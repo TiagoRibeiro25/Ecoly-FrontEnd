@@ -1,4 +1,6 @@
 <script setup>
+import { useUsersStore } from "../stores/users";
+
 const props = defineProps({
 	index: { type: Number, required: true },
 	id: { type: Number, required: true },
@@ -14,6 +16,11 @@ const props = defineProps({
 
 const changeHighlightedBadge = async (badge) => {
 	if (!props.isUserProfile || !props.isUnlocked) return;
+
+	const usersStore = useUsersStore();
+	usersStore.updateUserData({ highlightBadgeId: badge.id });
+
+	props.updateHighLightedBadge(badge);
 };
 
 const contrastBg = (index) => index % 2 === 0;

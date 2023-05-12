@@ -27,7 +27,7 @@ export const useUsersStore = defineStore("users", () => {
 			return response.data;
 		} catch (err) {
 			console.log(err.response);
-			return err.response.data;
+			return err.response ? err.response.data : { success: false, message: "Error getting user" };
 		}
 	};
 
@@ -41,7 +41,7 @@ export const useUsersStore = defineStore("users", () => {
 			}
 			return response.data;
 		} catch (err) {
-			return err.response.data;
+			return err.response ? err.response.data : { success: false, message: "Error logging in" };
 		}
 	};
 
@@ -52,7 +52,7 @@ export const useUsersStore = defineStore("users", () => {
 			return response.data;
 		} catch (err) {
 			console.log(err.response);
-			return err.response.data;
+			return err.response ? err.response.data : { success: false, message: "Error registering" };
 		}
 	};
 
@@ -63,7 +63,7 @@ export const useUsersStore = defineStore("users", () => {
 			return response.data;
 		} catch (err) {
 			console.log(err.response);
-			return err.response.data;
+			return err.response ? err.response.data : { success: false, message: "Error updating user" };
 		}
 	};
 

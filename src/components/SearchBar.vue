@@ -10,7 +10,7 @@ const props = defineProps({ page: { type: String, required: false } });
 /** @type {"News" | "Activities" | "Home"} */
 const currentPage = props.page || "Home";
 const search = ref("");
-/** @type {Array<{id: number, title: string, type: string}> */
+/** @type {Array<{id: number, title: string, type: "atividade | notícia"}> */
 const data = ref([]);
 const showModal = ref(false);
 const searching = ref(false);

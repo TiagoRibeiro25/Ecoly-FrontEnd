@@ -122,10 +122,10 @@ watchEffect(async () => {
 					>
 						{{ item.title }}
 					</router-link> -->
-					<span>{{ item.title }}</span>
+					<span class="result-text">{{ item.title }}</span>
 				</div>
 				<div class="col-3">
-					<span>
+					<span class="result-text">
 						{{ item.type }}
 					</span>
 				</div>
@@ -186,6 +186,12 @@ $tertiary-color: #ffffff;
 		border-radius: 13px;
 		padding: 10px;
 		margin-bottom: 23px;
+	}
+
+	.result-text {
+		font-family: "Panton", sans-serif;
+		font-weight: 600;
+		font-size: 20px;
 	}
 
 	.col-9 {

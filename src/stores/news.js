@@ -14,5 +14,15 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
-	return { search };
+	const getNews = async () => {
+		try {
+			const response = await api.get("/news");
+			return response.data;
+		} catch (err) {
+			console.log(err.response.data || "Error in get news");
+			return { success: false, data: [] };
+		}
+	};
+
+	return { search, getNews };
 });

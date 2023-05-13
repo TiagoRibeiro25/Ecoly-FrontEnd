@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 
 export const useNewsStore = defineStore("news", () => {
 	//TODO: fix the backend to return the correct data
+	/** @param {string} input @returns {Promise<{success: boolean, data: []}>} */
 	const search = async (input) => {
 		try {
 			const response = await api.get(`/news?search=${input}`);

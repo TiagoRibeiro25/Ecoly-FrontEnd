@@ -164,7 +164,7 @@ onBeforeMount(async () => {
 					height="50"
 					class="route-icon"
 				/>
-				<button v-if="showText" class="route-text">Tema</button>
+				<button v-if="showText" class="route-text" style="font-size: 1.5rem">Tema</button>
 			</span>
 			<router-link
 				:to="{
@@ -272,7 +272,7 @@ $tertiary-color: #3fc380;
 .route-text {
 	font-family: "Panton", sans-serif;
 	font-weight: 300;
-	font-size: 1.8rem;
+	font-size: 1.5rem;
 }
 
 .route-icon {

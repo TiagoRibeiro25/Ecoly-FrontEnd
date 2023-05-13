@@ -110,7 +110,7 @@ watchEffect(async () => {
 				</div>
 			</div>
 
-			<div v-else v-for="item in data" :key="item.id" class="d-flex flex-row result">
+			<div v-else v-for="item in data" :key="item.id" class="d-flex flex-row result mx-auto">
 				<div class="col-9">
 					<!-- TODO: uncomment after making the NewsDetails and ActivitiesDetails -->
 					<!-- <router-link
@@ -186,6 +186,7 @@ $tertiary-color: #ffffff;
 		border-radius: 13px;
 		padding: 10px;
 		margin-bottom: 23px;
+		max-width: 1310px;
 	}
 
 	.result-text {

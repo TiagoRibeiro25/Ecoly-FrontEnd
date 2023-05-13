@@ -47,19 +47,19 @@ const login = async () => {
 
 	const usersStore = useUsersStore();
 	const response = await usersStore.login(loginEmail.value, loginPassword.value);
-	logging.value = false;
 
-	if (response.success) router.go();
-	else {
-		if (response.message === "User not found.") {
-			loginErrorMsg.value = "Email não encontrado.";
-		}
-		if (response.message === "Invalid password.") {
-			loginErrorMsg.value = "Password incorreta.";
-		} else {
-			loginErrorMsg.value = "Ocorreu um erro ao fazer login.";
-		}
+	if (response.success) return router.go();
+
+	if (response.message === "User not found.") {
+		loginErrorMsg.value = "Email não encontrado.";
 	}
+	if (response.message === "Invalid password.") {
+		loginErrorMsg.value = "Password incorreta.";
+	} else {
+		loginErrorMsg.value = "Ocorreu um erro ao fazer login.";
+	}
+
+	logging.value = false;
 };
 
 // Register Variables

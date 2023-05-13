@@ -1,8 +1,11 @@
 <script setup>
+import { useDark, useToggle } from "@vueuse/core";
 import { onBeforeMount, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useUsersStore } from "@/stores/users";
 
+const isDark = useDark();
+const toggleDark = useToggle(isDark);
 const userStore = useUsersStore();
 const route = ref(useRoute().name);
 const router = useRouter();
@@ -102,7 +105,9 @@ onBeforeMount(async () => {
 					class="route-icon"
 					:class="{ 'selected-icon': route === 'News' }"
 				/>
-				<span v-if="showText" :class="{ 'selected-link': route === 'News' }"> Notícias </span>
+				<span v-if="showText" class="route-text" :class="{ 'selected-link': route === 'News' }">
+					Notícias
+				</span>
 			</router-link>
 			<router-link :to="{ name: 'Activities' }"
 				><img
@@ -113,7 +118,9 @@ onBeforeMount(async () => {
 					class="route-icon"
 					:class="{ 'selected-icon': route === 'Activities' }"
 				/>
-				<span v-if="showText" :class="{ 'selected-link': route === 'Activities' }"> Atividades </span>
+				<span v-if="showText" class="route-text" :class="{ 'selected-link': route === 'Activities' }">
+					Atividades
+				</span>
 			</router-link>
 			<router-link :to="{ name: 'Dashboard' }"
 				><img
@@ -124,7 +131,9 @@ onBeforeMount(async () => {
 					class="route-icon"
 					:class="{ 'selected-icon': route === 'Dashboard' }"
 				/>
-				<span v-if="showText" :class="{ 'selected-link': route === 'Dashboard' }"> Dashboard </span>
+				<span v-if="showText" class="route-text" :class="{ 'selected-link': route === 'Dashboard' }">
+					Dashboard
+				</span>
 			</router-link>
 			<router-link :to="{ name: 'Manage' }"
 				><img
@@ -135,11 +144,23 @@ onBeforeMount(async () => {
 					class="route-icon"
 					:class="{ 'selected-icon': route === 'Manage' }"
 				/>
-				<span v-if="showText" :class="{ 'selected-link': route === 'Manage' }"> Gestão </span>
+				<span v-if="showText" class="route-text" :class="{ 'selected-link': route === 'Manage' }">
+					Gestão
+				</span>
 			</router-link>
 		</div>
 
 		<div class="bottom-link">
+			<span class="ml-3 mb-2 toggle-theme" @click="() => toggleDark()">
+				<img
+					:src="isDark ? '../assets/icons/dark.svg' : '../assets/icons/light.svg'"
+					alt="Tema"
+					width="50"
+					height="50"
+					class="route-icon"
+				/>
+				<button v-if="showText" class="route-text">Tema</button>
+			</span>
 			<!-- if the user is logged pass the param "/me" -->
 			<router-link
 				:to="{
@@ -157,23 +178,12 @@ onBeforeMount(async () => {
 						'mt-2': showText,
 						'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged,
 					}"
-					:style="{
-						marginTop: !showText && isUserLogged ? '-23px' : '0',
-						marginTop: !showText && !isUserLogged ? '-10px' : '-10px',
-					}"
 				/>
-				<span v-if="showText" :class="{ 'selected-link': currentRoute === '/profile/me' }">
+				<span v-if="showText" class="route-text" :class="{ 'selected-link': currentRoute === '/profile/me' }">
 					{{ isUserLogged ? "Perfil" : "Entrar" }}
 				</span>
 			</router-link>
-			<button
-				v-if="showText && isUserLogged"
-				class="sign-out-btn"
-				@click="signOut"
-				:style="{ visibility: showText ? 'visible' : 'hidden' }"
-			>
-				Sign Out
-			</button>
+			<button v-if="showText && isUserLogged" class="sign-out-btn" @click="signOut">Sign Out</button>
 		</div>
 	</nav>
 </template>
@@ -220,7 +230,7 @@ $tertiary-color: #3fc380;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 80%;
+	height: 72.5%;
 
 	& a:hover {
 		& span {
@@ -230,10 +240,35 @@ $tertiary-color: #3fc380;
 }
 
 .bottom-link {
-	height: 10%;
+	height: 17.2%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+}
+
+.toggle-theme {
+	&:hover {
+		color: $tertiary-color;
+		cursor: pointer;
+	}
+
+	& button {
+		color: $secondary-color;
+		background-color: transparent;
+		border: none;
+		font-size: 1.8rem;
+		padding-right: 24px;
+
+		&:hover {
+			color: $tertiary-color;
+		}
+	}
+}
+
+.route-text {
+	font-family: "Panton", sans-serif;
+	font-weight: 300;
+	font-size: 1.8rem;
 }
 
 .route-icon {
@@ -264,6 +299,7 @@ $tertiary-color: #3fc380;
 	&:hover {
 		opacity: 70%;
 	}
+
 	transition: color 0.5s ease-in-out;
 }
 
@@ -280,6 +316,7 @@ $tertiary-color: #3fc380;
 	0% {
 		width: 250px;
 	}
+
 	100% {
 		width: 80px;
 	}
@@ -289,6 +326,7 @@ $tertiary-color: #3fc380;
 	0% {
 		width: 80px;
 	}
+
 	100% {
 		width: 250px;
 	}

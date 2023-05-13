@@ -42,9 +42,6 @@ watchEffect(async () => {
 		const activitiesResponse = await activitiesStore.search(searchInput);
 		const newsResponse = await newsStore.search(searchInput);
 
-		console.log(activitiesResponse);
-		console.log(newsResponse);
-
 		if (!activitiesResponse.success && !newsResponse.success) {
 			searching.value = false;
 			return;
@@ -68,12 +65,12 @@ watchEffect(async () => {
 		searching.value = false;
 
 		if (data.value.length === 0) showModal.value = false;
-	}, 1000);
+	}, 1500);
 });
 </script>
 
 <template>
-	<div class="searchbar">
+	<div class="searchbar mx-auto">
 		<b-input-group>
 			<template #prepend>
 				<b-input-group-text
@@ -143,8 +140,8 @@ $secondary-color: #aedcc0;
 $tertiary-color: #ffffff;
 
 .searchbar {
-	width: 66%;
-	margin-left: auto;
+	width: 50%;
+	max-width: 1310px;
 	z-index: 1001;
 }
 
@@ -179,6 +176,7 @@ $tertiary-color: #ffffff;
 	margin-left: 40px;
 
 	overflow-y: scroll;
+
 	&::-webkit-scrollbar {
 		display: none;
 	}

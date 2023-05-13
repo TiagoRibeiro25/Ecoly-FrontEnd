@@ -14,6 +14,7 @@ const props = defineProps({
 	updateHighLightedBadge: { type: Function, required: true },
 });
 
+/** @param {{id: number, title: string, description: string, img: string, percentage: number}} badge */
 const changeHighlightedBadge = async (badge) => {
 	if (!props.isUserProfile || !props.isUnlocked) return;
 

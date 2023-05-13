@@ -20,7 +20,11 @@ const pinia = createPinia();
 const app = createApp(App);
 
 app.use(pinia);
-app.use(VueLazyLoad, { loading: "../assets/images/loading.gif", error: "" });
+app.use(VueLazyLoad, {
+	loading: "../assets/images/loading.gif",
+	error: "../assets/images/error.png",
+	lazyComponent: true,
+});
 app.use(router);
 
 app.mount("#app");

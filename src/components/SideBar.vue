@@ -82,23 +82,28 @@ onBeforeMount(async () => {
 	>
 		<div class="top-logo">
 			<router-link :to="{ name: 'Home' }">
-				<!-- if (isExpanded === true) show -->
 				<img
 					v-if="showText"
-					src="../assets/logo/logo_exp.webp"
+					v-lazy="{ src: '../assets/logo/logo_exp.webp' }"
 					alt="home"
 					width="180"
 					height="60"
 					class="mt-2"
 				/>
-				<!-- else show -->
-				<img v-else src="../assets/logo/logo.webp" alt="home" width="50" height="80" class="mr-3" />
+				<img
+					v-else
+					v-lazy="{ src: '../assets/logo/logo.webp' }"
+					alt="home"
+					width="50"
+					height="80"
+					class="mr-3"
+				/>
 			</router-link>
 		</div>
 		<div class="nav-links">
 			<router-link :to="{ name: 'News' }">
 				<img
-					src="../assets/icons/news.svg"
+					v-lazy="{ src: '../assets/icons/news.svg' }"
 					alt="News"
 					width="50"
 					height="50"
@@ -111,7 +116,7 @@ onBeforeMount(async () => {
 			</router-link>
 			<router-link :to="{ name: 'Activities' }"
 				><img
-					src="../assets/icons/activities.svg"
+					v-lazy="{ src: '../assets/icons/activities.svg' }"
 					alt="Activities"
 					width="50"
 					height="50"
@@ -124,7 +129,7 @@ onBeforeMount(async () => {
 			</router-link>
 			<router-link :to="{ name: 'Dashboard' }"
 				><img
-					src="../assets/icons/dashboard.svg"
+					v-lazy="{ src: '../assets/icons/dashboard.svg' }"
 					alt="Dashboard"
 					width="50"
 					height="50"
@@ -137,7 +142,7 @@ onBeforeMount(async () => {
 			</router-link>
 			<router-link :to="{ name: 'Manage' }"
 				><img
-					src="../assets/icons/manage.svg"
+					v-lazy="{ src: '../assets/icons/manage.svg' }"
 					alt="Manage"
 					width="50"
 					height="50"
@@ -153,7 +158,7 @@ onBeforeMount(async () => {
 		<div class="bottom-link">
 			<span class="ml-3 mb-2 toggle-theme" @click="() => toggleDark()">
 				<img
-					:src="isDark ? '../assets/icons/dark.svg' : '../assets/icons/light.svg'"
+					v-lazy="{ src: isDark ? '../assets/icons/dark.svg' : '../assets/icons/light.svg' }"
 					alt="Tema"
 					width="50"
 					height="50"
@@ -161,7 +166,6 @@ onBeforeMount(async () => {
 				/>
 				<button v-if="showText" class="route-text">Tema</button>
 			</span>
-			<!-- if the user is logged pass the param "/me" -->
 			<router-link
 				:to="{
 					name: isUserLogged ? 'Profile' : 'Authenticate',
@@ -169,12 +173,12 @@ onBeforeMount(async () => {
 				}"
 			>
 				<img
-					:src="isUserLogged ? profilePicture : '../assets/icons/profile.svg'"
+					v-lazy="{ src: isUserLogged ? profilePicture : '../assets/icons/profile.svg' }"
 					alt="Profile"
 					width="50"
 					height="50"
+					class="route-icon"
 					:class="{
-						'route-icon': true,
 						'mt-2': showText,
 						'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged,
 					}"

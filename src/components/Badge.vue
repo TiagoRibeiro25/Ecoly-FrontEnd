@@ -51,13 +51,13 @@ const contrastBg = (index) => index % 2 === 0;
 			<div class="row">
 				<!-- Title -->
 				<div class="col-12">
-					<h3 class="badge-title" :class="{ 'text-success': props.id === highlightedBadge.id }">
+					<h3 class="badge-title" :class="{ 'text-success': props.id === highlightedBadge?.id }">
 						{{ props.title }}
 					</h3>
 				</div>
 				<!-- Description -->
 				<div class="col-12">
-					<p class="badge-description" :class="{ 'text-success': props.id === highlightedBadge.id }">
+					<p class="badge-description" :class="{ 'text-success': props.id === highlightedBadge?.id }">
 						{{ props.description }}
 					</p>
 				</div>

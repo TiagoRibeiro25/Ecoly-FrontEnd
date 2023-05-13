@@ -7,8 +7,15 @@ const isDark = useDark();
 <template>
 	<div class="error-page d-flex flex-column align-items-center justify-content-center">
 		<div class="text-center">
-			<img v-if="!isDark" class="error-logo" src="../assets/logo/logo_exp_dark.webp" alt="Ecoly logo" />
-			<img v-else class="error-logo" src="../assets/logo/logo_exp.webp" alt="Ecoly logo" />
+			<img
+				class="error-logo"
+				v-lazy="{
+					src: !isDark
+						? '../../../../../../assets/logo/logo_exp_dark.webp'
+						: '../../../../../../assets/logo/logo_exp.webp',
+				}"
+				alt="Ecoly"
+			/>
 			<h2 class="error-subtitle" :class="{ 'title-dark-theme': isDark, 'title-light-theme': !isDark }">
 				Ups, a menos que você tenha uma máquina do tempo, esse conteúdo não está disponível.
 			</h2>
@@ -20,8 +27,11 @@ const isDark = useDark();
 				proteger o planeta.
 			</p>
 
-			<!-- gift of a tree -->
-			<img class="error-tree mt-2 img-fluid" src="../assets/images/tree.gif" alt="animated tree" />
+			<img
+				class="error-tree mt-2 img-fluid"
+				v-lazy="{ src: '../../../../../../assets/images/tree.gif' }"
+				alt="animated tree"
+			/>
 
 			<router-link
 				class="error-link"

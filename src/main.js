@@ -13,6 +13,9 @@ import "bootstrap/dist/css/bootstrap.css";
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
 
+import "./assets/fonts.css";
+import "./assets/main.css";
+
 const pinia = createPinia();
 const app = createApp(App);
 

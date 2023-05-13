@@ -73,6 +73,18 @@ export const useUsersStore = defineStore("users", () => {
 		token.value = "";
 	};
 
+	const cancelNewsLetter = async (delete_key) => {
+		try {
+			const response = await api.delete(`/users/subscribe/${delete_key}`);
+			return response.data;
+		} catch (err) {
+			console.log(err.response);
+			return err.response
+				? err.response.data
+				: { success: false, message: "An error occurred while unsubscribing" };
+		}
+	};
+
 	return {
 		isUserLoggedIn,
 		token,
@@ -82,5 +94,6 @@ export const useUsersStore = defineStore("users", () => {
 		register,
 		updateUserData,
 		signOut,
+		cancelNewsLetter,
 	};
 });

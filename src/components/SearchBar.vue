@@ -5,7 +5,10 @@ import { useDark } from "@vueuse/core";
 import { ref, watchEffect } from "vue";
 
 const isDark = useDark();
-const props = defineProps({ page: { type: String, required: false } });
+const props = defineProps({
+	page: { type: String, required: false },
+	placeholder: { type: String, required: false },
+});
 
 /** @type {"News" | "Activities" | "Home"} */
 const currentPage = props.page || "Home";
@@ -36,34 +39,31 @@ watchEffect(async () => {
 			return;
 		}
 
-		const activitiesStore = useActivitiesStore();
-		const newsStore = useNewsStore();
-
-		const activitiesResponse = await activitiesStore.search(searchInput);
-		const newsResponse = await newsStore.search(searchInput);
-
-		if (!activitiesResponse.success && !newsResponse.success) {
-			searching.value = false;
-			return;
-		}
-
-		const activities = activitiesResponse.data;
-		const news = newsResponse.data;
-
+		// Search for activities
 		if (currentPage === "Activities" || currentPage === "Home") {
-			activities.forEach((activity) => {
-				data.value.push({ id: activity.id, title: activity.title, type: "atividade" });
-			});
+			const activitiesStore = useActivitiesStore();
+			const activitiesResponse = await activitiesStore.search(searchInput);
+			if (activitiesResponse.success) {
+				const activities = activitiesResponse.data;
+				activities.forEach((activity) => {
+					data.value.push({ id: activity.id, title: activity.title, type: "atividade" });
+				});
+			}
 		}
 
+		// Search for news
 		if (currentPage === "News" || currentPage === "Home") {
-			news.forEach((news) => {
-				data.value.push({ id: news.id, title: news.title, type: "notícia" });
-			});
+			const newsStore = useNewsStore();
+			const newsResponse = await newsStore.search(searchInput);
+			if (newsResponse.success) {
+				const news = newsResponse.data;
+				news.forEach((news) => {
+					data.value.push({ id: news.id, title: news.title, type: "notícia" });
+				});
+			}
 		}
 
 		searching.value = false;
-
 		if (data.value.length === 0) showModal.value = false;
 	}, 1500);
 });
@@ -83,7 +83,7 @@ watchEffect(async () => {
 			<b-form-input
 				class="searchbar-input"
 				:class="{ 'bg-light': !isDark, 'bg-dark': isDark }"
-				placeholder="Pesquisar"
+				:placeholder="props.placeholder || 'Pesquisar'"
 				type="search"
 				v-model="search"
 				style="width: 400px"

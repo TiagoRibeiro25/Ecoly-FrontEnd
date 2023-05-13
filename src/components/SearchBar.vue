@@ -53,13 +53,17 @@ watchEffect(async () => {
 		const activities = activitiesResponse.data;
 		const news = newsResponse.data;
 
-		activities.forEach((activity) => {
-			data.value.push({ id: activity.id, title: activity.title, type: "atividade" });
-		});
+		if (currentPage === "Activities" || currentPage === "Home") {
+			activities.forEach((activity) => {
+				data.value.push({ id: activity.id, title: activity.title, type: "atividade" });
+			});
+		}
 
-		news.forEach((news) => {
-			data.value.push({ id: news.id, title: news.title, type: "notícia" });
-		});
+		if (currentPage === "News" || currentPage === "Home") {
+			news.forEach((news) => {
+				data.value.push({ id: news.id, title: news.title, type: "notícia" });
+			});
+		}
 
 		searching.value = false;
 

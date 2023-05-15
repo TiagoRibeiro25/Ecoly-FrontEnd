@@ -33,6 +33,7 @@ watchEffect(async () => {
 	setTimeout(async () => {
 		if (searchInput !== search.value) return;
 
+		data.value = [];
 		if (searchInput.length < 3) {
 			searching.value = false;
 			showModal.value = false;

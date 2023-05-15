@@ -14,7 +14,6 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.get("/users/me", { headers });
 			return response.data;
 		} catch (err) {
-			console.log(err);
 			return { success: false, message: "Error getting user" };
 		}
 	};
@@ -26,7 +25,6 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.get(`/users/${id}`, { headers });
 			return response.data;
 		} catch (err) {
-			console.log(err.response);
 			return err.response ? err.response.data : { success: false, message: "Error getting user" };
 		}
 	};
@@ -51,7 +49,6 @@ export const useUsersStore = defineStore("users", () => {
 			console.log(response.data);
 			return response.data;
 		} catch (err) {
-			console.log(err.response);
 			return err.response ? err.response.data : { success: false, message: "Error registering" };
 		}
 	};
@@ -62,7 +59,6 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.patch("/users", data, { headers });
 			return response.data;
 		} catch (err) {
-			console.log(err.response);
 			return err.response ? err.response.data : { success: false, message: "Error updating user" };
 		}
 	};
@@ -78,7 +74,6 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.delete(`/users/subscribe/${delete_key}`);
 			return response.data;
 		} catch (err) {
-			console.log(err.response);
 			return err.response
 				? err.response.data
 				: { success: false, message: "An error occurred while unsubscribing" };

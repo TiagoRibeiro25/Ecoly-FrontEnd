@@ -9,7 +9,6 @@ export const useNewsStore = defineStore("news", () => {
 			const response = await api.get(`/news?search=${input}`);
 			return response.data;
 		} catch (err) {
-			console.log(err.response.data || "Error in search news");
 			return { success: false, data: [] };
 		}
 	};
@@ -19,7 +18,6 @@ export const useNewsStore = defineStore("news", () => {
 			const response = await api.get("/news");
 			return response.data;
 		} catch (err) {
-			console.log(err.response.data || "Error in get news");
 			return { success: false, data: [] };
 		}
 	};

@@ -7,7 +7,6 @@ export const useSchoolsStore = defineStore("schools", () => {
 			const response = await api.get("/schools");
 			return response.data;
 		} catch (err) {
-			console.log(err);
 			return { success: false, message: err.message };
 		}
 	};

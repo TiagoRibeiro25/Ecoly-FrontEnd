@@ -8,7 +8,6 @@ export const useActivitiesStore = defineStore("activities", () => {
 			const response = await api.get(`/activities?search=${input}`);
 			return response.data;
 		} catch (err) {
-			console.log(err.response.data || "Error in search activities");
 			return { success: false, data: [] };
 		}
 	};

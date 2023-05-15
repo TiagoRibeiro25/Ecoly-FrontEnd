@@ -1,5 +1,6 @@
 import api from "@/services/api";
 import { defineStore } from "pinia";
+import { useUsersStore } from "./users";
 
 export const useNewsStore = defineStore("news", () => {
 	//TODO: fix the backend to return the correct data
@@ -22,5 +23,16 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
-	return { search, getNews };
+	const deleteNew = async (id) => {
+		const token = useUsersStore().token;
+
+		try {
+			const response = await api.delete(`/news/${id}`).set("Authorization", `Bearer ${token}`);
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Ocorreu um erro ao apagar a notícia" };
+		}
+	};
+
+	return { search, getNews, deleteNew };
 });

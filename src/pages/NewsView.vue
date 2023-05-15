@@ -10,6 +10,7 @@ import DeleteModal from "../components/DeleteModal.vue";
 const isDark = useDark();
 const fetching = ref(false);
 const news = ref([]);
+const isUserAdmin = ref(false);
 
 // delete modal variables
 const showDeleteModal = ref(false);
@@ -31,7 +32,11 @@ watchEffect(async () => {
 	const newsStore = useNewsStore();
 	const response = await newsStore.getNews();
 
-	if (response.success) news.value = response.data;
+	if (response.success) {
+		news.value = response.data.news;
+		isUserAdmin.value = response.data.isUserAdmin;
+	}
+
 	fetching.value = false;
 });
 </script>
@@ -42,6 +47,14 @@ watchEffect(async () => {
 	</div>
 	<div class="col-12">
 		<Header title="NOTÍCIAS" />
+	</div>
+	<div class="col-12">
+		<!-- TODO: add new button -->
+		<div class="mx-auto" style="max-width: 1305px">
+			<router-link to="/news/create">
+				<b-button variant="success" class="mb-3"> Adicionar notícia </b-button>
+			</router-link>
+		</div>
 	</div>
 	<div class="col-12">
 		<div class="news-container mx-auto px-5">
@@ -66,7 +79,7 @@ watchEffect(async () => {
 					:content="item.content"
 					:date_created="item.date_created"
 					:image="item.image"
-					:isUserAdmin="true"
+					:isUserAdmin="isUserAdmin"
 					@delete="showModal"
 				/>
 			</div>

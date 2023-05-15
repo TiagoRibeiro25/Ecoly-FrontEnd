@@ -16,7 +16,10 @@ export const useNewsStore = defineStore("news", () => {
 
 	const getNews = async () => {
 		try {
-			const response = await api.get("/news");
+			const usersStore = useUsersStore();
+			const headers = { Authorization: `Bearer ${usersStore.token}` };
+
+			const response = await api.get("/news", { headers });
 			return response.data;
 		} catch (err) {
 			return { success: false, data: [] };
@@ -24,10 +27,11 @@ export const useNewsStore = defineStore("news", () => {
 	};
 
 	const deleteNew = async (id) => {
-		const token = useUsersStore().token;
+		const usersStore = useUsersStore();
+		const headers = { Authorization: `Bearer ${usersStore.token}` };
 
 		try {
-			const response = await api.delete(`/news/${id}`).set("Authorization", `Bearer ${token}`);
+			const response = await api.delete(`/news/${id}`, { headers });
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Ocorreu um erro ao apagar a notícia" };

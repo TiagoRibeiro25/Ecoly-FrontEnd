@@ -112,17 +112,12 @@ watchEffect(async () => {
 
 			<div v-else v-for="item in data" :key="item.id" class="d-flex flex-row result mx-auto">
 				<div class="col-9">
-					<!-- TODO: uncomment after making the NewsDetails and ActivitiesDetails -->
-					<!-- <router-link
+					<router-link
+						:to="{ name: item.type === 'notícia' ? 'NewDetail' : 'ActivityDetail', params: { id: item.id } }"
 						class="go-to-item-link text-decoration-none"
-						:to="{
-							name: item.type === 'new' ? 'NewsDetails' : 'ActivitiesDetails',
-							params: { id: item.id },
-						}"
 					>
 						{{ item.title }}
-					</router-link> -->
-					<span class="result-text">{{ item.title }}</span>
+					</router-link>
 				</div>
 				<div class="col-3">
 					<span class="result-text">

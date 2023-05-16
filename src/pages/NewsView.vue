@@ -30,7 +30,7 @@ watchEffect(async () => {
 	news.value = [];
 
 	const newsStore = useNewsStore();
-	/** @type {{success: boolean, data: {isUserAdmin: boolean, news: [{id: string, creator_id: id, title: string, content: string, date_created: string, image: string}]}}} */
+	/** @type {{success: boolean, data: {isUserAdmin: boolean, news: Array<{id: string, creator_id: id, title: string, content: string, date_created: string, image: string}>}}} */
 	const response = await newsStore.getNews();
 
 	if (response.success) {

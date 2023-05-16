@@ -57,7 +57,7 @@ watchEffect(async () => {
 			const newsStore = useNewsStore();
 			const newsResponse = await newsStore.search(searchInput);
 			if (newsResponse.success) {
-				const news = newsResponse.data;
+				const news = newsResponse.data.news;
 				news.forEach((news) => {
 					data.value.push({ id: news.id, title: news.title, type: "notícia" });
 				});

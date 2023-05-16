@@ -7,8 +7,8 @@ import NewsView from "@/pages/NewsView.vue";
 import NotFoundView from "@/pages/NotFoundView.vue";
 import ProfileView from "@/pages/ProfileView.vue";
 import UnsubscribeView from "@/pages/UnsubscribeView.vue";
-import ActivityDetailVue from "../pages/ActivityDetail.vue";
-import NewDetailVue from "../pages/NewDetail.vue";
+import ActivityDetailView from "../pages/ActivityDetail.vue";
+import NewDetailView from "../pages/NewDetail.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 import { useUsersStore } from "../stores/users";
@@ -35,7 +35,7 @@ const router = createRouter({
 		{
 			path: "/news/:id",
 			name: "NewDetail",
-			component: NewDetailVue,
+			component: NewDetailView,
 		},
 		{
 			path: "/activities",
@@ -45,7 +45,7 @@ const router = createRouter({
 		{
 			path: "/activities/:id",
 			name: "ActivityDetail",
-			component: ActivityDetailVue,
+			component: ActivityDetailView,
 		},
 		{
 			path: "/dashboard",

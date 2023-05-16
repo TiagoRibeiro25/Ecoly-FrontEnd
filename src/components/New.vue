@@ -38,7 +38,10 @@ onMounted(() => {
 		</div>
 		<div class="col-lg-8 d-flex flex-column px-2 py-3" style="overflow: hidden">
 			<div class="row">
-				<div class="title-container" :class="props.isUserAdmin ? 'col-10' : 'col-12'">
+				<div
+					class="title-container text-lg-left text-center"
+					:class="props.isUserAdmin ? 'col-10' : 'col-12'"
+				>
 					<h2>
 						<router-link
 							:to="{ name: 'NewDetail', params: { id: props.id } }"
@@ -72,7 +75,10 @@ onMounted(() => {
 			</div>
 			<div class="row mt-3">
 				<div class="col-12">
-					<p class="new-date text-muted" :class="isDark ? 'text-light' : 'text-dark'">
+					<p
+						class="new-date text-muted text-lg-left text-center"
+						:class="isDark ? 'text-light' : 'text-dark'"
+					>
 						{{ props.date_created }}
 					</p>
 				</div>

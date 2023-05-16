@@ -8,6 +8,7 @@ import NotFoundView from "@/pages/NotFoundView.vue";
 import ProfileView from "@/pages/ProfileView.vue";
 import UnsubscribeView from "@/pages/UnsubscribeView.vue";
 import ActivityDetailView from "../pages/ActivityDetail.vue";
+import NewCreateView from "../pages/NewCreate.vue";
 import NewDetailView from "../pages/NewDetail.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
@@ -36,6 +37,11 @@ const router = createRouter({
 			path: "/news/:id",
 			name: "NewDetail",
 			component: NewDetailView,
+		},
+		{
+			path: "/news/create",
+			name: "NewCreate",
+			component: NewCreateView,
 		},
 		{
 			path: "/activities",

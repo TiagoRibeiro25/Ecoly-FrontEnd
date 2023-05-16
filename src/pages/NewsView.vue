@@ -6,6 +6,7 @@ import SearchBar from "../components/SearchBar.vue";
 import Header from "../components/Header.vue";
 import New from "../components/New.vue";
 import DeleteModal from "../components/DeleteModal.vue";
+import ChangeViewButton from "../components/ChangeViewButton.vue";
 
 const isDark = useDark();
 const fetching = ref(false);
@@ -49,12 +50,9 @@ watchEffect(async () => {
 	<div class="col-12">
 		<Header title="NOTÍCIAS" />
 	</div>
-	<div class="col-12">
-		<!-- TODO: add new button -->
-		<div class="mx-auto" style="max-width: 1305px">
-			<router-link to="/news/create">
-				<b-button variant="success" class="mb-3"> Adicionar notícia </b-button>
-			</router-link>
+	<div v-if="isUserAdmin" class="col-12 mb-4">
+		<div class="news-container mx-auto px-5">
+			<ChangeViewButton text="Adicionar notícia" to="NewCreate" iconImg="../assets/icons/add.svg" />
 		</div>
 	</div>
 	<div class="col-12">

@@ -93,13 +93,7 @@ watchEffect(async () => {
 	</div>
 
 	<!-- Search Results -->
-	<div
-		class="search-results px-5"
-		:style="{
-			visibility: showModal ? 'visible' : 'hidden',
-			backgroundColor: isDark ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.3)',
-		}"
-	>
+	<div class="search-results px-5" :style="{ visibility: showModal ? 'visible' : 'hidden' }">
 		<div v-if="searching">
 			<div class="d-flex justify-content-center flex-row">
 				<b-spinner class="mt-5 mx-1" variant="success" type="grow"></b-spinner>
@@ -175,6 +169,7 @@ $tertiary-color: #ffffff;
 	z-index: 1000;
 	padding-top: 180px;
 	margin-left: 40px;
+	background-color: rgba(0, 0, 0, 0.7);
 
 	overflow-y: scroll;
 

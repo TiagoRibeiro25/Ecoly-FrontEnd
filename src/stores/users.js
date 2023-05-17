@@ -80,6 +80,19 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	/** @param {string} email  @returns {Promise<{success: boolean, message: string}>} */
+	const subscribeNewsLetter = async (email = null) => {
+		try {
+			const headers = { Authorization: `Bearer ${token.value}` };
+			const response = await api.post("/subscribe", email ? { email } : {}, { headers });
+			return response.data;
+		} catch (err) {
+			return err.response
+				? err.response.data
+				: { success: false, message: "An error occurred while subscribing" };
+		}
+	};
+
 	return {
 		isUserLoggedIn,
 		token,
@@ -90,5 +103,6 @@ export const useUsersStore = defineStore("users", () => {
 		updateUserData,
 		signOut,
 		cancelNewsLetter,
+		subscribeNewsLetter,
 	};
 });

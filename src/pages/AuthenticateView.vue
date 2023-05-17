@@ -140,7 +140,7 @@ const register = async () => {
 		schoolId: +registerSchool.value,
 		internalId: registerInternalNumber.value,
 		course: registerCourse.value,
-		year: +registerYear.value,
+		year: registerYear.value,
 	});
 
 	if (response.success) {

@@ -162,7 +162,6 @@ onBeforeMount(async () => {
 	const schoolsStore = useSchoolsStore();
 	const response = await schoolsStore.getSchools();
 	if (response.success) {
-		// schools.value = response.data;
 		schools.value = response.data.map((school) => {
 			return { value: school.id, text: school.name };
 		});

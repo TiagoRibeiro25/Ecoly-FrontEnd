@@ -15,10 +15,10 @@ export const useNewsStore = defineStore("news", () => {
 	};
 
 	const getNews = async () => {
-		try {
-			const usersStore = useUsersStore();
-			const headers = { Authorization: `Bearer ${usersStore.token}` };
+		const usersStore = useUsersStore();
+		const headers = { Authorization: `Bearer ${usersStore.token}` };
 
+		try {
 			const response = await api.get("/news", { headers });
 			return response.data;
 		} catch (err) {

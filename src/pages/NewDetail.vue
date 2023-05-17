@@ -44,6 +44,8 @@ onBeforeMount(async () => {
 		// check if the user logged is subscribed to the newsletter
 		const isSubscribed = await newsStore.isSubscribed();
 
+		console.log(isSubscribed);
+
 		isUserSubscribed.value = isSubscribed.success;
 	}
 
@@ -88,11 +90,14 @@ onBeforeMount(async () => {
 			</main>
 
 			<!-- subscribe to the newsletter -->
-			<footer v-if="isUserLogged" class="px-3 d-flex flex-column align-items-center mb-5">
-				<h2 class="new-title text-center pt-5" :class="isDark ? 'new-title-dark' : 'new-title-light'">
+			<footer v-if="isUserLogged" class="px-3 d-flex flex-column align-items-center">
+				<h2 class="new-title text-center pt-5 pb-3" :class="isDark ? 'new-title-dark' : 'new-title-light'">
 					{{ isUserSubscribed ? "Você já está inscrito na newsletter" : "Inscreva-se na newsletter" }}
 				</h2>
-				<div class="col-12 my-4">
+				<div
+					v-if="subscribing || msg.length > 0"
+					class="col-12 my-4 d-flex justify-content-center align-items-center"
+				>
 					<div v-if="subscribing">
 						<b-spinner variant="success" label="Carregando..."></b-spinner>
 					</div>
@@ -104,7 +109,7 @@ onBeforeMount(async () => {
 				</div>
 				<button
 					v-if="!isUserSubscribed"
-					class="btn cancel-btn mt-2"
+					class="btn cancel-btn mb-5"
 					:class="isDark ? 'cancel-btn-dark' : 'cancel-btn-light'"
 					:disabled="subscribing"
 					@click="subscribe"

@@ -71,7 +71,7 @@ export const useUsersStore = defineStore("users", () => {
 
 	const cancelNewsLetter = async (delete_key) => {
 		try {
-			const response = await api.delete(`/users/subscribe/${delete_key}`);
+			const response = await api.delete(`/subscribe/${delete_key}`);
 			return response.data;
 		} catch (err) {
 			return err.response

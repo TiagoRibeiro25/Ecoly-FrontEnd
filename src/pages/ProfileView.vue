@@ -38,7 +38,7 @@ watchEffect(async () => {
 </script>
 
 <template>
-	<div v-if="!isLoaded" class="loading">
+	<div v-if="!isLoaded" class="d-flex justify-content-center align-items-center" style="height: 100vh">
 		<b-spinner variant="success" label="Carregando..."></b-spinner>
 	</div>
 	<div v-else class="px-sm-5 px-1 mt-5 mb-5">
@@ -180,7 +180,7 @@ watchEffect(async () => {
 				</div>
 			</div>
 		</div>
-		<!-- Edit Profile Modal -->
+
 		<EditProfileModal v-if="user.isLoggedUser" :user="user" id="edit-profile-modal" />
 	</div>
 </template>
@@ -191,13 +191,6 @@ $secondary-color: #aedcc0;
 $tertiary-color: #6ea952;
 $quaternary-color: #3fc380;
 $quinary-color: #303a39;
-
-.loading {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-}
 
 .top-info {
 	background-color: $primary-color;

@@ -2,7 +2,7 @@
 import CardImage from "../components/CardImage.vue";
 import { useDark } from "@vueuse/core";
 import { ref, onMounted } from "vue";
-import { formatText } from "../utils/formatData";
+import { formatText, formatDate } from "../utils/formatData";
 
 const props = defineProps({
 	index: { type: Number, required: true },
@@ -79,7 +79,7 @@ onMounted(() => {
 						class="new-date text-muted text-lg-left text-center"
 						:class="isDark ? 'text-light' : 'text-dark'"
 					>
-						{{ props.date_created }}
+						{{ formatDate(props.date_created, "yyyy-mm-dd") }}
 					</p>
 				</div>
 			</div>

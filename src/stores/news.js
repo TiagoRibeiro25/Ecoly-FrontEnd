@@ -3,7 +3,6 @@ import { defineStore } from "pinia";
 import { useUsersStore } from "./users";
 
 export const useNewsStore = defineStore("news", () => {
-	//TODO: fix the backend to return the correct data
 	/** @param {string} input @returns {Promise<{success: boolean, data: []}>} */
 	const search = async (input) => {
 		try {
@@ -14,6 +13,7 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
+	/** @returns {Promise<{success: boolean, data: []}>} */
 	const getNews = async () => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
@@ -26,6 +26,7 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
+	/** @param {number} id @returns {Promise<{success: boolean, data: []}>} */
 	const getNew = async (id) => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
@@ -38,6 +39,7 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
+	/** @param {number} id @returns {Promise<{success: boolean, message: string}>} */
 	const deleteNew = async (id) => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
@@ -50,6 +52,7 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
+	/** @returns {Promise<{success: boolean, message: string}>} */
 	const isSubscribed = async () => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };

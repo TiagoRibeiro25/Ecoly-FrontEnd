@@ -23,7 +23,16 @@ const msg = ref("");
 const subscribe = async () => {
 	msg.value = "";
 	subscribing.value = true;
-	//TODO: finish
+
+	const response = await usersStore.subscribeNewsLetter();
+	if (!response.success) {
+		msg.value = response.message;
+		subscribing.value = false;
+		return;
+	}
+
+	isUserSubscribed.value = true;
+	subscribing.value = false;
 };
 
 onBeforeMount(async () => {
@@ -40,16 +49,14 @@ onBeforeMount(async () => {
 	// check if the user is logged
 	isUserLogged.value = usersStore.isUserLoggedIn;
 
+	// finish loading the new
+	isLoaded.value = true;
+
+	// check if the user is subscribed to the newsletter
 	if (isUserLogged.value) {
-		// check if the user logged is subscribed to the newsletter
 		const isSubscribed = await newsStore.isSubscribed();
-
-		console.log(isSubscribed);
-
 		isUserSubscribed.value = isSubscribed.success;
 	}
-
-	isLoaded.value = true;
 });
 </script>
 
@@ -92,7 +99,7 @@ onBeforeMount(async () => {
 			<!-- subscribe to the newsletter -->
 			<footer v-if="isUserLogged" class="px-3 d-flex flex-column align-items-center">
 				<h2 class="new-title text-center pt-5 pb-3" :class="isDark ? 'new-title-dark' : 'new-title-light'">
-					{{ isUserSubscribed ? "Você já está inscrito na newsletter" : "Inscreva-se na newsletter" }}
+					{{ isUserSubscribed ? "Já estás inscrito na newsletter" : "Subscreve-te à newsletter" }}
 				</h2>
 				<div
 					v-if="subscribing || msg.length > 0"

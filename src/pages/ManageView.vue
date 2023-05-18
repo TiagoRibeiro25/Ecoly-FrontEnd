@@ -1,5 +1,12 @@
+<script setup>
+import { useDark } from "@vueuse/core";
+import Header from "../components/Header.vue";
+
+const isDark = useDark();
+</script>
+
 <template>
-	<div>
-		<h1 class="text-center">Manage</h1>
+	<div class="col-12 mt-5">
+		<Header title="MANAGE" />
 	</div>
 </template>

@@ -70,7 +70,7 @@ onBeforeMount(async () => {
 
 <template>
 	<nav
-		class="sidebar d-flex flex-column justify-content-between"
+		class="sidebar d-flex flex-column justify-content-between shadow-lg"
 		:class="{
 			expanded: isExpanded,
 			reduced: !isExpanded,

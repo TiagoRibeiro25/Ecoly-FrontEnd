@@ -75,7 +75,7 @@ onBeforeMount(async () => {
 						{{ newItem.title }}
 					</h1>
 				</div>
-				<div class="col-3 d-flex flex-column align-items-end pt-1">
+				<div class="col-3 d-flex flex-column align-items-end">
 					<span class="header-info text-muted">
 						{{ formatDate(newItem.date_created) }}
 					</span>
@@ -88,7 +88,7 @@ onBeforeMount(async () => {
 					</router-link>
 				</div>
 			</header>
-			<main class="px-3 mt-5 mb-5">
+			<main class="px-3 my-5">
 				<p
 					class="main-text text-justify"
 					:class="isDark ? 'main-text-dark' : 'main-text-light'"

@@ -14,12 +14,12 @@ export const useNewsStore = defineStore("news", () => {
 	};
 
 	/** @returns {Promise<{success: boolean, data: []}>} */
-	const getNews = async () => {
+	const getNews = async (filter = "") => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
 
 		try {
-			const response = await api.get("/news", { headers });
+			const response = await api.get(`/news?filter=${filter}`, { headers });
 			return response.data;
 		} catch (err) {
 			return { success: false, data: [] };

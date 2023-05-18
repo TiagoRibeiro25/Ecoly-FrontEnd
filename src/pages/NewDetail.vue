@@ -1,14 +1,16 @@
 <script setup>
 import DetailImages from "../components/DetailImages.vue";
+import DeleteModal from "../components/DeleteModal.vue";
 import { useDark } from "@vueuse/core";
 import { useNewsStore } from "../stores/news";
 import { useUsersStore } from "../stores/users";
 import { onBeforeMount, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { formatDate } from "../utils/formatData";
 
 const isDark = useDark();
 const route = useRoute();
+const router = useRouter();
 const id = route.params.id;
 const newsStore = useNewsStore();
 const usersStore = useUsersStore();
@@ -19,6 +21,9 @@ const isUserLogged = ref(false);
 const isUserSubscribed = ref(false);
 const subscribing = ref(false);
 const msg = ref("");
+const showDeleteModal = ref(false);
+
+const leavePage = () => router.push({ name: "News" });
 
 const subscribe = async () => {
 	msg.value = "";
@@ -86,6 +91,17 @@ onBeforeMount(async () => {
 					>
 						{{ newItem.creator.name }}
 					</router-link>
+					<b-button size="sm" class="delete-btn rounded-circle bg-transparent border-0">
+						<img
+							v-lazy="{
+								src: isDark ? '../assets/icons/remove-dark.svg' : '../assets/icons/remove-light.svg',
+							}"
+							alt="Remover notícia"
+							width="25"
+							height="25"
+							@click="showDeleteModal = true"
+						/>
+					</b-button>
 				</div>
 			</header>
 			<main class="px-3 my-5">
@@ -126,6 +142,14 @@ onBeforeMount(async () => {
 			</footer>
 		</div>
 	</div>
+
+	<DeleteModal
+		:id="id"
+		type="new"
+		:show="showDeleteModal"
+		@close="showDeleteModal = false"
+		@delete="leavePage"
+	/>
 </template>
 
 <style lang="scss" scoped>

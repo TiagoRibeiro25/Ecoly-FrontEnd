@@ -1,5 +1,6 @@
 (#ecoly) todo:
 - [x] 📃 fix 404 page when logging out
 - [ ] 🔥 api/news doesn't work on production
+- [ ] 📃 fix news order (show most recent first)!
 
 ----

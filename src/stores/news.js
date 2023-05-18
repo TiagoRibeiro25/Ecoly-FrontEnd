@@ -39,16 +39,20 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
-	/** @param {{title: string, content: string, imgs: string[] }} data @returns {Promise<{success: boolean, message: string}>} */
+	/** @param {{title: string, content: string, imgs: string[] }} data @returns {Promise<{success: boolean, message: string, statusCode: number}>} */
 	const addNew = async (data) => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
 
 		try {
 			const response = await api.post("/news", data, { headers });
-			return response.data;
+			return { statusCode: 200, ...response.data };
 		} catch (err) {
-			return { success: false, message: "Ocorreu um erro ao adicionar a notícia" };
+			return {
+				success: false,
+				message: "Ocorreu um erro ao adicionar a notícia",
+				statusCode: err.response.status,
+			};
 		}
 	};
 

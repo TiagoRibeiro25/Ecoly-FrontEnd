@@ -28,7 +28,15 @@ export function formatNumber(number, decimalPlaces = 1) {
  * @returns {string} - Formatted text
  */
 export function formatText(text, maxLength = 20) {
-	return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+	// Remove HTML tags using regex
+	const regex = /(<([^>]+)>)/gi;
+	const content = text.replace(regex, "");
+
+	// Trim excess whitespace
+	const trimmedContent = content.trim();
+
+	// Return formatted text based on maxLength
+	return trimmedContent.length > maxLength ? `${trimmedContent.slice(0, maxLength)}...` : trimmedContent;
 }
 
 /**

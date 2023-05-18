@@ -13,6 +13,15 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
+	const getRecentActivities = async () => {
+		try {
+			const response = await api.get("/activities?fields=activities&filter=recent");
+			return response.data;
+		} catch (err) {
+			return { success: false, data: [] };
+		}
+	};
+
 	const deleteActivity = async (id) => {
 		const token = useUsersStore().token;
 
@@ -24,5 +33,5 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
-	return { search, deleteActivity };
+	return { search, deleteActivity, getRecentActivities };
 });

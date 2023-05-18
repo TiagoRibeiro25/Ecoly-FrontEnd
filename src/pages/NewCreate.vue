@@ -29,7 +29,7 @@ const addNew = async () => {
 	if (response.success) {
 		msg.value = "Notícia adicionada com sucesso!";
 	} else {
-		msg.value = "Erro ao adicionar notícia!";
+		msg.value = response.status === 413 ? "Tamanho das imagens excedido!" : "Erro ao adicionar notícia!";
 	}
 
 	creating.value = false;
@@ -47,12 +47,17 @@ const addNew = async () => {
 				<AddImages :images="images" />
 			</div>
 			<div class="col-12 mt-5 px-0">
-				<AddInput :text="title" placeholder="Título da notícia" type="input" @update:text="title = $event" />
+				<AddInput
+					:text="title"
+					placeholder="Título da notícia (mínimo 10 caracteres)"
+					type="input"
+					@update:text="title = $event"
+				/>
 			</div>
 			<div class="col-12 mt-3 mb-5 px-0">
 				<AddInput
 					:text="content"
-					placeholder="Corpo da notícia"
+					placeholder="Corpo da notícia (mínimo 100 caracteres) - HTML permitido"
 					type="textarea"
 					@update:text="content = $event"
 				/>
@@ -76,6 +81,41 @@ const addNew = async () => {
 					Adicionar Notícia
 				</button>
 			</div>
+			<!-- Preview container -->
+			<div class="col-12 mt-5 px-0">
+				<h2
+					class="preview-header-title"
+					:class="isDark ? 'preview-header-title-dark' : 'preview-header-title-light'"
+				>
+					Pre visualização
+				</h2>
+				<div
+					class="preview custom-scroll-bar mt-3"
+					:class="isDark ? 'custom-scroll-bar-dark' : 'custom-scroll-bar-light'"
+				>
+					<header class="d-flex flex-row">
+						<div class="col-9 px-0 d-flex align-items-center">
+							<h2 class="preview-title" :class="isDark ? 'preview-title-dark' : 'preview-title-light'">
+								{{ title.trim().length > 0 ? title : "Título da notícia" }}
+							</h2>
+						</div>
+						<div class="col-3 px-0 d-flex flex-column align-items-end">
+							<span class="preview-header-info text-muted">
+								{{ new Date().toISOString().split("T")[0] }}
+							</span>
+							<span class="preview-header-info header-link text-muted"> Autor </span>
+						</div>
+					</header>
+					<hr />
+					<main>
+						<p
+							class="preview-main-text text-justify"
+							:class="isDark ? 'preview-main-text-dark' : 'preview-main-text-light'"
+							v-html="content.trim().length > 0 ? content : 'Corpo da notícia'"
+						></p>
+					</main>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -85,6 +125,7 @@ $primary-color: #343e3d;
 $secondary-color: #aedcc0;
 $tertiary-color: #ffffff;
 $fourth-color: #18516f;
+$fifth-color: #3fc380;
 
 .msg {
 	font-family: "Panton", sans-serif;
@@ -125,6 +166,108 @@ $fourth-color: #18516f;
 		&:hover {
 			background-color: $fourth-color;
 		}
+	}
+}
+
+.preview-header-title {
+	font-family: "Panton", sans-serif;
+	font-size: 2rem;
+	font-weight: 600;
+
+	&.preview-header-title-dark {
+		color: $secondary-color;
+	}
+
+	&.preview-header-title-light {
+		color: $primary-color;
+	}
+}
+
+.preview {
+	border: 2px solid $fifth-color;
+	border-radius: 15px;
+	padding: 1rem;
+	max-height: 40rem;
+	overflow-y: auto;
+}
+
+.custom-scroll-bar {
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+	&::-moz-scrollbar {
+		width: 10px;
+	}
+	scrollbar-width: 10px;
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	&::-moz-scrollbar-track {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: $fifth-color;
+	}
+	&::-moz-scrollbar-thumb {
+		background: $fifth-color;
+	}
+
+	&.custom-scroll-bar-dark {
+		&::-webkit-scrollbar-thumb:hover {
+			background: $secondary-color;
+		}
+		&::-moz-scrollbar-thumb:hover {
+			background: $secondary-color;
+		}
+	}
+
+	&.custom-scroll-bar-light {
+		&::-webkit-scrollbar-thumb:hover {
+			background: $fourth-color;
+		}
+		&::-moz-scrollbar-thumb:hover {
+			background: $fourth-color;
+		}
+	}
+}
+
+.preview-title {
+	font-family: "Panton", sans-serif;
+	font-size: 1.8rem;
+	font-weight: 600;
+
+	&.preview-title-dark {
+		color: $secondary-color;
+	}
+
+	&.preview-title-light {
+		color: $primary-color;
+	}
+}
+
+.preview-header-info {
+	font-family: "Panton", sans-serif;
+	font-size: 1rem;
+	font-weight: 600;
+
+	&.header-link {
+		cursor: pointer;
+	}
+}
+
+.preview-main-text {
+	font-family: "Panton", sans-serif;
+	font-size: 1.15rem;
+	font-weight: 400;
+
+	&.preview-main-text-dark {
+		color: $tertiary-color;
+	}
+
+	&.preview-main-text-light {
+		color: $primary-color;
 	}
 }
 </style>

@@ -2,17 +2,21 @@
 import Header from "../components/Header.vue";
 import AddImages from "../components/AddImages.vue";
 import AddInput from "../components/AddInput.vue";
-import { ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { useNewsStore } from "../stores/news";
+import { useUsersStore } from "../stores/users";
 import { useDark } from "@vueuse/core";
+import { useRouter } from "vue-router";
 
 const isDark = useDark();
+const router = useRouter();
 const newsStore = useNewsStore();
 const images = ref([]);
 const title = ref("");
 const content = ref("");
-const creating = ref(false);
 const msg = ref("");
+const creating = ref(false);
+const loading = ref(true);
 
 const validateForm = () => {
 	if (!title.value || title.value.trim().length < 10) return false;
@@ -34,9 +38,25 @@ const addNew = async () => {
 
 	creating.value = false;
 };
+
+onBeforeMount(async () => {
+	const usersStore = useUsersStore();
+	const response = await usersStore.getLoggedInUser();
+
+	if (response.success && response.data.role === "admin") {
+		loading.value = false;
+		return;
+	}
+
+	router.push({ name: "NotFound" });
+});
 </script>
 
 <template>
+	<div v-if="loading" class="col-12 d-flex justify-content-center align-items-center" style="height: 100vh">
+		<b-spinner variant="success" label="Carregando"></b-spinner>
+	</div>
+
 	<div class="col-12 pt-3">
 		<Header title="ADICIONAR NOTÍCIA" />
 	</div>

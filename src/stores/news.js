@@ -39,6 +39,19 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
+	/** @param {{title: string, content: string, imgs: string[] }} data @returns {Promise<{success: boolean, message: string}>} */
+	const addNew = async (data) => {
+		const usersStore = useUsersStore();
+		const headers = { Authorization: `Bearer ${usersStore.token}` };
+
+		try {
+			const response = await api.post("/news", data, { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Ocorreu um erro ao adicionar a notícia" };
+		}
+	};
+
 	/** @param {number} id @returns {Promise<{success: boolean, message: string}>} */
 	const deleteNew = async (id) => {
 		const usersStore = useUsersStore();
@@ -65,5 +78,5 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
-	return { search, getNews, getNew, deleteNew, isSubscribed };
+	return { search, getNews, getNew, addNew, deleteNew, isSubscribed };
 });

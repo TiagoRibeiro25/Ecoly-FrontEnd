@@ -4,7 +4,7 @@ import Header from "../components/Header.vue";
 import { useDark } from "@vueuse/core";
 import { useNewsStore } from "../stores/news";
 import { onBeforeMount, ref } from "vue";
-import RecentNews from "../components/RecentNews.vue";
+import RecentNews from "../components/Home/RecentNews.vue";
 
 const isDark = useDark();
 const recentNews = ref([]);

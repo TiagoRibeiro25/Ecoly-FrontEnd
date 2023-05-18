@@ -1,7 +1,7 @@
 <script setup>
 import Arrow from "./Arrow.vue";
 import { useDark } from "@vueuse/core";
-import { formatDate, formatText } from "../utils/formatData";
+import { formatDate, formatText } from "../../utils/formatData";
 import { ref } from "vue";
 
 const isDark = useDark();

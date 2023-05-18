@@ -3,12 +3,13 @@ import SearchBar from "../components/SearchBar.vue";
 import Header from "../components/Header.vue";
 import RecentNews from "../components/Home/RecentNews.vue";
 import RecentActivities from "../components/Home/RecentActivities.vue";
+import FAQ from "../utils/FAQcontent.js";
+import Footer from "../components/Home/Footer.vue";
 import { useNewsStore } from "../stores/news";
 import { onBeforeMount, ref } from "vue";
 import { useActivitiesStore } from "../stores/activities";
 import { useDark } from "@vueuse/core";
 import axios from "axios";
-import FAQ from "../utils/FAQcontent.js";
 
 const isDark = useDark();
 
@@ -123,6 +124,9 @@ onBeforeMount(() => {
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="col-12 mt-5 px-0">
+		<Footer />
 	</div>
 </template>
 

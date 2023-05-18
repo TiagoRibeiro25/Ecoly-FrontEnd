@@ -11,7 +11,14 @@ watchEffect(() => {
 });
 
 watchEffect(() => {
-	document.querySelector("body").style.backgroundColor = isDark.value ? "#333333" : "#ffffff";
+	// add body-dark-theme if dark and remove body-light-theme
+	if (isDark.value) {
+		document.body.classList.add("body-dark-theme");
+		document.body.classList.remove("body-light-theme");
+	} else {
+		document.body.classList.add("body-light-theme");
+		document.body.classList.remove("body-dark-theme");
+	}
 });
 </script>
 

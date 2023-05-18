@@ -1,5 +1,7 @@
 # Ecoly - Eco-Schools Management Web Application
 
+> :warning: **This application is still in development.** :warning:
+
 Ecoly is a web application that helps schools manage their eco-schools subjects. It allows schools to easily create new activities, schedule meetings, and track progress towards eco-friendly goals.
 
 ## Prerequisites

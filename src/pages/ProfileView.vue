@@ -318,17 +318,17 @@ $quinary-color: #303a39;
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background: $secondary-color;
+		background: $quaternary-color;
 	}
 	&::-moz-scrollbar-thumb {
-		background: $secondary-color;
+		background: $quaternary-color;
 	}
 
 	&::-webkit-scrollbar-thumb:hover {
-		background: $quaternary-color;
+		background: $secondary-color;
 	}
 	&::-moz-scrollbar-thumb:hover {
-		background: $quaternary-color;
+		background: $secondary-color;
 	}
 }
 </style>

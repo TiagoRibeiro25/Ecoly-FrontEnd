@@ -30,9 +30,11 @@ watch(data, () => {
 		<textarea
 			v-model="data"
 			:placeholder="placeholder"
-			class="form-control"
+			class="form-control custom-scroll-bar"
 			rows="5"
-			:class="isDark ? 'dark-theme-input' : 'light-theme-input'"
+			:class="
+				isDark ? 'dark-theme-input custom-scroll-bar-dark' : 'light-theme-input custom-scroll-bar-light'
+			"
 		></textarea>
 	</div>
 </template>
@@ -50,8 +52,9 @@ $fifth-color: #18516f;
 	font-weight: 400;
 	background-color: transparent;
 	border-radius: 0.6rem;
-	max-height: 15rem;
+	max-height: 40rem;
 	min-height: 3rem;
+	overflow-y: auto;
 }
 
 .light-theme-input {
@@ -76,6 +79,48 @@ $fifth-color: #18516f;
 		box-shadow: none;
 		border-color: $fourth-color;
 		color: $fourth-color;
+	}
+}
+
+.custom-scroll-bar {
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+	&::-moz-scrollbar {
+		width: 10px;
+	}
+	scrollbar-width: 10px;
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	&::-moz-scrollbar-track {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: $tertiary-color;
+	}
+	&::-moz-scrollbar-thumb {
+		background: $tertiary-color;
+	}
+
+	&.custom-scroll-bar-dark {
+		&::-webkit-scrollbar-thumb:hover {
+			background: $secondary-color;
+		}
+		&::-moz-scrollbar-thumb:hover {
+			background: $secondary-color;
+		}
+	}
+
+	&.custom-scroll-bar-light {
+		&::-webkit-scrollbar-thumb:hover {
+			background: $fifth-color;
+		}
+		&::-moz-scrollbar-thumb:hover {
+			background: $fifth-color;
+		}
 	}
 }
 </style>

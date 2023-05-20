@@ -22,7 +22,7 @@ watchEffect(async () => {
 	const searchInput = search.value;
 	data.value = [];
 
-	if (search.value.length < 3) {
+	if (searchInput.trim().length < 3) {
 		showModal.value = false;
 		return;
 	}
@@ -34,7 +34,7 @@ watchEffect(async () => {
 		if (searchInput !== search.value) return;
 
 		data.value = [];
-		if (searchInput.length < 3) {
+		if (searchInput.trim().length < 3) {
 			searching.value = false;
 			showModal.value = false;
 			return;

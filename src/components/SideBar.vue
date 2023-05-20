@@ -3,6 +3,8 @@ import { useDark, useToggle } from "@vueuse/core";
 import { onBeforeMount, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useUsersStore } from "@/stores/users";
+import logo_exp from "../assets/logo/logo_exp.webp";
+import logo from "../assets/logo/logo.webp";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -82,15 +84,8 @@ onBeforeMount(async () => {
 	>
 		<div class="top-logo">
 			<router-link :to="{ name: 'Home' }">
-				<img
-					v-if="showText"
-					src="../assets/logo/logo_exp.webp"
-					alt="home"
-					width="180"
-					height="60"
-					class="mt-2"
-				/>
-				<img v-else src="../assets/logo/logo.webp" alt="home" width="50" height="80" class="mr-3" />
+				<img v-if="showText" v-lazy="{ src: logo_exp }" alt="home" width="180" height="60" class="mt-2" />
+				<img v-else v-lazy="{ src: logo }" alt="home" width="50" height="80" class="mr-3" />
 			</router-link>
 		</div>
 		<div class="nav-links">

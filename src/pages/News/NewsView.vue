@@ -4,7 +4,7 @@ import { ref, watchEffect } from "vue";
 import { useNewsStore } from "../../stores/news";
 import SearchBar from "../../components/SearchBar.vue";
 import Header from "../../components/Header.vue";
-import New from "../../components/New.vue";
+import NewCard from "./NewCard.vue";
 import DeleteModal from "../../components/DeleteModal.vue";
 import ChangeViewButton from "../../components/ChangeViewButton.vue";
 
@@ -69,7 +69,7 @@ watchEffect(async () => {
 			</div>
 
 			<div v-else>
-				<New
+				<NewCard
 					v-for="(item, index) in news"
 					:key="item.id"
 					:index="index"

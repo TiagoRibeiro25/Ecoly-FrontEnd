@@ -1,8 +1,8 @@
 <script setup>
-import CardImage from "../components/CardImage.vue";
+import CardImage from "../../components/CardImage.vue";
 import { useDark } from "@vueuse/core";
 import { ref, onMounted } from "vue";
-import { formatText, formatDate } from "../utils/formatData";
+import { formatText, formatDate } from "../../utils/formatData";
 
 const props = defineProps({
 	index: { type: Number, required: true },

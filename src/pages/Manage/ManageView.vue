@@ -6,6 +6,7 @@ import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
 import ChangeViewButton from "../../components/ChangeViewButton.vue";
 import ManageHeader from "../../components/ManageHeader.vue";
+import Themes from "./Themes.vue";
 
 const isDark = useDark();
 const router = useRouter();
@@ -80,7 +81,9 @@ onBeforeMount(async () => {
 				<!-- Themes -->
 				<div class="col-12 mt-5 px-0">
 					<ManageHeader title="Temas" description="adicionar temas para as atividades" />
-					<div class="col-12 mt-4" style="border: 1px solid red"></div>
+					<div class="col-12 mt-4" style="border: 1px solid red">
+						<Themes />
+					</div>
 				</div>
 			</div>
 		</div>

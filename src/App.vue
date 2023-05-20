@@ -11,7 +11,7 @@ watchEffect(() => {
 });
 
 watchEffect(() => {
-	// add body-dark-theme if dark and remove body-light-theme
+	// Toggle theme
 	if (isDark.value) {
 		document.body.classList.add("body-dark-theme");
 		document.body.classList.remove("body-light-theme");

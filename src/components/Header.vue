@@ -13,7 +13,7 @@ const isDark = useDark();
 </template>
 
 <style lang="scss" scoped>
-$primary-color: #000000;
+$primary-color: #343e3d;
 $secondary-color: #aedcc0;
 
 header {

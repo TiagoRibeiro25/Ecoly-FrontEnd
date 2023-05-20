@@ -34,7 +34,7 @@ $tertiary-color: #18516f;
 	font-family: "Panton", sans-serif;
 	font-weight: 600;
 	font-size: 1rem;
-	width: 200px;
+	width: 250px;
 }
 
 .disabled {
@@ -54,6 +54,11 @@ $tertiary-color: #18516f;
 		background-color: $tertiary-color;
 		color: $secondary-color;
 	}
+
+	&.disabled {
+		background-color: $primary-color;
+		color: $secondary-color;
+	}
 }
 
 .btn-dark {
@@ -67,6 +72,11 @@ $tertiary-color: #18516f;
 		& img {
 			filter: invert(1);
 		}
+	}
+
+	&.disabled {
+		background-color: $secondary-color;
+		color: $primary-color;
 	}
 }
 </style>

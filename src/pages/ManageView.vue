@@ -7,6 +7,6 @@ const isDark = useDark();
 
 <template>
 	<div class="col-12 mt-5">
-		<Header title="MANAGE" />
+		<Header title="GESTÃO" />
 	</div>
 </template>

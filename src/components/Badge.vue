@@ -1,5 +1,5 @@
 <script setup>
-import { useUsersStore } from "../stores/users";
+import { useUsersStore } from "@/stores/users";
 
 const props = defineProps({
 	index: { type: Number, required: true },

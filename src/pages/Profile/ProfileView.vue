@@ -1,10 +1,9 @@
 <script setup>
-import EditProfileModal from "../components/EditProfileModal.vue";
-import SeedImg from "../components/SeedImg.vue";
-import Badge from "../components/Badge.vue";
+import EditProfileModal from "../../components/EditProfileModal.vue";
+import Badge from "@/components/Badge.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUsersStore } from "../stores/users";
-import { formatNumber } from "../utils/formatData";
+import { useUsersStore } from "../../stores/users";
+import { formatNumber } from "../../utils/formatData";
 import { ref, watchEffect } from "vue";
 
 const route = useRoute();
@@ -109,13 +108,27 @@ watchEffect(async () => {
 			<div class="col-lg-3 col-6">
 				<div class="row justify-content-center align-items-center">
 					<h2 class="info">Mensal: {{ formatNumber(user.seeds.month) }}</h2>
-					<SeedImg />
+					<div class="ml-2" style="margin-bottom: 11px">
+						<img
+							class="img-fluid"
+							v-lazy="{ src: '../assets/icons/seed.svg' }"
+							alt="Semente"
+							loading="lazy"
+						/>
+					</div>
 				</div>
 			</div>
 			<div class="col-lg-3 col-6">
 				<div class="row justify-content-center align-items-center">
 					<h2 class="info">Total: {{ formatNumber(user.seeds.total) }}</h2>
-					<SeedImg />
+					<div class="ml-2" style="margin-bottom: 11px">
+						<img
+							class="img-fluid"
+							v-lazy="{ src: '../assets/icons/seed.svg' }"
+							alt="Semente"
+							loading="lazy"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

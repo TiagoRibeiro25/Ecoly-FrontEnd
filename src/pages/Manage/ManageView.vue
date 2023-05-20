@@ -1,16 +1,18 @@
 <script setup>
-import Header from "../components/Header.vue";
+import Header from "../../components/Header.vue";
 import { useDark } from "@vueuse/core";
-import { useUsersStore } from "../stores/users";
+import { useUsersStore } from "../../stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
-import ChangeViewButton from "../components/ChangeViewButton.vue";
-import ManageHeader from "../components/ManageHeader.vue";
+import ChangeViewButton from "../../components/ChangeViewButton.vue";
+import ManageHeader from "../../components/ManageHeader.vue";
 
 const isDark = useDark();
 const router = useRouter();
 const isLoaded = ref(false);
 const isUserAdmin = ref(false);
+
+// Themes
 
 onBeforeMount(async () => {
 	const usersStore = useUsersStore();
@@ -37,6 +39,7 @@ onBeforeMount(async () => {
 		</div>
 		<div class="col-12 mb-4">
 			<div class="mx-auto px-5" style="max-width: 1403px">
+				<!-- Fast Actions -->
 				<div class="col-12 pt-3 pb-4 px-0 d-flex flex-xl-row flex-column">
 					<div
 						class="col-xl-3 col-12 px-0 d-flex justify-content-xl-start justify-content-center align-items-center"
@@ -74,8 +77,10 @@ onBeforeMount(async () => {
 					</div>
 				</div>
 
+				<!-- Themes -->
 				<div class="col-12 mt-5 px-0">
 					<ManageHeader title="Temas" description="adicionar temas para as atividades" />
+					<div class="col-12 mt-4" style="border: 1px solid red"></div>
 				</div>
 			</div>
 		</div>

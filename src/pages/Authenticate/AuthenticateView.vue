@@ -1,8 +1,8 @@
 <script setup>
 import { useDark } from "@vueuse/core";
-import { useUsersStore } from "@/stores/users";
-import { useSchoolsStore } from "@/stores/schools";
-import { validateEmail } from "@/utils/validators";
+import { useUsersStore } from "../../stores/users";
+import { useSchoolsStore } from "../../stores/schools";
+import { validateEmail } from "../../utils/validators";
 import { useRouter } from "vue-router";
 import { onBeforeMount, ref } from "vue";
 

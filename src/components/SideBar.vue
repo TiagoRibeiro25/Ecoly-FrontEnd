@@ -2,7 +2,7 @@
 import { useDark, useToggle } from "@vueuse/core";
 import { onBeforeMount, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUsersStore } from "@/stores/users";
+import { useUsersStore } from "../stores/users";
 import logo_exp from "../assets/logo/logo_exp.webp";
 import logo from "../assets/logo/logo.webp";
 

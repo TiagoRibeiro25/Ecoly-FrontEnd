@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useUsersStore } from "../../stores/users";
-import { validateEmail } from "@/utils/validators.js";
+import { validateEmail } from "../../utils/validators";
 
 const newsLetterEmail = ref("");
 const btnMessage = ref("Subscrever");

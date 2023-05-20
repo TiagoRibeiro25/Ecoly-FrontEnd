@@ -2,7 +2,7 @@
 import { useDark } from "@vueuse/core";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { useUsersStore } from "@/stores/users";
+import { useUsersStore } from "../stores/users";
 
 const isDark = useDark();
 const route = useRoute();

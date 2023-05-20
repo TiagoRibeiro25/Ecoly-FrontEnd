@@ -1,7 +1,7 @@
 <script setup>
 import { useDark } from "@vueuse/core";
-import SearchBar from "../components/SearchBar.vue";
-import Header from "../components/Header.vue";
+import SearchBar from "../../components/SearchBar.vue";
+import Header from "../../components/Header.vue";
 
 const isDark = useDark();
 </script>

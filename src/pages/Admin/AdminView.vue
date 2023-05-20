@@ -1,7 +1,7 @@
 <script setup>
-import Header from "../components/Header.vue";
+import Header from "../../components/Header.vue";
 import { useDark } from "@vueuse/core";
-import { useUsersStore } from "../stores/users";
+import { useUsersStore } from "../../stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
 

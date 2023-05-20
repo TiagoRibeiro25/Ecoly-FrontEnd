@@ -1,10 +1,10 @@
 <script setup>
-import Header from "../components/Header.vue";
-import AddImages from "../components/AddImages.vue";
-import AddInput from "../components/AddInput.vue";
+import Header from "../../components/Header.vue";
+import AddImages from "../../components/AddImages.vue";
+import AddInput from "../../components/AddInput.vue";
 import { onBeforeMount, ref } from "vue";
-import { useNewsStore } from "../stores/news";
-import { useUsersStore } from "../stores/users";
+import { useNewsStore } from "../../stores/news";
+import { useUsersStore } from "../../stores/users";
 import { useDark } from "@vueuse/core";
 import { useRouter } from "vue-router";
 

@@ -1,7 +1,7 @@
 import api from "@/services/api";
-import { getLocalStorage, removeLocalStorage, setLocalStorage } from "@/utils/localStorage";
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from "../utils/localStorage";
 
 export const useUsersStore = defineStore("users", () => {
 	const isUserLoggedIn = ref(getLocalStorage("auth_key") ? true : false);

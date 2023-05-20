@@ -1,6 +1,6 @@
 <script setup>
 import { useDark } from "@vueuse/core";
-import Header from "../components/Header.vue";
+import Header from "../../components/Header.vue";
 
 const isDark = useDark();
 </script>

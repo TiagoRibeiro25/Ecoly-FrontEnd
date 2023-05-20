@@ -78,7 +78,7 @@ watchEffect(async () => {
 					class="searchbar-input search-icon"
 					:class="{ 'bg-light': !isDark, 'bg-dark': isDark }"
 				>
-					<img src="../assets/icons/search.svg" alt="search" width="20" />
+					<img v-lazy="{ src: '../assets/icons/search.svg' }" alt="search" width="20" />
 				</b-input-group-text>
 			</template>
 			<b-form-input

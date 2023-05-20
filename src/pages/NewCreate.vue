@@ -57,83 +57,85 @@ onBeforeMount(async () => {
 		<b-spinner variant="success" label="Carregando"></b-spinner>
 	</div>
 
-	<div class="col-12 pt-3">
-		<Header title="ADICIONAR NOTÍCIA" />
-	</div>
+	<div v-else>
+		<div class="col-12 pt-3">
+			<Header title="ADICIONAR NOTÍCIA" />
+		</div>
 
-	<div class="col-12 mb-4">
-		<div class="mx-auto px-5" style="max-width: 1403px">
-			<div class="col-12 pt-3">
-				<AddImages :images="images" />
-			</div>
-			<div class="col-12 mt-5 px-0">
-				<AddInput
-					:text="title"
-					placeholder="Título da notícia (mínimo 10 caracteres)"
-					type="input"
-					@update:text="title = $event"
-				/>
-			</div>
-			<div class="col-12 mt-3 mb-5 px-0">
-				<AddInput
-					:text="content"
-					placeholder="Corpo da notícia (mínimo 100 caracteres) - HTML permitido"
-					type="textarea"
-					@update:text="content = $event"
-				/>
-			</div>
-			<div v-if="creating" class="col-12 mb-3 d-flex justify-content-center align-items-center">
-				<b-spinner variant="success" label="Adicionando Notícia"></b-spinner>
-			</div>
-			<div v-if="msg" class="col-12 mb-3 d-flex justify-content-center align-items-center">
-				<span class="msg" :class="isDark ? 'msg-dark' : 'msg-light'">
-					{{ msg }}
-				</span>
-			</div>
-			<div class="col-12 mt-4 d-flex justify-content-center align-items-center">
-				<button
-					type="submit"
-					class="add-new-btn btn px-4"
-					:class="isDark ? 'dark-btn' : 'light-btn'"
-					:disabled="!validateForm() || creating"
-					@click="addNew"
-				>
-					Adicionar Notícia
-				</button>
-			</div>
-			<!-- Preview container -->
-			<div class="col-12 mt-5 px-0">
-				<h2
-					class="preview-header-title"
-					:class="isDark ? 'preview-header-title-dark' : 'preview-header-title-light'"
-				>
-					Pre visualização
-				</h2>
-				<div
-					class="preview custom-scroll-bar mt-3"
-					:class="isDark ? 'custom-scroll-bar-dark' : 'custom-scroll-bar-light'"
-				>
-					<header class="d-flex flex-row">
-						<div class="col-9 px-0 d-flex align-items-center">
-							<h2 class="preview-title" :class="isDark ? 'preview-title-dark' : 'preview-title-light'">
-								{{ title.trim().length > 0 ? title : "Título da notícia" }}
-							</h2>
-						</div>
-						<div class="col-3 px-0 d-flex flex-column align-items-end">
-							<span class="preview-header-info text-muted">
-								{{ new Date().toISOString().split("T")[0] }}
-							</span>
-							<span class="preview-header-info header-link text-muted"> Autor </span>
-						</div>
-					</header>
-					<hr />
-					<main>
-						<p
-							class="preview-main-text text-justify"
-							:class="isDark ? 'preview-main-text-dark' : 'preview-main-text-light'"
-							v-html="content.trim().length > 0 ? content : 'Corpo da notícia'"
-						></p>
-					</main>
+		<div class="col-12 mb-4">
+			<div class="mx-auto px-5" style="max-width: 1403px">
+				<div class="col-12 pt-3">
+					<AddImages :images="images" />
+				</div>
+				<div class="col-12 mt-5 px-0">
+					<AddInput
+						:text="title"
+						placeholder="Título da notícia (mínimo 10 caracteres)"
+						type="input"
+						@update:text="title = $event"
+					/>
+				</div>
+				<div class="col-12 mt-3 mb-5 px-0">
+					<AddInput
+						:text="content"
+						placeholder="Corpo da notícia (mínimo 100 caracteres) - HTML permitido"
+						type="textarea"
+						@update:text="content = $event"
+					/>
+				</div>
+				<div v-if="creating" class="col-12 mb-3 d-flex justify-content-center align-items-center">
+					<b-spinner variant="success" label="Adicionando Notícia"></b-spinner>
+				</div>
+				<div v-if="msg" class="col-12 mb-3 d-flex justify-content-center align-items-center">
+					<span class="msg" :class="isDark ? 'msg-dark' : 'msg-light'">
+						{{ msg }}
+					</span>
+				</div>
+				<div class="col-12 mt-4 d-flex justify-content-center align-items-center">
+					<button
+						type="submit"
+						class="add-new-btn btn px-4"
+						:class="isDark ? 'dark-btn' : 'light-btn'"
+						:disabled="!validateForm() || creating"
+						@click="addNew"
+					>
+						Adicionar Notícia
+					</button>
+				</div>
+				<!-- Preview container -->
+				<div class="col-12 mt-5 px-0">
+					<h2
+						class="preview-header-title"
+						:class="isDark ? 'preview-header-title-dark' : 'preview-header-title-light'"
+					>
+						Pre visualização
+					</h2>
+					<div
+						class="preview custom-scroll-bar mt-3"
+						:class="isDark ? 'custom-scroll-bar-dark' : 'custom-scroll-bar-light'"
+					>
+						<header class="d-flex flex-row">
+							<div class="col-9 px-0 d-flex align-items-center">
+								<h2 class="preview-title" :class="isDark ? 'preview-title-dark' : 'preview-title-light'">
+									{{ title.trim().length > 0 ? title : "Título da notícia" }}
+								</h2>
+							</div>
+							<div class="col-3 px-0 d-flex flex-column align-items-end">
+								<span class="preview-header-info text-muted">
+									{{ new Date().toISOString().split("T")[0] }}
+								</span>
+								<span class="preview-header-info header-link text-muted"> Autor </span>
+							</div>
+						</header>
+						<hr />
+						<main>
+							<p
+								class="preview-main-text text-justify"
+								:class="isDark ? 'preview-main-text-dark' : 'preview-main-text-light'"
+								v-html="content.trim().length > 0 ? content : 'Corpo da notícia'"
+							></p>
+						</main>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -45,9 +45,8 @@ const fetchActivities = async () => {
 
 /** @returns {Promise<void>} */
 const fetchRandomQuote = async () => {
-	const url = import.meta.env.VITE_QUOTES_API_URL;
 	try {
-		const response = await axios.get(url);
+		const response = await axios.get("https://get-quotes-api.cyclic.app/api/quotes/random");
 		quote.value = response.data;
 	} catch (err) {
 		console.log("There was an error fetching the quote. Using default quote instead.\n Error: ", err);
@@ -78,10 +77,10 @@ onBeforeMount(() => {
 			<div class="col-12 px-0 mt-5">
 				<RecentNews :news="recentNews" :fetching="fetchingNews" />
 			</div>
-			<div class="col-12 px-0 mt-5">
+			<div class="col-12 px-0 mt-5 py-5">
 				<RecentActivities :activities="recentActivities" :fetching="fetchingActivities" />
 			</div>
-			<div class="col-12 px-0 mt-5">
+			<div class="col-12 px-0 mt-5 pb-3">
 				<div class="d-flex flex-column align-items-center justify-content-center mb-5 w-75 mx-auto pt-5">
 					<div
 						v-if="quote.author && quote.content"
@@ -96,36 +95,36 @@ onBeforeMount(() => {
 					</div>
 				</div>
 			</div>
-			<div class="col-12 px-0 mt-5">
-				<div class="FAQ-section pt-4" :class="{ 'FAQ-bg-light': !isDark, 'FAQ-bg-dark': isDark }">
-					<div class="faq my-5">
-						<h2 class="title text-center" :class="{ 'title-text-light': !isDark, 'title-text-dark': isDark }">
-							PERGUNTAS FREQUENTES
-						</h2>
-						<div class="accordion" role="tablist">
-							<b-card v-for="question in FAQ" :key="question.id" no-body class="mb-1 card">
-								<b-card-header header-tag="header" class="p-1" role="tab">
-									<b-button
-										block
-										v-b-toggle="'collapse-' + question.id"
-										variant="info"
-										class="text-left question"
-										>{{ question.question }}</b-button
-									>
-								</b-card-header>
-								<b-collapse :id="'collapse-' + question.id" accordion="my-accordion" role="tabpanel">
-									<b-card-body>
-										<b-card-text class="text-left answer"> {{ question.answer }}</b-card-text>
-									</b-card-body>
-								</b-collapse>
-							</b-card>
-						</div>
-					</div>
+		</div>
+	</div>
+	<div class="col-12 px-0 mt-5">
+		<div class="FAQ-section pt-4" :class="{ 'FAQ-bg-light': !isDark, 'FAQ-bg-dark': isDark }">
+			<div class="faq my-5">
+				<h2 class="title text-center" :class="{ 'title-text-light': !isDark, 'title-text-dark': isDark }">
+					PERGUNTAS FREQUENTES
+				</h2>
+				<div class="accordion" role="tablist">
+					<b-card v-for="question in FAQ" :key="question.id" no-body class="mb-1 card">
+						<b-card-header header-tag="header" class="p-1" role="tab">
+							<b-button
+								block
+								v-b-toggle="'collapse-' + question.id"
+								variant="info"
+								class="text-left question"
+								>{{ question.question }}</b-button
+							>
+						</b-card-header>
+						<b-collapse :id="'collapse-' + question.id" accordion="my-accordion" role="tabpanel">
+							<b-card-body>
+								<b-card-text class="text-left answer"> {{ question.answer }}</b-card-text>
+							</b-card-body>
+						</b-collapse>
+					</b-card>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-12 mt-5 px-0">
+	<div class="col-12 px-0">
 		<Footer />
 	</div>
 </template>

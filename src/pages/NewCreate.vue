@@ -14,6 +14,7 @@ const newsStore = useNewsStore();
 const images = ref([]);
 const title = ref("");
 const content = ref("");
+const userLoggedName = ref("Autor");
 const msg = ref("");
 const creating = ref(false);
 const loading = ref(true);
@@ -45,6 +46,7 @@ onBeforeMount(async () => {
 
 	if (response.success && response.data.role === "admin") {
 		loading.value = false;
+		userLoggedName.value = response.data.name;
 		return;
 	}
 
@@ -124,7 +126,7 @@ onBeforeMount(async () => {
 								<span class="preview-header-info text-muted">
 									{{ new Date().toISOString().split("T")[0] }}
 								</span>
-								<span class="preview-header-info header-link text-muted"> Autor </span>
+								<span class="preview-header-info header-link text-muted"> {{ userLoggedName }} </span>
 							</div>
 						</header>
 						<hr />

@@ -91,7 +91,11 @@ onBeforeMount(async () => {
 					>
 						{{ newItem.creator.name }}
 					</router-link>
-					<b-button size="sm" class="delete-btn rounded-circle bg-transparent border-0">
+					<b-button
+						v-if="newItem.isUserAdmin"
+						size="sm"
+						class="delete-btn rounded-circle bg-transparent border-0"
+					>
 						<img
 							v-lazy="{
 								src: isDark ? '../assets/icons/remove-dark.svg' : '../assets/icons/remove-light.svg',

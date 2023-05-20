@@ -1,0 +1,137 @@
+<script setup>
+import EditProfileModal from "../../components/EditProfileModal.vue";
+
+const props = defineProps({
+	user: { type: Object, required: true },
+	highLightedBadge: { type: Object, required: false },
+});
+
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+</script>
+
+<template>
+	<div class="top-info row mx-auto py-lg-0 py-sm-3 py-5 shadow">
+		<!-- Profile Picture -->
+		<div class="col-lg-2 d-flex justify-content-center align-items-center flex-column">
+			<img
+				class="img-fluid profile-pic rounded-circle"
+				alt="Imagem de Perfil"
+				v-lazy="{ src: props.user.photo }"
+			/>
+		</div>
+		<!-- Profile Info -->
+		<div class="col-lg-8 pl-lg-0 pb-lg-0 pb-3 text-lg-left text-center">
+			<div>
+				<h3 class="user-name mb-2 mt-4">{{ props.user.name }}</h3>
+				<span class="user-info d-block">{{ props.user.email }}</span>
+				<span class="user-info d-block">
+					{{ props.user.role === "unsigned" ? "Sem cargo" : capitalize(props.user.role) }}
+					{{ props.user.internal_id ? " - " + props.user.internal_id : "" }}
+				</span>
+				<span class="user-info d-block">
+					{{ props.user.school }}
+				</span>
+				<div v-if="props.user.course">
+					<span class="user-info d-block">
+						{{ props.user.course }}
+						{{ props.user.year ? `- ${props.user.year} ano` : "" }}
+					</span>
+				</div>
+			</div>
+		</div>
+		<!-- Profile HighLight Badge + Edit Profile Button -->
+		<div class="col-lg-2 d-flex justify-content-center align-items-center flex-column">
+			<!-- HighLight Badge -->
+			<div v-if="highLightedBadge" class="d-flex justify-content-center align-items-center flex-column">
+				<img
+					class="img-fluid badge-icon mb-2"
+					v-lazy="{ src: highLightedBadge.img }"
+					alt="Medalha em Destaque"
+				/>
+				<span class="badge-title d-block text-center">{{ highLightedBadge.title }}</span>
+			</div>
+			<div v-else class="d-flex justify-content-center align-items-center flex-column">
+				<img
+					class="empty-badge"
+					src="@/assets/logo/logo.webp"
+					alt="Nenhuma medalha em destaque"
+					:class="{ 'mb-3': !props.user.isLoggedUser }"
+				/>
+			</div>
+			<!-- Edit Profile Button -->
+			<div v-if="props.user.isLoggedUser" class="mt-3">
+				<b-button class="edit-profile-btn px-2" size="sm" @click="$bvModal.show('edit-profile-modal')">
+					Editar Perfil
+				</b-button>
+			</div>
+		</div>
+	</div>
+	<EditProfileModal v-if="props.user.isLoggedUser" :user="props.user" id="edit-profile-modal" />
+</template>
+
+<style lang="scss" scoped>
+$primary-color: #343e3d;
+$secondary-color: #aedcc0;
+$tertiary-color: #6ea952;
+$quaternary-color: #3fc380;
+$quinary-color: #303a39;
+
+.top-info {
+	background-color: $primary-color;
+	border-radius: 20px;
+	min-height: 180px;
+	max-width: 1400px;
+}
+
+.profile-pic {
+	max-width: 150px;
+	max-height: 150px;
+	background-color: $tertiary-color;
+}
+
+.user-name,
+.user-info {
+	font-family: "Panton", sans-serif;
+	font-size: 1.7rem;
+	font-weight: 700;
+	color: $secondary-color;
+}
+
+.user-info {
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.badge-title {
+	font-family: "Panton", sans-serif;
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: $secondary-color;
+}
+
+.badge-icon {
+	width: 60px;
+	height: 70px;
+}
+
+.empty-badge {
+	width: 65px;
+	height: 90px;
+	background-image: url("@/assets/logo/logo_dark.webp");
+}
+
+.edit-profile-btn {
+	background: transparent;
+	border: 1px solid $secondary-color;
+	color: $secondary-color;
+	font-family: "Panton", sans-serif;
+	font-size: 0.9rem;
+	font-weight: 700;
+	border-radius: 20px;
+
+	&:hover {
+		background-color: $secondary-color;
+		color: $primary-color;
+	}
+}
+</style>

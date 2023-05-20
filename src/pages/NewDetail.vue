@@ -150,6 +150,7 @@ onBeforeMount(async () => {
 	<DeleteModal
 		:id="id"
 		type="new"
+		typeText="notícia"
 		:show="showDeleteModal"
 		@close="showDeleteModal = false"
 		@delete="leavePage"

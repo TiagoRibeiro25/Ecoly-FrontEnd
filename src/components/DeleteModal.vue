@@ -5,6 +5,7 @@ import { ref } from "vue";
 const props = defineProps({
 	id: { type: Number, required: true },
 	type: { type: String, required: true },
+	typeText: { type: String, required: true },
 	show: { type: Boolean, required: true },
 });
 
@@ -28,6 +29,8 @@ const deleteActivity = () => {
 	const activitiesStore = useActivitiesStore();
 	return activitiesStore.deleteActivity(props.id);
 };
+
+// TODO: deleteTheme
 
 const deleteItem = async () => {
 	msg.value = "";
@@ -53,7 +56,7 @@ const deleteItem = async () => {
 	<b-modal v-model="props.show" id="modal-delete-new" size="lg" hide-footer @hidden="handleModalClose">
 		<div class="container">
 			<h4 class="modal-title text-center mt-1">
-				Tens a certeza que queres apagar esta {{ props.type === "new" ? "notícia" : "atividade" }}?
+				Tens a certeza que queres apagar esta {{ props.typeText }}?
 			</h4>
 
 			<div v-if="deleting" class="w-100 text-center mt-4">

@@ -1,4 +1,5 @@
 import ActivitiesView from "@/pages/ActivitiesView.vue";
+import ActivityCreateView from "@/pages/ActivityCreateView.vue";
 import AuthenticateView from "@/pages/AuthenticateView.vue";
 import DashboardView from "@/pages/DashboardView.vue";
 import HomeView from "@/pages/HomeView.vue";
@@ -8,6 +9,7 @@ import NotFoundView from "@/pages/NotFoundView.vue";
 import ProfileView from "@/pages/ProfileView.vue";
 import UnsubscribeView from "@/pages/UnsubscribeView.vue";
 import ActivityDetailView from "../pages/ActivityDetail.vue";
+import AdminView from "../pages/AdminView.vue";
 import NewCreateView from "../pages/NewCreate.vue";
 import NewDetailView from "../pages/NewDetail.vue";
 
@@ -54,6 +56,11 @@ const router = createRouter({
 			component: ActivityDetailView,
 		},
 		{
+			path: "/activities/create",
+			name: "ActivityCreate",
+			component: ActivityCreateView,
+		},
+		{
 			path: "/dashboard",
 			name: "Dashboard",
 			component: DashboardView,
@@ -62,6 +69,11 @@ const router = createRouter({
 			path: "/manage",
 			name: "Manage",
 			component: ManageView,
+		},
+		{
+			path: "/manage/admin",
+			name: "Admin",
+			component: AdminView,
 		},
 		{
 			path: "/profile/:id",

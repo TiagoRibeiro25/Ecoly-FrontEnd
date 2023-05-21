@@ -23,10 +23,11 @@ export const useActivitiesStore = defineStore("activities", () => {
 	};
 
 	const deleteActivity = async (id) => {
-		const token = useUsersStore().token;
+		const usersStore = useUsersStore();
+		const headers = { Authorization: `Bearer ${usersStore.token}` };
 
 		try {
-			const response = await api.delete(`/activities/${id}`).set("Authorization", `Bearer ${token}`);
+			const response = await api.delete(`/activities/${id}`, { headers });
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Ocorreu um erro ao apagar a atividade" };

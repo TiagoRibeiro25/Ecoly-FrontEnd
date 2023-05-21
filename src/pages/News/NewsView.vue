@@ -93,7 +93,7 @@ watchEffect(async () => {
 	<DeleteModal
 		:id="idToDelete"
 		type="new"
-		typeText="notícia"
+		text="esta notícia"
 		:show="showDeleteModal"
 		@close="showDeleteModal = false"
 		@delete="() => (fetchAgain = true)"

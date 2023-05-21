@@ -1,11 +1,12 @@
 <script setup>
 import { useNewsStore } from "../stores/news";
+import { useActivitiesStore } from "../stores/activities";
 import { ref } from "vue";
 
 const props = defineProps({
 	id: { type: Number, required: true },
-	type: { type: String, required: true },
-	typeText: { type: String, required: true },
+	type: { type: String, required: true }, // "new" | "activity" | "theme"
+	text: { type: String, required: true },
 	show: { type: Boolean, required: true },
 });
 
@@ -31,6 +32,10 @@ const deleteActivity = () => {
 };
 
 // TODO: deleteTheme
+const deleteTheme = () => {
+	const activitiesStore = useActivitiesStore();
+	return activitiesStore.deleteTheme(props.id);
+};
 
 const deleteItem = async () => {
 	msg.value = "";
@@ -38,7 +43,15 @@ const deleteItem = async () => {
 
 	let response = null;
 
-	response = props.type === "new" ? await deleteNew() : await deleteActivity();
+	if (props.type === "new") {
+		response = await deleteNew();
+	} else if (props.type === "activity") {
+		response = await deleteActivity();
+	} else if (props.type === "theme") {
+		response = await deleteTheme();
+	} else {
+		response = { success: false, message: "Tipo inválido" };
+	}
 
 	deleting.value = false;
 
@@ -55,9 +68,7 @@ const deleteItem = async () => {
 <template>
 	<b-modal v-model="props.show" id="modal-delete-new" size="lg" hide-footer @hidden="handleModalClose">
 		<div class="container">
-			<h4 class="modal-title text-center mt-1">
-				Tens a certeza que queres apagar esta {{ props.typeText }}?
-			</h4>
+			<h4 class="modal-title text-center mt-1">Tens a certeza que queres apagar {{ props.text }}?</h4>
 
 			<div v-if="deleting" class="w-100 text-center mt-4">
 				<b-spinner variant="danger" label="Removendo"></b-spinner>

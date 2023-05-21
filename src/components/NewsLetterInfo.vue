@@ -24,7 +24,10 @@ const subscribe = async () => {
 	}
 
 	subscribing.value = false;
-	isUserSubscribed.value = true;
+
+	const isSubscribed = await newsStore.isSubscribed();
+	isUserSubscribed.value = isSubscribed.success;
+	deleteKey.value = isSubscribed.deleteKey;
 };
 
 onBeforeMount(async () => {

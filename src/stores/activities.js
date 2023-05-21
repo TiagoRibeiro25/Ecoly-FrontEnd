@@ -34,5 +34,17 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
-	return { search, deleteActivity, getRecentActivities };
+	const getActiveThemes = async () => {
+		const usersStore = useUsersStore();
+		const headers = { Authorization: `Bearer ${usersStore.token}` };
+
+		try {
+			const response = await api.get("/activities?fields=themes", { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, data: [] };
+		}
+	};
+
+	return { search, deleteActivity, getRecentActivities, getActiveThemes };
 });

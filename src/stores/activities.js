@@ -46,5 +46,18 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
-	return { search, deleteActivity, getRecentActivities, getActiveThemes };
+	/** @param {number} id - id do tema a ser apagado @returns {Promise<{success: boolean, message: string}>} */
+	const deleteTheme = async (id) => {
+		const usersStore = useUsersStore();
+		const headers = { Authorization: `Bearer ${usersStore.token}` };
+
+		try {
+			const response = await api.patch(`/activities/${id}?fields=theme`, {}, { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Ocorreu um erro ao apagar o tema" };
+		}
+	};
+
+	return { search, deleteActivity, getRecentActivities, getActiveThemes, deleteTheme };
 });

@@ -7,10 +7,12 @@ import Header from "../../components/Header.vue";
 import NewCard from "./NewCard.vue";
 import DeleteModal from "../../components/DeleteModal.vue";
 import ChangeViewButton from "../../components/ChangeViewButton.vue";
+import NewsLetterInfo from "../../components/NewsLetterInfo.vue";
 
 const isDark = useDark();
 const fetching = ref(false);
 const news = ref([]);
+const isUserLogged = ref(false);
 const isUserAdmin = ref(false);
 
 // delete modal variables
@@ -31,12 +33,13 @@ watchEffect(async () => {
 	news.value = [];
 
 	const newsStore = useNewsStore();
-	/** @type {{success: boolean, data: {isUserAdmin: boolean, news: Array<{id: string, creator_id: id, title: string, content: string, date_created: string, image: string}>}}} */
+	/** @type {{success: boolean, data: {isUserAdmin: boolean, isUserLogged: boolean, news: Array<{id: string, creator_id: id, title: string, content: string, date_created: string, image: string}>}}} */
 	const response = await newsStore.getNews();
 
 	if (response.success) {
 		news.value = response.data.news;
 		isUserAdmin.value = response.data.isUserAdmin;
+		isUserLogged.value = response.data.isUserLogged;
 	}
 
 	fetching.value = false;
@@ -81,6 +84,8 @@ watchEffect(async () => {
 					:isUserAdmin="isUserAdmin"
 					@delete="showModal"
 				/>
+
+				<NewsLetterInfo v-if="isUserLogged" />
 			</div>
 		</div>
 	</div>

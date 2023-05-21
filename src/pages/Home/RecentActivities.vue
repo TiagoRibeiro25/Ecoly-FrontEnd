@@ -24,7 +24,7 @@ const props = defineProps({
 				class="error-container d-flex justify-content-center align-items-center shadow-lg"
 				:class="isDark ? 'error-container-dark' : 'error-container-light'"
 			>
-				<h5 class="text-center">Não existem atividades recentes.</h5>
+				<h5 class="text-center">Não existem atividades para mostrar</h5>
 			</div>
 		</div>
 

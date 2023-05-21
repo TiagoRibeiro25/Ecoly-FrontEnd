@@ -7,7 +7,7 @@ import { useUsersStore } from "../../stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { formatDate } from "../../utils/formatData";
-import NewsLetterInfo from "./NewsLetterInfo.vue";
+import NewsLetterInfo from "../../components/NewsLetterInfo.vue";
 
 const isDark = useDark();
 const route = useRoute();
@@ -19,7 +19,6 @@ const usersStore = useUsersStore();
 const newItem = ref(null);
 const isLoaded = ref(false);
 const isUserLogged = ref(false);
-const isUserSubscribed = ref(false);
 const showDeleteModal = ref(false);
 
 const leavePage = () => router.push({ name: "News" });
@@ -40,12 +39,6 @@ onBeforeMount(async () => {
 
 	// finish loading the new
 	isLoaded.value = true;
-
-	// check if the user is subscribed to the newsletter
-	if (isUserLogged.value) {
-		const isSubscribed = await newsStore.isSubscribed();
-		isUserSubscribed.value = isSubscribed.success;
-	}
 });
 </script>
 
@@ -100,11 +93,7 @@ onBeforeMount(async () => {
 				></p>
 			</main>
 
-			<NewsLetterInfo
-				v-if="isUserLogged"
-				:isUserSubscribed="isUserSubscribed"
-				@subscribe="isUserSubscribed = true"
-			/>
+			<NewsLetterInfo v-if="isUserLogged" />
 		</div>
 	</div>
 

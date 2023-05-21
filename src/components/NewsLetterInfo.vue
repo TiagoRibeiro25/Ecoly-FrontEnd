@@ -1,14 +1,15 @@
 <script setup>
 import { useDark } from "@vueuse/core";
-import { useUsersStore } from "../../stores/users";
-import { ref } from "vue";
+import { useUsersStore } from "../stores/users";
+import { onBeforeMount, ref } from "vue";
+import { useNewsStore } from "../stores/news";
 
 const isDark = useDark();
 const usersStore = useUsersStore();
-const props = defineProps({ isUserSubscribed: Boolean });
-const emits = defineEmits(["subscribe"]);
+const newsStore = useNewsStore();
 const subscribing = ref(false);
 const msg = ref("");
+const isUserSubscribed = ref(false);
 
 const subscribe = async () => {
 	msg.value = "";
@@ -21,15 +22,20 @@ const subscribe = async () => {
 		return;
 	}
 
-	emits("subscribe");
+	isUserSubscribed.value = true;
 	subscribing.value = false;
 };
+
+onBeforeMount(async () => {
+	const isSubscribed = await newsStore.isSubscribed();
+	isUserSubscribed.value = isSubscribed.success;
+});
 </script>
 
 <template>
 	<footer class="px-3 d-flex flex-column align-items-center">
 		<h2 class="new-title text-center pt-5 pb-3" :class="isDark ? 'new-title-dark' : 'new-title-light'">
-			{{ props.isUserSubscribed ? "Já estás inscrito na newsletter" : "Subscreve-te à newsletter" }}
+			{{ isUserSubscribed ? "Já estás inscrito na newsletter" : "Subscreve-te à newsletter" }}
 		</h2>
 		<div
 			v-if="subscribing || msg.length > 0"
@@ -45,7 +51,7 @@ const subscribe = async () => {
 			</div>
 		</div>
 		<button
-			v-if="!props.isUserSubscribed"
+			v-if="!isUserSubscribed"
 			class="btn cancel-btn mb-5"
 			:class="isDark ? 'cancel-btn-dark' : 'cancel-btn-light'"
 			:disabled="subscribing"

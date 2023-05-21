@@ -1,13 +1,13 @@
 <script setup>
 import DetailImages from "../../components/DetailImages.vue";
-import DeleteModal from "../../components/DeleteModal.vue";
+import DeleteModal from "../../components/Modals/DeleteModal.vue";
+import NewsLetterInfo from "../../components/NewsLetterInfo.vue";
 import { useDark } from "@vueuse/core";
 import { useNewsStore } from "../../stores/news";
 import { useUsersStore } from "../../stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { formatDate } from "../../utils/formatData";
-import NewsLetterInfo from "../../components/NewsLetterInfo.vue";
 
 const isDark = useDark();
 const route = useRoute();

@@ -1,6 +1,6 @@
 <script setup>
-import { useNewsStore } from "../stores/news";
-import { useActivitiesStore } from "../stores/activities";
+import { useNewsStore } from "../../stores/news";
+import { useActivitiesStore } from "../../stores/activities";
 import { ref } from "vue";
 
 const props = defineProps({

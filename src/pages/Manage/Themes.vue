@@ -2,7 +2,7 @@
 import { useDark } from "@vueuse/core";
 import { useActivitiesStore } from "../../stores/activities";
 import { watchEffect, ref } from "vue";
-import DeleteModal from "../../components/DeleteModal.vue";
+import DeleteModal from "../../components/Modals/DeleteModal.vue";
 
 const isDark = useDark();
 const activitiesStore = useActivitiesStore();

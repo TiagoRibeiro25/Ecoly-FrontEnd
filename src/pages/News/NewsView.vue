@@ -1,13 +1,13 @@
 <script setup>
-import { useDark } from "@vueuse/core";
-import { ref, watchEffect } from "vue";
-import { useNewsStore } from "../../stores/news";
 import SearchBar from "../../components/SearchBar.vue";
 import Header from "../../components/Header.vue";
 import NewCard from "./NewCard.vue";
-import DeleteModal from "../../components/DeleteModal.vue";
+import DeleteModal from "../../components/Modals/DeleteModal.vue";
 import ChangeViewButton from "../../components/ChangeViewButton.vue";
 import NewsLetterInfo from "../../components/NewsLetterInfo.vue";
+import { useDark } from "@vueuse/core";
+import { ref, watchEffect } from "vue";
+import { useNewsStore } from "../../stores/news";
 
 const isDark = useDark();
 const fetching = ref(false);

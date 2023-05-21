@@ -13,6 +13,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
+	/** @returns {Promise<{success: boolean, data: []}>} */
 	const getRecentActivities = async () => {
 		try {
 			const response = await api.get("/activities?fields=activities&filter=recent");
@@ -22,6 +23,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
+	/** @param {number} id - id da atividade a ser apagada @returns {Promise<{success: boolean, message: string}>} */
 	const deleteActivity = async (id) => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
@@ -34,6 +36,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
+	/** @returns {Promise<{success: boolean, data: []}>} */
 	const getActiveThemes = async () => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };

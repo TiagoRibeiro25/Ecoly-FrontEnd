@@ -1,8 +1,0 @@
-(#ecoly) todo:
-- [x] 📃 fix 404 page when logging out
-- [x] 📃 fix news order (show most recent first)
-- [ ] 🔥 api/news doesn't work on production
-- [ ] 🚚 when changing user email in the backend, change the email in the newsletter list if the user is subscribed
-- [ ] 👀 add subscribe to news letter at the bottom of the news list page
-
-----

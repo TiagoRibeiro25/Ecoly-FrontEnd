@@ -10,6 +10,7 @@ const newsStore = useNewsStore();
 const subscribing = ref(false);
 const msg = ref("");
 const isUserSubscribed = ref(false);
+const deleteKey = ref("");
 
 const subscribe = async () => {
 	msg.value = "";
@@ -22,13 +23,14 @@ const subscribe = async () => {
 		return;
 	}
 
-	isUserSubscribed.value = true;
 	subscribing.value = false;
+	isUserSubscribed.value = true;
 };
 
 onBeforeMount(async () => {
 	const isSubscribed = await newsStore.isSubscribed();
 	isUserSubscribed.value = isSubscribed.success;
+	deleteKey.value = isSubscribed.deleteKey;
 });
 </script>
 
@@ -52,13 +54,21 @@ onBeforeMount(async () => {
 		</div>
 		<button
 			v-if="!isUserSubscribed"
-			class="btn cancel-btn mb-5"
-			:class="isDark ? 'cancel-btn-dark' : 'cancel-btn-light'"
+			class="btn news-letter-btn mb-5"
+			:class="isDark ? 'news-letter-btn-dark' : 'news-letter-btn-light'"
 			:disabled="subscribing"
 			@click="subscribe"
 		>
 			Subscrever
 		</button>
+		<router-link
+			v-else
+			class="btn news-letter-btn mb-5"
+			:class="isDark ? 'news-letter-btn-dark' : 'news-letter-btn-light'"
+			:to="{ name: 'Unsubscribe', params: { id: deleteKey } }"
+		>
+			Cancelar subscrição
+		</router-link>
 	</footer>
 </template>
 
@@ -83,7 +93,7 @@ $fifth-color: #333;
 	}
 }
 
-.cancel-btn {
+.news-letter-btn {
 	font-family: "Panton", sans-serif;
 	font-weight: 500;
 	font-size: 1.1rem;

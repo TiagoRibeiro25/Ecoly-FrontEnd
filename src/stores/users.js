@@ -10,8 +10,8 @@ export const useUsersStore = defineStore("users", () => {
 	/** @returns {Promise<{success: boolean, message?: string, data?: object}>} */
 	const getLoggedInUser = async () => {
 		if (!token.value || !isUserLoggedIn) return { success: false, message: "No token" };
+		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
-			const headers = { Authorization: `Bearer ${token.value}` };
 			const response = await api.get("/users/me", { headers });
 			return response.data;
 		} catch (err) {
@@ -21,9 +21,8 @@ export const useUsersStore = defineStore("users", () => {
 
 	/** @param {number} id @returns {Promise<{success: boolean, message?: string, data?: object}>} */
 	const getUserProfile = async (id) => {
+		const headers = isUserLoggedIn.value ? { Authorization: `Bearer ${token.value}` } : {};
 		try {
-			// if the user is logged in, send the token in the header
-			const headers = isUserLoggedIn.value ? { Authorization: `Bearer ${token.value}` } : {};
 			const response = await api.get(`/users/${id}`, { headers });
 			return response.data;
 		} catch (err) {
@@ -31,14 +30,26 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	/** @returns {Promise<{success: boolean, message?: string, data?: {id: number, name: string, email: string, role: string, school: string}[]}>} */
 	const getUsersFromSchool = async () => {
 		if (!token.value || !isUserLoggedIn) return { success: false, message: "No token" };
+		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
-			const headers = { Authorization: `Bearer ${token.value}` };
 			const response = await api.get("/users?filter=school", { headers });
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao obter utilizadores" };
+		}
+	};
+
+	/** @returns {Promise<{success: boolean, message?: string, data?: {id: number, title: string}[]}>}*/
+	const getRoles = async () => {
+		const headers = { Authorization: `Bearer ${token.value}` };
+		try {
+			const response = await api.get("/users/role", { headers });
+			return response.data;
+		} catch (err) {
+			return err.response ? err.response.data : { success: false, message: "Erro ao obter roles" };
 		}
 	};
 
@@ -68,7 +79,6 @@ export const useUsersStore = defineStore("users", () => {
 	const register = async (data) => {
 		try {
 			const response = await api.post("/users", data);
-			console.log(response.data);
 			return response.data;
 		} catch (err) {
 			return err.response ? err.response.data : { success: false, message: "Erro no registo" };
@@ -80,8 +90,8 @@ export const useUsersStore = defineStore("users", () => {
 	 * @returns {Promise<{success: boolean, message: string}>}
 	 */
 	const updateUserData = async (data) => {
+		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
-			const headers = { Authorization: `Bearer ${token.value}` };
 			const response = await api.patch("/users", data, { headers });
 			return response.data;
 		} catch (err) {
@@ -108,8 +118,8 @@ export const useUsersStore = defineStore("users", () => {
 
 	/** @param {string} email  @returns {Promise<{success: boolean, message: string}>} */
 	const subscribeNewsLetter = async (email = null) => {
+		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
-			const headers = { Authorization: `Bearer ${token.value}` };
 			const response = await api.post("/subscribe", email ? { email } : {}, { headers });
 			return response.data;
 		} catch (err) {
@@ -123,6 +133,7 @@ export const useUsersStore = defineStore("users", () => {
 		getLoggedInUser,
 		getUserProfile,
 		getUsersFromSchool,
+		getRoles,
 		login,
 		register,
 		updateUserData,

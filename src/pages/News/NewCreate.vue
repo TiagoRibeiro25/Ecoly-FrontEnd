@@ -74,6 +74,7 @@ onBeforeMount(async () => {
 						:text="title"
 						placeholder="Título da notícia (mínimo 10 caracteres)"
 						type="input"
+						:isDark="isDark"
 						@update:text="title = $event"
 					/>
 				</div>
@@ -82,6 +83,7 @@ onBeforeMount(async () => {
 						:text="content"
 						placeholder="Corpo da notícia (mínimo 100 caracteres) - HTML permitido"
 						type="textarea"
+						:isDark="isDark"
 						@update:text="content = $event"
 					/>
 				</div>

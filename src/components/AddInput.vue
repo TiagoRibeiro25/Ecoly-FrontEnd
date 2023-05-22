@@ -1,13 +1,12 @@
 <script setup>
-import { useDark } from "@vueuse/core";
 import { ref, watch } from "vue";
 
-const isDark = useDark();
 const emits = defineEmits(["update:text"]);
 const props = defineProps({
 	text: { type: String, required: true },
 	placeholder: { type: String, required: true },
 	type: { type: String, required: false, default: "input" }, // 'input' | 'textarea'
+	isDark: { type: Boolean, required: false, default: false },
 });
 
 const data = ref(props.text);
@@ -23,7 +22,7 @@ watch(data, () => {
 			v-model="data"
 			:placeholder="placeholder"
 			class="form-control"
-			:class="isDark ? 'dark-theme-input' : 'light-theme-input'"
+			:class="props.isDark ? 'dark-theme-input' : 'light-theme-input'"
 		/>
 	</div>
 	<div v-else>
@@ -33,7 +32,7 @@ watch(data, () => {
 			class="form-control custom-scroll-bar"
 			rows="5"
 			:class="
-				isDark ? 'dark-theme-input custom-scroll-bar-dark' : 'light-theme-input custom-scroll-bar-light'
+				props.isDark ? 'dark-theme-input custom-scroll-bar-dark' : 'light-theme-input custom-scroll-bar-light'
 			"
 		></textarea>
 	</div>

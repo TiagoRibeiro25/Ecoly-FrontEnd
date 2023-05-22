@@ -3,6 +3,7 @@ import { useDark } from "@vueuse/core";
 import { useActivitiesStore } from "../../stores/activities";
 import { watchEffect, ref } from "vue";
 import DeleteModal from "../../components/Modals/DeleteModal.vue";
+import AddModal from "../../components/Modals/AddModal.vue";
 
 const isDark = useDark();
 const activitiesStore = useActivitiesStore();
@@ -12,9 +13,10 @@ const isLoaded = ref(false);
 /** @type {{id: number, name:string }} */
 const themeToDelete = ref(null);
 const showDeleteModal = ref(false);
+const showAddModal = ref(false);
 const fetchAgain = ref(false);
 
-const showModal = (theme) => {
+const showDelModal = (theme) => {
 	themeToDelete.value = theme;
 	showDeleteModal.value = true;
 };
@@ -47,13 +49,17 @@ watchEffect(async () => {
 				<button
 					class="btn theme-btn mx-2 my-2"
 					:class="isDark ? 'theme-btn-dark' : 'theme-btn-light'"
-					@click="showModal(theme)"
+					@click="showDelModal(theme)"
 				>
 					{{ theme.name }}
 				</button>
 			</div>
 			<div>
-				<button class="btn theme-btn add-btn mx-2 my-2" :class="isDark ? 'add-btn-dark' : 'add-btn-light'">
+				<button
+					class="btn theme-btn add-btn mx-2 my-2"
+					:class="isDark ? 'add-btn-dark' : 'add-btn-light'"
+					@click="showAddModal = true"
+				>
 					Adicionar Tema
 				</button>
 			</div>
@@ -67,6 +73,15 @@ watchEffect(async () => {
 		:text="themeToDelete?.name"
 		@close="showDeleteModal = false"
 		@delete="fetchAgain = true"
+	/>
+
+	<AddModal
+		type="theme"
+		text="tema"
+		:show="showAddModal"
+		inputPlaceholder="Nome do tema"
+		@close="showAddModal = false"
+		@add="fetchAgain = true"
 	/>
 </template>
 

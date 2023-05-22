@@ -77,16 +77,14 @@ const deleteItem = async () => {
 				<span class="error-msg">{{ msg }}</span>
 			</div>
 
-			<div>
-				<b-button
-					type="button"
-					class="btn btn-block modal-remove-btn w-50 mx-auto mt-4"
-					:disabled="removing"
-					@click="deleteItem"
-				>
-					Remover
-				</b-button>
-			</div>
+			<b-button
+				type="button"
+				class="btn btn-block modal-remove-btn w-50 mx-auto mt-4"
+				:disabled="removing"
+				@click="deleteItem"
+			>
+				Remover
+			</b-button>
 		</div>
 	</b-modal>
 </template>

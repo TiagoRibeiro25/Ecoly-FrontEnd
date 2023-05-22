@@ -39,7 +39,9 @@ watchEffect(async () => {
 	if (response.success) {
 		news.value = response.data.news;
 		isUserAdmin.value = response.data.isUserAdmin;
-		isUserLogged.value = response.data.isUserLogged;
+		setTimeout(() => {
+			isUserLogged.value = response.data.isUserLogged;
+		}, 300);
 	}
 
 	fetching.value = false;

@@ -110,7 +110,7 @@ $senary-color: #8e0101;
 
 .theme-btn {
 	font-family: "Panton", sans-serif;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 1rem;
 	width: 200px;
 
@@ -131,6 +131,8 @@ $senary-color: #8e0101;
 }
 
 .add-btn {
+	font-weight: 600;
+
 	&-dark {
 		background-color: $quinary-color;
 		color: $primary-color;

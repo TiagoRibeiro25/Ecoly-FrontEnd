@@ -45,7 +45,7 @@ onBeforeMount(async () => {
 				<!-- Themes -->
 				<div class="col-12 mt-5 px-0">
 					<ManageHeader title="Temas" description="adicionar temas para as atividades" />
-					<div class="col-12 mt-5">
+					<div class="col-12 mt-5 px-0">
 						<Themes />
 					</div>
 				</div>

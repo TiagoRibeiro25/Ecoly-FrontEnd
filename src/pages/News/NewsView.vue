@@ -31,6 +31,7 @@ watchEffect(async () => {
 	fetchAgain.value = false;
 	fetching.value = true;
 	news.value = [];
+	isUserLogged.value = false;
 
 	const newsStore = useNewsStore();
 	/** @type {{success: boolean, data: {isUserAdmin: boolean, isUserLogged: boolean, news: Array<{id: string, creator_id: id, title: string, content: string, date_created: string, image: string}>}}} */

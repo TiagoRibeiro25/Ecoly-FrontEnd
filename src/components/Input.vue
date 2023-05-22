@@ -7,6 +7,7 @@ const props = defineProps({
 	placeholder: { type: String, required: true },
 	type: { type: String, required: false, default: "input" }, // 'input' | 'textarea'
 	isDark: { type: Boolean, required: false, default: false },
+	alignText: { type: Boolean, required: false, default: false },
 });
 
 const data = ref(props.text);
@@ -23,6 +24,7 @@ watch(data, () => {
 			:placeholder="placeholder"
 			class="form-control"
 			:class="props.isDark ? 'dark-theme-input' : 'light-theme-input'"
+			:style="props.alignText ? 'text-align: center' : ''"
 		/>
 	</div>
 	<div v-else>
@@ -34,6 +36,7 @@ watch(data, () => {
 			:class="
 				props.isDark ? 'dark-theme-input custom-scroll-bar-dark' : 'light-theme-input custom-scroll-bar-light'
 			"
+			:style="props.alignText ? 'text-align: center' : ''"
 		></textarea>
 	</div>
 </template>

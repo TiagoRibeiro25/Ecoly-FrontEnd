@@ -8,6 +8,7 @@ import { useDark } from "@vueuse/core";
 import { useUsersStore } from "../../stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
+import AdminRoles from "./AdminRoles.vue";
 
 const isDark = useDark();
 const router = useRouter();
@@ -53,6 +54,17 @@ onBeforeMount(async () => {
 					<button
 						class="btn tab pr-4 pl-0"
 						:class="{
+							'tab-selected': selectedTab === 'roles',
+							'tab-dark': isDark,
+							'tab-light': !isDark,
+						}"
+						@click="selectedTab = 'roles'"
+					>
+						Cargos
+					</button>
+					<button
+						class="btn tab pr-4 pl-0"
+						:class="{
 							'tab-selected': selectedTab === 'schools',
 							'tab-dark': isDark,
 							'tab-light': !isDark,
@@ -93,6 +105,7 @@ onBeforeMount(async () => {
 					"
 				>
 					<AdminUsers v-if="selectedTab === 'users'" />
+					<AdminRoles v-else-if="selectedTab === 'roles'" />
 					<AdminSchools v-else-if="selectedTab === 'schools'" />
 					<AdminActivities v-else-if="selectedTab === 'activities'" />
 					<AdminMeetings v-else-if="selectedTab === 'meetings'" />

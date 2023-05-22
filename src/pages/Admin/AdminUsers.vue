@@ -162,7 +162,6 @@ watchEffect(async () => {
 <style lang="scss" scoped>
 $primary-color: #343e3d;
 $secondary-color: #ffffff;
-$tertiary-color: #18516f;
 $quaternary-color: #aedcc0;
 $quinary-color: #3fc380;
 $senary-color: #333333;

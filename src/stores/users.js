@@ -31,6 +31,17 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	const getUsersFromSchool = async () => {
+		if (!token.value || !isUserLoggedIn) return { success: false, message: "No token" };
+		try {
+			const headers = { Authorization: `Bearer ${token.value}` };
+			const response = await api.get("/users?filter=school", { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Erro ao obter utilizadores" };
+		}
+	};
+
 	/**
 	 * @param {string} email
 	 * @param {string} password
@@ -111,6 +122,7 @@ export const useUsersStore = defineStore("users", () => {
 		token,
 		getLoggedInUser,
 		getUserProfile,
+		getUsersFromSchool,
 		login,
 		register,
 		updateUserData,

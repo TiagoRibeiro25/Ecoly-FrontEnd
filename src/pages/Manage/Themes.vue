@@ -47,7 +47,7 @@ watchEffect(async () => {
 			</div>
 			<div v-for="theme in themes" :key="theme.id">
 				<button
-					class="btn theme-btn mx-2 my-2"
+					class="btn theme-btn mx-2 my-2 py-1"
 					:class="isDark ? 'theme-btn-dark' : 'theme-btn-light'"
 					@click="showDelModal(theme)"
 				>
@@ -56,7 +56,7 @@ watchEffect(async () => {
 			</div>
 			<div>
 				<button
-					class="btn theme-btn add-btn mx-2 my-2"
+					class="btn theme-btn add-btn mx-2 my-2 py-1"
 					:class="isDark ? 'add-btn-dark' : 'add-btn-light'"
 					@click="showAddModal = true"
 				>
@@ -112,6 +112,7 @@ $senary-color: #8e0101;
 	font-family: "Panton", sans-serif;
 	font-weight: 500;
 	font-size: 1rem;
+	border-radius: 12px;
 	width: 200px;
 
 	&-dark {

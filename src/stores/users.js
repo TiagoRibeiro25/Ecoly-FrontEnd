@@ -31,6 +31,17 @@ export const useUsersStore = defineStore("users", () => {
 	};
 
 	/** @returns {Promise<{success: boolean, message?: string, data?: {id: number, name: string, email: string, role: string, school: string}[]}>} */
+	const getUsers = async () => {
+		const headers = { Authorization: `Bearer ${token.value}` };
+		try {
+			const response = await api.get("/users", { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Erro ao obter utilizadores" };
+		}
+	};
+
+	/** @returns {Promise<{success: boolean, message?: string, data?: {id: number, name: string, email: string, role: string, school: string}[]}>} */
 	const getUsersFromSchool = async () => {
 		if (!token.value || !isUserLoggedIn) return { success: false, message: "No token" };
 		const headers = { Authorization: `Bearer ${token.value}` };
@@ -142,6 +153,7 @@ export const useUsersStore = defineStore("users", () => {
 		token,
 		getLoggedInUser,
 		getUserProfile,
+		getUsers,
 		getUsersFromSchool,
 		getRoles,
 		login,

@@ -71,6 +71,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 			const response = await api.post("/activities?fields=theme", { name: theme }, { headers });
 			return response.data;
 		} catch (err) {
+			if (err.response.status === 409) return { success: false, message: "O tema já existe" };
 			return { success: false, message: "Ocorreu um erro ao adicionar o tema" };
 		}
 	};

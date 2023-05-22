@@ -61,6 +61,15 @@ onBeforeMount(async () => {
 						<ContactMembers />
 					</div>
 				</div>
+
+				<!-- Meetings -->
+				<div class="col-12 mt-5 px-0 pt-4">
+					<ManageHeader
+						title="Reuniões"
+						description="crie reuniões ou registe as reuniões do conselho adicionando a respetiva ata"
+					/>
+					<div class="col-12 mt-5 px-0"></div>
+				</div>
 			</div>
 		</div>
 	</div>

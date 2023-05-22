@@ -7,6 +7,7 @@ export const useUsersStore = defineStore("users", () => {
 	const isUserLoggedIn = ref(getLocalStorage("auth_key") ? true : false);
 	const token = ref(getLocalStorage("auth_key") || "");
 
+	/** @returns {Promise<{success: boolean, message?: string, data?: object}>} */
 	const getLoggedInUser = async () => {
 		if (!token.value || !isUserLoggedIn) return { success: false, message: "No token" };
 		try {
@@ -18,6 +19,7 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	/** @param {number} id @returns {Promise<{success: boolean, message?: string, data?: object}>} */
 	const getUserProfile = async (id) => {
 		try {
 			// if the user is logged in, send the token in the header
@@ -29,6 +31,11 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	/**
+	 * @param {string} email
+	 * @param {string} password
+	 * @returns {Promise<{success: boolean, message?: string, data?: {auth_key: string}}>}
+	 */
 	const login = async (email, password) => {
 		try {
 			const response = await api.post("/users/login", { email, password });
@@ -43,6 +50,10 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	/**
+	 * @param {{name: string, email: string, password: string, schoolId: number, internalId?: number, course?: string, year?: number}} data
+	 * @returns {Promise<{success: boolean, message: string}>
+	 */
 	const register = async (data) => {
 		try {
 			const response = await api.post("/users", data);
@@ -53,6 +64,10 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	/**
+	 * @param {{ email?: string, password?: string, internal_id?: string, course?: string, year?: number, highlightBadgeId?: number }} data
+	 * @returns {Promise<{success: boolean, message: string}>}
+	 */
 	const updateUserData = async (data) => {
 		try {
 			const headers = { Authorization: `Bearer ${token.value}` };
@@ -63,12 +78,14 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	/** @returns {void} */
 	const signOut = () => {
 		isUserLoggedIn.value = false;
 		removeLocalStorage("auth_key");
 		token.value = "";
 	};
 
+	/** @param {string} delete_key @returns  {Promise<{success: boolean, message: string}>} */
 	const cancelNewsLetter = async (delete_key) => {
 		try {
 			const response = await api.delete(`/subscribe/${delete_key}`);

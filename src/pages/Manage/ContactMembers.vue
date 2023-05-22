@@ -87,8 +87,8 @@ onBeforeMount(async () => {
 		</h2>
 	</div>
 
-	<div v-else class="row mt-4 w-100">
-		<div class="col-12">
+	<div v-else class="col-12 mt-4 px-0">
+		<div class="col-12 px-0">
 			<b-form-select
 				class="mt-3 destination-select"
 				:class="isDark ? 'destination-dark-mode' : 'destination-light-mode'"
@@ -96,7 +96,7 @@ onBeforeMount(async () => {
 				:options="options"
 			></b-form-select>
 		</div>
-		<div class="col-12 mt-3">
+		<div class="col-12 mt-3 px-0">
 			<AddInput
 				:text="content"
 				placeholder="Conteúdo da mensagem (mínimo 100 caracteres)"
@@ -106,7 +106,7 @@ onBeforeMount(async () => {
 			/>
 		</div>
 
-		<div class="col-12 my-3 d-flex justify-content-end">
+		<div class="col-12 mt-1 mb-3 d-flex justify-content-end px-0">
 			<div
 				class="d-flex justify-content-center align-items-center flex-column"
 				style="width: 250px"
@@ -119,7 +119,7 @@ onBeforeMount(async () => {
 			</div>
 		</div>
 
-		<div class="col-12 d-flex justify-content-end">
+		<div class="col-12 d-flex justify-content-end px-0">
 			<button
 				class="btn contact-btn"
 				:class="isDark ? 'contact-btn-dark' : 'contact-btn-light'"

@@ -57,9 +57,9 @@ onBeforeMount(async () => {
 						title="Contactar Membros"
 						description="entre em contacto com outros membros do conselho"
 					/>
-				</div>
-				<div class="col-12 mt-5 px-0">
-					<ContactMembers />
+					<div class="col-12 mt-5 px-0">
+						<ContactMembers />
+					</div>
 				</div>
 			</div>
 		</div>

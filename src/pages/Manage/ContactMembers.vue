@@ -106,14 +106,14 @@ onBeforeMount(async () => {
 			/>
 		</div>
 
-		<div class="col-12 mt-1 mb-3 d-flex justify-content-end px-0">
+		<div class="col-12 my-3 d-flex justify-content-end px-0">
 			<div
 				class="d-flex justify-content-center align-items-center flex-column"
 				style="width: 250px"
 				v-if="sending || sendingMsg !== ''"
 			>
 				<b-spinner v-if="sending" variant="success" label="Enviando..."></b-spinner>
-				<span class="send-msg mt-3 text-center" :class="isDark ? 'send-msg-dark' : 'send-msg-light'">
+				<span class="send-msg mt-1 text-center" :class="isDark ? 'send-msg-dark' : 'send-msg-light'">
 					{{ sendingMsg }}
 				</span>
 			</div>
@@ -123,7 +123,7 @@ onBeforeMount(async () => {
 			<button
 				class="btn contact-btn"
 				:class="isDark ? 'contact-btn-dark' : 'contact-btn-light'"
-				:disabled="content.trim().length < 100 || sending"
+				:disabled="content.trim().length < 100 || sending || sendingMsg === 'Mensagem enviada com sucesso!'"
 				@click="contact"
 			>
 				Enviar

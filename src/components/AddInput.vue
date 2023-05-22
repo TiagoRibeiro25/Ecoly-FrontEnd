@@ -44,12 +44,12 @@ $secondary-color: #aedcc0;
 $tertiary-color: #3fc380;
 $fourth-color: #ffffff;
 $fifth-color: #18516f;
+$sixth-color: #333333;
 
 .form-control {
 	font-family: "Panton", sans-serif;
 	font-size: 1.2rem;
 	font-weight: 400;
-	background-color: transparent;
 	border-radius: 0.6rem;
 	max-height: 40rem;
 	min-height: 3rem;
@@ -59,21 +59,23 @@ $fifth-color: #18516f;
 .light-theme-input {
 	border: 2px solid $tertiary-color;
 	color: $primary-color;
+	background-color: $fourth-color;
 
 	&:focus {
+		background-color: $fourth-color;
 		outline: transparent;
 		box-shadow: none;
 		border-color: $fifth-color;
-		background-color: transparent;
 	}
 }
 
 .dark-theme-input {
 	border: 2px solid $tertiary-color;
 	color: $secondary-color;
+	background-color: $sixth-color;
 
 	&:focus {
-		background-color: transparent;
+		background-color: $sixth-color;
 		outline: transparent;
 		box-shadow: none;
 		border-color: $fourth-color;

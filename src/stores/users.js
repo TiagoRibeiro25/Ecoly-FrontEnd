@@ -127,6 +127,16 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	const contact = async (to, content) => {
+		const headers = { Authorization: `Bearer ${token.value}` };
+		try {
+			const response = await api.post("/users/contact", { to, content }, { headers });
+			return response.data;
+		} catch (err) {
+			return err.response ? err.response.data : { success: false, message: "Erro ao enviar mensagem" };
+		}
+	};
+
 	return {
 		isUserLoggedIn,
 		token,
@@ -140,5 +150,6 @@ export const useUsersStore = defineStore("users", () => {
 		signOut,
 		cancelNewsLetter,
 		subscribeNewsLetter,
+		contact,
 	};
 });

@@ -7,6 +7,7 @@ import { useNewsStore } from "../../stores/news";
 import { useUsersStore } from "../../stores/users";
 import { useDark } from "@vueuse/core";
 import { useRouter } from "vue-router";
+import { formatDate } from "../../utils/formatData";
 
 const isDark = useDark();
 const router = useRouter();
@@ -126,7 +127,7 @@ onBeforeMount(async () => {
 							</div>
 							<div class="col-3 px-0 d-flex flex-column align-items-end">
 								<span class="preview-header-info text-muted">
-									{{ new Date().toISOString().split("T")[0] }}
+									{{ formatDate(new Date().toISOString().split("T")[0], "yyyy-mm-dd") }}
 								</span>
 								<span class="preview-header-info header-link text-muted"> {{ userLoggedName }} </span>
 							</div>

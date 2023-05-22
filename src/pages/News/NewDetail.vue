@@ -59,7 +59,7 @@ onBeforeMount(async () => {
 				</div>
 				<div class="col-3 d-flex flex-column align-items-end">
 					<span class="header-info text-muted">
-						{{ formatDate(newItem.date_created) }}
+						{{ formatDate(newItem.date_created, "yyyy-mm-dd") }}
 					</span>
 					<router-link
 						class="header-info header-link text-muted"

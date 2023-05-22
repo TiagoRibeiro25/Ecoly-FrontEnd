@@ -8,6 +8,7 @@ import ChangeViewButton from "../../components/ChangeViewButton.vue";
 import ManageHeader from "../../components/ManageHeader.vue";
 import Themes from "./Themes.vue";
 import FastActions from "./FastActions.vue";
+import ContactMembers from "./ContactMembers.vue";
 
 const isDark = useDark();
 const router = useRouter();
@@ -48,6 +49,17 @@ onBeforeMount(async () => {
 					<div class="col-12 mt-5 px-0">
 						<Themes />
 					</div>
+				</div>
+
+				<!-- Contact -->
+				<div class="col-12 mt-5 px-0 pt-4">
+					<ManageHeader
+						title="Contactar Membros"
+						description="entre em contacto com outros membros do conselho"
+					/>
+				</div>
+				<div class="col-12 mt-5 px-0">
+					<ContactMembers />
 				</div>
 			</div>
 		</div>

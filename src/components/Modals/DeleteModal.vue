@@ -31,7 +31,6 @@ const deleteActivity = () => {
 	return activitiesStore.deleteActivity(props.id);
 };
 
-// TODO: deleteTheme
 const deleteTheme = () => {
 	const activitiesStore = useActivitiesStore();
 	return activitiesStore.deleteTheme(props.id);

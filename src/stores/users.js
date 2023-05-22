@@ -82,7 +82,18 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.put(`/users/role/${roleId}`, { role: name }, { headers });
 			return response.data;
 		} catch (err) {
-			return { success: false, message: "Erro ao editar role" };
+			return { success: false, message: "Erro ao editar cargo" };
+		}
+	};
+
+	/** @param {string} role @returns {Promise<{success: boolean, message: string}>} */
+	const addRole = async (role) => {
+		const headers = { Authorization: `Bearer ${token.value}` };
+		try {
+			const response = await api.post("/users/role", { role }, { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Erro ao adicionar novo cargo" };
 		}
 	};
 
@@ -180,6 +191,7 @@ export const useUsersStore = defineStore("users", () => {
 		changeUserRole,
 		getRoles,
 		editRole,
+		addRole,
 		login,
 		register,
 		updateUserData,

@@ -15,7 +15,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.get("/users/me", { headers });
 			return response.data;
 		} catch (err) {
-			return { success: false, message: "Error getting user" };
+			return { success: false, message: "Erro ao obter utilizador autenticado" };
 		}
 	};
 
@@ -46,7 +46,7 @@ export const useUsersStore = defineStore("users", () => {
 			}
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Error logging in" };
+			return err.response ? err.response.data : { success: false, message: "Erro no login" };
 		}
 	};
 
@@ -60,7 +60,7 @@ export const useUsersStore = defineStore("users", () => {
 			console.log(response.data);
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Error registering" };
+			return err.response ? err.response.data : { success: false, message: "Erro no registo" };
 		}
 	};
 
@@ -74,7 +74,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.patch("/users", data, { headers });
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Error updating user" };
+			return err.response ? err.response.data : { success: false, message: "Erro ao atualizar o utilizador" };
 		}
 	};
 
@@ -91,9 +91,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.delete(`/subscribe/${delete_key}`);
 			return response.data;
 		} catch (err) {
-			return err.response
-				? err.response.data
-				: { success: false, message: "An error occurred while unsubscribing" };
+			return err.response ? err.response.data : { success: false, message: "Erro ao cancelar subscrição" };
 		}
 	};
 
@@ -104,9 +102,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.post("/subscribe", email ? { email } : {}, { headers });
 			return response.data;
 		} catch (err) {
-			return err.response
-				? err.response.data
-				: { success: false, message: "An error occurred while subscribing" };
+			return err.response ? err.response.data : { success: false, message: "Erro ao efetuar a subscrição" };
 		}
 	};
 

@@ -26,7 +26,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.get(`/users/${id}`, { headers });
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Error getting user" };
+			return { success: false, message: "Erro obtendo informação do utilizador" };
 		}
 	};
 
@@ -60,7 +60,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.patch(`/users/${userId}/role`, { roleId }, { headers });
 			return response.data;
 		} catch (error) {
-			return error.response ? error.response.data : { success: false, message: "Erro ao atualizar o cargo" };
+			return { success: false, message: "Erro ao atualizar o cargo" };
 		}
 	};
 
@@ -90,7 +90,7 @@ export const useUsersStore = defineStore("users", () => {
 			}
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Erro no login" };
+			return { success: false, message: "Erro no login" };
 		}
 	};
 
@@ -103,7 +103,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.post("/users", data);
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Erro no registo" };
+			return { success: false, message: "Erro no registo" };
 		}
 	};
 
@@ -117,7 +117,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.patch("/users", data, { headers });
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Erro ao atualizar o utilizador" };
+			return { success: false, message: "Erro ao atualizar o utilizador" };
 		}
 	};
 
@@ -134,7 +134,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.delete(`/subscribe/${delete_key}`);
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Erro ao cancelar subscrição" };
+			return { success: false, message: "Erro ao cancelar subscrição" };
 		}
 	};
 
@@ -145,7 +145,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.post("/subscribe", email ? { email } : {}, { headers });
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Erro ao efetuar a subscrição" };
+			return { success: false, message: "Erro ao efetuar a subscrição" };
 		}
 	};
 
@@ -155,7 +155,7 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.post("/users/contact", { to, content }, { headers });
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Erro ao enviar mensagem" };
+			return { success: false, message: "Erro ao enviar mensagem" };
 		}
 	};
 

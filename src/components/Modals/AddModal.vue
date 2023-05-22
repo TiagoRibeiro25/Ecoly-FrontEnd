@@ -27,7 +27,6 @@ const formatText = (text) => {
 		.trim() // Remove extra spaces
 		.toLowerCase() // Lowercase
 		.replace(/\s+/g, " ") // Remove extra spaces
-		.replace(/[^a-zA-Z ]/g, "") // Remove special characters and numbers
 		.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()));
 };
 

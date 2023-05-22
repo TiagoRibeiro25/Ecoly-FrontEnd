@@ -62,5 +62,18 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
-	return { search, deleteActivity, getRecentActivities, getActiveThemes, deleteTheme };
+	/** @param {string} theme @returns {Promise<{success: boolean, message: string}>} */
+	const addTheme = async (theme) => {
+		const usersStore = useUsersStore();
+		const headers = { Authorization: `Bearer ${usersStore.token}` };
+
+		try {
+			const response = await api.post("/activities?fields=theme", { name: theme }, { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Ocorreu um erro ao adicionar o tema" };
+		}
+	};
+
+	return { search, deleteActivity, getRecentActivities, getActiveThemes, deleteTheme, addTheme };
 });

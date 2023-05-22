@@ -166,6 +166,7 @@ $tertiary-color: #18516f;
 $quaternary-color: #aedcc0;
 $quinary-color: #3fc380;
 $senary-color: #333333;
+$septenary-color: #e2e1e1;
 
 .error-title {
 	font-family: "Panton", sans-serif;
@@ -204,6 +205,10 @@ $senary-color: #333333;
 	&-light-theme {
 		background-color: $secondary-color;
 		color: $primary-color;
+
+		thead th {
+			background-color: $septenary-color;
+		}
 
 		& th,
 		td {

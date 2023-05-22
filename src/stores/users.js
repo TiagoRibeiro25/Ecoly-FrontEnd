@@ -71,7 +71,18 @@ export const useUsersStore = defineStore("users", () => {
 			const response = await api.get("/users/role", { headers });
 			return response.data;
 		} catch (err) {
-			return err.response ? err.response.data : { success: false, message: "Erro ao obter roles" };
+			return { success: false, message: "Erro ao obter roles" };
+		}
+	};
+
+	/** @param {number} roleId @param {string} name @returns {Promise<{success: boolean, message?: string}>} */
+	const editRole = async (roleId, name) => {
+		const headers = { Authorization: `Bearer ${token.value}` };
+		try {
+			const response = await api.put(`/users/role/${roleId}`, { role: name }, { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Erro ao editar role" };
 		}
 	};
 
@@ -168,6 +179,7 @@ export const useUsersStore = defineStore("users", () => {
 		getUsersFromSchool,
 		changeUserRole,
 		getRoles,
+		editRole,
 		login,
 		register,
 		updateUserData,

@@ -53,6 +53,17 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
+	/** @param {number} userId @param {number} roleId @returns {Promise<{success: boolean, message: string}>} */
+	const changeUserRole = async (userId, roleId) => {
+		const headers = { Authorization: `Bearer ${token.value}` };
+		try {
+			const response = await api.patch(`/users/${userId}/role`, { roleId }, { headers });
+			return response.data;
+		} catch (error) {
+			return error.response ? error.response.data : { success: false, message: "Erro ao atualizar o cargo" };
+		}
+	};
+
 	/** @returns {Promise<{success: boolean, message?: string, data?: {id: number, title: string}[]}>}*/
 	const getRoles = async () => {
 		const headers = { Authorization: `Bearer ${token.value}` };
@@ -155,6 +166,7 @@ export const useUsersStore = defineStore("users", () => {
 		getUserProfile,
 		getUsers,
 		getUsersFromSchool,
+		changeUserRole,
 		getRoles,
 		login,
 		register,

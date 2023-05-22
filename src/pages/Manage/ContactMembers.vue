@@ -2,7 +2,7 @@
 import { useDark } from "@vueuse/core";
 import { onBeforeMount, ref } from "vue";
 import { useUsersStore } from "../../stores/users";
-import AddInput from "../../components/AddInput.vue";
+import Input from "../../components/Input.vue";
 
 const isDark = useDark();
 const fetching = ref(true);
@@ -97,7 +97,7 @@ onBeforeMount(async () => {
 			></b-form-select>
 		</div>
 		<div class="col-12 mt-3 px-0">
-			<AddInput
+			<Input
 				:text="content"
 				placeholder="Conteúdo da mensagem (mínimo 100 caracteres)"
 				type="textarea"

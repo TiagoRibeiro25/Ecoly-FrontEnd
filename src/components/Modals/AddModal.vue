@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import AddInput from "../AddInput.vue";
+import Input from "../Input.vue";
 import { useActivitiesStore } from "../../stores/activities";
 
 const props = defineProps({
@@ -72,7 +72,7 @@ const addItem = async () => {
 			<h4 class="modal-title text-center mt-1 mb-3">Adicionar {{ props.text }}</h4>
 
 			<div class="w-75 mx-auto">
-				<AddInput
+				<Input
 					:text="newItem"
 					:placeholder="props.inputPlaceholder || props.text"
 					type="input"

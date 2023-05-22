@@ -1,7 +1,7 @@
 <script setup>
 import Header from "../../components/Header.vue";
 import AddImages from "../../components/AddImages.vue";
-import AddInput from "../../components/AddInput.vue";
+import Input from "../../components/Input.vue";
 import { onBeforeMount, ref } from "vue";
 import { useNewsStore } from "../../stores/news";
 import { useUsersStore } from "../../stores/users";
@@ -71,7 +71,7 @@ onBeforeMount(async () => {
 					<AddImages :images="images" />
 				</div>
 				<div class="col-12 mt-5 px-0">
-					<AddInput
+					<Input
 						:text="title"
 						placeholder="Título da notícia (mínimo 10 caracteres)"
 						type="input"
@@ -80,7 +80,7 @@ onBeforeMount(async () => {
 					/>
 				</div>
 				<div class="col-12 mt-3 mb-5 px-0">
-					<AddInput
+					<Input
 						:text="content"
 						placeholder="Corpo da notícia (mínimo 100 caracteres) - HTML permitido"
 						type="textarea"

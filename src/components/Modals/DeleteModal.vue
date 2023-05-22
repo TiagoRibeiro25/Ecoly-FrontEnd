@@ -65,7 +65,7 @@ const deleteItem = async () => {
 </script>
 
 <template>
-	<b-modal v-model="props.show" id="modal-delete-new" size="lg" hide-footer @hidden="handleModalClose">
+	<b-modal v-model="props.show" size="lg" hide-footer @hidden="handleModalClose">
 		<div class="container">
 			<h4 class="modal-title text-center mt-1">Tens a certeza que queres apagar {{ props.text }}?</h4>
 

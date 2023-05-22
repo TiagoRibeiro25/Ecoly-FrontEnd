@@ -23,7 +23,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
-	/** @param {number} id - id da atividade a ser apagada @returns {Promise<{success: boolean, message: string}>} */
+	/** @param {number} id @returns {Promise<{success: boolean, message: string}>} */
 	const deleteActivity = async (id) => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
@@ -49,7 +49,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
-	/** @param {number} id - id do tema a ser apagado @returns {Promise<{success: boolean, message: string}>} */
+	/** @param {number} id @returns {Promise<{success: boolean, message: string}>} */
 	const deleteTheme = async (id) => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };

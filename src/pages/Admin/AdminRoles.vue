@@ -1,6 +1,6 @@
 <script setup>
 import Input from "../../components/Input.vue";
-import EditRoleModal from "../../components/Modals/EditRoleModal.vue";
+import EditModal from "../../components/Modals/EditModal.vue";
 import { useDark } from "@vueuse/core";
 import { ref, watchEffect } from "vue";
 import { useUsersStore } from "../../stores/users";
@@ -157,7 +157,7 @@ watchEffect(async () => {
 		</div>
 	</div>
 
-	<EditRoleModal
+	<EditModal
 		type="role"
 		:item="roleToEdit"
 		:show="showEditRoleModal"

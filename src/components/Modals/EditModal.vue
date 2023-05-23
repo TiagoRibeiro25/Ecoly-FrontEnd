@@ -2,9 +2,10 @@
 import { ref } from "vue";
 import Input from "../Input.vue";
 import { useUsersStore } from "../../stores/users";
+import { useSchoolsStore } from "../../stores/schools";
 
 const props = defineProps({
-	type: { type: String, required: true }, // "role" | "theme"
+	type: { type: String, required: true }, // "role" | "school"
 	item: { type: Object, required: true },
 	show: { type: Boolean, required: true },
 	inputPlaceholder: { type: String, required: false },
@@ -34,12 +35,15 @@ const updateItem = async () => {
 	updating.value = true;
 	msg.value = "";
 
-	const newItemValue = props.type === "role" ? formatText(newItem.value) : newItem.value;
-	const usersStore = useUsersStore();
 	let response = null;
 
 	if (props.type === "role") {
+		const usersStore = useUsersStore();
+		const newItemValue = formatText(newItem.value);
 		response = await usersStore.editRole(props.item.id, newItemValue);
+	} else if (props.type === "school") {
+		const schoolsStore = useSchoolsStore();
+		response = await schoolsStore.editSchool(props.item.id, newItem.value.trim());
 	} else {
 		response = { success: false, msg: "Tipo inválido" };
 	}
@@ -60,7 +64,7 @@ const updateItem = async () => {
 <template>
 	<b-modal v-model="props.show" size="lg" hide-footer @hidden="handleModalClose">
 		<div class="container">
-			<h4 class="modal-title text-center mt-1 mb-3">Mudar {{ props.item.title }} para</h4>
+			<h4 class="modal-title text-center mt-1 mb-3">Mudar {{ props.item.title || props.item.name }} para</h4>
 
 			<div class="w-75 mx-auto">
 				<Input

@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 const props = defineProps({
 	image: { type: String, required: true },
-	type: { type: String, required: true },
+	type: { type: String, required: true }, // 'new' | 'activity'
 	id: { type: Number, required: true },
 });
 const image = props.image;
@@ -12,7 +12,7 @@ const isNewItemHovered = ref(false);
 
 <template>
 	<div class="w-100 h-100" @mouseover="isNewItemHovered = true" @mouseleave="isNewItemHovered = false">
-		<router-link :to="{ name: type === 'new' ? 'NewDetail' : 'ActivitiesDetail', params: { id: props.id } }">
+		<router-link :to="{ name: type === 'new' ? 'NewDetail' : 'ActivityDetail', params: { id: props.id } }">
 			<img class="img-fluid news-image w-100 h-100" v-lazy="{ src: image }" alt="Imagem de Destaque" />
 			<img
 				class="img-fluid overlay-image w-100 h-100 position-absolute"

@@ -63,18 +63,20 @@ watchEffect(async () => {
 </script>
 
 <template>
-	<div
-		v-if="!isLoaded || schools.length === 0"
-		class="col-12 d-flex justify-content-center align-items-center h-100"
-	>
-		<b-spinner v-if="!isLoaded" variant="success" label="Carregando..."></b-spinner>
-		<h2 v-else class="error-title text-center" :class="isDark ? 'error-title-dark' : 'error-title-light'">
-			Ocorreu um erro ao carregar as escolas
-		</h2>
-	</div>
+	<div class="row h-100 px-0">
+		<div v-if="!isLoaded || schools.length === 0" class="col-lg-5 col-12 py-2 pl-lg-3 px-3 h-100">
+			<div
+				class="schools w-100 h-100 shadow-sm d-flex justify-content-center align-items-center"
+				:class="isDark ? 'schools-dark' : 'schools-light'"
+			>
+				<b-spinner v-if="!isLoaded" variant="success" label="Carregando..."></b-spinner>
+				<h2 v-else class="error-title text-center" :class="isDark ? 'error-title-dark' : 'error-title-light'">
+					Ocorreu um erro ao carregar as escolas
+				</h2>
+			</div>
+		</div>
 
-	<div v-else class="row d-flex justify-row h-100 px-0">
-		<div class="col-lg-5 col-12 py-2 pl-lg-3 px-3">
+		<div v-else class="col-lg-5 col-12 py-2 pl-lg-3 px-3">
 			<div
 				class="schools w-100 h-100 shadow-sm custom-scroll-bar"
 				:class="isDark ? 'schools-dark custom-scroll-bar-dark' : 'schools-light custom-scroll-bar-light'"

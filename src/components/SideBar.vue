@@ -208,6 +208,7 @@ $tertiary-color: #3fc380;
 	background-color: $primary-color;
 	color: $secondary-color;
 	height: 100vh;
+	height: 100dvh;
 	position: fixed;
 	top: 0;
 	left: 0;

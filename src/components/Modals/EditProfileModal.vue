@@ -1,6 +1,6 @@
 <script setup>
-import { validateEmail } from "../utils/validators";
-import { useUsersStore } from "../stores/users";
+import { validateEmail } from "../../utils/validators";
+import { useUsersStore } from "../../stores/users";
 import { ref } from "vue";
 
 const props = defineProps({

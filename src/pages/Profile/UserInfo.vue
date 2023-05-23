@@ -1,5 +1,5 @@
 <script setup>
-import EditProfileModal from "../../components/EditProfileModal.vue";
+import EditProfileModal from "../../components/modals/EditProfileModal.vue";
 
 const props = defineProps({
 	user: { type: Object, required: true },

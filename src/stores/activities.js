@@ -23,6 +23,31 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
+	/** @returns {Promise<{success: boolean, isUserVerified?: boolean, data: []}>}*/
+	const getAllUnfinishedActivities = async () => {
+		const usersStore = useUsersStore();
+		const headers = usersStore.token ? { Authorization: `Bearer ${usersStore.token}` } : {};
+		try {
+			const response = await api.get("/activities?fields=activities&filter=unfinished", { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, data: [] };
+		}
+	};
+
+	const getUnfinishedActivitiesFromSchool = async (schoolName) => {
+		const usersStore = useUsersStore();
+		const headers = usersStore.token ? { Authorization: `Bearer ${usersStore.token}` } : {};
+		try {
+			const response = await api.get("/activities?fields?activities&filter=unfinished&school=" + schoolName, {
+				headers,
+			});
+			return response.data;
+		} catch (err) {
+			return { success: false, data: [] };
+		}
+	};
+
 	/** @param {number} id @returns {Promise<{success: boolean, message: string}>} */
 	const deleteActivity = async (id) => {
 		const usersStore = useUsersStore();
@@ -76,5 +101,14 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
-	return { search, deleteActivity, getRecentActivities, getActiveThemes, deleteTheme, addTheme };
+	return {
+		search,
+		deleteActivity,
+		getRecentActivities,
+		getAllUnfinishedActivities,
+		getUnfinishedActivitiesFromSchool,
+		getActiveThemes,
+		deleteTheme,
+		addTheme,
+	};
 });

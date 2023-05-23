@@ -39,7 +39,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 		const usersStore = useUsersStore();
 		const headers = usersStore.token ? { Authorization: `Bearer ${usersStore.token}` } : {};
 		try {
-			const response = await api.get("/activities?fields?activities&filter=unfinished&school=" + schoolName, {
+			const response = await api.get(`/activities?fields=activities&filter=unfinished&school=${schoolName}`, {
 				headers,
 			});
 			return response.data;

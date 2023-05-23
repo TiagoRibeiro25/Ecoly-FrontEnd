@@ -9,7 +9,7 @@ const props = defineProps({
 	id: { type: Number, required: true },
 	title: { type: String, required: true },
 	content: { type: String, required: true },
-	date_created: { type: String, required: true },
+	dateCreated: { type: String, required: true },
 	image: { type: String, required: true },
 	isUserAdmin: { type: Boolean, required: true },
 });
@@ -53,7 +53,11 @@ onMounted(() => {
 					</h2>
 				</div>
 				<div v-if="props.isUserAdmin" class="col-2 text-center pt-2">
-					<b-button size="sm" class="delete-btn rounded-circle bg-transparent border-0">
+					<b-button
+						size="sm"
+						class="rounded-circle bg-transparent border-0"
+						@click="() => emit('delete', props.id)"
+					>
 						<img
 							v-lazy="{
 								src: isDark ? '../assets/icons/remove-dark.svg' : '../assets/icons/remove-light.svg',
@@ -61,7 +65,6 @@ onMounted(() => {
 							alt="Remover notícia"
 							width="25"
 							height="25"
-							@click="() => emit('delete', props.id)"
 						/>
 					</b-button>
 				</div>
@@ -79,7 +82,7 @@ onMounted(() => {
 						class="new-date text-muted text-lg-left text-center"
 						:class="isDark ? 'text-light' : 'text-dark'"
 					>
-						{{ formatDate(props.date_created, "yyyy-mm-dd") }}
+						{{ formatDate(props.dateCreated, "yyyy-mm-dd") }}
 					</p>
 				</div>
 			</div>

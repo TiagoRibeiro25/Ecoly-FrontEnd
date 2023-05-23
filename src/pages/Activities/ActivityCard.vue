@@ -74,9 +74,8 @@ onMounted(() => {
 					<p
 						class="activity-description text-justify pr-1"
 						:class="isDark ? 'activity-description-dark' : 'activity-description-light'"
-					>
-						{{ props.description }}
-					</p>
+						v-html="props.description.replace(/\n/g, '<br />')"
+					></p>
 				</div>
 			</div>
 		</div>

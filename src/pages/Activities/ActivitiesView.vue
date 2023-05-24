@@ -7,6 +7,8 @@ import { ref, watch, watchEffect } from "vue";
 import { useSchoolsStore } from "../../stores/schools";
 import { useActivitiesStore } from "../../stores/activities";
 import ActivityCard from "./ActivityCard.vue";
+import DeleteModal from "../../components/Modals/DeleteModal.vue";
+import FinishActivityModal from "../../components/Modals/FinishActivityModal.vue";
 
 const isDark = useDark();
 const fetching = ref(false);
@@ -15,14 +17,24 @@ const schools = ref([{ value: "all", text: "Todas as escolas" }]);
 const schoolSelected = ref("all");
 const isUserVerified = ref(false);
 
+const fetchAgain = ref(false);
+
 // delete modal variables
 const showDeleteModal = ref(false);
 const idToDelete = ref(null);
-const fetchAgain = ref(false);
 
-const showModal = (id) => {
+const showDelModal = (id) => {
 	idToDelete.value = id;
 	showDeleteModal.value = true;
+};
+
+// finish modal variables
+const showFinishModal = ref(false);
+const idToFinish = ref(null);
+
+const showFinModal = (id) => {
+	idToFinish.value = id;
+	showFinishModal.value = true;
 };
 
 watch(schoolSelected, () => {
@@ -78,8 +90,8 @@ watchEffect(async () => {
 	<div class="col-12">
 		<Header title="ATIVIDADES" />
 	</div>
-	<div class="col-12 mb-4 px-0">
-		<div class="activities-container mx-auto px-5 d-flex flex-row">
+	<div class="col-12 mb-4">
+		<div class="activities-container px-5 mx-auto d-flex flex-row">
 			<div v-if="isUserVerified" class="col-6 px-0 d-flex align-items-end">
 				<ChangeViewButton text="Adicionar atividade" to="ActivityCreate" iconImg="../assets/icons/add.svg" />
 			</div>
@@ -97,7 +109,7 @@ watchEffect(async () => {
 
 	<!-- Activities -->
 	<div class="col-12">
-		<div class="activities-container mx-auto px-5">
+		<div class="activities-container px-5 mx-auto">
 			<div
 				v-if="fetching || activities.length === 0"
 				class="d-flex flex-column align-items-center justify-content-center"
@@ -122,10 +134,28 @@ watchEffect(async () => {
 					:theme="activity.theme"
 					:image="activity.image"
 					:canUserEdit="activity.canUserEdit"
+					@delete="showDelModal"
+					@finish="showFinModal"
 				/>
 			</div>
 		</div>
 	</div>
+
+	<DeleteModal
+		:id="idToDelete"
+		type="activity"
+		text="esta atividade"
+		:show="showDeleteModal"
+		@close="showDeleteModal = false"
+		@delete="() => (fetchAgain = true)"
+	/>
+
+	<FinishActivityModal
+		:id="idToFinish"
+		:show="showFinishModal"
+		@close="showFinishModal = false"
+		@update="() => (fetchAgain = true)"
+	/>
 </template>
 
 <style lang="scss" scoped>

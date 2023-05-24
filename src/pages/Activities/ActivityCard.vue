@@ -78,6 +78,36 @@ onMounted(() => {
 					></p>
 				</div>
 			</div>
+			<div class="row" style="height: 200px">
+				<div class="col-6 d-flex align-items-end">
+					<div class="activity-dates" :class="isDark ? 'activity-dates-dark' : 'activity-dates-light'">
+						<div>
+							Data de início: <span class="text-muted">{{ initialDate }}</span>
+						</div>
+						<div>
+							Data final: <span class="text-muted">{{ finalDate }}</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-6 d-flex justify-content-end align-items-end flex-column pr-5">
+					<div :class="canUserEdit ? '' : 'mb-2'">
+						<span class="theme px-3 py-1">
+							{{ theme }}
+						</span>
+					</div>
+					<div v-if="canUserEdit">
+						<button
+							type="button"
+							class="finish-btn btn btn-sm rounded-pill px-3 float-right mt-2"
+							:class="isDark ? 'finish-btn-dark' : 'finish-btn-light'"
+							@click="emit('finish', props.id)"
+						>
+							<img class="mr-1" v-lazy="{ src: '../assets/icons/finish.svg' }" alt="add" width="20" />
+							<span> Finalizar </span>
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -87,6 +117,7 @@ $primary-color: #343e3d;
 $secondary-color: #e4f0e8;
 $tertiary-color: #ffffff;
 $quaternary-color: #aedcc0;
+$quinary-color: #18516f;
 
 .activity-card {
 	border-radius: 20px;
@@ -109,16 +140,12 @@ $quaternary-color: #aedcc0;
 	overflow: hidden;
 }
 
-.activity-description,
-.activity-date {
+.activity-description {
 	font-family: "Panton", sans-serif;
 	font-size: 1rem;
 	font-weight: 400;
-	height: 80px;
 	overflow: hidden;
-}
 
-.activity-description {
 	&-dark {
 		color: $tertiary-color;
 	}
@@ -130,6 +157,20 @@ $quaternary-color: #aedcc0;
 
 .activity-date {
 	font-size: 0.9rem;
+}
+
+.activity-dates {
+	font-family: "Panton", sans-serif;
+	font-size: 1rem;
+	font-weight: 400;
+
+	&-dark {
+		color: $tertiary-color;
+	}
+
+	&-light {
+		color: $primary-color;
+	}
 }
 
 .title-dark {
@@ -146,6 +187,48 @@ $quaternary-color: #aedcc0;
 
 .activity-card-bg-light {
 	background-color: $secondary-color;
+}
+
+.theme {
+	font-family: "Panton", sans-serif;
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: $primary-color;
+	background-color: $quaternary-color;
+	border-radius: 15px;
+}
+
+.finish-btn {
+	font-family: "Panton", sans-serif;
+	font-weight: 600;
+	font-size: 14px;
+
+	&-dark {
+		background-color: $tertiary-color;
+		color: $primary-color;
+		& img {
+			filter: invert(1);
+		}
+
+		&:hover {
+			background-color: $quinary-color;
+			color: $tertiary-color;
+
+			& img {
+				filter: invert(0);
+			}
+		}
+	}
+
+	&-light {
+		background-color: $primary-color;
+		color: $tertiary-color;
+
+		&:hover {
+			background-color: $quinary-color;
+			color: $tertiary-color;
+		}
+	}
 }
 
 @keyframes slideIn {

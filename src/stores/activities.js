@@ -35,6 +35,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
+	/** @param {string} schoolName @returns {Promise<{success: boolean, isUserVerified?: boolean, data: []}>} */
 	const getUnfinishedActivitiesFromSchool = async (schoolName) => {
 		const usersStore = useUsersStore();
 		const headers = usersStore.token ? { Authorization: `Bearer ${usersStore.token}` } : {};
@@ -58,6 +59,19 @@ export const useActivitiesStore = defineStore("activities", () => {
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Ocorreu um erro ao apagar a atividade" };
+		}
+	};
+
+	/** @param {{id: number, images: string[], report: string}} @returns {Promise<{success: boolean, message: string}>} */
+	const finishActivity = async ({ id, images, report }) => {
+		const usersStore = useUsersStore();
+		const headers = { Authorization: `Bearer ${usersStore.token}` };
+
+		try {
+			const response = await api.patch(`/activities/${id}?fields=activity`, { report, images }, { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Ocorreu um erro ao finalizar a atividade" };
 		}
 	};
 
@@ -104,6 +118,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 	return {
 		search,
 		deleteActivity,
+		finishActivity,
 		getRecentActivities,
 		getAllUnfinishedActivities,
 		getUnfinishedActivitiesFromSchool,

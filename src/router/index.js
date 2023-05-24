@@ -18,7 +18,6 @@ import { useUsersStore } from "../stores/users";
 
 function isUserLoggedIn(next) {
 	const usersStore = useUsersStore();
-	console.log(usersStore.isUserLoggedIn);
 	if (!usersStore.isUserLoggedIn) next({ name: "Authenticate" });
 	else next();
 }

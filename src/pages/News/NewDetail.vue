@@ -28,7 +28,7 @@ onBeforeMount(async () => {
 	const response = await newsStore.getNew(id);
 
 	if (!response.success) {
-		router.push({ name: "NotFound" });
+		await router.push({ name: "NotFound" });
 		return;
 	}
 

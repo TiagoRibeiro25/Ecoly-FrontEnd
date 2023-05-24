@@ -20,7 +20,7 @@ onBeforeMount(async () => {
 	const response = await usersStore.getLoggedInUser();
 
 	if (!response.success || response.data.role !== "admin") {
-		router.push({ name: "NotFound" });
+		await router.push({ name: "NotFound" });
 		return;
 	}
 

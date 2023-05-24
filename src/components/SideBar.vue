@@ -54,11 +54,11 @@ function close() {
 	}, 300);
 }
 
-function signOut() {
+async function signOut() {
 	userStore.signOut();
 	isUserLogged.value = false;
 	profilePicture.value = "../../../../../../assets/icons/profile.svg";
-	router.push({ name: "Authenticate" });
+	await router.push({ name: "Authenticate" });
 }
 
 onBeforeMount(async () => {

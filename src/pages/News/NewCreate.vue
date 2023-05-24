@@ -51,7 +51,7 @@ onBeforeMount(async () => {
 		return;
 	}
 
-	router.push({ name: "NotFound" });
+	await router.push({ name: "NotFound" });
 });
 </script>
 

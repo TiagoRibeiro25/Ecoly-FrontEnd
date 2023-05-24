@@ -4,7 +4,6 @@ import { useDark } from "@vueuse/core";
 import { useUsersStore } from "../../stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
-import ChangeViewButton from "../../components/ChangeViewButton.vue";
 import ManageHeader from "../../components/ManageHeader.vue";
 import Themes from "./Themes.vue";
 import FastActions from "./FastActions.vue";
@@ -20,7 +19,7 @@ onBeforeMount(async () => {
 	const response = await usersStore.getLoggedInUser();
 
 	if (!response.success || response.data.role === "unsigned") {
-		router.push({ name: "NotFound" });
+		await router.push({ name: "NotFound" });
 		return;
 	}
 

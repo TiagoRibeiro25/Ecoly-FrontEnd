@@ -21,8 +21,7 @@ watchEffect(async () => {
 	const usersStore = useUsersStore();
 	const response = await usersStore.getUserProfile(id);
 	if (!response.success) {
-		if (id === "me") router.push({ name: "Authenticate" });
-		else router.push({ name: "NotFound" });
+		await router.push({ name: id === me ? "Authenticate" : "NotFound" });
 		return;
 	}
 

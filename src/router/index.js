@@ -18,7 +18,8 @@ import { useUsersStore } from "../stores/users";
 
 function isUserLoggedIn(next) {
 	const usersStore = useUsersStore();
-	if (usersStore.isUserLoggedIn) next({ name: "Authenticate" });
+	console.log(usersStore.isUserLoggedIn);
+	if (!usersStore.isUserLoggedIn) next({ name: "Authenticate" });
 	else next();
 }
 
@@ -103,7 +104,9 @@ const router = createRouter({
 			name: "Authenticate",
 			component: AuthenticateView,
 			beforeEnter: (to, from, next) => {
-				isUserLoggedIn(next);
+				const usersStore = useUsersStore();
+				if (usersStore.isUserLoggedIn) next({ name: "Profile", params: { id: "me" } });
+				else next();
 			},
 		},
 		{

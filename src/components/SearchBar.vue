@@ -102,7 +102,7 @@ watchEffect(async () => {
 			</div>
 		</div>
 
-		<div v-else class="mb-3">
+		<div v-else class="mb-3 px-5">
 			<div v-if="data.length === 0">
 				<div class="d-flex justify-content-center flex-row error-container py-4 mx-auto">
 					<h2 class="error-msg mt-2" :class="{ 'error-msg-dark': isDark, 'error-msg-light': !isDark }">

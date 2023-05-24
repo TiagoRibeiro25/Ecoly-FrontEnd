@@ -16,6 +16,12 @@ import UnsubscribeView from "../pages/UnsubscribeView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import { useUsersStore } from "../stores/users";
 
+function isUserLoggedIn(next) {
+	const usersStore = useUsersStore();
+	if (usersStore.isUserLoggedIn) next({ name: "Authenticate" });
+	else next();
+}
+
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 
@@ -44,6 +50,9 @@ const router = createRouter({
 			path: "/news/create",
 			name: "NewCreate",
 			component: NewCreateView,
+			beforeEnter: (to, from, next) => {
+				isUserLoggedIn(next);
+			},
 		},
 		{
 			path: "/activities",
@@ -59,6 +68,9 @@ const router = createRouter({
 			path: "/activities/create",
 			name: "ActivityCreate",
 			component: ActivityCreateView,
+			beforeEnter: (to, from, next) => {
+				isUserLoggedIn(next);
+			},
 		},
 		{
 			path: "/dashboard",
@@ -69,11 +81,17 @@ const router = createRouter({
 			path: "/manage",
 			name: "Manage",
 			component: ManageView,
+			beforeEnter: (to, from, next) => {
+				isUserLoggedIn(next);
+			},
 		},
 		{
 			path: "/manage/admin",
 			name: "Admin",
 			component: AdminView,
+			beforeEnter: (to, from, next) => {
+				isUserLoggedIn(next);
+			},
 		},
 		{
 			path: "/profile/:id",
@@ -85,9 +103,7 @@ const router = createRouter({
 			name: "Authenticate",
 			component: AuthenticateView,
 			beforeEnter: (to, from, next) => {
-				const usersStore = useUsersStore();
-				if (usersStore.isUserLoggedIn) next({ name: "Profile", params: { id: "me" } });
-				else next();
+				isUserLoggedIn(next);
 			},
 		},
 		{

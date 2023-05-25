@@ -1,10 +1,10 @@
 import api from "@/services/api";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { getLocalStorage, removeLocalStorage, setLocalStorage } from "../utils/localStorage";
+import { getLocalStorage, removeLocalStorage, setLocalStorage } from "@/utils/localStorage";
 
 export const useUsersStore = defineStore("users", () => {
-	const isUserLoggedIn = ref(getLocalStorage("auth_key") ? true : false);
+	const isUserLoggedIn = ref(!!getLocalStorage("auth_key"));
 	const token = ref(getLocalStorage("auth_key") || "");
 
 	/** @returns {Promise<{success: boolean, message?: string, data?: object}>} */
@@ -53,7 +53,9 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
-	/** @param {number} userId @param {number} roleId @returns {Promise<{success: boolean, message: string}>} */
+	/** @param {number} userId
+	 *  @param {number} roleId
+	 *  @returns {Promise<{success: boolean, message: string}>} */
 	const changeUserRole = async (userId, roleId) => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
@@ -75,7 +77,9 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
-	/** @param {number} roleId @param {string} name @returns {Promise<{success: boolean, message?: string}>} */
+	/** @param {number} roleId
+	 * 	@param {string} name
+	 * 	@returns {Promise<{success: boolean, message?: string}>} */
 	const editRole = async (roleId, name) => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
@@ -86,7 +90,8 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
-	/** @param {string} role @returns {Promise<{success: boolean, message: string}>} */
+	/** @param {string} role
+	 * @returns {Promise<{success: boolean, message: string}>} */
 	const addRole = async (role) => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
@@ -118,7 +123,7 @@ export const useUsersStore = defineStore("users", () => {
 
 	/**
 	 * @param {{name: string, email: string, password: string, schoolId: number, internalId?: number, course?: string, year?: number}} data
-	 * @returns {Promise<{success: boolean, message: string}>
+	 * @returns {Promise<{success: boolean, message: string}>}
 	 */
 	const register = async (data) => {
 		try {
@@ -160,7 +165,8 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
-	/** @param {string} email  @returns {Promise<{success: boolean, message: string}>} */
+	/** @param {string | null} email
+	 *  @returns {Promise<{success: boolean, message: string}>} */
 	const subscribeNewsLetter = async (email = null) => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
@@ -198,6 +204,6 @@ export const useUsersStore = defineStore("users", () => {
 		signOut,
 		cancelNewsLetter,
 		subscribeNewsLetter,
-		contact,
+		contact
 	};
 });

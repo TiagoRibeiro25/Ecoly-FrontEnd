@@ -1,7 +1,7 @@
 <script setup>
 import Badge from "@/components/Badge.vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUsersStore } from "../../stores/users";
+import { useUsersStore } from "@/stores/users";
 import { ref, watchEffect } from "vue";
 import UserInfo from "./UserInfo.vue";
 import SeedsInfo from "./SeedsInfo.vue";
@@ -21,7 +21,7 @@ watchEffect(async () => {
 	const usersStore = useUsersStore();
 	const response = await usersStore.getUserProfile(id);
 	if (!response.success) {
-		await router.push({ name: id === me ? "Authenticate" : "NotFound" });
+		await router.push({ name: id === "me" ? "Authenticate" : "NotFound" });
 		return;
 	}
 
@@ -142,14 +142,17 @@ $quinary-color: #303a39;
 	&::-webkit-scrollbar {
 		width: 10px;
 	}
+
 	&::-moz-scrollbar {
 		width: 10px;
 	}
+
 	scrollbar-width: 10px;
 
 	&::-webkit-scrollbar-track {
 		background: $quinary-color;
 	}
+
 	&::-moz-scrollbar-track {
 		background: $quinary-color;
 	}
@@ -157,6 +160,7 @@ $quinary-color: #303a39;
 	&::-webkit-scrollbar-thumb {
 		background: $quaternary-color;
 	}
+
 	&::-moz-scrollbar-thumb {
 		background: $quaternary-color;
 	}
@@ -164,6 +168,7 @@ $quinary-color: #303a39;
 	&::-webkit-scrollbar-thumb:hover {
 		background: $secondary-color;
 	}
+
 	&::-moz-scrollbar-thumb:hover {
 		background: $secondary-color;
 	}

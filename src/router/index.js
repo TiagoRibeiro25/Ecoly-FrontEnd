@@ -14,7 +14,7 @@ import ProfileView from "../pages/Profile/ProfileView.vue";
 import UnsubscribeView from "../pages/UnsubscribeView.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
-import { useUsersStore } from "../stores/users";
+import { useUsersStore } from "@/stores/users";
 
 function isUserLoggedIn(next) {
 	const usersStore = useUsersStore();
@@ -29,22 +29,22 @@ const router = createRouter({
 		{
 			path: "/",
 			name: "Home",
-			component: HomeView,
+			component: HomeView
 		},
 		{
 			path: "/:pathMatch(.*)*",
 			name: "NotFound",
-			component: NotFoundView,
+			component: NotFoundView
 		},
 		{
 			path: "/news",
 			name: "News",
-			component: NewsView,
+			component: NewsView
 		},
 		{
 			path: "/news/:id",
 			name: "NewDetail",
-			component: NewDetailView,
+			component: NewDetailView
 		},
 		{
 			path: "/news/create",
@@ -52,17 +52,17 @@ const router = createRouter({
 			component: NewCreateView,
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
-			},
+			}
 		},
 		{
 			path: "/activities",
 			name: "Activities",
-			component: ActivitiesView,
+			component: ActivitiesView
 		},
 		{
 			path: "/activities/:id",
 			name: "ActivityDetail",
-			component: ActivityDetailView,
+			component: ActivityDetailView
 		},
 		{
 			path: "/activities/create",
@@ -70,12 +70,12 @@ const router = createRouter({
 			component: ActivityCreateView,
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
-			},
+			}
 		},
 		{
 			path: "/dashboard",
 			name: "Dashboard",
-			component: DashboardView,
+			component: DashboardView
 		},
 		{
 			path: "/manage",
@@ -83,7 +83,7 @@ const router = createRouter({
 			component: ManageView,
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
-			},
+			}
 		},
 		{
 			path: "/manage/admin",
@@ -91,12 +91,12 @@ const router = createRouter({
 			component: AdminView,
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
-			},
+			}
 		},
 		{
 			path: "/profile/:id",
 			name: "Profile",
-			component: ProfileView,
+			component: ProfileView
 		},
 		{
 			path: "/authenticate",
@@ -106,14 +106,14 @@ const router = createRouter({
 				const usersStore = useUsersStore();
 				if (usersStore.isUserLoggedIn) next({ name: "Profile", params: { id: "me" } });
 				else next();
-			},
+			}
 		},
 		{
 			path: "/unsubscribe/:id",
 			name: "Unsubscribe",
-			component: UnsubscribeView,
-		},
-	],
+			component: UnsubscribeView
+		}
+	]
 });
 
 export default router;

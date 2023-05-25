@@ -15,7 +15,6 @@ const isDark = useDark();
 const fetching = ref(false);
 const activities = ref([]);
 const schools = ref([{ value: "all", text: "Todas as escolas" }]);
-// const schoolSelected = ref("all");
 const schoolSelected = ref(+getLocalStorage("filterActivitiesSchool") || "all");
 const isUserVerified = ref(false);
 

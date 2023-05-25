@@ -63,16 +63,26 @@ const updateUser = async () => {
 		password: password.value,
 	};
 
-	if (email.value !== props.user.email) newData.email = email.value;
-	if (internalNumber.value !== props.user.internal_id) newData.internal_id = internalNumber.value;
-	if (course.value !== props.user.course) newData.course = course.value;
-	if (year.value !== props.user.year) newData.year = year.value;
+	if (email.value.trim() !== props.user.email && email.value.trim() !== "") {
+		newData.email = email.value;
+	}
+	if (internalNumber.value.trim() !== props.user.internal_id && internalNumber.value.trim() !== "") {
+		newData.internal_id = internalNumber.value;
+	}
+	if (course.value.trim() !== props.user.course && course.value.trim() !== "") {
+		newData.course = course.value;
+	}
+	if (year.value.trim() !== props.user.year && year.value.trim() !== "") {
+		newData.year = +year.value;
+	}
 
 	if (Object.keys(newData).length === 1) {
 		errorMsg.value = "Não há nada para alterar";
 		updating.value = false;
 		return;
 	}
+
+	console.log(newData);
 
 	const response = await useUsersStore().updateUserData(newData);
 	if (response.success) {

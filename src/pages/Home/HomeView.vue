@@ -46,7 +46,8 @@ const fetchActivities = async () => {
 /** @returns {Promise<void>} */
 const fetchRandomQuote = async () => {
 	try {
-		const response = await axios.get("https://get-quotes-api.cyclic.app/api/quotes/random");
+		const url = import.meta.env.VITE_QUOTE_API_ROUTE;
+		const response = await axios.get(url);
 		quote.value = response.data;
 	} catch (err) {
 		console.log("There was an error fetching the quote. Using default quote instead.\n Error: ", err);

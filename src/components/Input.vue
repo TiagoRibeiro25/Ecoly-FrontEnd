@@ -7,7 +7,7 @@ const props = defineProps({
 	placeholder: { type: String, required: true },
 	type: { type: String, required: false, default: "input" }, // 'input' | 'textarea'
 	isDark: { type: Boolean, required: false, default: false },
-	alignText: { type: Boolean, required: false, default: false },
+	alignText: { type: Boolean, required: false, default: false }
 });
 
 const data = ref(props.text);
@@ -90,14 +90,17 @@ $sixth-color: #333333;
 	&::-webkit-scrollbar {
 		width: 10px;
 	}
+
 	&::-moz-scrollbar {
 		width: 10px;
 	}
+
 	scrollbar-width: 10px;
 
 	&::-webkit-scrollbar-track {
 		background: transparent;
 	}
+
 	&::-moz-scrollbar-track {
 		background: transparent;
 	}
@@ -105,6 +108,7 @@ $sixth-color: #333333;
 	&::-webkit-scrollbar-thumb {
 		background: $tertiary-color;
 	}
+
 	&::-moz-scrollbar-thumb {
 		background: $tertiary-color;
 	}
@@ -113,6 +117,7 @@ $sixth-color: #333333;
 		&::-webkit-scrollbar-thumb:hover {
 			background: $secondary-color;
 		}
+
 		&::-moz-scrollbar-thumb:hover {
 			background: $secondary-color;
 		}
@@ -122,6 +127,7 @@ $sixth-color: #333333;
 		&::-webkit-scrollbar-thumb:hover {
 			background: $fifth-color;
 		}
+
 		&::-moz-scrollbar-thumb:hover {
 			background: $fifth-color;
 		}

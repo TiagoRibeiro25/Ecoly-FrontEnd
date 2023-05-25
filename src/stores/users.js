@@ -19,7 +19,8 @@ export const useUsersStore = defineStore("users", () => {
 		}
 	};
 
-	/** @param {number} id @returns {Promise<{success: boolean, message?: string, data?: object}>} */
+	/** @param {number | number} id 
+	 *  @returns {Promise<{success: boolean, message?: string, data?: object}>} */
 	const getUserProfile = async (id) => {
 		const headers = isUserLoggedIn.value ? { Authorization: `Bearer ${token.value}` } : {};
 		try {

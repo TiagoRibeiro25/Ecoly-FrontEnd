@@ -3,11 +3,11 @@ import DetailImages from "../../components/DetailImages.vue";
 import DeleteModal from "../../components/Modals/DeleteModal.vue";
 import NewsLetterInfo from "../../components/NewsLetterInfo.vue";
 import { useDark } from "@vueuse/core";
-import { useNewsStore } from "../../stores/news";
-import { useUsersStore } from "../../stores/users";
+import { useNewsStore } from "@/stores/news";
+import { useUsersStore } from "@/stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { formatDate } from "../../utils/formatData";
+import { formatDate } from "@/utils/formatData";
 
 const isDark = useDark();
 const route = useRoute();
@@ -15,7 +15,7 @@ const router = useRouter();
 const id = route.params.id;
 const newsStore = useNewsStore();
 const usersStore = useUsersStore();
-/** @type {{isUserAdmin: boolean, id: number, title: string, content: string, date_created: string, creator: {id: number, name: string}, images: string[]}}*/
+/** @type {null | {isUserAdmin: boolean, id: number, title: string, content: string, date_created: string, creator: {id: number, name: string}, images: string[]}}*/
 const newItem = ref(null);
 const isLoaded = ref(false);
 const isUserLogged = ref(false);
@@ -98,7 +98,7 @@ onBeforeMount(async () => {
 	</div>
 
 	<DeleteModal
-		:id="id"
+		:id="+id"
 		type="new"
 		text="esta notícia"
 		:show="showDeleteModal"

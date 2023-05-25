@@ -98,7 +98,6 @@ onBeforeMount(async () => {
 				</div>
 				<div class="col-12 mt-4 d-flex justify-content-center align-items-center">
 					<button
-						type="submit"
 						class="add-new-btn btn px-4"
 						:class="isDark ? 'dark-btn' : 'light-btn'"
 						:disabled="!validateForm() || creating"
@@ -222,14 +221,17 @@ $fifth-color: #3fc380;
 	&::-webkit-scrollbar {
 		width: 10px;
 	}
+
 	&::-moz-scrollbar {
 		width: 10px;
 	}
+
 	scrollbar-width: 10px;
 
 	&::-webkit-scrollbar-track {
 		background: transparent;
 	}
+
 	&::-moz-scrollbar-track {
 		background: transparent;
 	}
@@ -237,6 +239,7 @@ $fifth-color: #3fc380;
 	&::-webkit-scrollbar-thumb {
 		background: $fifth-color;
 	}
+
 	&::-moz-scrollbar-thumb {
 		background: $fifth-color;
 	}
@@ -245,6 +248,7 @@ $fifth-color: #3fc380;
 		&::-webkit-scrollbar-thumb:hover {
 			background: $secondary-color;
 		}
+
 		&::-moz-scrollbar-thumb:hover {
 			background: $secondary-color;
 		}
@@ -254,6 +258,7 @@ $fifth-color: #3fc380;
 		&::-webkit-scrollbar-thumb:hover {
 			background: $fourth-color;
 		}
+
 		&::-moz-scrollbar-thumb:hover {
 			background: $fourth-color;
 		}

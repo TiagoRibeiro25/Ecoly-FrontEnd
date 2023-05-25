@@ -7,6 +7,8 @@ import DetailImages from "@/components/DetailImages.vue";
 import ComplexityInput from "@/components/ComplexityInput.vue";
 import DeleteModal from "../../components/Modals/DeleteModal.vue";
 import FinishActivityModal from "../../components/Modals/FinishActivityModal.vue";
+import Plant from "@/assets/images/activityDetail-illustration.webp";
+import ActivityDetailContent from "./ActivityDetailContent.vue";
 
 const isDark = useDark();
 const route = useRoute();
@@ -30,14 +32,14 @@ onBeforeMount(async () => {
 	const activitiesStore = useActivitiesStore();
 	const response = await activitiesStore.getActivity(id);
 
-	if (response.success) {
-		activity.value = response.data;
-		isLoaded.value = true;
-		canUserEdit.value = response.canUserEdit;
+	if (!response.success) {
+		await router.push({ name: "NotFound" });
 		return;
 	}
 
-	await router.push({ name: "NotFound" });
+	activity.value = response.data;
+	canUserEdit.value = response.canUserEdit;
+	isLoaded.value = true;
 });
 </script>
 
@@ -55,11 +57,11 @@ onBeforeMount(async () => {
 					<h1 class="activity-title" :class="isDark ? 'activity-title-dark' : 'activity-title-light'">
 						{{ activity.title }}
 					</h1>
-					<div class="col-12 px-0 d-flex flex-row">
-						<span class="theme px-4">
+					<div class="col-12 px-0 d-flex flex-row align-items-center">
+						<span class="theme px-4 text-center">
 							{{ activity.theme }}
 						</span>
-						<span class="dates px-3" :class="isDark ? 'dates-dark' : 'dates-light'">
+						<span class="dates px-3 text-center" :class="isDark ? 'dates-dark' : 'dates-light'">
 							{{ activity.initial_date }} 🌳 {{ activity.final_date }}
 						</span>
 					</div>
@@ -116,24 +118,63 @@ onBeforeMount(async () => {
 					</div>
 				</div>
 			</header>
+			<main class="d-flex flex-row" style="overflow: hidden">
+				<div class="col-lg-4 col-6 left-content px-0 pt-5">
+					<ActivityDetailContent side="left" />
+					<ActivityDetailContent side="left" title="Diagnóstico" :content="activity.diagnostic" />
+					<ActivityDetailContent side="left" />
+					<ActivityDetailContent side="left" title="Recursos" :content="activity.resources" :pad="true" />
+					<ActivityDetailContent side="left" />
+					<ActivityDetailContent
+						side="left"
+						title="Indicadores de avaliação"
+						:content="activity.evaluation_indicator"
+						:pad="true"
+					/>
+					<ActivityDetailContent side="left" />
+				</div>
+				<div class="col-lg-4 col-0 plant">
+					<img class="img-fluid plant-img h-100 w-100" v-lazy="{ src: Plant }" alt="planta" />
+				</div>
+				<div class="col-lg-4 col-6 right-content px-0 pt-5">
+					<ActivityDetailContent side="right" title="Objetivos" :content="activity.objective" />
+					<ActivityDetailContent side="right" />
+					<ActivityDetailContent side="right" title="Metas" :content="activity.meta" />
+					<ActivityDetailContent side="right" />
+					<ActivityDetailContent
+						side="right"
+						title="Participantes"
+						:content="activity.participants"
+						:pad="true"
+					/>
+					<ActivityDetailContent side="right" />
+					<ActivityDetailContent
+						side="right"
+						title="Instrumentos de avaliação"
+						:content="activity.evaluation_method"
+						:pad="true"
+					/>
+					<ActivityDetailContent side="right" />
+				</div>
+			</main>
 		</div>
+
+		<DeleteModal
+			:id="activity.id"
+			type="activity"
+			text="esta atividade"
+			:show="showDeleteModal"
+			@close="showDeleteModal = false"
+			@delete="leavePage"
+		/>
+
+		<FinishActivityModal
+			:id="activity.id"
+			:show="showFinishModal"
+			@close="showFinishModal = false"
+			@update="leavePage"
+		/>
 	</div>
-
-	<DeleteModal
-		:id="activity.id"
-		type="activity"
-		text="esta atividade"
-		:show="showDeleteModal"
-		@close="showDeleteModal = false"
-		@delete="leavePage"
-	/>
-
-	<FinishActivityModal
-		:id="activity.id"
-		:show="showFinishModal"
-		@close="showFinishModal = false"
-		@update="leavePage"
-	/>
 </template>
 
 <style lang="scss" scoped>
@@ -214,6 +255,55 @@ $fourth-color: #ffffff;
 				color: $tertiary-color !important;
 			}
 		}
+	}
+}
+
+.plant {
+	min-height: 800px;
+	animation: plant 1s ease-in-out;
+}
+
+.plant-img {
+	object-fit: cover;
+}
+.left-content {
+	animation: left-content 1.5s ease-in-out;
+}
+
+.right-content {
+	animation: right-content 1.5s ease-in-out;
+}
+
+@keyframes plant {
+	0% {
+		transform: translateY(100vh);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes left-content {
+	0% {
+		transform: translateX(-100vw);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes right-content {
+	0% {
+		transform: translateX(100vw);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
 	}
 }
 </style>

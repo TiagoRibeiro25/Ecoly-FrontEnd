@@ -4,8 +4,8 @@ import Header from "../../components/Header.vue";
 import ChangeViewButton from "../../components/ChangeViewButton.vue";
 import { useDark } from "@vueuse/core";
 import { ref, watch, watchEffect } from "vue";
-import { useSchoolsStore } from "../../stores/schools";
-import { useActivitiesStore } from "../../stores/activities";
+import { useSchoolsStore } from "@/stores/schools";
+import { useActivitiesStore } from "@/stores/activities";
 import ActivityCard from "./ActivityCard.vue";
 import DeleteModal from "../../components/Modals/DeleteModal.vue";
 import FinishActivityModal from "../../components/Modals/FinishActivityModal.vue";
@@ -62,7 +62,7 @@ watchEffect(async () => {
 	}
 
 	const activitiesStore = useActivitiesStore();
-	let activitiesResponse = null;
+	let activitiesResponse;
 
 	// Get all activities
 	if (schoolSelected.value === "all") {

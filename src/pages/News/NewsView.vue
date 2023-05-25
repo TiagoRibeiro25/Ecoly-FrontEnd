@@ -40,9 +40,7 @@ watchEffect(async () => {
 	if (response.success) {
 		news.value = response.data.news;
 		isUserAdmin.value = response.data.isUserAdmin;
-		setTimeout(() => {
-			isUserLogged.value = response.data.isUserLogged;
-		}, 300);
+		isUserLogged.value = response.data.isUserLogged;
 	}
 
 	fetching.value = false;
@@ -88,7 +86,7 @@ watchEffect(async () => {
 					@delete="showModal"
 				/>
 
-				<NewsLetterInfo v-if="isUserLogged" />
+				<NewsLetterInfo v-if="isUserLogged && news.length > 0" />
 			</div>
 		</div>
 	</div>

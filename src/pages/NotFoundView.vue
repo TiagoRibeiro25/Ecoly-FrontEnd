@@ -66,9 +66,7 @@ $sixth-color: #18516f;
 	font-weight: bold;
 	color: #333;
 	width: 60%;
-	margin: 0 auto;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 10px auto;
 }
 
 .error-description {

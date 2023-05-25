@@ -2,7 +2,7 @@
 import { useDark } from "@vueuse/core";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { useUsersStore } from "../stores/users";
+import { useUsersStore } from "@/stores/users";
 
 const isDark = useDark();
 const route = useRoute();
@@ -89,9 +89,7 @@ $sixth-color: #18516f;
 	font-weight: bold;
 	color: #333;
 	width: 60%;
-	margin: 0 auto;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 10px auto;
 }
 
 .cancel-description {

@@ -9,12 +9,14 @@ import { useActivitiesStore } from "@/stores/activities";
 import ActivityCard from "./ActivityCard.vue";
 import DeleteModal from "../../components/Modals/DeleteModal.vue";
 import FinishActivityModal from "../../components/Modals/FinishActivityModal.vue";
+import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
 
 const isDark = useDark();
 const fetching = ref(false);
 const activities = ref([]);
 const schools = ref([{ value: "all", text: "Todas as escolas" }]);
-const schoolSelected = ref("all");
+// const schoolSelected = ref("all");
+const schoolSelected = ref(+getLocalStorage("filterActivitiesSchool") || "all");
 const isUserVerified = ref(false);
 
 const fetchAgain = ref(false);
@@ -38,6 +40,7 @@ const showFinModal = (id) => {
 };
 
 watch(schoolSelected, () => {
+	setLocalStorage("filterActivitiesSchool", schoolSelected.value);
 	fetchAgain.value = !fetchAgain.value;
 });
 
@@ -70,7 +73,11 @@ watchEffect(async () => {
 	}
 	// Get activities from a specific school
 	else {
-		const schoolName = schools.value.find((school) => school.value === schoolSelected.value).text;
+		const schoolName = schools.value.find((school) => school.value === schoolSelected.value)?.text;
+		if (!schoolName) {
+			fetching.value = false;
+			return;
+		}
 		activitiesResponse = await activitiesStore.getUnfinishedActivitiesFromSchool(schoolName);
 	}
 

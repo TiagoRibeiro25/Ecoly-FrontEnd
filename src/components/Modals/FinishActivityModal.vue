@@ -48,13 +48,13 @@ const finishActivity = async () => {
 <template>
 	<b-modal v-model="props.show" size="lg" hide-footer @hidden="handleCloseModal">
 		<div class="container">
-			<h4 class="modal-title text-center mt-1 mb-3">Finalizar atividade</h4>
+			<h4 class="modal-title text-center mt-1">Finalizar atividade</h4>
 
 			<div class="col-12">
 				<AddImages :images="imgs" />
 			</div>
 
-			<div class="col-12">
+			<div class="col-12 mt-4">
 				<Input
 					:text="report"
 					placeholder="Relatório da atividade (mínimo 100 caracteres)"

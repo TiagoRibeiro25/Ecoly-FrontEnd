@@ -102,7 +102,7 @@ onMounted(() => {
 							:class="isDark ? 'finish-btn-dark' : 'finish-btn-light'"
 							@click="emit('finish', props.id)"
 						>
-							<img class="mr-1" v-lazy="{ src: '../assets/icons/finish.svg' }" alt="add" width="20" />
+							<img class="mr-1" v-lazy="{ src: '../assets/icons/finish-dark.svg' }" alt="add" width="20" />
 							<span> Finalizar </span>
 						</button>
 					</div>

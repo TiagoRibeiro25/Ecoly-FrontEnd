@@ -1,8 +1,8 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 
 const props = defineProps({
-	images: { type: Array, required: true },
+	images: { type: Array, required: true }
 });
 
 const dataImages = ref([]);
@@ -63,10 +63,8 @@ onUnmounted(() => {
 				alt="Imagem do Item"
 			/>
 		</div>
-		<div v-else class="col-12" style="height: 190px">
-			<div class="col-12 d-flex justify-content-center align-items-center">
-				<b-spinner variant="success" label="Carregando..."></b-spinner>
-			</div>
+		<div v-else class="col-12 d-flex justify-content-center align-items-center" style="height: 190px">
+			<b-spinner variant="success" label="Carregando..."></b-spinner>
 		</div>
 
 		<!-- Modal -->

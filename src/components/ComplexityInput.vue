@@ -1,11 +1,11 @@
 <script setup>
-
 import { ref, watch } from "vue";
 
 const emits = defineEmits(["update:complexity"]);
 const props = defineProps({
 	complexity: { type: Number, required: true },
-	isDark: { type: Boolean, required: false, default: false }
+	isDark: { type: Boolean, required: false, default: false },
+	disabled: { type: Boolean, required: false, default: false }
 });
 
 const complexity = ref(props.complexity);
@@ -18,7 +18,7 @@ watch(complexity, () => {
 
 <template>
 	<div>
-		<b class="mr-1 info-label" :class="props.isDark ? 'info-dark-theme' : 'info-light-theme'">
+		<b v-if="!disabled" class="mr-1 info-label" :class="props.isDark ? 'info-dark-theme' : 'info-light-theme'">
 			Complexidade
 		</b>
 		<b-form-rating
@@ -26,6 +26,7 @@ watch(complexity, () => {
 			:class="props.isDark ? 'complexity-dark-theme' : 'complexity-light-theme'"
 			inline
 			v-model="complexity"
+			:readonly="disabled"
 		></b-form-rating>
 	</div>
 </template>
@@ -46,6 +47,12 @@ $fourth-color: #ffffff;
 	font-size: 1.3rem;
 	transform: translateY(2px);
 	background-color: transparent;
+
+	&:focus {
+		outline: none;
+		background-color: transparent;
+		box-shadow: none;
+	}
 }
 
 .info-light-theme,

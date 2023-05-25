@@ -50,6 +50,23 @@ export const useActivitiesStore = defineStore("activities", () => {
 		};
 
 		/**
+		 *
+		 * @param {number | string} id
+		 * @returns {Promise<{data, success, canUserEdit: boolean}|{data: *[], success: boolean}>}
+		 */
+		const getActivity = async (id) => {
+			const usersStore = useUsersStore();
+			const headers = usersStore.token ? { Authorization: `Bearer ${usersStore.token}` } : {};
+
+			try {
+				const response = await api.get(`/activities/${id}`, { headers });
+				return { success: response.data.success, canUserEdit: response.data.canUserEdit, data: response.data.data };
+			} catch (err) {
+				return { success: false, data: [] };
+			}
+		};
+
+		/**
 		 * @param {{theme_id: number, title:string, complexity: number, initial_date: string, final_date: string, objective: string, diagnostic: string, meta: string, meta: string, resources: string, participants: string, evaluation_indicator: string, evaluation_method: string, images: string[]}} activity
 		 * @returns {Promise<{success: boolean, message: string}>}
 		 */
@@ -139,6 +156,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 			getRecentActivities,
 			getAllUnfinishedActivities,
 			getUnfinishedActivitiesFromSchool,
+			getActivity,
 			getActiveThemes,
 			deleteTheme,
 			addTheme

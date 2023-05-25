@@ -72,6 +72,7 @@ onBeforeMount(async () => {
 						v-if="newItem.isUserAdmin"
 						size="sm"
 						class="delete-btn rounded-circle bg-transparent border-0 mt-2"
+						@click="showDeleteModal = true"
 					>
 						<img
 							v-lazy="{
@@ -80,7 +81,6 @@ onBeforeMount(async () => {
 							alt="Remover notícia"
 							width="25"
 							height="25"
-							@click="showDeleteModal = true"
 						/>
 					</b-button>
 				</div>

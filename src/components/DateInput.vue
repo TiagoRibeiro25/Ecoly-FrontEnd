@@ -1,15 +1,14 @@
 <script setup>
 import { useDark } from "@vueuse/core";
-import { watch, ref } from "vue";
+import { ref, watch } from "vue";
 
 const isDark = useDark();
-const emits = defineEmits(["update:data"]);
+const emits = defineEmits(["update:date"]);
 const props = defineProps({
 	date: { type: String, required: true },
 	placeholder: { type: String, required: false, default: "Data" },
 	minDate: { type: String, required: false, default: "" },
 	maxDate: { type: String, required: false, default: "" },
-	isDark: { type: Boolean, required: false, default: false },
 });
 
 const date = ref(props.date);
@@ -27,13 +26,13 @@ watch(date, () => {
 			:placeholder="placeholder"
 			:min="minDate"
 			:max="maxDate"
-			:is-dark="isDark"
 		></b-form-datepicker>
 	</div>
 </template>
 
 <style lang="scss" scoped>
 $primary-color: #3fc380;
+$secondary-color: #ffffff;
 
 .date-picker {
 	font-family: "Panton", sans-serif;

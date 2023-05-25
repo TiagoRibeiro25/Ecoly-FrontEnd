@@ -1,5 +1,5 @@
 <script setup>
-import { formatNumber } from "../../utils/formatData";
+import { formatNumber } from "@/utils/formatData";
 
 const props = defineProps({
 	user: { type: Object, required: true },

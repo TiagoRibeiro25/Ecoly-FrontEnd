@@ -9,12 +9,11 @@ import router from "./router";
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "./assets/fonts.css";
+import "./assets/main.css";
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
-
-import "./assets/fonts.css";
-import "./assets/main.css";
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -23,7 +22,7 @@ app.use(pinia);
 app.use(VueLazyLoad, {
 	loading: "../assets/images/loading.gif",
 	error: "../assets/images/error.png",
-	lazyComponent: true,
+	lazyComponent: true
 });
 app.use(router);
 

@@ -266,6 +266,7 @@ $fourth-color: #ffffff;
 .plant-img {
 	object-fit: cover;
 }
+
 .left-content {
 	animation: left-content 1.5s ease-in-out;
 }

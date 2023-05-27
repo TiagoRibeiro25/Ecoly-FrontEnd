@@ -139,8 +139,8 @@ $primary-color: #343e3d;
 $secondary-color: #aedcc0;
 $tertiary-color: #6ea952;
 $quaternary-color: #3fc380;
-$senary-color: #e4f0e8;
-$septenary-color: #18516f;
+$quinary-color: #e4f0e8;
+$senary-color: #18516f;
 
 .badges {
 	max-width: 1400px;
@@ -155,7 +155,7 @@ $septenary-color: #18516f;
 	}
 
 	&-light {
-		background-color: $senary-color;
+		background-color: $quinary-color;
 	}
 }
 
@@ -232,11 +232,11 @@ $septenary-color: #18516f;
 
 	&-light {
 		&::-webkit-scrollbar-track {
-			background: $senary-color;
+			background: $quinary-color;
 		}
 
 		&::-moz-scrollbar-track {
-			background: $senary-color;
+			background: $quinary-color;
 		}
 
 		&::-webkit-scrollbar-thumb {
@@ -248,11 +248,11 @@ $septenary-color: #18516f;
 		}
 
 		&::-webkit-scrollbar-thumb:hover {
-			background: $septenary-color;
+			background: $senary-color;
 		}
 
 		&::-moz-scrollbar-thumb:hover {
-			background: $septenary-color;
+			background: $senary-color;
 		}
 	}
 }

@@ -246,8 +246,6 @@ onBeforeMount(async () => {
 					:class="{
 						'mt-2': showText,
 						'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged,
-						'selected-icon-dark': (route === 'Profile' || route === 'Authenticate') && isDark,
-						'selected-icon-light': (route === 'Profile' || route === 'Authenticate') && !isDark,
 					}"
 				/>
 				<img

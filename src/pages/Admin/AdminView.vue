@@ -121,6 +121,7 @@ $secondary-color: #aedcc0;
 $tertiary-color: #ffffff;
 $quaternary-color: #18516f;
 $fifth-color: #3fc380;
+$sixth-color: #e4f0e8;
 
 .tab {
 	font-family: "Panton", sans-serif;
@@ -171,7 +172,7 @@ $fifth-color: #3fc380;
 	}
 
 	&-light {
-		background-color: $secondary-color;
+		background-color: $sixth-color;
 		color: $primary-color;
 	}
 }

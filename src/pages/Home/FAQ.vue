@@ -37,6 +37,8 @@ const isDark = useDark();
 $primary-color: #f8f9fa;
 $secondary-color: #343e3d;
 $tertiary-color: #aedcc0;
+$quaternary-color: #e4f0e8;
+
 .FAQ-section {
 	background-repeat: no-repeat;
 	background-position: center;
@@ -53,7 +55,7 @@ $tertiary-color: #aedcc0;
 
 .FAQ-bg-light {
 	background-image: url("@/assets/images/illustrationFAQ.webp");
-	background-color: $tertiary-color;
+	background-color: $quaternary-color;
 }
 
 .FAQ-bg-dark {

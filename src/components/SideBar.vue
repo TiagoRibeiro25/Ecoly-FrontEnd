@@ -285,6 +285,7 @@ $primary-color: #343e3d;
 $secondary-color: #e4f0e8;
 $tertiary-color: #3fc380;
 $quaternary-color: #18516f;
+$quinary-color: #aedcc0;
 
 .sidebar {
 	height: 100vh;
@@ -299,18 +300,16 @@ $quaternary-color: #18516f;
 
 	&-dark {
 		background-color: $primary-color;
-		color: $secondary-color;
 
 		& a,
 		.route-text,
 		.sign-out-btn {
-			color: $secondary-color;
+			color: $quinary-color;
 		}
 	}
 
 	&-light {
 		background-color: $secondary-color;
-		color: $primary-color;
 
 		& a,
 		.route-text,

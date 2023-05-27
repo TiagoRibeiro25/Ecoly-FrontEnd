@@ -6,7 +6,6 @@ import { ref } from "vue";
 import { useDark } from "@vueuse/core";
 import { useMeetingsStore } from "@/stores/meetings";
 
-
 const isDark = useDark();
 const date = ref("");
 const time = ref("");
@@ -22,7 +21,7 @@ const createMeeting = async () => {
 	const data = {
 		date: `${date.value} ${time.value}`,
 		description: content.value,
-		room: room.value
+		room: room.value,
 	};
 
 	const meetingsStore = useMeetingsStore();
@@ -36,8 +35,6 @@ const createMeeting = async () => {
 
 	creating.value = false;
 };
-
-
 </script>
 
 <template>
@@ -84,7 +81,10 @@ const createMeeting = async () => {
 				v-if="creating || creatingMsg !== ''"
 			>
 				<b-spinner v-if="creating" variant="success" label="Enviando..."></b-spinner>
-				<span class="creating-msg mt-1 text-center" :class="isDark ? 'creating-msg-dark' : 'creating-msg-light'">
+				<span
+					class="creating-msg mt-1 text-center"
+					:class="isDark ? 'creating-msg-dark' : 'creating-msg-light'"
+				>
 					{{ creatingMsg }}
 				</span>
 			</div>
@@ -98,7 +98,6 @@ const createMeeting = async () => {
 		>
 			Criar Reunião
 		</button>
-
 	</div>
 </template>
 
@@ -143,7 +142,6 @@ $quinary-color: #3fc380;
 		}
 	}
 }
-
 
 .creating-msg {
 	font-family: "Panton", sans-serif;

@@ -5,6 +5,8 @@ import { useRoute, useRouter } from "vue-router";
 import { useUsersStore } from "../stores/users";
 import logo_exp from "../assets/logo/logo_exp.webp";
 import logo from "../assets/logo/logo.webp";
+import logo_exp_dark from "../assets/logo/logo_exp_dark.webp";
+import logo_dark from "../assets/logo/logo_dark.webp";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -78,17 +80,33 @@ onBeforeMount(async () => {
 			reduced: !isExpanded,
 			openAnimation: openAnimation,
 			closeAnimation: closeAnimation,
+			'sidebar-dark': isDark,
+			'sidebar-light': !isDark,
 		}"
 		@mouseover="open"
 		@mouseleave="close"
 	>
 		<div class="top-logo">
 			<router-link :to="{ name: 'Home' }">
-				<img v-if="showText" v-lazy="{ src: logo_exp }" alt="home" width="180" height="60" class="mt-2" />
-				<img v-else v-lazy="{ src: logo }" alt="home" width="50" height="80" class="mr-3" />
+				<img
+					v-if="showText"
+					v-lazy="{ src: !isDark ? logo_exp_dark : logo_exp }"
+					alt="home"
+					width="180"
+					height="60"
+					class="mt-2"
+				/>
+				<img
+					v-else
+					v-lazy="{ src: !isDark ? logo_dark : logo }"
+					alt="home"
+					width="50"
+					height="80"
+					class="mr-3"
+				/>
 			</router-link>
 		</div>
-		<div class="nav-links">
+		<div class="nav-links" :class="isDark ? 'nav-links-dark' : 'nav-links-light'">
 			<router-link :to="{ name: 'News' }">
 				<img
 					src="../assets/icons/news.svg"
@@ -96,9 +114,21 @@ onBeforeMount(async () => {
 					width="50"
 					height="50"
 					class="route-icon"
-					:class="{ 'selected-icon': route === 'News' }"
+					:class="{
+						'selected-icon': route === 'News',
+						'selected-icon-dark': route === 'News' && isDark,
+						'selected-icon-light': route === 'News' && !isDark,
+					}"
 				/>
-				<span v-if="showText" class="route-text" :class="{ 'selected-link': route === 'News' }">
+				<span
+					v-if="showText"
+					class="route-text"
+					:class="{
+						'selected-link': route === 'News',
+						'selected-link-dark': route === 'News' && isDark,
+						'selected-link-light': route === 'News' && !isDark,
+					}"
+				>
 					Notícias
 				</span>
 			</router-link>
@@ -109,9 +139,21 @@ onBeforeMount(async () => {
 					width="50"
 					height="50"
 					class="route-icon"
-					:class="{ 'selected-icon': route === 'Activities' }"
+					:class="{
+						'selected-icon': route === 'Activities',
+						'selected-icon-dark': route === 'Activities' && isDark,
+						'selected-icon-light': route === 'Activities' && !isDark,
+					}"
 				/>
-				<span v-if="showText" class="route-text" :class="{ 'selected-link': route === 'Activities' }">
+				<span
+					v-if="showText"
+					class="route-text"
+					:class="{
+						'selected-link': route === 'Activities',
+						'selected-link-dark': route === 'Activities' && isDark,
+						'selected-link-light': route === 'Activities' && !isDark,
+					}"
+				>
 					Atividades
 				</span>
 			</router-link>
@@ -122,9 +164,21 @@ onBeforeMount(async () => {
 					width="50"
 					height="50"
 					class="route-icon"
-					:class="{ 'selected-icon': route === 'Dashboard' }"
+					:class="{
+						'selected-icon': route === 'Dashboard',
+						'selected-icon-dark': route === 'Dashboard' && isDark,
+						'selected-icon-light': route === 'Dashboard' && !isDark,
+					}"
 				/>
-				<span v-if="showText" class="route-text" :class="{ 'selected-link': route === 'Dashboard' }">
+				<span
+					v-if="showText"
+					class="route-text"
+					:class="{
+						'selected-link': route === 'Dashboard',
+						'selected-link-dark': route === 'Dashboard' && isDark,
+						'selected-link-light': route === 'Dashboard' && !isDark,
+					}"
+				>
 					Dashboard
 				</span>
 			</router-link>
@@ -135,16 +189,32 @@ onBeforeMount(async () => {
 					width="50"
 					height="50"
 					class="route-icon"
-					:class="{ 'selected-icon': route === 'Manage' }"
+					:class="{
+						'selected-icon': route === 'Manage',
+						'selected-icon-dark': route === 'Manage' && isDark,
+						'selected-icon-light': route === 'Manage' && !isDark,
+					}"
 				/>
-				<span v-if="showText" class="route-text" :class="{ 'selected-link': route === 'Manage' }">
+				<span
+					v-if="showText"
+					class="route-text"
+					:class="{
+						'selected-link': route === 'Manage',
+						'selected-link-dark': route === 'Manage' && isDark,
+						'selected-link-light': route === 'Manage' && !isDark,
+					}"
+				>
 					Gestão
 				</span>
 			</router-link>
 		</div>
 
 		<div class="bottom-link">
-			<span class="ml-3 mb-2 toggle-theme" @click="() => toggleDark()">
+			<span
+				class="ml-3 mb-2 toggle-theme"
+				:class="isDark ? 'toggle-theme-dark' : 'toggle-theme-light'"
+				@click="() => toggleDark()"
+			>
 				<img
 					v-if="isDark"
 					src="../assets/icons/dark.svg"
@@ -176,6 +246,8 @@ onBeforeMount(async () => {
 					:class="{
 						'mt-2': showText,
 						'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged,
+						'selected-icon-dark': (route === 'Profile' || route === 'Authenticate') && isDark,
+						'selected-icon-light': (route === 'Profile' || route === 'Authenticate') && !isDark,
 					}"
 				/>
 				<img
@@ -188,9 +260,19 @@ onBeforeMount(async () => {
 					:class="{
 						'mt-2': showText,
 						'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged,
+						'selected-icon-dark': (route === 'Profile' || route === 'Authenticate') && isDark,
+						'selected-icon-light': (route === 'Profile' || route === 'Authenticate') && !isDark,
 					}"
 				/>
-				<span v-if="showText" class="route-text" :class="{ 'selected-link': currentRoute === '/profile/me' }">
+				<span
+					v-if="showText"
+					class="route-text"
+					:class="{
+						'selected-link': currentRoute === '/profile/me',
+						'selected-link-dark': currentRoute === '/profile/me' && isDark,
+						'selected-link-light': currentRoute === '/profile/me' && !isDark,
+					}"
+				>
 					{{ isUserLogged ? "Perfil" : "Entrar" }}
 				</span>
 			</router-link>
@@ -201,12 +283,11 @@ onBeforeMount(async () => {
 
 <style lang="scss" scoped>
 $primary-color: #343e3d;
-$secondary-color: #aedcc0;
+$secondary-color: #e4f0e8;
 $tertiary-color: #3fc380;
+$quaternary-color: #18516f;
 
 .sidebar {
-	background-color: $primary-color;
-	color: $secondary-color;
 	height: 100vh;
 	height: 100dvh;
 	position: fixed;
@@ -217,9 +298,30 @@ $tertiary-color: #3fc380;
 	font-size: 1.7rem;
 	font-weight: 300;
 
+	&-dark {
+		background-color: $primary-color;
+		color: $secondary-color;
+
+		& a,
+		.route-text,
+		.sign-out-btn {
+			color: $secondary-color;
+		}
+	}
+
+	&-light {
+		background-color: $secondary-color;
+		color: $primary-color;
+
+		& a,
+		.route-text,
+		.sign-out-btn {
+			color: $primary-color;
+		}
+	}
+
 	a {
 		text-decoration: none;
-		color: $secondary-color;
 		display: block;
 		padding: 16px;
 		transition: 0.3s;
@@ -244,9 +346,23 @@ $tertiary-color: #3fc380;
 	justify-content: center;
 	height: 72.5%;
 
-	& a:hover {
-		& span {
-			color: $tertiary-color;
+	&-dark {
+		& a:hover {
+			& span {
+				color: $tertiary-color;
+			}
+		}
+	}
+
+	&-light {
+		& img {
+			filter: brightness(0.2);
+		}
+
+		& a:hover {
+			& span {
+				color: $quaternary-color;
+			}
 		}
 	}
 }
@@ -259,21 +375,41 @@ $tertiary-color: #3fc380;
 }
 
 .toggle-theme {
-	&:hover {
-		color: $tertiary-color;
-		cursor: pointer;
+	&-dark {
+		& button {
+			color: $secondary-color;
+
+			&:hover {
+				color: $tertiary-color;
+			}
+		}
+
+		&:hover {
+			color: $tertiary-color;
+			cursor: pointer;
+		}
+	}
+
+	&-light {
+		& button {
+			color: $primary-color;
+
+			&:hover {
+				color: $quaternary-color;
+			}
+		}
+
+		&:hover {
+			color: $quaternary-color;
+			cursor: pointer;
+		}
 	}
 
 	& button {
-		color: $secondary-color;
 		background-color: transparent;
 		border: none;
 		font-size: 1.8rem;
 		padding-right: 24px;
-
-		&:hover {
-			color: $tertiary-color;
-		}
 	}
 }
 
@@ -289,17 +425,29 @@ $tertiary-color: #3fc380;
 }
 
 .selected-link {
-	color: $tertiary-color;
 	transition: color 0.1s ease-in-out;
+
+	&-dark {
+		color: $tertiary-color;
+	}
+
+	&-light {
+		color: $quaternary-color;
+	}
 }
 
 .selected-icon {
-	filter: invert(0.5) sepia(1) saturate(3) hue-rotate(100deg);
+	&-dark {
+		filter: invert(0.5) sepia(1) saturate(3) hue-rotate(100deg);
+	}
+
+	&-light {
+		filter: invert(0.7) sepia(1) saturate(4) hue-rotate(150deg) !important;
+	}
 }
 
 .sign-out-btn {
 	background-color: transparent;
-	color: $secondary-color;
 	opacity: 40%;
 	border: none;
 	font-size: 1.2rem;

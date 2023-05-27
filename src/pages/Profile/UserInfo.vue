@@ -1,6 +1,8 @@
 <script setup>
+import { useDark } from "@vueuse/core";
 import EditProfileModal from "../../components/Modals/EditProfileModal.vue";
 
+const isDark = useDark();
 const props = defineProps({
 	user: { type: Object, required: true },
 	highLightedBadge: { type: Object, required: false },
@@ -10,11 +12,15 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 </script>
 
 <template>
-	<div class="top-info row mx-auto py-lg-0 py-sm-3 py-5 shadow">
+	<div
+		class="top-info row mx-auto py-lg-0 py-sm-3 py-5 shadow"
+		:class="isDark ? 'top-info-dark' : 'top-info-light'"
+	>
 		<!-- Profile Picture -->
 		<div class="col-lg-2 d-flex justify-content-center align-items-center flex-column">
 			<img
 				class="img-fluid profile-pic rounded-circle"
+				:class="isDark ? 'profile-pic-dark' : 'profile-pic-light'"
 				alt="Imagem de Perfil"
 				v-lazy="{ src: props.user.photo }"
 			/>
@@ -22,17 +28,21 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 		<!-- Profile Info -->
 		<div class="col-lg-8 pl-lg-0 pb-lg-0 pb-3 text-lg-left text-center">
 			<div>
-				<h3 class="user-name mb-2 mt-4">{{ props.user.name }}</h3>
-				<span class="user-info d-block">{{ props.user.email }}</span>
-				<span class="user-info d-block">
+				<h3 class="user-name mb-2 mt-4" :class="isDark ? 'user-name-dark' : 'user-name-light'">
+					{{ props.user.name }}
+				</h3>
+				<span class="user-info d-block" :class="isDark ? 'user-info-dark' : 'user-info-light'">{{
+					props.user.email
+				}}</span>
+				<span class="user-info d-block" :class="isDark ? 'user-info-dark' : 'user-info-light'">
 					{{ props.user.role === "unsigned" ? "Sem cargo" : capitalize(props.user.role) }}
 					{{ props.user.internal_id ? " - " + props.user.internal_id : "" }}
 				</span>
-				<span class="user-info d-block">
+				<span class="user-info d-block" :class="isDark ? 'user-info-dark' : 'user-info-light'">
 					{{ props.user.school }}
 				</span>
 				<div v-if="props.user.course">
-					<span class="user-info d-block">
+					<span class="user-info d-block" :class="isDark ? 'user-info-dark' : 'user-info-light'">
 						{{ props.user.course }}
 						{{ props.user.year ? `- ${props.user.year} ano` : "" }}
 					</span>
@@ -48,7 +58,11 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 					v-lazy="{ src: highLightedBadge.img }"
 					alt="Medalha em Destaque"
 				/>
-				<span class="badge-title d-block text-center">{{ highLightedBadge.title }}</span>
+				<span
+					class="badge-title d-block text-center"
+					:class="isDark ? 'badge-title-dark' : 'badge-title-light'"
+					>{{ highLightedBadge.title }}</span
+				>
 			</div>
 			<div v-else class="d-flex justify-content-center align-items-center flex-column">
 				<img
@@ -60,7 +74,12 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 			</div>
 			<!-- Edit Profile Button -->
 			<div v-if="props.user.isLoggedUser" class="mt-3">
-				<b-button class="edit-profile-btn px-2" size="sm" @click="$bvModal.show('edit-profile-modal')">
+				<b-button
+					class="edit-profile-btn px-2"
+					:class="isDark ? 'edit-profile-btn-dark' : 'edit-profile-btn-light'"
+					size="sm"
+					@click="$bvModal.show('edit-profile-modal')"
+				>
 					Editar Perfil
 				</b-button>
 			</div>
@@ -73,20 +92,33 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 $primary-color: #343e3d;
 $secondary-color: #aedcc0;
 $tertiary-color: #6ea952;
-$quaternary-color: #3fc380;
-$quinary-color: #303a39;
+$quaternary-color: #e4f0e8;
 
 .top-info {
-	background-color: $primary-color;
 	border-radius: 20px;
 	min-height: 180px;
 	max-width: 1400px;
+
+	&-dark {
+		background-color: $primary-color;
+	}
+
+	&-light {
+		background-color: $quaternary-color;
+	}
 }
 
 .profile-pic {
 	max-width: 150px;
 	max-height: 150px;
-	background-color: $tertiary-color;
+
+	&-dark {
+		background-color: $tertiary-color;
+	}
+
+	&-light {
+		background-color: $secondary-color;
+	}
 }
 
 .user-name,
@@ -94,7 +126,14 @@ $quinary-color: #303a39;
 	font-family: "Panton", sans-serif;
 	font-size: 1.7rem;
 	font-weight: 700;
-	color: $secondary-color;
+
+	&-dark {
+		color: $secondary-color;
+	}
+
+	&-light {
+		color: $primary-color;
+	}
 }
 
 .user-info {
@@ -106,7 +145,14 @@ $quinary-color: #303a39;
 	font-family: "Panton", sans-serif;
 	font-size: 0.9rem;
 	font-weight: 700;
-	color: $secondary-color;
+
+	&-dark {
+		color: $secondary-color;
+	}
+
+	&-light {
+		color: $primary-color;
+	}
 }
 
 .badge-icon {
@@ -122,16 +168,43 @@ $quinary-color: #303a39;
 
 .edit-profile-btn {
 	background: transparent;
-	border: 1px solid $secondary-color;
-	color: $secondary-color;
 	font-family: "Panton", sans-serif;
 	font-size: 0.9rem;
 	font-weight: 700;
 	border-radius: 20px;
 
-	&:hover {
-		background-color: $secondary-color;
+	&-dark {
+		color: $secondary-color;
+		border: 1px solid $secondary-color;
+
+		&:hover {
+			color: $quaternary-color;
+			border: 1px solid $quaternary-color;
+			background-color: transparent !important;
+		}
+
+		&:focus {
+			color: $quaternary-color;
+			border: 1px solid $quaternary-color;
+			background-color: transparent !important;
+		}
+	}
+
+	&-light {
 		color: $primary-color;
+		border: 1px solid $primary-color;
+
+		&:hover {
+			color: $tertiary-color;
+			border: 1px solid $tertiary-color;
+			background-color: transparent !important;
+		}
+
+		&:focus {
+			color: $tertiary-color;
+			border: 1px solid $tertiary-color;
+			background-color: transparent !important;
+		}
 	}
 }
 </style>

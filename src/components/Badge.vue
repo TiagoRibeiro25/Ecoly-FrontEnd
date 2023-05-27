@@ -1,6 +1,8 @@
 <script setup>
 import { useUsersStore } from "@/stores/users";
+import { useDark } from "@vueuse/core";
 
+const isDark = useDark();
 const props = defineProps({
 	index: { type: Number, required: true },
 	id: { type: Number, required: true },
@@ -28,12 +30,19 @@ const contrastBg = (index) => index % 2 === 0;
 </script>
 
 <template>
-	<div class="row pl-4 py-3" :class="{ 'bg-darker': contrastBg(props.index), disabled: !isUnlocked }">
+	<div
+		class="row pl-4 py-3"
+		:class="{
+			'bg-darker': contrastBg(props.index) && isDark,
+			'bg-lighter': contrastBg(props.index) && !isDark,
+			disabled: !isUnlocked,
+		}"
+	>
 		<!-- Icon -->
 		<div class="col-2 text-center">
 			<img
 				class="img-fluid badge-icon"
-				:class="{ 'unlocked-badge': isUnlocked && isUserProfile }"
+				:class="{ 'unlocked-badge': isUnlocked && isUserProfile, 'badge-icon-light': !isDark }"
 				v-lazy="{ src: props.img }"
 				alt="Badge Icon"
 				@click="
@@ -52,13 +61,27 @@ const contrastBg = (index) => index % 2 === 0;
 			<div class="row">
 				<!-- Title -->
 				<div class="col-12">
-					<h3 class="badge-title" :class="{ 'text-success': props.id === highlightedBadge?.id }">
+					<h3
+						class="badge-title"
+						:class="{
+							'text-success': props.id === highlightedBadge?.id,
+							'badge-title-dark': isDark,
+							'badge-title-light': !isDark,
+						}"
+					>
 						{{ props.title }}
 					</h3>
 				</div>
 				<!-- Description -->
 				<div class="col-12">
-					<p class="badge-description" :class="{ 'text-success': props.id === highlightedBadge?.id }">
+					<p
+						class="badge-description"
+						:class="{
+							'text-success': props.id === highlightedBadge?.id,
+							'badge-description-dark': isDark,
+							'badge-description-light': !isDark,
+						}"
+					>
 						{{ props.description }}
 					</p>
 				</div>
@@ -69,7 +92,9 @@ const contrastBg = (index) => index % 2 === 0;
 		<div class="col-2">
 			<div class="row mt-2">
 				<div class="col-12 text-center">
-					<span class="badge-percentage">{{ props.percentage }}%</span>
+					<span class="badge-percentage" :class="isDark ? 'badge-percentage-dark' : 'badge-percentage-light'"
+						>{{ props.percentage }}%</span
+					>
 				</div>
 				<div class="col-12">
 					<div class="progress">
@@ -86,6 +111,7 @@ const contrastBg = (index) => index % 2 === 0;
 </template>
 
 <style lang="scss" scoped>
+$primary-color: #dde9e1;
 $secondary-color: #aedcc0;
 $tertiary-color: #6ea952;
 $quinary-color: #303a39;
@@ -97,6 +123,10 @@ $quinary-color: #303a39;
 .badge-icon {
 	width: 70px;
 	height: 80px;
+
+	&-light {
+		filter: brightness(0.7);
+	}
 }
 
 .unlocked-badge {
@@ -114,7 +144,14 @@ $quinary-color: #303a39;
 	font-family: "Panton", sans-serif;
 	font-size: 1.3rem;
 	font-weight: 700;
-	color: $secondary-color;
+
+	&-dark {
+		color: $secondary-color;
+	}
+
+	&-light {
+		color: $quinary-color;
+	}
 }
 
 .badge-description {
@@ -128,6 +165,10 @@ $quinary-color: #303a39;
 
 .bg-darker {
 	background-color: $quinary-color;
+}
+
+.bg-lighter {
+	background-color: $primary-color;
 }
 
 .progress {

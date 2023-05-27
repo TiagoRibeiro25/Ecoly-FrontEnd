@@ -55,6 +55,7 @@ const cancelSubscription = async () => {
 
 			<div class="col-12">
 				<button
+					v-if="msg !== 'Subscrição cancelada com sucesso!'"
 					class="cancel-btn"
 					:class="{ 'button-dark-theme': isDark, 'button-light-theme': !isDark }"
 					@click="cancelSubscription"

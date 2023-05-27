@@ -67,7 +67,7 @@ const updateUser = async () => {
 		newData.email = email.value;
 	}
 	if (internalNumber.value.trim() !== props.user.internal_id && internalNumber.value.trim() !== "") {
-		newData.internal_id = internalNumber.value;
+		newData.internalId = internalNumber.value;
 	}
 	if (course.value.trim() !== props.user.course && course.value.trim() !== "") {
 		newData.course = course.value;
@@ -81,8 +81,6 @@ const updateUser = async () => {
 		updating.value = false;
 		return;
 	}
-
-	console.log(newData);
 
 	const response = await useUsersStore().updateUserData(newData);
 	if (response.success) {

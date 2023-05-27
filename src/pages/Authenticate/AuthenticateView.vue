@@ -101,12 +101,12 @@ const validateForm = () => {
 
 	// internal number
 	if (registerInternalNumber.value) {
-		if (!registerInternalNumber.value.match(/^\S+$/)) {
+		if (!RegExp(/^\S+$/).exec(registerInternalNumber.value)) {
 			return { success: false, message: "Insira um número interno válido" };
 		}
 
 		if (registerCourse.value) {
-			if (!registerCourse.value.trim().match(/[a-zA-Z]/)) {
+			if (!RegExp(/[a-zA-Z]/).exec(registerCourse.value.trim())) {
 				return { success: false, message: "Insira um curso válido" };
 			}
 
@@ -140,7 +140,7 @@ const register = async () => {
 		schoolId: +registerSchool.value,
 		internalId: registerInternalNumber.value,
 		course: registerCourse.value,
-		year: registerYear.value,
+		year: +registerYear.value,
 	});
 
 	if (response.success) {

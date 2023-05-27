@@ -1,29 +1,86 @@
 <script setup>
 import { useDark } from "@vueuse/core";
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
+import { useMeetingsStore } from "../../stores/meetings";
 
 const isDark = useDark();
-const option = ref("realizadas");
+const meetingsStore = useMeetingsStore();
+const option = ref("past"); // past | future
+const meetings = ref([]);
+const fetching = ref(true);
+const errorMsg = ref("");
+
+watchEffect(async () => {
+	if (option.value !== "past" && option.value !== "future") return;
+
+	meetings.value = [];
+	fetching.value = true;
+
+	const response = await meetingsStore.getMeetings(option.value);
+
+	if (response.success) {
+		meetings.value = response.data;
+	} else {
+		errorMsg.value = response.message;
+	}
+
+	fetching.value = false;
+});
 </script>
 
 <template>
 	<div class="col-12 px-0">
 		<span
 			class="option mx-3"
-			:class="{ 'option-selected': option === 'realizadas', 'option-dark': isDark, 'option-light': !isDark }"
-			@click="option = 'realizadas'"
+			:class="{ 'option-selected': option === 'past', 'option-dark': isDark, 'option-light': !isDark }"
+			@click="option = 'past'"
 		>
 			Realizadas
 		</span>
 		<span
 			class="option mx-2"
-			:class="{ 'option-selected': option === 'futuras', 'option-dark': isDark, 'option-light': !isDark }"
-			@click="option = 'futuras'"
+			:class="{ 'option-selected': option === 'future', 'option-dark': isDark, 'option-light': !isDark }"
+			@click="option = 'future'"
 		>
 			Futuras
 		</span>
 	</div>
-	<div class="col-12 meetings shadow" :class="isDark ? 'meetings-dark' : 'meetings-light'"></div>
+	<div
+		class="col-12 meetings custom-scroll-bar shadow p-3 pt-4"
+		:class="isDark ? 'meetings-dark custom-scroll-bar-dark' : 'meetings-light custom-scroll-bar-light'"
+	>
+		<div
+			v-if="fetching || errorMsg.length > 0"
+			class="col-12 h-100 d-flex justify-content-center align-items-center"
+		>
+			<b-spinner variant="success" label="Carregando Reuniões"></b-spinner>
+			<span class="ml-2" v-if="errorMsg.length > 0">{{ errorMsg }}</span>
+		</div>
+
+		<div
+			v-else
+			v-for="meeting in meetings"
+			:key="meeting.id"
+			class="col-12 d-flex flex-row mb-4 justify-content-center"
+		>
+			<span
+				class="date px-3 py-1 text-center d-flex justify-content-center align-items-center"
+				:class="isDark ? 'date-dark' : 'date-light'"
+			>
+				{{ meeting.date }}
+			</span>
+			<button class="btn mx-2 action-btn" :class="isDark ? 'action-btn-dark' : 'action-btn-light'">
+				Ver Descrição
+			</button>
+			<button
+				v-if="option === 'past'"
+				class="btn action-btn"
+				:class="isDark ? 'action-btn-dark' : 'action-btn-light'"
+			>
+				{{ meeting.hasAta ? "Ver Ata" : "Adicionar Ata" }}
+			</button>
+		</div>
+	</div>
 </template>
 
 <style lang="scss" scoped>
@@ -42,7 +99,6 @@ $senary-color: #18516f;
 	line-height: 1.5rem;
 	opacity: 0.5;
 	cursor: pointer;
-	transition: all 0.3s ease-in-out;
 
 	&-selected {
 		opacity: 1;
@@ -68,6 +124,8 @@ $senary-color: #18516f;
 .meetings {
 	height: 275px;
 	border-radius: 15px;
+	overflow-x: hidden;
+	overflow-y: auto;
 
 	&-dark {
 		background-color: $primary-color;
@@ -75,6 +133,118 @@ $senary-color: #18516f;
 
 	&-light {
 		background-color: $quinary-color;
+	}
+}
+
+.date {
+	font-family: "Panton", sans-serif;
+	font-size: 1rem;
+	font-weight: 500;
+	border-radius: 15px;
+	width: 120px;
+
+	&-dark {
+		background-color: $secondary-color;
+		color: $primary-color;
+	}
+
+	&-light {
+		background-color: $primary-color;
+		color: $tertiary-color;
+	}
+}
+
+.action-btn {
+	font-family: "Panton", sans-serif;
+	font-size: 1rem;
+	font-weight: 500;
+	border-radius: 15px;
+	outline: none;
+	background-color: transparent;
+	width: 138px;
+
+	&-dark {
+		color: $secondary-color;
+		border: 2px solid $secondary-color;
+
+		&:hover {
+			color: $tertiary-color;
+			border-color: $tertiary-color;
+		}
+	}
+
+	&-light {
+		color: $primary-color;
+		border: 2px solid $primary-color;
+
+		&:hover {
+			color: $senary-color;
+			border-color: $senary-color;
+		}
+	}
+}
+
+.custom-scroll-bar {
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	&::-moz-scrollbar {
+		width: 10px;
+	}
+
+	scrollbar-width: 10px;
+
+	&-dark {
+		&::-webkit-scrollbar-track {
+			background: $primary-color;
+		}
+
+		&::-moz-scrollbar-track {
+			background: $primary-color;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: $quaternary-color;
+		}
+
+		&::-moz-scrollbar-thumb {
+			background: $quaternary-color;
+		}
+
+		&::-webkit-scrollbar-thumb:hover {
+			background: $secondary-color;
+		}
+
+		&::-moz-scrollbar-thumb:hover {
+			background: $secondary-color;
+		}
+	}
+
+	&-light {
+		&::-webkit-scrollbar-track {
+			background: $quinary-color;
+		}
+
+		&::-moz-scrollbar-track {
+			background: $quinary-color;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: $quaternary-color;
+		}
+
+		&::-moz-scrollbar-thumb {
+			background: $quaternary-color;
+		}
+
+		&::-webkit-scrollbar-thumb:hover {
+			background: $senary-color;
+		}
+
+		&::-moz-scrollbar-thumb:hover {
+			background: $senary-color;
+		}
 	}
 }
 </style>

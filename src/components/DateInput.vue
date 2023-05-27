@@ -1,8 +1,6 @@
 <script setup>
-import { useDark } from "@vueuse/core";
 import { ref, watch } from "vue";
 
-const isDark = useDark();
 const emits = defineEmits(["update:date"]);
 const props = defineProps({
 	date: { type: String, required: true },
@@ -24,6 +22,7 @@ watch(date, () => {
 			v-model="date"
 			class="date-picker w-100"
 			:placeholder="placeholder"
+			locale="pt"
 			:min="minDate"
 			:max="maxDate"
 		></b-form-datepicker>
@@ -36,11 +35,13 @@ $secondary-color: #ffffff;
 
 .date-picker {
 	font-family: "Panton", sans-serif;
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	font-weight: 400;
 	border-radius: 0.6rem;
 	border: 2px solid $primary-color;
 	background-color: transparent;
 	outline: transparent;
+	padding-top: 0.12rem !important;
+	padding-bottom: 0.12rem !important;
 }
 </style>

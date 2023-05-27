@@ -7,7 +7,7 @@ const props = defineProps({
 	placeholder: { type: String, required: true },
 	type: { type: String, required: false, default: "input" }, // 'input' | 'textarea'
 	isDark: { type: Boolean, required: false, default: false },
-	alignText: { type: Boolean, required: false, default: false }
+	alignText: { type: Boolean, required: false, default: false },
 });
 
 const data = ref(props.text);
@@ -51,7 +51,7 @@ $sixth-color: #333333;
 
 .form-control {
 	font-family: "Panton", sans-serif;
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	font-weight: 400;
 	border-radius: 0.6rem;
 	max-height: 40rem;

@@ -260,6 +260,7 @@ onBeforeMount(async () => {
 						'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged,
 						'selected-icon-dark': (route === 'Profile' || route === 'Authenticate') && isDark,
 						'selected-icon-light': (route === 'Profile' || route === 'Authenticate') && !isDark,
+						'authenticate-light-icon': !isDark,
 					}"
 				/>
 				<span
@@ -370,6 +371,10 @@ $quaternary-color: #18516f;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+}
+
+.authenticate-light-icon {
+	filter: brightness(0.2);
 }
 
 .toggle-theme {

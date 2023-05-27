@@ -1,17 +1,26 @@
 <script setup>
-import Header from "../../components/Header.vue";
 import { useUsersStore } from "../../stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
+import Header from "../../components/Header.vue";
 import ManageHeader from "../../components/ManageHeader.vue";
 import Themes from "./Themes.vue";
 import FastActions from "./FastActions.vue";
 import ContactMembers from "./ContactMembers.vue";
 import CreateMeeting from "./CreateMeeting.vue";
+import Meetings from "./Meetings.vue";
 
 const router = useRouter();
 const isLoaded = ref(false);
 const isUserAdmin = ref(false);
+const showMeetings = ref(true);
+
+const updateMeetings = () => {
+	showMeetings.value = false;
+	setTimeout(() => {
+		showMeetings.value = true;
+	}, 10);
+};
 
 onBeforeMount(async () => {
 	const usersStore = useUsersStore();
@@ -66,10 +75,12 @@ onBeforeMount(async () => {
 						title="Reuniões"
 						description="crie reuniões ou registe as reuniões do conselho adicionando a respetiva ata"
 					/>
-					<div class="col-12 mt-5 px-0 d-flex flex-xl-row flex-column">
-						<div class="col-xl-6 col-12 px-0"></div>
-						<div class="col-xl-6 col-12 px-0 mt-xl-0 mt-4">
-							<CreateMeeting />
+					<div class="col-12 mt-5 mb-5 px-0 d-flex flex-xl-row flex-column">
+						<div class="col-xl-6 col-12 px-0">
+							<Meetings />
+						</div>
+						<div class="col-xl-6 col-12 px-0 mt-xl-2 pt-1 mt-4">
+							<CreateMeeting @update:showMeetings="updateMeetings" />
 						</div>
 					</div>
 				</div>

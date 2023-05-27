@@ -17,7 +17,7 @@ watch(date, () => {
 </script>
 
 <template>
-	<div class="d-flex flex-row justify-content-between align-items-center w-100 px-3">
+	<div class="d-flex flex-row justify-content-between align-items-center w-100">
 		<b-form-datepicker
 			v-model="date"
 			class="date-picker w-100"

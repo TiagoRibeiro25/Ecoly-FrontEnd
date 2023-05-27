@@ -6,6 +6,8 @@ import { ref } from "vue";
 import { useDark } from "@vueuse/core";
 import { useMeetingsStore } from "@/stores/meetings";
 
+const emits = ["update:showMeetings"];
+
 const isDark = useDark();
 const date = ref("");
 const time = ref("");
@@ -29,6 +31,7 @@ const createMeeting = async () => {
 
 	if (response.success) {
 		creatingMsg.value = "Reunião criada com sucesso!";
+		emits("update:showMeetings");
 	} else {
 		creatingMsg.value = "Erro ao criar reunião!";
 	}
@@ -41,6 +44,7 @@ const createMeeting = async () => {
 	<div class="col-12 d-flex flex-row mt-3 px-0">
 		<div class="col-7 px-0">
 			<DateInput
+				class="pr-xl-0 pl-xl-3 px-0"
 				:date="date"
 				placeholder="data da reunião"
 				:minDate="new Date().toISOString().slice(0, 10)"
@@ -49,7 +53,7 @@ const createMeeting = async () => {
 			/>
 		</div>
 		<div class="col-3 px-0">
-			<TimeInput :time="time" placeholder="..." @update:time="time = $event" />
+			<TimeInput class="px-3" :time="time" placeholder="..." @update:time="time = $event" />
 		</div>
 		<div class="col-2 px-0">
 			<Input
@@ -63,7 +67,7 @@ const createMeeting = async () => {
 		</div>
 	</div>
 
-	<div class="col-12 pr-0 mt-3">
+	<div class="col-12 pr-xl-0 pl-xl-3 px-0 mt-3">
 		<Input
 			:text="content"
 			placeholder="Descrição da reunião"

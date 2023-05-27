@@ -4,7 +4,7 @@ import { ref, watch } from "vue";
 const emits = defineEmits(["update:time"]);
 const props = defineProps({
 	time: { type: String, required: true },
-	placeholder: { type: String, required: false, default: "" }
+	placeholder: { type: String, required: false, default: "" },
 });
 
 const time = ref(props.time);
@@ -15,7 +15,7 @@ watch(time, () => {
 </script>
 
 <template>
-	<div class="d-flex flex-row justify-content-between align-items-center w-100 px-3">
+	<div class="d-flex flex-row justify-content-between align-items-center w-100">
 		<b-form-timepicker
 			v-model="time"
 			class="time-picker w-100"

@@ -29,10 +29,11 @@ Before you begin, ensure you have met the following requirements:
 
 ## Environment Variables
 
-To run properly, be sure to create a `.env` file in the root directory of the project and add the following variables:
+To run properly, be sure to create a `.env` file in the root directory of the project and add the following variables (use `.env.sample` as a template):
 
 ``` bash
 VITE_API_ROUTE=http://localhost:3000/api
+VITE_QUOTE_API_ROUTE=https://get-quotes-api.cyclic.app/api/quotes/random
 ```
 
 Replace the value of `VITE_API_ROUTE` with the URL of the API you are using (see [APIs Used](#apis-used) below)
@@ -41,8 +42,8 @@ Replace the value of `VITE_API_ROUTE` with the URL of the API you are using (see
 
 Ecoly uses the following APIs:
 
-- [Quotes API](https://github.com/TiagoRibeiro25/Get-Quotes-API)
 - [Ecoly API (in development)](https://github.com/TiagoRibeiro25/ecoly-api)
+- [Quotes API](https://github.com/TiagoRibeiro25/Get-Quotes-API)
 
 ## Technologies Used
 

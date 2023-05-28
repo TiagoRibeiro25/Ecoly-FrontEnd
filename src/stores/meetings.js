@@ -51,5 +51,21 @@ export const useMeetingsStore = defineStore("meetings", () => {
 		}
 	};
 
-	return { createMeeting, getMeetings, getMeetingAta };
+	/**
+	 * @param {{id: number, ata: string, images: string[]}}
+	 * @returns {Promise<{success: boolean, message: string}}>}
+	 */
+	const addMeetingAta = async ({ id, ata, images }) => {
+		const usersStore = useUsersStore();
+		const headers = { Authorization: `Bearer ${usersStore.token}` };
+
+		try {
+			const response = await api.patch(`/meetings/${id}?fields=ata`, { ata, images }, { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Erro ao adicionar ata à reunião" };
+		}
+	};
+
+	return { createMeeting, getMeetings, getMeetingAta, addMeetingAta };
 });

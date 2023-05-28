@@ -12,7 +12,8 @@ const firstYear = 2022;
 // get years from firstYear to current year
 const years = new Array(new Date().getFullYear() - firstYear + 1)
 	.fill(2022)
-	.map((year, index) => ({ value: year + index, text: year + index }));
+	.map((year, index) => ({ value: year + index, text: year + index }))
+	.sort((a, b) => b.value - a.value);
 const currentYear = ref(getLocalStorage("filterActivitiesYear") || years.at(-1).value);
 
 const activities = ref([]);

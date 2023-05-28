@@ -19,6 +19,16 @@ watchEffect(async () => {
 	const response = await meetingsStore.getMeetings(option.value);
 
 	if (response.success) {
+		// order by date
+		response.data.sort((a, b) => {
+			const aDate = a.date.split("-");
+			const bDate = b.date.split("-");
+
+			return option.value === "past"
+				? new Date(bDate[2], bDate[1] - 1, bDate[0]) - new Date(aDate[2], aDate[1] - 1, aDate[0]) // past
+				: new Date(aDate[2], aDate[1] - 1, aDate[0]) - new Date(bDate[2], bDate[1] - 1, bDate[0]); // future
+		});
+
 		meetings.value = response.data;
 	} else {
 		errorMsg.value = response.message;
@@ -141,7 +151,7 @@ $senary-color: #18516f;
 	font-size: 1rem;
 	font-weight: 500;
 	border-radius: 15px;
-	width: 120px;
+	width: 140px;
 
 	&-dark {
 		background-color: $secondary-color;

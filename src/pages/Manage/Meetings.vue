@@ -4,6 +4,7 @@ import { ref, watchEffect } from "vue";
 import { useMeetingsStore } from "../../stores/meetings";
 import SeeMeetingDescriptionModal from "../../components/Modals/SeeMeetingDescriptionModal.vue";
 import SeeMeetingAtaModal from "../../components/Modals/SeeMeetingAtaModal.vue";
+import AddMeetingAtaModal from "../../components/Modals/AddMeetingAtaModal.vue";
 
 const isDark = useDark();
 const meetingsStore = useMeetingsStore();
@@ -130,6 +131,8 @@ watchEffect(async () => {
 		/>
 
 		<SeeMeetingAtaModal :show="seeAtaModal" :id="meetingSelected.id" @close="seeAtaModal = false" />
+
+		<AddMeetingAtaModal :show="seeAddAtaModal" :id="meetingSelected.id" @close="seeAddAtaModal = false" />
 	</div>
 </template>
 

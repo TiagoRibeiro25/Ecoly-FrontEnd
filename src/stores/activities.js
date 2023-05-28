@@ -171,6 +171,22 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
+	/**
+	 * @param {number} id
+	 * @returns {Promise<{success: boolean, message: string}>}
+	 */
+	const getActivityReport = async (id) => {
+		const usersStore = useUsersStore();
+		const headers = usersStore.token ? { Authorization: `Bearer ${usersStore.token}` } : {};
+
+		try {
+			const response = await api.get(`/activities/${id}?fields=report`, { headers });
+			return response.data;
+		} catch (err) {
+			return { success: false, message: "Ocorreu um erro ao obter o relatório da atividade" };
+		}
+	};
+
 	return {
 		search,
 		addActivity,
@@ -184,5 +200,6 @@ export const useActivitiesStore = defineStore("activities", () => {
 		getActiveThemes,
 		deleteTheme,
 		addTheme,
+		getActivityReport,
 	};
 });

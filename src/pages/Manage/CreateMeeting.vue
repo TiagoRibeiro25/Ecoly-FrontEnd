@@ -6,7 +6,7 @@ import { ref } from "vue";
 import { useDark } from "@vueuse/core";
 import { useMeetingsStore } from "@/stores/meetings";
 
-const emits = ["update:showMeetings"];
+const emits = defineEmits(["update:showMeetings"]);
 
 const isDark = useDark();
 const date = ref("");

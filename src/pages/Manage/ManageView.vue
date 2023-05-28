@@ -77,7 +77,7 @@ onBeforeMount(async () => {
 					/>
 					<div class="col-12 mt-5 mb-5 px-0 d-flex flex-xl-row flex-column">
 						<div class="col-xl-6 col-12 px-0">
-							<Meetings />
+							<Meetings v-if="showMeetings" />
 						</div>
 						<div class="col-xl-6 col-12 px-0 mt-xl-2 pt-1 mt-4">
 							<CreateMeeting @update:showMeetings="updateMeetings" />

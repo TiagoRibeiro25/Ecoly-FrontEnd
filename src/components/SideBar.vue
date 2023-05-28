@@ -417,7 +417,7 @@ $quinary-color: #aedcc0;
 
 .route-text {
 	font-family: "Panton", sans-serif;
-	font-weight: 300;
+	font-weight: 400;
 	font-size: 1.5rem;
 }
 

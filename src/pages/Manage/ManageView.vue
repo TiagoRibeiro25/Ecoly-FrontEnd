@@ -9,6 +9,7 @@ import FastActions from "./FastActions.vue";
 import ContactMembers from "./ContactMembers.vue";
 import CreateMeeting from "./CreateMeeting.vue";
 import Meetings from "./Meetings.vue";
+import ActivitiesReport from "./ActivitiesReport.vue";
 
 const router = useRouter();
 const isLoaded = ref(false);
@@ -75,13 +76,24 @@ onBeforeMount(async () => {
 						title="Reuniões"
 						description="crie reuniões ou registe as reuniões do conselho adicionando a respetiva ata"
 					/>
-					<div class="col-12 mt-5 mb-5 px-0 d-flex flex-xl-row flex-column">
+					<div class="col-12 my-5 px-0 d-flex flex-xl-row flex-column">
 						<div class="col-xl-6 col-12 px-0">
 							<Meetings v-if="showMeetings" />
 						</div>
 						<div class="col-xl-6 col-12 px-0 mt-xl-2 pt-1 mt-4">
 							<CreateMeeting @update:showMeetings="updateMeetings" />
 						</div>
+					</div>
+				</div>
+
+				<!-- Activities Report -->
+				<div class="col-12 mt-5 px-0 pt-4">
+					<ManageHeader
+						title="Relatório de Atividades"
+						description="clique numa atividade para visualizar o seu relatório"
+					/>
+					<div class="col-12 my-4 px-0">
+						<ActivitiesReport />
 					</div>
 				</div>
 			</div>

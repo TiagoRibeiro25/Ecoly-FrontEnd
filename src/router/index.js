@@ -1,20 +1,7 @@
-import ActivitiesView from "../pages/Activities/ActivitiesView.vue";
-import ActivityCreateView from "../pages/Activities/ActivityCreateView.vue";
-import ActivityDetailView from "../pages/Activities/ActivityDetail.vue";
-import AdminView from "../pages/Admin/AdminView.vue";
-import AuthenticateView from "../pages/Authenticate/AuthenticateView.vue";
-import DashboardView from "../pages/Dashboard/DashboardView.vue";
 import HomeView from "../pages/Home/HomeView.vue";
-import ManageView from "../pages/Manage/ManageView.vue";
-import NewCreateView from "../pages/News/NewCreate.vue";
-import NewDetailView from "../pages/News/NewDetail.vue";
-import NewsView from "../pages/News/NewsView.vue";
-import NotFoundView from "../pages/NotFoundView.vue";
-import ProfileView from "../pages/Profile/ProfileView.vue";
-import UnsubscribeView from "../pages/UnsubscribeView.vue";
 
-import { createRouter, createWebHistory } from "vue-router";
 import { useUsersStore } from "@/stores/users";
+import { createRouter, createWebHistory } from "vue-router";
 
 function isUserLoggedIn(next) {
 	const usersStore = useUsersStore();
@@ -29,91 +16,91 @@ const router = createRouter({
 		{
 			path: "/",
 			name: "Home",
-			component: HomeView
+			component: HomeView,
 		},
 		{
 			path: "/:pathMatch(.*)*",
 			name: "NotFound",
-			component: NotFoundView
+			component: () => import("../pages/NotFoundView.vue"),
 		},
 		{
 			path: "/news",
 			name: "News",
-			component: NewsView
+			component: () => import("../pages/News/NewsView.vue"),
 		},
 		{
 			path: "/news/:id",
 			name: "NewDetail",
-			component: NewDetailView
+			component: () => import("../pages/News/NewDetail.vue"),
 		},
 		{
 			path: "/news/create",
 			name: "NewCreate",
-			component: NewCreateView,
+			component: () => import("../pages/News/NewCreate.vue"),
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
-			}
+			},
 		},
 		{
 			path: "/activities",
 			name: "Activities",
-			component: ActivitiesView
+			component: () => import("../pages/Activities/ActivitiesView.vue"),
 		},
 		{
 			path: "/activities/:id",
 			name: "ActivityDetail",
-			component: ActivityDetailView
+			component: () => import("../pages/Activities/ActivityDetail.vue"),
 		},
 		{
 			path: "/activities/create",
 			name: "ActivityCreate",
-			component: ActivityCreateView,
+			component: () => import("../pages/Activities/ActivityCreateView.vue"),
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
-			}
+			},
 		},
 		{
 			path: "/dashboard",
 			name: "Dashboard",
-			component: DashboardView
+			component: () => import("../pages/Dashboard/DashboardView.vue"),
 		},
 		{
 			path: "/manage",
 			name: "Manage",
-			component: ManageView,
+			component: () => import("../pages/Manage/ManageView.vue"),
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
-			}
+			},
 		},
 		{
 			path: "/manage/admin",
 			name: "Admin",
-			component: AdminView,
+			component: () => import("../pages/Admin/AdminView.vue"),
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
-			}
+			},
 		},
 		{
 			path: "/profile/:id",
 			name: "Profile",
-			component: ProfileView
+			component: () => import("../pages/Profile/ProfileView.vue"),
 		},
 		{
 			path: "/authenticate",
 			name: "Authenticate",
-			component: AuthenticateView,
+			component: () => import("../pages/Authenticate/AuthenticateView.vue"),
 			beforeEnter: (to, from, next) => {
 				const usersStore = useUsersStore();
 				if (usersStore.isUserLoggedIn) next({ name: "Profile", params: { id: "me" } });
 				else next();
-			}
+			},
 		},
 		{
 			path: "/unsubscribe/:id",
 			name: "Unsubscribe",
-			component: UnsubscribeView
-		}
-	]
+			component: () => import("../pages/UnsubscribeView.vue"),
+		},
+	],
 });
 
 export default router;

@@ -3,6 +3,7 @@ import { useDark } from "@vueuse/core";
 import { ref, watchEffect } from "vue";
 import { useMeetingsStore } from "../../stores/meetings";
 import SeeMeetingDescription from "../../components/Modals/SeeMeetingDescription.vue";
+import SeeMeetingAta from "../../components/Modals/SeeMeetingAta.vue";
 
 const isDark = useDark();
 const meetingsStore = useMeetingsStore();
@@ -51,7 +52,6 @@ watchEffect(async () => {
 		});
 
 		meetings.value = response.data;
-		meetingSelected.value = response.data[0];
 	} else {
 		errorMsg.value = response.message;
 	}
@@ -119,15 +119,18 @@ watchEffect(async () => {
 		</div>
 	</div>
 
-	<SeeMeetingDescription
-		v-if="meetingSelected"
-		:show="seeDescriptionModal"
-		:date="meetingSelected.date"
-		:creator="meetingSelected.creator"
-		:room="meetingSelected.room"
-		:description="meetingSelected.description"
-		@close="seeDescriptionModal = false"
-	/>
+	<div v-if="meetingSelected">
+		<SeeMeetingDescription
+			:show="seeDescriptionModal"
+			:date="meetingSelected.date"
+			:creator="meetingSelected.creator"
+			:room="meetingSelected.room"
+			:description="meetingSelected.description"
+			@close="seeDescriptionModal = false"
+		/>
+
+		<SeeMeetingAta :show="seeAtaModal" :id="meetingSelected.id" @close="seeAtaModal = false" />
+	</div>
 </template>
 
 <style lang="scss" scoped>

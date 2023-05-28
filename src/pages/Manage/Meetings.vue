@@ -2,8 +2,8 @@
 import { useDark } from "@vueuse/core";
 import { ref, watchEffect } from "vue";
 import { useMeetingsStore } from "../../stores/meetings";
-import SeeMeetingDescription from "../../components/Modals/SeeMeetingDescription.vue";
-import SeeMeetingAta from "../../components/Modals/SeeMeetingAta.vue";
+import SeeMeetingDescriptionModal from "../../components/Modals/SeeMeetingDescriptionModal.vue";
+import SeeMeetingAtaModal from "../../components/Modals/SeeMeetingAtaModal.vue";
 
 const isDark = useDark();
 const meetingsStore = useMeetingsStore();
@@ -120,7 +120,7 @@ watchEffect(async () => {
 	</div>
 
 	<div v-if="meetingSelected">
-		<SeeMeetingDescription
+		<SeeMeetingDescriptionModal
 			:show="seeDescriptionModal"
 			:date="meetingSelected.date"
 			:creator="meetingSelected.creator"
@@ -129,7 +129,7 @@ watchEffect(async () => {
 			@close="seeDescriptionModal = false"
 		/>
 
-		<SeeMeetingAta :show="seeAtaModal" :id="meetingSelected.id" @close="seeAtaModal = false" />
+		<SeeMeetingAtaModal :show="seeAtaModal" :id="meetingSelected.id" @close="seeAtaModal = false" />
 	</div>
 </template>
 

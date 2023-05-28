@@ -110,6 +110,11 @@ watchEffect(() => {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
+.modal-content {
+	background-color: transparent !important;
+	border: none !important;
+}
+
 .modal.show {
 	display: block;
 }

@@ -2,11 +2,32 @@
 import { useDark } from "@vueuse/core";
 import { ref, watchEffect } from "vue";
 import { useMeetingsStore } from "../../stores/meetings";
+import SeeMeetingDescription from "../../components/Modals/SeeMeetingDescription.vue";
 
 const isDark = useDark();
 const meetingsStore = useMeetingsStore();
 const option = ref("past"); // past | future
 const meetings = ref([]);
+const meetingSelected = ref(null);
+const seeDescriptionModal = ref(false);
+const seeAtaModal = ref(false);
+const seeAddAtaModal = ref(false);
+
+const showDescriptionModal = (meeting) => {
+	meetingSelected.value = meeting;
+	seeDescriptionModal.value = true;
+};
+
+const showAtaModal = (meeting) => {
+	meetingSelected.value = meeting;
+	seeAtaModal.value = true;
+};
+
+const showAddAtaModal = (meeting) => {
+	meetingSelected.value = meeting;
+	seeAddAtaModal.value = true;
+};
+
 const fetching = ref(true);
 const errorMsg = ref("");
 
@@ -30,6 +51,7 @@ watchEffect(async () => {
 		});
 
 		meetings.value = response.data;
+		meetingSelected.value = response.data[0];
 	} else {
 		errorMsg.value = response.message;
 	}
@@ -79,18 +101,33 @@ watchEffect(async () => {
 			>
 				{{ meeting.date }}
 			</span>
-			<button class="btn mx-2 action-btn" :class="isDark ? 'action-btn-dark' : 'action-btn-light'">
+			<button
+				class="btn mx-2 action-btn"
+				:class="isDark ? 'action-btn-dark' : 'action-btn-light'"
+				@click="showDescriptionModal(meeting)"
+			>
 				Ver Descrição
 			</button>
 			<button
 				v-if="option === 'past'"
 				class="btn action-btn"
 				:class="isDark ? 'action-btn-dark' : 'action-btn-light'"
+				@click="meeting.hasAta ? showAtaModal(meeting) : showAddAtaModal(meeting)"
 			>
 				{{ meeting.hasAta ? "Ver Ata" : "Adicionar Ata" }}
 			</button>
 		</div>
 	</div>
+
+	<SeeMeetingDescription
+		v-if="meetingSelected"
+		:show="seeDescriptionModal"
+		:date="meetingSelected.date"
+		:creator="meetingSelected.creator"
+		:room="meetingSelected.room"
+		:description="meetingSelected.description"
+		@close="seeDescriptionModal = false"
+	/>
 </template>
 
 <style lang="scss" scoped>

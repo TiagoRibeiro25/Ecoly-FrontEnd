@@ -2,8 +2,6 @@
 import Header from "../../components/Header.vue";
 import AdminUsers from "./AdminUsers.vue";
 import AdminSchools from "./AdminSchools.vue";
-import AdminActivities from "./AdminActivities.vue";
-import AdminMeetings from "./AdminMeetings.vue";
 import { useDark } from "@vueuse/core";
 import { useUsersStore } from "../../stores/users";
 import { onBeforeMount, ref } from "vue";
@@ -73,28 +71,6 @@ onBeforeMount(async () => {
 					>
 						Escolas
 					</button>
-					<button
-						class="btn tab pr-4 pl-0"
-						:class="{
-							'tab-selected': selectedTab === 'activities',
-							'tab-dark': isDark,
-							'tab-light': !isDark,
-						}"
-						@click="selectedTab = 'activities'"
-					>
-						Atividades
-					</button>
-					<button
-						class="btn tab pr-4 pl-0"
-						:class="{
-							'tab-selected': selectedTab === 'meetings',
-							'tab-dark': isDark,
-							'tab-light': !isDark,
-						}"
-						@click="selectedTab = 'meetings'"
-					>
-						Reuniões
-					</button>
 				</div>
 				<div
 					class="admin-container col-12 px-3 py-2 shadow custom-scroll-bar"
@@ -107,8 +83,6 @@ onBeforeMount(async () => {
 					<AdminUsers v-if="selectedTab === 'users'" />
 					<AdminRoles v-else-if="selectedTab === 'roles'" />
 					<AdminSchools v-else-if="selectedTab === 'schools'" />
-					<AdminActivities v-else-if="selectedTab === 'activities'" />
-					<AdminMeetings v-else-if="selectedTab === 'meetings'" />
 				</div>
 			</div>
 		</div>

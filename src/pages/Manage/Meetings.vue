@@ -54,7 +54,7 @@ watchEffect(async () => {
 
 		meetings.value = response.data;
 	} else {
-		errorMsg.value = response.message;
+		errorMsg.value = "Não foram encontradas reuniões.";
 	}
 
 	fetching.value = false;
@@ -86,8 +86,10 @@ watchEffect(async () => {
 			v-if="fetching || errorMsg.length > 0"
 			class="col-12 h-100 d-flex justify-content-center align-items-center"
 		>
-			<b-spinner variant="success" label="Carregando Reuniões"></b-spinner>
-			<span class="ml-2" v-if="errorMsg.length > 0">{{ errorMsg }}</span>
+			<b-spinner v-if="fetching" variant="success" label="Carregando Reuniões"></b-spinner>
+			<span v-else class="ml-2 error-msg" :class="isDark ? 'error-msg-dark' : 'error-msg-light'">{{
+				errorMsg
+			}}</span>
 		</div>
 
 		<div
@@ -143,6 +145,20 @@ $tertiary-color: #ffffff;
 $quaternary-color: #3fc380;
 $quinary-color: #e4f0e8;
 $senary-color: #18516f;
+
+.error-msg {
+	font-family: "Panton", sans-serif;
+	font-weight: 700;
+	font-size: 1.7rem;
+
+	&-dark {
+		color: $secondary-color;
+	}
+
+	&-light {
+		color: $primary-color;
+	}
+}
 
 .option {
 	font-family: "Panton", sans-serif;

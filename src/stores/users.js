@@ -6,13 +6,18 @@ import { ref } from "vue";
 export const useUsersStore = defineStore("users", () => {
 	const isUserLoggedIn = ref(!!getLocalStorage("auth_key"));
 	const token = ref(getLocalStorage("auth_key") || "");
+	const loggedUser = ref(null);
+	const roles = ref([]);
 
 	/** @returns {Promise<{success: boolean, message?: string, data?: object}>} */
 	const getLoggedInUser = async () => {
 		if (!token.value || !isUserLoggedIn) return { success: false, message: "No token" };
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
+			if (loggedUser.value) return { success: true, data: loggedUser.value };
+
 			const response = await api.get("/users/me", { headers, timeout: 5000 });
+			loggedUser.value = response.data.data;
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao obter utilizador autenticado" };
@@ -73,7 +78,10 @@ export const useUsersStore = defineStore("users", () => {
 	const getRoles = async () => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
+			if (roles.value.length) return { success: true, data: roles.value };
+
 			const response = await api.get("/users/role", { headers });
+			roles.value = response.data.data;
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao obter roles" };
@@ -88,6 +96,8 @@ export const useUsersStore = defineStore("users", () => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
 			const response = await api.put(`/users/role/${roleId}`, { role: name }, { headers });
+			const role = roles.value.find((role) => role.id === roleId);
+			role.title = name;
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao editar cargo" };
@@ -101,6 +111,7 @@ export const useUsersStore = defineStore("users", () => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
 			const response = await api.post("/users/role", { role }, { headers });
+			roles.value = [];
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao adicionar novo cargo" };
@@ -156,6 +167,7 @@ export const useUsersStore = defineStore("users", () => {
 	/** @returns {void} */
 	const signOut = () => {
 		isUserLoggedIn.value = false;
+		loggedUser.value = null;
 		removeLocalStorage("auth_key");
 		token.value = "";
 	};
@@ -199,6 +211,7 @@ export const useUsersStore = defineStore("users", () => {
 	};
 
 	return {
+		loggedUser,
 		isUserLoggedIn,
 		token,
 		getLoggedInUser,

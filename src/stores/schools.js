@@ -1,11 +1,17 @@
 import api from "@/services/api";
 import { defineStore } from "pinia";
 import { useUsersStore } from "./users";
+import { ref } from "vue";
 
 export const useSchoolsStore = defineStore("schools", () => {
+	const schools = ref([]);
+
 	const getSchools = async () => {
 		try {
+			if (schools.value.length) return { success: true, data: schools.value };
+
 			const response = await api.get("/schools");
+			schools.value = response.data.data;
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao obter escolas" };
@@ -18,6 +24,7 @@ export const useSchoolsStore = defineStore("schools", () => {
 
 		try {
 			const response = await api.post("/schools", { name: school }, { headers });
+			schools.value = [];
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao adicionar escola" };
@@ -30,6 +37,8 @@ export const useSchoolsStore = defineStore("schools", () => {
 
 		try {
 			const response = await api.put(`/schools/${schoolId}`, { name: newName }, { headers });
+			const school = schools.value.find((school) => school.id === schoolId);
+			school.name = newName;
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao editar escola" };

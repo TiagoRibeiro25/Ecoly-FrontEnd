@@ -31,12 +31,12 @@ const router = createRouter({
 		{
 			path: "/news/:id",
 			name: "NewDetail",
-			component: () => import("../pages/News/NewDetail.vue"),
+			component: () => import("../pages/News/NewDetailView.vue"),
 		},
 		{
 			path: "/news/create",
 			name: "NewCreate",
-			component: () => import("../pages/News/NewCreate.vue"),
+			component: () => import("../pages/News/NewCreateView.vue"),
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
 			},
@@ -49,7 +49,7 @@ const router = createRouter({
 		{
 			path: "/activities/:id",
 			name: "ActivityDetail",
-			component: () => import("../pages/Activities/ActivityDetail.vue"),
+			component: () => import("../pages/Activities/ActivityDetailView.vue"),
 		},
 		{
 			path: "/activities/create",

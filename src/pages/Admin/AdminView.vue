@@ -1,12 +1,12 @@
 <script setup>
 import Header from "../../components/Header.vue";
-import AdminUsers from "./AdminUsers.vue";
-import AdminSchools from "./AdminSchools.vue";
+import AdminUsers from "../../layouts/Admin/AdminUsers.vue";
+import AdminSchools from "../../layouts/Admin/AdminSchools.vue";
 import { useDark } from "@vueuse/core";
 import { useUsersStore } from "../../stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
-import AdminRoles from "./AdminRoles.vue";
+import AdminRoles from "../../layouts/Admin/AdminRoles.vue";
 
 const isDark = useDark();
 const router = useRouter();

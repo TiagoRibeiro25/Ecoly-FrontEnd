@@ -1,15 +1,15 @@
 <script setup>
 import SearchBar from "../../components/SearchBar.vue";
 import Header from "../../components/Header.vue";
-import RecentNews from "./RecentNews.vue";
-import RecentActivities from "./RecentActivities.vue";
-import Footer from "./Footer.vue";
+import RecentNews from "../../layouts/Home/RecentNews.vue";
+import RecentActivities from "../../layouts/Home/RecentActivities.vue";
+import Footer from "../../layouts/Home/Footer.vue";
 import { useNewsStore } from "@/stores/news";
 import { onBeforeMount, ref } from "vue";
 import { useActivitiesStore } from "@/stores/activities";
 import { useDark } from "@vueuse/core";
 import axios from "axios";
-import FAQ from "./FAQ.vue";
+import FAQ from "../../layouts/Home/FAQ.vue";
 
 const isDark = useDark();
 

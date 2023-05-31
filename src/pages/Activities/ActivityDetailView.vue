@@ -8,7 +8,7 @@ import ComplexityInput from "@/components/ComplexityInput.vue";
 import DeleteModal from "../../components/Modals/DeleteModal.vue";
 import FinishActivityModal from "../../components/Modals/FinishActivityModal.vue";
 import Plant from "@/assets/images/activityDetail-illustration.webp";
-import ActivityDetailContent from "./ActivityDetailContent.vue";
+import ActivityDetailContent from "../../layouts/Activities/ActivityDetailContent.vue";
 
 const isDark = useDark();
 const route = useRoute();

@@ -6,7 +6,7 @@ import { useDark } from "@vueuse/core";
 import { ref, watch, watchEffect } from "vue";
 import { useSchoolsStore } from "@/stores/schools";
 import { useActivitiesStore } from "@/stores/activities";
-import ActivityCard from "./ActivityCard.vue";
+import ActivityCard from "../../layouts/Activities/ActivityCard.vue";
 import DeleteModal from "../../components/Modals/DeleteModal.vue";
 import FinishActivityModal from "../../components/Modals/FinishActivityModal.vue";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";

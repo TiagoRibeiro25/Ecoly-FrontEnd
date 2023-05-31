@@ -4,12 +4,12 @@ import { onBeforeMount, ref } from "vue";
 import { useRouter } from "vue-router";
 import Header from "../../components/Header.vue";
 import ManageHeader from "../../components/ManageHeader.vue";
-import Themes from "./Themes.vue";
-import FastActions from "./FastActions.vue";
-import ContactMembers from "./ContactMembers.vue";
-import CreateMeeting from "./CreateMeeting.vue";
-import Meetings from "./Meetings.vue";
-import ActivitiesReport from "./ActivitiesReport.vue";
+import Themes from "../../layouts/Manage/Themes.vue";
+import FastActions from "../../layouts/Manage/FastActions.vue";
+import ContactMembers from "../../layouts/Manage/ContactMembers.vue";
+import CreateMeeting from "../../layouts/Manage/CreateMeeting.vue";
+import Meetings from "../../layouts/Manage/Meetings.vue";
+import ActivitiesReport from "../../layouts/Manage/ActivitiesReport.vue";
 
 const router = useRouter();
 const isLoaded = ref(false);

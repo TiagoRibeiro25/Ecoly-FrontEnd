@@ -1,8 +1,11 @@
 import api from "@/services/api";
 import { defineStore } from "pinia";
 import { useUsersStore } from "./users";
+import { ref } from "vue";
 
 export const useActivitiesStore = defineStore("activities", () => {
+	const themes = ref([]);
+
 	/** @param {string} input @returns {Promise<{success: boolean, data: []}>} */
 	const search = async (input) => {
 		try {
@@ -137,7 +140,10 @@ export const useActivitiesStore = defineStore("activities", () => {
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
 
 		try {
+			if (themes.value.length) return { success: true, data: themes.value };
+
 			const response = await api.get("/activities?fields=themes", { headers });
+			themes.value = response.data.data;
 			return response.data;
 		} catch (err) {
 			return { success: false, data: [] };
@@ -151,6 +157,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 
 		try {
 			const response = await api.patch(`/activities/${id}?fields=theme`, {}, { headers });
+			themes.value = themes.value.filter((theme) => theme.id !== id);
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Ocorreu um erro ao apagar o tema" };
@@ -164,6 +171,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 
 		try {
 			const response = await api.post("/activities?fields=theme", { name: theme }, { headers });
+			themes.value = [];
 			return response.data;
 		} catch (err) {
 			if (err.response.status === 409) return { success: false, message: "O tema já existe" };

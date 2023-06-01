@@ -29,7 +29,7 @@ const filteredUsers = computed(() => {
 const changeUserRole = async (userId, role) => {
 	const roleId = roles.value.find((r) => r.title === role).id;
 
-	const response = await usersStore.changeUserRole(userId, roleId);
+	const response = await usersStore.changeUserRole(userId, { id: roleId, title: role });
 
 	if (!response.success) {
 		fetchAgain.value = true;

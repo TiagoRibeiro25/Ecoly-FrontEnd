@@ -8,6 +8,8 @@ export const useUsersStore = defineStore("users", () => {
 	const token = ref(getLocalStorage("auth_key") || "");
 	const loggedUser = ref(null);
 	const roles = ref([]);
+	const users = ref([]);
+	const usersFromSchool = ref([]);
 
 	/** @returns {Promise<{success: boolean, message?: string, data?: object}>} */
 	const getLoggedInUser = async () => {
@@ -41,7 +43,10 @@ export const useUsersStore = defineStore("users", () => {
 	const getUsers = async () => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
+			if (users.value.length) return { success: true, data: users.value };
+
 			const response = await api.get("/users", { headers });
+			users.value = response.data.data;
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao obter utilizadores" };
@@ -53,7 +58,10 @@ export const useUsersStore = defineStore("users", () => {
 		if (!token.value || !isUserLoggedIn) return { success: false, message: "No token" };
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
+			if (usersFromSchool.value.length) return { success: true, data: usersFromSchool.value };
+
 			const response = await api.get("/users?filter=school", { headers });
+			usersFromSchool.value = response.data.data;
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao obter utilizadores" };
@@ -62,12 +70,15 @@ export const useUsersStore = defineStore("users", () => {
 
 	/**
 	 * 	@param {number} userId
-	 *  @param {number} roleId
+	 *  @param {{id: number, title: string}} role
 	 *  @returns {Promise<{success: boolean, message: string}>} */
-	const changeUserRole = async (userId, roleId) => {
+	const changeUserRole = async (userId, role) => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
+			const roleId = role.id;
 			const response = await api.patch(`/users/${userId}/role`, { roleId }, { headers });
+			const user = users.value.find((user) => user.id === userId);
+			user.role = role.title;
 			return response.data;
 		} catch (error) {
 			return { success: false, message: "Erro ao atualizar o cargo" };
@@ -158,6 +169,7 @@ export const useUsersStore = defineStore("users", () => {
 		const headers = { Authorization: `Bearer ${token.value}` };
 		try {
 			const response = await api.patch("/users", data, { headers });
+			loggedUser.value = null;
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Erro ao atualizar o utilizador" };

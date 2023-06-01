@@ -2,13 +2,13 @@
 import SearchBar from "../../components/SearchBar.vue";
 import Header from "../../components/Header.vue";
 import ChangeViewButton from "../../components/ChangeViewButton.vue";
+import ActivityCard from "../../layouts/Activities/ActivityCard.vue";
+import DeleteModal from "../../components/Modals/DeleteModal.vue";
+import FinishActivityModal from "../../components/Modals/FinishActivityModal.vue";
 import { useDark } from "@vueuse/core";
 import { ref, watch, watchEffect } from "vue";
 import { useSchoolsStore } from "@/stores/schools";
 import { useActivitiesStore } from "@/stores/activities";
-import ActivityCard from "../../layouts/Activities/ActivityCard.vue";
-import DeleteModal from "../../components/Modals/DeleteModal.vue";
-import FinishActivityModal from "../../components/Modals/FinishActivityModal.vue";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
 
 const isDark = useDark();
@@ -56,11 +56,13 @@ watchEffect(async () => {
 	const schoolsResponse = await schoolsStore.getSchools();
 
 	if (schoolsResponse.success) {
-		schools.value = schools.value.concat(
-			schoolsResponse.data.map((school) => {
-				return { value: school.id, text: school.name };
-			})
-		);
+		const schoolsData = schoolsResponse.data.map((school) => {
+			return { value: school.id, text: school.name };
+		});
+
+		schoolsData.sort((a, b) => a.text.localeCompare(b.text));
+
+		schools.value = [{ value: "all", text: "Todas as escolas" }, ...schoolsData];
 	}
 
 	const activitiesStore = useActivitiesStore();

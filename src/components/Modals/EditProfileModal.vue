@@ -72,7 +72,7 @@ const updateUser = async () => {
 	if (course.value.trim() !== props.user.course && course.value.trim() !== "") {
 		newData.course = course.value;
 	}
-	if (year.value.trim() !== props.user.year && year.value.trim() !== "") {
+	if (year.value.toString().trim() !== props.user.year.toString() && year.value.toString().trim() !== "") {
 		newData.year = +year.value;
 	}
 

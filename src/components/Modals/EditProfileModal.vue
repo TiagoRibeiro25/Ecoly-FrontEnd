@@ -162,8 +162,8 @@ const updateUser = async () => {
 				</div>
 
 				<div>
-					<p class="text-center text-danger" v-if="errorMsg">{{ errorMsg }}</p>
-					<p class="text-center text-success" v-if="successMsg">{{ successMsg }}</p>
+					<p class="text-center text-danger" v-if="errorMsg !== ''">{{ errorMsg }}</p>
+					<p class="text-center text-success" v-if="successMsg !== ''">{{ successMsg }}</p>
 				</div>
 
 				<div v-if="updating" class="w-100 text-center mb-3">

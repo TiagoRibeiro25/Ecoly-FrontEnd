@@ -15,14 +15,10 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach(() => {
+	window.scrollTo(0, 0);
 	setTimeout(() => {
 		isLoading.value = false;
 	}, 500);
-});
-
-watchEffect(() => {
-	console.log("route changed -> ", route.name);
-	window.scrollTo(0, 0);
 });
 
 watchEffect(() => {

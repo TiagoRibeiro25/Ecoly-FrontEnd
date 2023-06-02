@@ -1,4 +1,4 @@
-const { Builder, By, Key, until } = require("selenium-webdriver");
+const { Builder, By, until } = require("selenium-webdriver");
 const firefox = require("selenium-webdriver/firefox");
 const colors = require("colors");
 const login = require("./login.js");
@@ -16,6 +16,8 @@ async function clearForm(email, password, confirmPassword, internalNumber, cours
 
 module.exports = async (url) => {
 	try {
+		console.log(colors.blue("Profile test running..."));
+
 		const driver = await new Builder().forBrowser("firefox").withCapabilities(new firefox.Options()).build();
 
 		await driver.get(url);
@@ -91,9 +93,10 @@ module.exports = async (url) => {
 
 		await driver.wait(until.elementLocated(By.className("close"))).click();
 
-		console.log(colors.blue("Profile test passed!"));
+		console.log(colors.green("Profile test passed!"));
 		driver.quit();
 	} catch (err) {
-		console.log(err);
+		console.log(colors.red("Profile test failed!"));
+		console.log(colors.yellow("Error: ") + err);
 	}
 };

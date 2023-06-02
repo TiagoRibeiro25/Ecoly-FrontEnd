@@ -1,4 +1,17 @@
 import HomeView from "../pages/Home/HomeView.vue";
+import NotFoundView from "../pages/NotFoundView.vue";
+import NewsView from "../pages/News/NewsView.vue";
+import NewDetailView from "../pages/News/NewDetailView.vue";
+import NewCreateView from "../pages/News/NewCreateView.vue";
+import ActivitiesView from "../pages/Activities/ActivitiesView.vue";
+import ActivityDetailView from "../pages/Activities/ActivityDetailView.vue";
+import ActivityCreateView from "../pages/Activities/ActivityCreateView.vue";
+import DashboardView from "../pages/Dashboard/DashboardView.vue";
+import ManageView from "../pages/Manage/ManageView.vue";
+import AdminView from "../pages/Admin/AdminView.vue";
+import ProfileView from "../pages/Profile/ProfileView.vue";
+import AuthenticateView from "../pages/Authenticate/AuthenticateView.vue";
+import UnsubscribeView from "../pages/UnsubscribeView.vue";
 
 import { useUsersStore } from "@/stores/users";
 import { createRouter, createWebHistory } from "vue-router";
@@ -21,22 +34,22 @@ const router = createRouter({
 		{
 			path: "/:pathMatch(.*)*",
 			name: "NotFound",
-			component: () => import("../pages/NotFoundView.vue"),
+			component: NotFoundView,
 		},
 		{
 			path: "/news",
 			name: "News",
-			component: () => import("../pages/News/NewsView.vue"),
+			component: NewsView,
 		},
 		{
 			path: "/news/:id",
 			name: "NewDetail",
-			component: () => import("../pages/News/NewDetailView.vue"),
+			component: NewDetailView,
 		},
 		{
 			path: "/news/create",
 			name: "NewCreate",
-			component: () => import("../pages/News/NewCreateView.vue"),
+			component: () => NewCreateView,
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
 			},
@@ -44,17 +57,17 @@ const router = createRouter({
 		{
 			path: "/activities",
 			name: "Activities",
-			component: () => import("../pages/Activities/ActivitiesView.vue"),
+			component: ActivitiesView,
 		},
 		{
 			path: "/activities/:id",
 			name: "ActivityDetail",
-			component: () => import("../pages/Activities/ActivityDetailView.vue"),
+			component: ActivityDetailView,
 		},
 		{
 			path: "/activities/create",
 			name: "ActivityCreate",
-			component: () => import("../pages/Activities/ActivityCreateView.vue"),
+			component: ActivityCreateView,
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
 			},
@@ -62,12 +75,12 @@ const router = createRouter({
 		{
 			path: "/dashboard",
 			name: "Dashboard",
-			component: () => import("../pages/Dashboard/DashboardView.vue"),
+			component: DashboardView,
 		},
 		{
 			path: "/manage",
 			name: "Manage",
-			component: () => import("../pages/Manage/ManageView.vue"),
+			component: ManageView,
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
 			},
@@ -75,7 +88,7 @@ const router = createRouter({
 		{
 			path: "/manage/admin",
 			name: "Admin",
-			component: () => import("../pages/Admin/AdminView.vue"),
+			component: () => AdminView,
 			beforeEnter: (to, from, next) => {
 				isUserLoggedIn(next);
 			},
@@ -83,12 +96,12 @@ const router = createRouter({
 		{
 			path: "/profile/:id",
 			name: "Profile",
-			component: () => import("../pages/Profile/ProfileView.vue"),
+			component: ProfileView,
 		},
 		{
 			path: "/authenticate",
 			name: "Authenticate",
-			component: () => import("../pages/Authenticate/AuthenticateView.vue"),
+			component: AuthenticateView,
 			beforeEnter: (to, from, next) => {
 				const usersStore = useUsersStore();
 				if (usersStore.isUserLoggedIn) next({ name: "Profile", params: { id: "me" } });
@@ -98,7 +111,7 @@ const router = createRouter({
 		{
 			path: "/unsubscribe/:id",
 			name: "Unsubscribe",
-			component: () => import("../pages/UnsubscribeView.vue"),
+			component: UnsubscribeView,
 		},
 	],
 });

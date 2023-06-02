@@ -8,7 +8,7 @@ module.exports = async (url) => {
 		const driver = await new Builder().forBrowser("firefox").withCapabilities(new firefox.Options()).build();
 
 		await driver.get(url);
-		await login(driver);
+		await login({ driver, email: "user@esmad.ipp.pt", password: "Esmad_2223" });
 
 		//* Edit profile
 		let email;

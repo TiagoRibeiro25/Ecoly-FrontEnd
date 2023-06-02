@@ -69,6 +69,7 @@ watchEffect(() => {
 				alt="Imagem do Item"
 				:width="props.width"
 				:height="props.height"
+				:style="'width: ' + props.width + 'px; height: ' + props.height + 'px;'"
 			/>
 		</div>
 		<div v-else class="col-12 d-flex justify-content-center align-items-center" style="height: 190px">

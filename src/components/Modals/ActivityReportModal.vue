@@ -44,7 +44,7 @@ watchEffect(async () => {
 				class="row mx-auto text-center d-flex justify-content-center align-items-center"
 				style="transform: scale(0.9)"
 			>
-				<DetailImages :images="activity.images" />
+				<DetailImages :images="activity.images" :hasAnimation="false" />
 			</div>
 			<div class="row mx-auto mt-3">
 				<p class="report-description text-justify">

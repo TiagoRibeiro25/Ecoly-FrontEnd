@@ -51,7 +51,7 @@ const finishActivity = async () => {
 			<h4 class="modal-title text-center mt-1">Finalizar atividade</h4>
 
 			<div class="col-12">
-				<AddImages :images="imgs" />
+				<AddImages :images="imgs" :maxImages="2" />
 			</div>
 
 			<div class="col-12 mt-4">

@@ -5,6 +5,7 @@ const props = defineProps({
 	images: { type: Array, required: true },
 	width: { type: Number, required: false, default: 268 },
 	height: { type: Number, required: false, default: 170 },
+	hasAnimation: { type: Boolean, required: false, default: true },
 });
 
 const dataImages = ref([]);
@@ -40,6 +41,11 @@ onUnmounted(() => {
 
 watchEffect(() => {
 	if (props.images.length !== 0) {
+		if (!props.hasAnimation) {
+			dataImages.value = props.images;
+			return;
+		}
+
 		dataImages.value = [];
 		let i = 0;
 		const internal = setInterval(() => {
@@ -65,11 +71,13 @@ watchEffect(() => {
 				:key="index"
 				:src="image"
 				@click="openModal(index)"
-				class="newDetailsImg img-fluid my-3 mx-3 rounded-lg shadow"
+				class="img-fluid my-3 mx-3 rounded-lg shadow"
+				:class="props.hasAnimation ? 'animate' : ''"
 				alt="Imagem do Item"
 				:width="props.width"
 				:height="props.height"
 				:style="'width: ' + props.width + 'px; height: ' + props.height + 'px;'"
+				style="cursor: pointer"
 			/>
 		</div>
 		<div v-else class="col-12 d-flex justify-content-center align-items-center" style="height: 190px">
@@ -90,9 +98,8 @@ watchEffect(() => {
 </template>
 
 <style lang="scss" scoped>
-.newDetailsImg {
+.animate {
 	animation: slideIn 1s ease-in-out;
-	cursor: pointer;
 }
 
 @keyframes slideIn {

@@ -1,5 +1,8 @@
 <script setup>
-const props = defineProps({ images: { type: Array, required: true } });
+const props = defineProps({
+	images: { type: Array, required: true },
+	maxImages: { type: Number, required: false, default: 4 },
+});
 
 const addImage = () => {
 	const input = document.createElement("input");
@@ -31,7 +34,7 @@ const removeImage = (index) => props.images.splice(index, 1);
 		/>
 
 		<img
-			v-if="images.length < 4"
+			v-if="images.length < maxImages"
 			v-lazy="{ src: '../assets/images/addImage.webp' }"
 			class="add-new-img img-fluid my-3 mx-3 rounded-lg shadow"
 			alt="Adicionar imagem"

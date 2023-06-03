@@ -48,7 +48,7 @@ watchEffect(async () => {
 
 		<div v-else class="container">
 			<div class="text-center">
-				<DetailImages :images="meeting.images" />
+				<DetailImages :images="meeting.images" :hasAnimation="false" />
 			</div>
 
 			<div class="row mx-auto justify-content-end mt-4">

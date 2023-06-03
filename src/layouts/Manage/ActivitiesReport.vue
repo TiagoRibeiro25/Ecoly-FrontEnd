@@ -102,7 +102,13 @@ watchEffect(async () => {
 						</span>
 					</div>
 					<div class="col-12 px-0 d-flex justify-content-center align-items-center text-center my-4">
-						<DetailImages class="images" :images="activitySelected.image" :width="200" :height="150" />
+						<DetailImages
+							class="images"
+							:images="activitySelected.image"
+							:width="200"
+							:height="150"
+							:hasAnimation="false"
+						/>
 					</div>
 					<div class="col-12 d-flex flex-column justify-content-center align-items-center mb-5">
 						<button

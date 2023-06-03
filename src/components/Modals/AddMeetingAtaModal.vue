@@ -47,7 +47,7 @@ const addAta = async () => {
 			<h2 class="modal-warning mb-4">Depois de adicionar a ata, você <b>não</b> poderá mais editá-la.</h2>
 
 			<div class="text-center">
-				<AddImages :images="images" />
+				<AddImages :images="images" :maxImages="2" />
 			</div>
 
 			<div class="mt-5">

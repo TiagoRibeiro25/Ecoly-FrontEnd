@@ -14,6 +14,8 @@ module.exports = async (url) => {
 
 		await driver.wait(until.elementLocated(By.css("span.change-form"))).click();
 
+		await driver.wait(until.elementLocated(By.css("h1")));
+
 		const username = await driver.wait(until.elementLocated(By.css("input[placeholder='Nome']")));
 		const email = await driver.wait(until.elementLocated(By.css("input[placeholder='Email']")));
 		const password = await driver.wait(until.elementLocated(By.css("input[placeholder='Password']")));
@@ -26,9 +28,12 @@ module.exports = async (url) => {
 			until.elementLocated(By.css("input[placeholder='Ano do Curso (opcional)']"))
 		);
 
+		// generate unique random email
+		const randomEmail = Math.random().toString(36).substring(2, 15) + "@esmad.ipp.pt";
+
 		await Promise.all([
 			username.sendKeys("Utilizador Teste"),
-			email.sendKeys("user.test@esmad.ipp.pt"),
+			email.sendKeys(randomEmail),
 			password.sendKeys("Esmad_2223"),
 			school.findElement(By.css("option:nth-child(1)")).click(),
 			internalNumber.sendKeys("123456789"),

@@ -5,10 +5,23 @@ import { ref } from "vue";
 
 export const useActivitiesStore = defineStore("activities", () => {
 	const themes = ref([]);
+	const recentActivities = ref([]);
+	const unfinishedActivities = ref({});
 
 	/** @param {string} input @returns {Promise<{success: boolean, data: []}>} */
 	const search = async (input) => {
 		try {
+			if (Object.keys(unfinishedActivities.value).length) {
+				const activitiesCopy = JSON.parse(JSON.stringify(unfinishedActivities.value));
+
+				const filtered = activitiesCopy;
+				filtered.data = activitiesCopy.data.filter((n) =>
+					n.title.toLowerCase().includes(input.toLowerCase())
+				);
+
+				return { success: true, data: filtered.data };
+			}
+
 			const response = await api.get(`/activities?search=${input}`);
 			return response.data;
 		} catch (err) {
@@ -19,7 +32,9 @@ export const useActivitiesStore = defineStore("activities", () => {
 	/** @returns {Promise<{success: boolean, data: []}>} */
 	const getRecentActivities = async () => {
 		try {
+			if (recentActivities.value.length) return { success: true, data: recentActivities.value };
 			const response = await api.get("/activities?fields=activities&filter=recent");
+			recentActivities.value = response.data.data;
 			return response.data;
 		} catch (err) {
 			return { success: false, data: [] };
@@ -32,7 +47,16 @@ export const useActivitiesStore = defineStore("activities", () => {
 		const headers = usersStore.token ? { Authorization: `Bearer ${usersStore.token}` } : {};
 
 		try {
+			if (Object.keys(unfinishedActivities.value).length) {
+				return {
+					success: true,
+					isUserVerified: unfinishedActivities.value.isUserVerified,
+					data: unfinishedActivities.value.data,
+				};
+			}
+
 			const response = await api.get("/activities?fields=activities&filter=unfinished", { headers });
+			unfinishedActivities.value = response.data;
 			return response.data;
 		} catch (err) {
 			return { success: false, data: [] };
@@ -102,6 +126,8 @@ export const useActivitiesStore = defineStore("activities", () => {
 
 		try {
 			const response = await api.post("/activities?fields=activity", activity, { headers });
+			recentActivities.value = [];
+			unfinishedActivities.value = {};
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Ocorreu um erro ao adicionar a atividade" };
@@ -115,6 +141,10 @@ export const useActivitiesStore = defineStore("activities", () => {
 
 		try {
 			const response = await api.delete(`/activities/${id}`, { headers });
+			recentActivities.value = recentActivities.value.filter((activity) => activity.id !== id);
+			unfinishedActivities.value.data = unfinishedActivities.value.data.filter(
+				(activity) => activity.id !== id
+			);
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Ocorreu um erro ao apagar a atividade" };
@@ -128,6 +158,10 @@ export const useActivitiesStore = defineStore("activities", () => {
 
 		try {
 			const response = await api.patch(`/activities/${id}?fields=activity`, { report, images }, { headers });
+			recentActivities.value = recentActivities.value.filter((activity) => activity.id !== id);
+			unfinishedActivities.value.data = unfinishedActivities.value.data.filter(
+				(activity) => activity.id !== id
+			);
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Ocorreu um erro ao finalizar a atividade" };

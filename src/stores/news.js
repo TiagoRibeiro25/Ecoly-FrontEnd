@@ -11,8 +11,10 @@ export const useNewsStore = defineStore("news", () => {
 	const search = async (input) => {
 		try {
 			if (Object.keys(news.value).length) {
-				const filtered = news.value;
-				filtered.news = news.value.news.filter((n) => n.title.toLowerCase().includes(input.toLowerCase()));
+				const newsCopy = JSON.parse(JSON.stringify(news.value));
+
+				const filtered = newsCopy;
+				filtered.news = newsCopy.news.filter((n) => n.title.toLowerCase().includes(input.toLowerCase()));
 				return { success: true, data: filtered };
 			}
 

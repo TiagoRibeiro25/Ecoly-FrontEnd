@@ -1,6 +1,7 @@
 const { Builder, Capabilities, until, By, Key } = require("selenium-webdriver");
 const firefox = require("selenium-webdriver/firefox");
 const colors = require("colors");
+const login = require("./login.js");
 
 module.exports = async (url) => {
 	try {
@@ -12,34 +13,7 @@ module.exports = async (url) => {
 
 		await driver.sleep(1300);
 
-		// --------------------------------------------------LOGIN PART-------------------------------------------------------------
-
-		// click on the login button
-		const loginIcon = await driver.wait(until.elementLocated(By.css("a[href='/authenticate']")));
-		await loginIcon.click();
-		await driver.sleep(800);
-
-		// click outside to close the sidebar menu
-		await driver.wait(until.elementLocated(By.className("mb-3 text-center title-dark"))).click();
-		await driver.sleep(1000);
-
-		// input email login
-		const emailLogin = await driver.wait(until.elementLocated(By.css("input[type='email']")));
-		await emailLogin.sendKeys("user@esmad.ipp.pt");
-
-		await driver.sleep(800);
-
-		// input password login
-		const passwordLogin = await driver.wait(until.elementLocated(By.css("input[type='password']")));
-		await passwordLogin.sendKeys("Esmad_2223");
-
-		await driver.sleep(800);
-
-		// click on the login button
-		const loginButton = await driver.wait(until.elementLocated(By.css("button[type='submit']")));
-		await loginButton.click();
-
-		await driver.sleep(800);
+		await login({ driver, email: "user@esmad.ipp.pt", password: "Esmad_2223" });
 
 		// --------------------------------------------------ACTIVITIES PART-------------------------------------------------------------
 		// click one activities icon on the sidebar menu to acess the activities page

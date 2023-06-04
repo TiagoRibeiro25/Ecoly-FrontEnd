@@ -1,11 +1,21 @@
 import api from "@/services/api";
 import { defineStore } from "pinia";
 import { useUsersStore } from "./users";
+import { ref } from "vue";
 
 export const useNewsStore = defineStore("news", () => {
+	const news = ref({});
+	const filteredNews = ref({});
+
 	/** @param {string} input @returns {Promise<{success: boolean, data: []}>} */
 	const search = async (input) => {
 		try {
+			if (Object.keys(news.value).length) {
+				const filtered = news.value;
+				filtered.news = news.value.news.filter((n) => n.title.toLowerCase().includes(input.toLowerCase()));
+				return { success: true, data: filtered };
+			}
+
 			const response = await api.get(`/news?search=${input}`);
 			return response.data;
 		} catch (err) {
@@ -19,8 +29,23 @@ export const useNewsStore = defineStore("news", () => {
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
 
 		try {
+			if ((filter === "all" || filter === "" || !filter) && Object.keys(news.value).length) {
+				return { success: true, data: news.value };
+			}
+
+			if (filter === "recent" && Object.keys(filteredNews.value).length) {
+				return { success: true, data: filteredNews.value };
+			}
+
 			const response = await api.get(`/news?filter=${filter}`, { headers });
-			return response.data;
+
+			if (filter === "all" || filter === "" || !filter) {
+				news.value = response.data.data;
+				return { success: true, data: news.value };
+			} else {
+				filteredNews.value = response.data.data;
+				return { success: true, data: filteredNews.value };
+			}
 		} catch (err) {
 			return { success: false, data: [] };
 		}
@@ -46,6 +71,8 @@ export const useNewsStore = defineStore("news", () => {
 
 		try {
 			const response = await api.post("/news", data, { headers });
+			news.value = [];
+			filteredNews.value = [];
 			return { statusCode: 200, ...response.data };
 		} catch (err) {
 			return {
@@ -63,6 +90,8 @@ export const useNewsStore = defineStore("news", () => {
 
 		try {
 			const response = await api.delete(`/news/${id}`, { headers });
+			news.value.news = news.value.news.filter((n) => n.id !== id);
+			filteredNews.value.news = filteredNews.value.news.filter((n) => n.id !== id);
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Ocorreu um erro ao apagar a notícia" };
@@ -82,5 +111,14 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
-	return { search, getNews, getNew, addNew, deleteNew, isSubscribed };
+	return {
+		news,
+		filteredNews,
+		search,
+		getNews,
+		getNew,
+		addNew,
+		deleteNew,
+		isSubscribed,
+	};
 });

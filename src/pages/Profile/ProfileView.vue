@@ -6,6 +6,7 @@ import { ref, watchEffect } from "vue";
 import UserInfo from "../../layouts/Profile/UserInfo.vue";
 import SeedsInfo from "../../layouts/Profile/SeedsInfo.vue";
 import { useDark } from "@vueuse/core";
+import NewsLetterInfo from "../../components/NewsLetterInfo.vue";
 
 const isDark = useDark();
 const route = useRoute();
@@ -131,6 +132,8 @@ watchEffect(async () => {
 				</div>
 			</div>
 		</div>
+
+		<NewsLetterInfo class="mt-5" v-if="user.isLoggedUser" />
 	</div>
 </template>
 

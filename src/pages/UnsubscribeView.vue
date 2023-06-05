@@ -2,7 +2,7 @@
 import { useDark } from "@vueuse/core";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { useUsersStore } from "@/stores/users";
+import { useNewsStore } from "../stores/news";
 
 const isDark = useDark();
 const route = useRoute();
@@ -13,8 +13,8 @@ const msg = ref("");
 const cancelSubscription = async () => {
 	msg.value = "";
 	canceling.value = true;
-	const usersStore = useUsersStore();
-	const response = await usersStore.cancelNewsLetter(delete_key);
+	const newsStore = useNewsStore();
+	const response = await newsStore.cancelNewsLetter(delete_key);
 	msg.value = response.success ? "Subscrição cancelada com sucesso!" : "Erro ao cancelar subscrição!";
 	canceling.value = false;
 };

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { useUsersStore } from "../../stores/users";
+import { useNewsStore } from "../../stores/news";
 import { validateEmail } from "../../utils/validators";
 
 const newsLetterEmail = ref("");
@@ -10,8 +10,8 @@ const subscribe = async () => {
 	try {
 		if (!validateEmail(newsLetterEmail.value)) btnMessage.value = "Email inválido";
 		else {
-			const usersStore = useUsersStore();
-			const response = await usersStore.subscribeNewsLetter(newsLetterEmail.value);
+			const newsStore = useNewsStore();
+			const response = await newsStore.subscribeNewsLetter(newsLetterEmail.value);
 			btnMessage.value = response.success ? "Sucesso" : "Erro";
 		}
 	} catch (err) {

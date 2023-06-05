@@ -1,11 +1,9 @@
 <script setup>
 import { useDark } from "@vueuse/core";
-import { useUsersStore } from "../stores/users";
 import { onBeforeMount, ref } from "vue";
 import { useNewsStore } from "../stores/news";
 
 const isDark = useDark();
-const usersStore = useUsersStore();
 const newsStore = useNewsStore();
 const subscribing = ref(false);
 const msg = ref("");
@@ -16,7 +14,7 @@ const subscribe = async () => {
 	msg.value = "";
 	subscribing.value = true;
 
-	const response = await usersStore.subscribeNewsLetter();
+	const response = await newsStore.subscribeNewsLetter();
 	if (!response.success) {
 		msg.value = response.message;
 		subscribing.value = false;

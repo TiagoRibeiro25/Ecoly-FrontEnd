@@ -184,29 +184,6 @@ export const useUsersStore = defineStore("users", () => {
 		token.value = "";
 	};
 
-	/** @param {string} delete_key @returns  {Promise<{success: boolean, message: string}>} */
-	const cancelNewsLetter = async (delete_key) => {
-		try {
-			const response = await api.delete(`/subscribe/${delete_key}`);
-			return response.data;
-		} catch (err) {
-			return { success: false, message: "Erro ao cancelar subscrição" };
-		}
-	};
-
-	/**
-	 * 	@param {string | null} email
-	 *  @returns {Promise<{success: boolean, message: string}>} */
-	const subscribeNewsLetter = async (email = null) => {
-		const headers = { Authorization: `Bearer ${token.value}` };
-		try {
-			const response = await api.post("/subscribe", email ? { email } : {}, { headers });
-			return response.data;
-		} catch (err) {
-			return { success: false, message: "Erro ao efetuar a subscrição" };
-		}
-	};
-
 	/**
 	 * @param {{name: string, email: string}[]} to
 	 * @param {string} content
@@ -238,8 +215,6 @@ export const useUsersStore = defineStore("users", () => {
 		register,
 		updateUserData,
 		signOut,
-		cancelNewsLetter,
-		subscribeNewsLetter,
 		contact,
 	};
 });

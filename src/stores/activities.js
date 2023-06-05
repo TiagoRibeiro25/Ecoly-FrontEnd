@@ -12,7 +12,7 @@ export const useActivitiesStore = defineStore("activities", () => {
 	const search = async (input) => {
 		try {
 			if (Object.keys(unfinishedActivities.value).length) {
-				const activitiesCopy = JSON.parse(JSON.stringify(unfinishedActivities.value));
+				const activitiesCopy = { ...unfinishedActivities.value };
 
 				const filtered = activitiesCopy;
 				filtered.data = activitiesCopy.data.filter((n) =>

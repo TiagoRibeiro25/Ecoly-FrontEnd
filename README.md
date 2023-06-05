@@ -1,7 +1,5 @@
 # Ecoly - Eco-Schools Management Web Application
 
-> :warning: **This application is still in development.** :warning:
-
 Ecoly is a web application that helps schools manage their eco-schools subjects. It allows schools to easily create new activities, schedule meetings, and track progress towards eco-friendly goals.
 
 ## Prerequisites
@@ -31,7 +29,7 @@ Before you begin, ensure you have met the following requirements:
 
 To run properly, be sure to create a `.env` file in the root directory of the project and add the following variables (use `.env.sample` as a template):
 
-``` bash
+``` javascript
 VITE_API_ROUTE=http://localhost:3000/api
 VITE_QUOTE_API_ROUTE=https://get-quotes-api.cyclic.app/api/quotes/random
 ```
@@ -42,7 +40,7 @@ Replace the value of `VITE_API_ROUTE` with the URL of the API you are using (see
 
 Ecoly uses the following APIs:
 
-- [Ecoly API (in development)](https://github.com/TiagoRibeiro25/ecoly-api)
+- [Ecoly API](https://github.com/TiagoRibeiro25/ecoly-api)
 - [Quotes API](https://github.com/TiagoRibeiro25/Get-Quotes-API)
 
 ## Technologies Used
@@ -52,6 +50,14 @@ Ecoly is built using the following technologies:
 - [Vue.js 3](https://v3.vuejs.org/)
 - [Bootstrap 5](https://getbootstrap.com/)
 - [Vite](https://vitejs.dev/)
+
+## Testing
+
+The tests were written using [Selenium](https://www.selenium.dev/). To run the tests, run the following command:
+
+``` bash
+npm run test
+```
 
 ## Contributing to Ecoly
 

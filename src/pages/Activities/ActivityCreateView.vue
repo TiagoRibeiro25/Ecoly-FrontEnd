@@ -25,7 +25,7 @@ const activity = ref({
 	complexity: 0,
 	theme: "",
 	initialDate: "",
-	finalDate: ""
+	finalDate: "",
 });
 const themes = ref([]);
 const themeSelected = ref(null);
@@ -37,19 +37,25 @@ const errorMsg = ref("");
 
 const validateForm = () => {
 	if (!activity.value.imgs || activity.value.imgs.length === 0) return false;
-	if (!activity.value.title || activity.value.title.trim().length < 10 || activity.value.title.trim().length > 70) return false;
-	if (!activity.value.diagnostic || activity.value.diagnostic.trim().length > 100) return false;
-	if (!activity.value.objective || activity.value.objective.trim().length > 150) return false;
-	if (!activity.value.participants || activity.value.participants.trim().length > 100) return false;
-	if (!activity.value.metas || activity.value.metas.trim().length > 100) return false;
-	if (!activity.value.resources || activity.value.resources.trim().length > 150) return false;
-	if (!activity.value.evaluationIndicators || activity.value.evaluationIndicators.trim().length > 100) return false;
-	if (!activity.value.evaluationMethod || activity.value.evaluationMethod.trim().length > 100) return false;
-	if (!activity.value.complexity || activity.value.complexity < 1 || activity.value.complexity > 5) return false;
+	if (
+		!activity.value.title ||
+		activity.value.title.trim().length < 10 ||
+		activity.value.title.trim().length > 100
+	)
+		return false;
+	if (!activity.value.diagnostic || activity.value.diagnostic.trim().length > 300) return false;
+	if (!activity.value.objective || activity.value.objective.trim().length > 300) return false;
+	if (!activity.value.participants || activity.value.participants.trim().length > 300) return false;
+	if (!activity.value.metas || activity.value.metas.trim().length > 300) return false;
+	if (!activity.value.resources || activity.value.resources.trim().length > 300) return false;
+	if (!activity.value.evaluationIndicators || activity.value.evaluationIndicators.trim().length > 300)
+		return false;
+	if (!activity.value.evaluationMethod || activity.value.evaluationMethod.trim().length > 300) return false;
+	if (!activity.value.complexity || activity.value.complexity < 1 || activity.value.complexity > 5)
+		return false;
 	if (activity.value.initialDate > activity.value.finalDate) return false;
 	return activity.value.theme !== null;
 };
-
 
 watch(themeSelected, (value) => {
 	activity.value.theme = value;
@@ -78,7 +84,7 @@ const addActivity = async () => {
 		participants: activity.value.participants,
 		evaluation_indicator: activity.value.evaluationIndicators,
 		evaluation_method: activity.value.evaluationMethod,
-		images: activity.value.imgs
+		images: activity.value.imgs,
 	});
 
 	if (!response.success) {
@@ -112,7 +118,6 @@ onBeforeMount(async () => {
 	});
 
 	themeSelected.value = themes.value[0].value;
-
 
 	loading.value = false;
 });
@@ -148,7 +153,7 @@ onBeforeMount(async () => {
 						placeholder="Título"
 						type="textarea"
 						:isDark="isDark"
-						@update:text="value => (activity.title = value)"
+						@update:text="(value) => (activity.title = value)"
 					/>
 
 					<Input
@@ -157,7 +162,7 @@ onBeforeMount(async () => {
 						placeholder="Objetivo"
 						type="textarea"
 						:isDark="isDark"
-						@update:text="value => (activity.objective = value)"
+						@update:text="(value) => (activity.objective = value)"
 					/>
 
 					<Input
@@ -166,7 +171,7 @@ onBeforeMount(async () => {
 						placeholder="Metas"
 						type="textarea"
 						:isDark="isDark"
-						@update:text="value => (activity.metas = value)"
+						@update:text="(value) => (activity.metas = value)"
 					/>
 
 					<Input
@@ -175,9 +180,8 @@ onBeforeMount(async () => {
 						placeholder="Recursos"
 						type="textarea"
 						:isDark="isDark"
-						@update:text="value => (activity.resources = value)"
+						@update:text="(value) => (activity.resources = value)"
 					/>
-
 				</div>
 				<div class="col-lg-6 col-12 px-0">
 					<Input
@@ -186,7 +190,7 @@ onBeforeMount(async () => {
 						placeholder="Diagnóstico"
 						type="textarea"
 						:isDark="isDark"
-						@update:text="value => (activity.diagnostic = value)"
+						@update:text="(value) => (activity.diagnostic = value)"
 					/>
 
 					<Input
@@ -195,7 +199,7 @@ onBeforeMount(async () => {
 						placeholder="Participantes"
 						type="textarea"
 						:isDark="isDark"
-						@update:text="value => (activity.participants = value)"
+						@update:text="(value) => (activity.participants = value)"
 					/>
 
 					<Input
@@ -204,7 +208,7 @@ onBeforeMount(async () => {
 						placeholder="Indicadores de avaliação"
 						type="textarea"
 						:isDark="isDark"
-						@update:text="value => (activity.evaluationIndicators = value)"
+						@update:text="(value) => (activity.evaluationIndicators = value)"
 					/>
 
 					<Input
@@ -213,7 +217,7 @@ onBeforeMount(async () => {
 						placeholder="Instrumentos de avaliação"
 						type="textarea"
 						:isDark="isDark"
-						@update:text="value => (activity.evaluationMethod = value)"
+						@update:text="(value) => (activity.evaluationMethod = value)"
 					/>
 				</div>
 			</div>
@@ -224,7 +228,7 @@ onBeforeMount(async () => {
 						class="p-3 text-center"
 						complexity="activity.complexity"
 						:isDark="isDark"
-						@update:complexity="value => (activity.complexity = value)"
+						@update:complexity="(value) => (activity.complexity = value)"
 					/>
 
 					<div class="col-12">
@@ -243,7 +247,7 @@ onBeforeMount(async () => {
 						placeholder="Data de início"
 						:minDate="new Date()"
 						:maxDate="new Date(new Date().setFullYear(new Date().getFullYear() + 1))"
-						@update:date="value => (activity.initialDate = value)"
+						@update:date="(value) => (activity.initialDate = value)"
 					/>
 
 					<DateInput
@@ -252,7 +256,7 @@ onBeforeMount(async () => {
 						placeholder="Data de término"
 						:minDate="new Date()"
 						:maxDate="new Date(new Date().setFullYear(new Date().getFullYear() + 1))"
-						@update:date="value => (activity.finalDate = value)"
+						@update:date="(value) => (activity.finalDate = value)"
 					/>
 				</div>
 			</div>
@@ -263,7 +267,7 @@ onBeforeMount(async () => {
 					v-if="errorMsg !== ''"
 					class="error-msg pb-3"
 					:class="isDark ? 'error-msg-dark' : 'error-msg-light'"
-				> 
+				>
 					{{ errorMsg }}
 				</span>
 
@@ -350,7 +354,6 @@ $fifth-color: #18516f;
 	&.light-btn {
 		background-color: $primary-color;
 		color: $fourth-color;
-
 	}
 
 	&:hover {
@@ -358,5 +361,4 @@ $fifth-color: #18516f;
 		background-color: $fifth-color;
 	}
 }
-
 </style>

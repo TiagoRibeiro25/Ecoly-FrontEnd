@@ -1,19 +1,12 @@
 const { Builder, Capabilities, until, By } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
+const chrome = require('selenium-webdriver/firefox');
 const colors = require('colors');
 
 module.exports = async (url) => {
     try {
         console.log(colors.blue("Main page test running..."));
 
-        const chromeOptions = new chrome.Options();
-        chromeOptions.addArguments('--headless'); // Run Chrome in headless mode
-
-        const driver = await new Builder()
-            .forBrowser('chrome')
-            .setChromeOptions(chromeOptions)
-            .withCapabilities(Capabilities.chrome())
-            .build();
+        const driver = await new Builder().forBrowser("firefox").withCapabilities(new firefox.Options()).build();
 
         await driver.get(url);
 
@@ -150,7 +143,7 @@ module.exports = async (url) => {
               await emailInput.sendKeys('example@gmail.com');
               
               const subscribeButton = await driver.wait(
-                until.elementLocated(By.css('button[data-v-30b5c66e][class="btn btn-outline-secondary"]')),
+                until.elementLocated(By.id('button-addon2')),
                 5000
               );
               await subscribeButton.click();

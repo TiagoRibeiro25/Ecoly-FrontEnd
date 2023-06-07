@@ -1,4 +1,4 @@
-const { Builder, Capabilities, until, By } = require('selenium-webdriver');
+const { Builder, until, By } = require('selenium-webdriver');
 const firefox = require("selenium-webdriver/firefox");
 const login = require("./login.js");
 const colors = require('colors');

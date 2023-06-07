@@ -96,8 +96,8 @@ export const useNewsStore = defineStore("news", () => {
 
 		try {
 			const response = await api.delete(`/news/${id}`, { headers });
-			news.value.news = news.value.news.filter((n) => n.id !== id);
-			filteredNews.value.news = filteredNews.value.news.filter((n) => n.id !== id);
+			news.value = [];
+			filteredNews.value = [];
 			return response.data;
 		} catch (err) {
 			return { success: false, message: "Ocorreu um erro ao apagar a notícia" };

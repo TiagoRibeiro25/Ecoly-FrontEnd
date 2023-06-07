@@ -9,7 +9,7 @@ module.exports = async (url) =>{
 
         const driver = await new Builder().forBrowser("firefox").withCapabilities(new firefox.Options()).build();
     
-        await driver.get('https://ecoly.pages.dev');
+        await driver.get(url);
 
 
         const newsIcon = await driver.wait(

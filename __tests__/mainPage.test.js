@@ -1,5 +1,5 @@
-const { Builder, Capabilities, until, By } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/firefox');
+const { Builder, until, By } = require('selenium-webdriver');
+const firefox = require('selenium-webdriver/firefox');
 const colors = require('colors');
 
 module.exports = async (url) => {

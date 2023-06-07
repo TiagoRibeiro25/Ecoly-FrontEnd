@@ -76,12 +76,15 @@ export const useNewsStore = defineStore("news", () => {
 			const response = await api.post("/news", data, { headers });
 			news.value = [];
 			filteredNews.value = [];
-			return { statusCode: 200, ...response.data };
+			return {
+				statusCode: response.status,
+				...response.data,
+			};
 		} catch (err) {
 			return {
 				success: false,
 				message: "Ocorreu um erro ao adicionar a notícia",
-				statusCode: err.response.status,
+				statusCode: err.response?.status || 500,
 			};
 		}
 	};
@@ -109,7 +112,7 @@ export const useNewsStore = defineStore("news", () => {
 		try {
 			if (isUserSubscribed.value !== undefined) {
 				return {
-					success: isUserSubscribed.value.isSubscribed ? true : false,
+					success: !!isUserSubscribed.value.isSubscribed,
 					message: isUserSubscribed.value.isSubscribed ? "Subscrito" : "Não subscrito",
 					deleteKey: isUserSubscribed.value.deleteKey,
 				};

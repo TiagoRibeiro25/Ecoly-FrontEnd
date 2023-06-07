@@ -30,7 +30,12 @@ const addNew = async () => {
 	creating.value = true;
 	msg.value = "";
 
-	const response = await newsStore.addNew({ title: title.value, content: content.value, imgs: images.value });
+	const imagesArray = [];
+	for (const img of images.value) {
+		imagesArray.push(img);
+	}
+
+	const response = await newsStore.addNew({ title: title.value, content: content.value, imgs: imagesArray });
 
 	if (response.success) {
 		msg.value = "Notícia adicionada com sucesso!";

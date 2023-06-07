@@ -104,24 +104,32 @@ watchEffect(async () => {
 
 		<div v-else class="mb-3 px-5">
 			<div v-if="data.length === 0">
-				<div class="d-flex justify-content-center flex-row error-container py-4 mx-auto">
-					<h2 class="error-msg mt-2" :class="{ 'error-msg-dark': isDark, 'error-msg-light': !isDark }">
-						Nenhum resultado encontrado
-					</h2>
+				<div
+					class="d-flex justify-content-center flex-row error-container py-4 mx-auto"
+					:class="isDark ? 'error-container-dark' : 'error-container-light'"
+				>
+					<h2 class="error-msg mt-2">Nenhum resultado encontrado</h2>
 				</div>
 			</div>
 
-			<div v-else v-for="item in data" :key="item.id" class="d-flex flex-row result mx-auto">
+			<div
+				v-else
+				v-for="item in data"
+				:key="item.id"
+				class="d-flex flex-row result mx-auto"
+				:class="isDark ? 'result-dark' : 'result-light'"
+			>
 				<div class="col-9">
 					<router-link
 						:to="{ name: item.type === 'notícia' ? 'NewDetail' : 'ActivityDetail', params: { id: item.id } }"
 						class="go-to-item-link text-decoration-none"
+						:class="isDark ? 'go-to-item-link-dark' : 'go-to-item-link-light'"
 					>
 						{{ item.title }}
 					</router-link>
 				</div>
 				<div class="col-3">
-					<span class="result-text">
+					<span class="result-text" :class="isDark ? 'result-text-dark' : 'result-text-light'">
 						{{ item.type }}
 					</span>
 				</div>
@@ -134,6 +142,8 @@ watchEffect(async () => {
 $primary-color: #343e3d;
 $secondary-color: #aedcc0;
 $tertiary-color: #ffffff;
+$quaternary-color: #e4f0e8;
+$quinary-color: #18516f;
 
 .searchbar {
 	width: 50%;
@@ -178,17 +188,32 @@ $tertiary-color: #ffffff;
 	}
 
 	.result {
-		background-color: $primary-color;
 		border-radius: 13px;
 		padding: 10px;
 		margin-bottom: 23px;
 		max-width: 1310px;
+
+		&-dark {
+			background-color: $primary-color;
+		}
+
+		&-light {
+			background-color: $quaternary-color;
+		}
 	}
 
 	.result-text {
 		font-family: "Panton", sans-serif;
 		font-weight: 600;
 		font-size: 20px;
+
+		&-dark {
+			color: $secondary-color;
+		}
+
+		&-light {
+			color: $primary-color;
+		}
 	}
 
 	.col-9 {
@@ -208,11 +233,21 @@ $tertiary-color: #ffffff;
 	}
 
 	.go-to-item-link {
-		color: $secondary-color;
-	}
+		&-dark {
+			color: $secondary-color;
 
-	.go-to-item-link:hover {
-		color: $tertiary-color;
+			&:hover {
+				color: $tertiary-color;
+			}
+		}
+
+		&-light {
+			color: $primary-color;
+
+			&:hover {
+				color: $quinary-color;
+			}
+		}
 	}
 }
 
@@ -226,7 +261,22 @@ $tertiary-color: #ffffff;
 		font-family: "Panton", sans-serif;
 		font-weight: 600;
 		font-size: 25px;
-		color: $secondary-color;
+	}
+
+	&-dark {
+		background-color: $primary-color;
+
+		.error-msg {
+			color: $secondary-color;
+		}
+	}
+
+	&-light {
+		background-color: $quaternary-color;
+
+		.error-msg {
+			color: $primary-color;
+		}
 	}
 }
 

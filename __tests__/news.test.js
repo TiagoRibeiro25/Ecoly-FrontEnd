@@ -58,6 +58,8 @@ module.exports = async (url) =>{
           
           
           await driver.executeScript('arguments[0].click()', newsIcon2);
+
+          await driver.sleep(1000);
   
           const removeBtn = await driver.wait(
             until.elementLocated(By.css('img[data-v-00a57e29][src="../assets/icons/remove-light.svg"]')),

@@ -1,8 +1,11 @@
 <script setup>
 import { ref } from "vue";
-import { useNewsStore } from "../../stores/news";
-import { validateEmail } from "../../utils/validators";
+import { useNewsStore } from "@/stores/news";
+import { validateEmail } from "@/utils/validators";
+import { useUsersStore } from "@/stores/users";
 
+const usersStore = useUsersStore();
+const isUserLoggedIn = usersStore.isUserLoggedIn;
 const newsLetterEmail = ref("");
 const btnMessage = ref("Subscrever");
 
@@ -29,7 +32,13 @@ const subscribe = async () => {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 left-content">
-					<img src="@/assets/logo/logo_exp.webp" alt="Ecoly" width="170" class="img-fluid mb-2" />
+					<img
+						src="@/assets/logo/logo_exp.webp"
+						alt="Ecoly"
+						width="380"
+						class="img-fluid mb-2"
+						style="width: 170px"
+					/>
 					<h4 class="slogan mb-3 text-left">PLANTA O TEU FUTURO</h4>
 					<router-link :to="{ name: 'News' }" class="route-link text-left"> notícias </router-link>
 					<router-link :to="{ name: 'Activities' }" class="route-link text-left"> atividades </router-link>
@@ -61,18 +70,20 @@ const subscribe = async () => {
 				</div>
 				<div class="col-sm-4 mid-content">
 					<div class="social-media text-left mb-4">
-						<img class="pr-3" src="@/assets/icons/instagram.svg" alt="instagram" />
-						<img class="pr-3" src="@/assets/icons/facebook.svg" alt="facebook" />
-						<img class="pr-3" src="@/assets/icons/twitter.svg" alt="twitter" />
+						<img src="@/assets/icons/instagram.svg" alt="instagram" />
+						<img class="px-3" src="@/assets/icons/facebook.svg" alt="facebook" />
+						<img src="@/assets/icons/twitter.svg" alt="twitter" />
 					</div>
 
 					<router-link :to="{ name: 'Activities' }" class="route-link text-left">
 						plano de atividades
 					</router-link>
-					<router-link :to="{ name: 'Manage' }" class="route-link text-left">
+					<router-link v-if="isUserLoggedIn" :to="{ name: 'Manage' }" class="route-link text-left">
 						gestão do conselho
 					</router-link>
-					<router-link :to="{ name: 'Authenticate' }" class="route-link text-left"> criar conta </router-link>
+					<router-link v-if="!isUserLoggedIn" :to="{ name: 'Authenticate' }" class="route-link text-left">
+						criar conta
+					</router-link>
 				</div>
 				<div class="col-sm-4 right-content">
 					<h5 class="text-left">ENTRE EM CONTACTO</h5>

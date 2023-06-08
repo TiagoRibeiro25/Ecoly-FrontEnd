@@ -109,8 +109,6 @@ export const useNewsStore = defineStore("news", () => {
 		const usersStore = useUsersStore();
 		const headers = { Authorization: `Bearer ${usersStore.token}` };
 
-		console.log(isUserSubscribed.value);
-
 		try {
 			if (isUserSubscribed.value !== undefined) {
 				return {

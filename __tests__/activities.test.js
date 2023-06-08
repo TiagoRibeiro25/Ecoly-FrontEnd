@@ -409,18 +409,18 @@ module.exports = async (url) => {
 
 		// ---------------------------------------------------------------------------TESTING DELETING AN ACTIVITY--------------------------------------------------------------------------------
 		await driver.sleep(800);
-		// // select the class btn btn-secondary btn-sm rounded-circle bg-transparent border-0
-		// const deleteActivityButton = await driver.wait(
-		// 	until.elementLocated(By.css(".btn.btn-secondary.btn-sm.rounded-circle.bg-transparent.border-0"))
-		// );
 
-		// await driver.sleep(800);
+		const deleteActivityButton = await driver.wait(
+			until.elementLocated(By.css(".btn.btn-secondary.btn-sm.rounded-circle.bg-transparent.border-0"))
+		);
 
-		// await deleteActivityButton.click();
+		await driver.sleep(800);
 
-		// await driver.sleep(1300);
+		await deleteActivityButton.click();
 
-		// // select the button containting this class btn btn-secondary btn btn-block modal-remove-btn w-50 mx-auto mt-4
+		await driver.sleep(1000);
+
+		// the commented code below is for deleting the activity
 		// const confirmDeleteActivityButton = await driver.wait(
 		// 	until.elementLocated(By.css(".btn.btn-secondary.btn.btn-block.modal-remove-btn.w-50.mx-auto.mt-4"))
 		// );
@@ -429,7 +429,16 @@ module.exports = async (url) => {
 
 		// await confirmDeleteActivityButton.click();
 
+		const closeModalDeleteButton = await driver.wait(until.elementLocated(By.css(".close")));
+
+		// hoover the button
+		await driver.actions().move({ origin: closeModalDeleteButton }).perform();
+
 		await driver.sleep(2000);
+
+		await closeModalDeleteButton.click();
+
+		await driver.sleep(1500);
 
 		console.log(colors.green("Activities test passed!"));
 

@@ -122,6 +122,11 @@ export const useNewsStore = defineStore("news", () => {
 			isUserSubscribed.value = { isSubscribed: response.data.success, deleteKey: response.data?.deleteKey };
 			return response.data;
 		} catch (err) {
+			if (err.response?.status === 404) {
+				isUserSubscribed.value = { isSubscribed: false, deleteKey: undefined };
+				return { success: false, message: "Não subscrito" };
+			}
+
 			return { success: false, message: "Ocorreu um erro ao verificar a subscrição" };
 		}
 	};

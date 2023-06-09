@@ -1,7 +1,7 @@
 <script setup>
 import { useDark } from "@vueuse/core";
 import { ref, watchEffect } from "vue";
-import { useMeetingsStore } from "../../stores/meetings";
+import { useMeetingsStore } from "@/stores/meetings";
 import SeeMeetingDescriptionModal from "../../components/Modals/SeeMeetingDescriptionModal.vue";
 import SeeMeetingAtaModal from "../../components/Modals/SeeMeetingAtaModal.vue";
 import AddMeetingAtaModal from "../../components/Modals/AddMeetingAtaModal.vue";
@@ -148,8 +148,8 @@ $senary-color: #18516f;
 
 .error-msg {
 	font-family: "Panton", sans-serif;
-	font-weight: 700;
-	font-size: 1.7rem;
+	font-weight: 500;
+	font-size: 1.4rem;
 
 	&-dark {
 		color: $secondary-color;

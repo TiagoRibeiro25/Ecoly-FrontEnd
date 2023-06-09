@@ -4,12 +4,12 @@ import Header from "../../components/Header.vue";
 import RecentNews from "../../layouts/Home/RecentNews.vue";
 import RecentActivities from "../../layouts/Home/RecentActivities.vue";
 import Footer from "../../layouts/Home/Footer.vue";
+import FAQ from "../../layouts/Home/FAQ.vue";
 import { useNewsStore } from "@/stores/news";
 import { onBeforeMount, ref } from "vue";
 import { useActivitiesStore } from "@/stores/activities";
+import { useQuotesStore } from "@/stores/quotes";
 import { useDark } from "@vueuse/core";
-import axios from "axios";
-import FAQ from "../../layouts/Home/FAQ.vue";
 
 const isDark = useDark();
 
@@ -25,7 +25,6 @@ const fetchingActivities = ref(true);
 const quote = ref({});
 const fetchingQuote = ref(true);
 
-/** @returns {Promise<void>} */
 const fetchNews = async () => {
 	const newsStore = useNewsStore();
 	const response = await newsStore.getNews("recent");
@@ -34,7 +33,6 @@ const fetchNews = async () => {
 	fetchingNews.value = false;
 };
 
-/** @returns {Promise<void>} */
 const fetchActivities = async () => {
 	const activitiesStore = useActivitiesStore();
 	const response = await activitiesStore.getRecentActivities();
@@ -43,22 +41,10 @@ const fetchActivities = async () => {
 	fetchingActivities.value = false;
 };
 
-/** @returns {Promise<void>} */
 const fetchRandomQuote = async () => {
-	try {
-		const url = import.meta.env.VITE_QUOTE_API_ROUTE;
-		const response = await axios.get(url);
-		quote.value = response.data;
-	} catch (err) {
-		console.log("There was an error fetching the quote. Using default quote instead.\n Error: ", err);
-		quote.value = {
-			author: "Yan Arthus Bertrand",
-			content:
-				"A ecologia deve estar inscrita no ADN de tudo o que fazemos diariamente e ainda não entrou nos costumes.",
-		};
-	} finally {
-		fetchingQuote.value = false;
-	}
+	const quotesStore = useQuotesStore();
+	quote.value = await quotesStore.getRandomQuote();
+	fetchingQuote.value = false;
 };
 
 onBeforeMount(() => {

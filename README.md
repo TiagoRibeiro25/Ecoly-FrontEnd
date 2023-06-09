@@ -29,7 +29,7 @@ Before you begin, ensure you have met the following requirements:
 
 To run properly, be sure to create a `.env` file in the root directory of the project and add the following variables (use `.env.sample` as a template):
 
-``` javascript
+``` dotenv
 VITE_API_ROUTE=https://ecoly-api.cyclic.app/api
 VITE_QUOTE_API_ROUTE=https://get-quotes-api.cyclic.app/api/quotes/random
 ```

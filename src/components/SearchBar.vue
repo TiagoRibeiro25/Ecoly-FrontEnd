@@ -1,19 +1,16 @@
 <script setup>
-import { useActivitiesStore } from "../stores/activities";
-import { useNewsStore } from "../stores/news";
+import { useActivitiesStore } from "@/stores/activities";
+import { useNewsStore } from "@/stores/news";
 import { useDark } from "@vueuse/core";
 import { ref, watchEffect } from "vue";
 
 const isDark = useDark();
 const props = defineProps({
-	page: { type: String, required: false },
+	page: { type: String, required: false, default: "Home" },
 	placeholder: { type: String, required: false },
 });
 
-/** @type {"News" | "Activities" | "Home"} */
-const currentPage = props.page || "Home";
 const search = ref("");
-/** @type {Array<{id: number, title: string, type: "atividade | notícia"}> */
 const data = ref([]);
 const showModal = ref(false);
 const searching = ref(false);
@@ -41,7 +38,7 @@ watchEffect(async () => {
 		}
 
 		// Search for activities
-		if (currentPage === "Activities" || currentPage === "Home") {
+		if (props.page === "Activities" || props.page === "Home") {
 			const activitiesStore = useActivitiesStore();
 			const activitiesResponse = await activitiesStore.search(searchInput);
 			if (activitiesResponse.success) {
@@ -53,7 +50,7 @@ watchEffect(async () => {
 		}
 
 		// Search for news
-		if (currentPage === "News" || currentPage === "Home") {
+		if (props.page === "News" || props.page === "Home") {
 			const newsStore = useNewsStore();
 			const newsResponse = await newsStore.search(searchInput);
 			if (newsResponse.success) {

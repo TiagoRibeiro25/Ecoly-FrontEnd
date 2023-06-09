@@ -43,14 +43,14 @@ const validateForm = () => {
 		activity.value.title.trim().length > 100
 	)
 		return false;
-	if (!activity.value.diagnostic || activity.value.diagnostic.trim().length < 100 || activity.value.diagnostic.trim().length > 300) return false;
-	if (!activity.value.objective || activity.value.objective.trim().length < 100 || activity.value.objective.trim().length > 300) return false;
-	if (!activity.value.participants || activity.value.participants.trim().length < 100 || activity.value.participants.trim().length > 300) return false;
-	if (!activity.value.metas || activity.value.metas.trim().length < 100 || activity.value.metas.trim().length > 300) return false;
-	if (!activity.value.resources || activity.value.resources.trim().length < 100 || activity.value.resources.trim().length > 300) return false;
-	if (!activity.value.evaluationIndicators || activity.value.evaluationIndicators.trim().length < 100 || activity.value.evaluationIndicators.trim().length > 300)
+	if (!activity.value.diagnostic || activity.value.diagnostic.trim().length < 15 || activity.value.diagnostic.trim().length > 300) return false;
+	if (!activity.value.objective || activity.value.objective.trim().length < 15 || activity.value.objective.trim().length > 300) return false;
+	if (!activity.value.participants || activity.value.participants.trim().length < 15 || activity.value.participants.trim().length > 300) return false;
+	if (!activity.value.metas || activity.value.metas.trim().length < 15 || activity.value.metas.trim().length > 300) return false;
+	if (!activity.value.resources || activity.value.resources.trim().length < 15 || activity.value.resources.trim().length > 300) return false;
+	if (!activity.value.evaluationIndicators || activity.value.evaluationIndicators.trim().length < 15 || activity.value.evaluationIndicators.trim().length > 300)
 		return false;
-	if (!activity.value.evaluationMethod || activity.value.evaluationMethod.trim().length < 100 || activity.value.evaluationMethod.trim().length > 300) return false;
+	if (!activity.value.evaluationMethod || activity.value.evaluationMethod.trim().length < 15 || activity.value.evaluationMethod.trim().length > 300) return false;
 	if (!activity.value.complexity || activity.value.complexity < 1 || activity.value.complexity > 5)
 		return false;
 	if (activity.value.initialDate > activity.value.finalDate) return false;
@@ -159,7 +159,7 @@ onBeforeMount(async () => {
 					<Input
 						class="p-3"
 						:text="activity.objective"
-						placeholder="Objetivo (mínimo 100 caracteres)"
+						placeholder="Objetivo (mínimo 15 caracteres)"
 						type="textarea"
 						:isDark="isDark"
 						@update:text="(value) => (activity.objective = value)"
@@ -168,7 +168,7 @@ onBeforeMount(async () => {
 					<Input
 						class="p-3"
 						:text="activity.metas"
-						placeholder="Metas (mínimo 100 caracteres)"
+						placeholder="Metas (mínimo 15 caracteres)"
 						type="textarea"
 						:isDark="isDark"
 						@update:text="(value) => (activity.metas = value)"
@@ -177,7 +177,7 @@ onBeforeMount(async () => {
 					<Input
 						class="p-3"
 						:text="activity.resources"
-						placeholder="Recursos (mínimo 100 caracteres)"
+						placeholder="Recursos (mínimo 15 caracteres)"
 						type="textarea"
 						:isDark="isDark"
 						@update:text="(value) => (activity.resources = value)"
@@ -187,7 +187,7 @@ onBeforeMount(async () => {
 					<Input
 						class="p-3"
 						:text="activity.diagnostic"
-						placeholder="Diagnóstico (mínimo 100 caracteres)"
+						placeholder="Diagnóstico (mínimo 15 caracteres)"
 						type="textarea"
 						:isDark="isDark"
 						@update:text="(value) => (activity.diagnostic = value)"
@@ -196,7 +196,7 @@ onBeforeMount(async () => {
 					<Input
 						class="p-3"
 						:text="activity.participants"
-						placeholder="Participantes (mínimo 100 caracteres)"
+						placeholder="Participantes (mínimo 15 caracteres)"
 						type="textarea"
 						:isDark="isDark"
 						@update:text="(value) => (activity.participants = value)"
@@ -205,7 +205,7 @@ onBeforeMount(async () => {
 					<Input
 						class="p-3"
 						:text="activity.evaluationIndicators"
-						placeholder="Indicadores de avaliação (mínimo 100 caracteres)"
+						placeholder="Indicadores de avaliação (mínimo 15 caracteres)"
 						type="textarea"
 						:isDark="isDark"
 						@update:text="(value) => (activity.evaluationIndicators = value)"
@@ -214,7 +214,7 @@ onBeforeMount(async () => {
 					<Input
 						class="p-3"
 						:text="activity.evaluationMethod"
-						placeholder="Instrumentos de avaliação (mínimo 100 caracteres)"
+						placeholder="Instrumentos de avaliação (mínimo 15 caracteres)"
 						type="textarea"
 						:isDark="isDark"
 						@update:text="(value) => (activity.evaluationMethod = value)"

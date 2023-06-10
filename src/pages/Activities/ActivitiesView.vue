@@ -2,7 +2,7 @@
 import SearchBar from "../../components/SearchBar.vue";
 import Header from "../../components/Header.vue";
 import ChangeViewButton from "../../components/ChangeViewButton.vue";
-import ActivityCard from "../../layouts/Activities/ActivityCard.vue";
+import ActivityCard from "../../sections/Activities/ActivityCard.vue";
 import DeleteModal from "../../components/Modals/DeleteModal.vue";
 import FinishActivityModal from "../../components/Modals/FinishActivityModal.vue";
 import { useDark } from "@vueuse/core";

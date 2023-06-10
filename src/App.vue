@@ -2,7 +2,7 @@
 import { ref, watchEffect } from "vue";
 import { RouterView, useRoute, useRouter } from "vue-router";
 import { useDark } from "@vueuse/core";
-import SideBar from "./components/SideBar.vue";
+import SideBar from "./layouts/SideBar.vue";
 
 const isDark = useDark();
 const route = useRoute();

@@ -1,10 +1,10 @@
 <script setup>
 import SearchBar from "../../components/SearchBar.vue";
 import Header from "../../components/Header.vue";
-import RecentNews from "../../layouts/Home/RecentNews.vue";
-import RecentActivities from "../../layouts/Home/RecentActivities.vue";
-import Footer from "../../layouts/Home/Footer.vue";
-import FAQ from "../../layouts/Home/FAQ.vue";
+import RecentNews from "../../sections/Home/RecentNews.vue";
+import RecentActivities from "../../sections/Home/RecentActivities.vue";
+import Footer from "../../sections/Home/Footer.vue";
+import FAQ from "../../sections/Home/FAQ.vue";
 import { useNewsStore } from "@/stores/news";
 import { onBeforeMount, ref } from "vue";
 import { useActivitiesStore } from "@/stores/activities";

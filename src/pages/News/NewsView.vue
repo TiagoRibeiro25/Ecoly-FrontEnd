@@ -1,7 +1,7 @@
 <script setup>
 import SearchBar from "../../components/SearchBar.vue";
 import Header from "../../components/Header.vue";
-import NewCard from "../../layouts/News/NewCard.vue";
+import NewCard from "../../sections/News/NewCard.vue";
 import DeleteModal from "../../components/Modals/DeleteModal.vue";
 import ChangeViewButton from "../../components/ChangeViewButton.vue";
 import NewsLetterInfo from "../../components/NewsLetterInfo.vue";

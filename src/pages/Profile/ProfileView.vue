@@ -3,8 +3,8 @@ import Badge from "@/components/Badge.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useUsersStore } from "@/stores/users";
 import { ref, watchEffect } from "vue";
-import UserInfo from "../../layouts/Profile/UserInfo.vue";
-import SeedsInfo from "../../layouts/Profile/SeedsInfo.vue";
+import UserInfo from "../../sections/Profile/UserInfo.vue";
+import SeedsInfo from "../../sections/Profile/SeedsInfo.vue";
 import { useDark } from "@vueuse/core";
 import NewsLetterInfo from "../../components/NewsLetterInfo.vue";
 

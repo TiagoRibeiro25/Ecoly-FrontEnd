@@ -5,7 +5,6 @@ import { useDark } from "@vueuse/core";
 import SideBar from "./layouts/SideBar.vue";
 
 const isDark = useDark();
-const route = useRoute();
 const router = useRouter();
 const isLoading = ref(false);
 

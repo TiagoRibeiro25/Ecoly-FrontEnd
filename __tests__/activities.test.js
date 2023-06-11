@@ -171,53 +171,55 @@ module.exports = async (url) => {
 
 		await driver.findElement(By.className("title text-left mt-3")).click();
 
-		const titleInput = await driver.wait(until.elementLocated(By.css('textarea[placeholder="Título"]')));
+		const titleInput = await driver.wait(
+			until.elementLocated(By.css('textarea[placeholder="Título (mínimo 10 caracteres)"]'))
+		);
 		await titleInput.sendKeys("Teste");
 
 		await driver.sleep(500);
 
 		const diagnosticInput = await driver.wait(
-			until.elementLocated(By.css('textarea[placeholder="Diagnóstico"]'))
+			until.elementLocated(By.css('textarea[placeholder="Diagnóstico (mínimo 15 caracteres)"]'))
 		);
 		await diagnosticInput.sendKeys("Teste");
 
 		await driver.sleep(500);
 
 		const objectiveInput = await driver.wait(
-			until.elementLocated(By.css('textarea[placeholder="Objetivo"]'))
+			until.elementLocated(By.css('textarea[placeholder="Objetivo (mínimo 15 caracteres)"]'))
 		);
 		await objectiveInput.sendKeys("Teste");
 
 		await driver.sleep(500);
 
 		const participantsInput = await driver.wait(
-			until.elementLocated(By.css('textarea[placeholder="Participantes"]'))
+			until.elementLocated(By.css('textarea[placeholder="Participantes (mínimo 15 caracteres)"]'))
 		);
 		await participantsInput.sendKeys("Teste");
 
 		await driver.sleep(500);
 
-		const metaInput = await driver.wait(until.elementLocated(By.css('textarea[placeholder="Metas"]')));
+		const metaInput = await driver.wait(until.elementLocated(By.css('textarea[placeholder="Metas (mínimo 15 caracteres)"]')));
 		await metaInput.sendKeys("Teste");
 
 		await driver.sleep(500);
 
 		const indicator_evaluation_Input = await driver.wait(
-			until.elementLocated(By.css('textarea[placeholder="Indicadores de avaliação"]'))
+			until.elementLocated(By.css('textarea[placeholder="Indicadores de avaliação (mínimo 15 caracteres)"]'))
 		);
 		await indicator_evaluation_Input.sendKeys("Teste");
 
 		await driver.sleep(500);
 
 		const resourcesInput = await driver.wait(
-			until.elementLocated(By.css('textarea[placeholder="Recursos"]'))
+			until.elementLocated(By.css('textarea[placeholder="Recursos (mínimo 15 caracteres)"]'))
 		);
 		await resourcesInput.sendKeys("Teste");
 
 		await driver.sleep(500);
 
 		const indicator_instruments_evaluation_Input = await driver.wait(
-			until.elementLocated(By.css('textarea[placeholder="Instrumentos de avaliação"]'))
+			until.elementLocated(By.css('textarea[placeholder="Instrumentos de avaliação (mínimo 15 caracteres)"]'))
 		);
 		await indicator_instruments_evaluation_Input.sendKeys("Teste");
 

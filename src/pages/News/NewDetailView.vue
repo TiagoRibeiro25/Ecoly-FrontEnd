@@ -85,7 +85,7 @@ onBeforeMount(async () => {
 					</b-button>
 				</div>
 			</header>
-			<main class="px-3 my-5">
+			<main class="px-3 my-5 pb-md-0 pb-5">
 				<p
 					class="main-text text-justify"
 					:class="isDark ? 'main-text-dark' : 'main-text-light'"

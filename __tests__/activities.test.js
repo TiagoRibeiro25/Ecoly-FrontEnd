@@ -122,7 +122,7 @@ module.exports = async (url) => {
 		const titleDetailActivity = await driver.wait(
 			until.elementLocated(
 				By.xpath(
-					"//a[@href='/activities/3' and contains(@class, 'activity-title') and contains(@class, 'title-dark')]"
+					"//a[@href='/activities/3' and contains(@class, 'activity-title') and contains(@class, 'title')]"
 				)
 			)
 		);
@@ -324,7 +324,7 @@ module.exports = async (url) => {
 
 		// selecting an school without activities--------------------------------------------------------------
 		const selectSchoolNoActivities = await driver.findElement(
-			By.css(".custom-select.mt-3.school-select.school-dark-mode")
+			By.css(".custom-select.mt-3.school-select")
 		);
 		await driver.sleep(800);
 
@@ -333,14 +333,14 @@ module.exports = async (url) => {
 		await driver.sleep(1400);
 
 		selectSchoolNoActivities
-			.findElement(By.css(".custom-select.mt-3.school-select.school-dark-mode > option:nth-child(2)"))
+			.findElement(By.css(".custom-select.mt-3.school-select > option:nth-child(2)"))
 			.click();
 
 		await driver.sleep(300);
 
 		// selecting an school with activities--------------------------------------------------------------
 		const selectSchoolActivities = await driver.findElement(
-			By.css(".custom-select.mt-3.school-select.school-dark-mode")
+			By.css(".custom-select.mt-3.school-select")
 		);
 		await driver.sleep(800);
 
@@ -349,12 +349,12 @@ module.exports = async (url) => {
 		await driver.sleep(1400);
 
 		selectSchoolActivities
-			.findElement(By.css(".custom-select.mt-3.school-select.school-dark-mode > option:nth-child(3)"))
+			.findElement(By.css(".custom-select.mt-3.school-select > option:nth-child(3)"))
 			.click();
 
 		//selecting all schools--------------------------------------------------------------
 		const selectAllSchools = await driver.findElement(
-			By.css(".custom-select.mt-3.school-select.school-dark-mode")
+			By.css(".custom-select.mt-3.school-select")
 		);
 
 		await driver.sleep(800);
@@ -364,7 +364,7 @@ module.exports = async (url) => {
 		await driver.sleep(1400);
 
 		selectAllSchools
-			.findElement(By.css(".custom-select.mt-3.school-select.school-dark-mode > option:nth-child(1)"))
+			.findElement(By.css(".custom-select.mt-3.school-select > option:nth-child(1)"))
 			.click();
 
 		await driver.sleep(300);

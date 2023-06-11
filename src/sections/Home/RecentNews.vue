@@ -50,7 +50,7 @@ const slide = ref(0);
 				</div>
 				<div class="row-3">
 					<div class="row">
-						<div class="col-6 text-left mt-3">
+						<div class="col-6 d-sm-block d-none text-left mt-3">
 							<p
 								class="recent-new-date"
 								:class="{
@@ -61,7 +61,7 @@ const slide = ref(0);
 								{{ formatDate(props.news[slide].date_created, "yyyy-mm-dd") }}
 							</p>
 						</div>
-						<div class="col-6 text-right mt-3">
+						<div class="col-sm-6 col-12 text-sm-right text-center mt-3">
 							<router-link
 								class="see-details-btn py-2 px-3"
 								:class="{

@@ -72,7 +72,7 @@ watchEffect(async () => {
 				</span>
 			</div>
 
-			<div v-else>
+			<div v-else class="pb-md-0 pb-5">
 				<NewCard
 					v-for="(item, index) in news"
 					:key="item.id"

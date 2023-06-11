@@ -229,6 +229,12 @@ export const useActivitiesStore = defineStore("activities", () => {
 		}
 	};
 
+	const resetData = () => {
+		recentActivities.value = [];
+		unfinishedActivities.value = {};
+		themes.value = [];
+	};
+
 	return {
 		search,
 		addActivity,
@@ -243,5 +249,6 @@ export const useActivitiesStore = defineStore("activities", () => {
 		deleteTheme,
 		addTheme,
 		getActivityReport,
+		resetData,
 	};
 });

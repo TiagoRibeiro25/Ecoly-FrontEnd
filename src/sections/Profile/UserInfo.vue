@@ -2,18 +2,27 @@
 import EditProfileModal from "../../components/Modals/EditProfileModal.vue";
 import { useDark } from "@vueuse/core";
 import { useUsersStore } from "../../stores/users";
+import { useNewsStore } from "../../stores/news";
+import { useActivitiesStore } from "../../stores/activities";
+import { useRouter } from "vue-router";
 
 const isDark = useDark();
 const props = defineProps({
 	user: { type: Object, required: true },
 	highLightedBadge: { type: Object, required: false },
 });
+const router = useRouter();
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-const signOut = () => {
+const signOut = async () => {
 	const usersStore = useUsersStore();
+	const newsStore = useNewsStore();
+	const activitiesStore = useActivitiesStore();
 	usersStore.signOut();
+	newsStore.resetData();
+	activitiesStore.resetData();
+	await router.push({ name: "Authenticate" });
 };
 </script>
 

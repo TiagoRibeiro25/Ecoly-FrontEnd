@@ -179,7 +179,7 @@ onBeforeMount(async () => {
 			<!-- Log In Form -->
 			<b-form
 				v-if="showLogIn"
-				class="form w-75 p-4"
+				class="form p-sm-4"
 				:class="{ 'quit-login': loginQuitLogin }"
 				@submit.prevent="login"
 			>
@@ -233,7 +233,7 @@ onBeforeMount(async () => {
 			<!-- Register Form -->
 			<b-form
 				v-else
-				class="form w-75 p-4"
+				class="form p-sm-4"
 				:class="{ 'quit-register': RegisterQuitRegister }"
 				@submit.prevent="register"
 			>
@@ -370,6 +370,7 @@ $fifth-color: #aedcc0;
 }
 
 .form {
+	width: 75%;
 	animation: slide-from-right 0.5s ease-in-out forwards;
 }
 
@@ -494,6 +495,12 @@ h1 {
 	100% {
 		transform: translateX(0);
 		opacity: 1;
+	}
+}
+
+@media (max-width: 768px) {
+	.form {
+		width: 100%;
 	}
 }
 </style>

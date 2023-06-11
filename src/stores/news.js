@@ -158,7 +158,14 @@ export const useNewsStore = defineStore("news", () => {
 		}
 	};
 
+	const resetData = () => {
+		news.value = [];
+		filteredNews.value = [];
+		isUserSubscribed.value = undefined;
+	};
+
 	return {
+		isUserSubscribed,
 		news,
 		filteredNews,
 		search,
@@ -169,5 +176,6 @@ export const useNewsStore = defineStore("news", () => {
 		isSubscribed,
 		subscribeNewsLetter,
 		cancelNewsLetter,
+		resetData,
 	};
 });

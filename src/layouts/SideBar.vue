@@ -298,15 +298,15 @@ onBeforeMount(async () => {
 		aria-label="Mobile Navigation"
 	>
 		<router-link :to="{ name: 'Home' }">
-			<img :src="isDark ? logo : logo_dark" alt="Home" width="35" height="45" class="route-icon" />
+			<img :src="isDark ? logo : logo_dark" alt="Home" width="25" height="35" class="route-icon" />
 		</router-link>
 		<div :class="isDark ? 'nav-links-dark' : 'nav-links-light'">
 			<router-link :to="{ name: 'News' }">
 				<img
 					src="../assets/icons/news.svg"
 					alt="News"
-					width="45"
-					height="45"
+					width="35"
+					height="35"
 					class="route-icon"
 					:class="{
 						'selected-icon': route === 'News',
@@ -319,8 +319,8 @@ onBeforeMount(async () => {
 				<img
 					src="../assets/icons/activities.svg"
 					alt="Activities"
-					width="45"
-					height="45"
+					width="35"
+					height="35"
 					class="route-icon"
 					:class="{
 						'selected-icon': route === 'Activities',
@@ -333,8 +333,8 @@ onBeforeMount(async () => {
 				<img
 					src="../assets/icons/manage.svg"
 					alt="Manage"
-					width="45"
-					height="45"
+					width="35"
+					height="35"
 					class="route-icon"
 					:class="{
 						'selected-icon': route === 'Manage',
@@ -353,8 +353,8 @@ onBeforeMount(async () => {
 					v-if="isUserLogged"
 					v-lazy="{ src: profilePicture }"
 					alt="Perfil"
-					width="45"
-					height="45"
+					width="35"
+					height="35"
 					class="route-icon"
 					:class="{ 'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged }"
 				/>
@@ -362,8 +362,8 @@ onBeforeMount(async () => {
 					v-else
 					src="../assets/icons/profile.svg"
 					alt="Perfil"
-					width="45"
-					height="45"
+					width="35"
+					height="35"
 					class="route-icon"
 					:class="{
 						'mt-2': showText,
@@ -383,16 +383,16 @@ onBeforeMount(async () => {
 					v-if="isDark"
 					src="../assets/icons/dark.svg"
 					alt="Tema"
-					width="45"
-					height="45"
+					width="35"
+					height="35"
 					class="route-icon"
 				/>
 				<img
 					v-if="!isDark"
 					src="../assets/icons/light.svg"
 					alt="Tema"
-					width="45"
-					height="45"
+					width="35"
+					height="35"
 					class="route-icon"
 				/>
 			</span>

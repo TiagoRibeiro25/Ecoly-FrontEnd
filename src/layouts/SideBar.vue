@@ -16,7 +16,6 @@ const router = useRouter();
 
 watch(useRoute(), (newRoute) => {
 	route.value = newRoute.name;
-	console.log(isUserLogged.value);
 });
 
 const showText = ref(false);

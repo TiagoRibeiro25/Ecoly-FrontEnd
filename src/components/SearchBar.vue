@@ -90,7 +90,7 @@ watchEffect(async () => {
 	</div>
 
 	<!-- Search Results -->
-	<div class="search-results px-5" :style="{ visibility: showModal ? 'visible' : 'hidden' }">
+	<div class="search-results px-md-5" :style="{ visibility: showModal ? 'visible' : 'hidden' }">
 		<div v-if="searching">
 			<div class="d-flex justify-content-center flex-row">
 				<b-spinner class="mt-5 mx-1" variant="success" type="grow"></b-spinner>
@@ -99,7 +99,7 @@ watchEffect(async () => {
 			</div>
 		</div>
 
-		<div v-else class="mb-3 px-5">
+		<div v-else class="mb-3 px-md-5 px-3">
 			<div v-if="data.length === 0">
 				<div
 					class="d-flex justify-content-center flex-row error-container py-4 mx-auto"

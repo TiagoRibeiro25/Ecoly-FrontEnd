@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref, watchEffect } from "vue";
+import { ref, watchEffect } from "vue";
 
 const props = defineProps({
 	images: { type: Array, required: true },
@@ -9,35 +9,6 @@ const props = defineProps({
 });
 
 const dataImages = ref([]);
-const selectedImage = ref(null);
-const modalRef = ref(null);
-
-const openModal = (index) => {
-	selectedImage.value = dataImages.value[index];
-	modalRef.value.classList.add("show");
-};
-
-const closeModal = (event) => {
-	if (event.target === modalRef.value) {
-		modalRef.value.classList.remove("show");
-	}
-};
-
-const handleKeyDown = (event) => {
-	if (event.key === "Escape") {
-		modalRef.value.classList.remove("show");
-	}
-};
-
-onMounted(() => {
-	window.addEventListener("click", closeModal);
-	window.addEventListener("keydown", handleKeyDown);
-});
-
-onUnmounted(() => {
-	window.removeEventListener("click", closeModal);
-	window.removeEventListener("keydown", handleKeyDown);
-});
 
 watchEffect(() => {
 	if (props.images.length !== 0) {
@@ -70,29 +41,16 @@ watchEffect(() => {
 				v-for="(image, index) in dataImages"
 				:key="index"
 				:src="image"
-				@click="openModal(index)"
 				class="img-fluid my-3 mx-3 rounded-lg shadow"
 				:class="props.hasAnimation ? 'animate' : ''"
 				alt="Imagem do Item"
 				:width="props.width"
 				:height="props.height"
 				:style="'width: ' + props.width + 'px; height: ' + props.height + 'px;'"
-				style="cursor: pointer"
 			/>
 		</div>
 		<div v-else class="col-12 d-flex justify-content-center align-items-center" style="height: 190px">
 			<b-spinner variant="success" label="Carregando..."></b-spinner>
-		</div>
-
-		<!-- Modal -->
-		<div class="modal" tabindex="-1" ref="modalRef" @click="closeModal">
-			<div class="modal-dialog modal-dialog-centered modal-xl">
-				<div class="modal-content">
-					<div class="modal-body d-flex justify-content-center align-items-center">
-						<img :src="selectedImage" class="img-fluid" alt="Imagem ampliada" />
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </template>

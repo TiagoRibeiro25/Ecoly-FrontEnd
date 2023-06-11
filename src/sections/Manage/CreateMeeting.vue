@@ -41,8 +41,8 @@ const createMeeting = async () => {
 </script>
 
 <template>
-	<div class="col-12 d-flex flex-row mt-3 px-0">
-		<div class="col-7 px-0">
+	<div class="col-12 d-flex flex-xl-row flex-column mt-3 px-0">
+		<div class="col-xl-7 px-0">
 			<DateInput
 				class="pr-xl-0 pl-xl-3 px-0"
 				:date="date"
@@ -52,18 +52,11 @@ const createMeeting = async () => {
 				@update:date="date = $event"
 			/>
 		</div>
-		<div class="col-3 px-0">
-			<TimeInput class="px-3" :time="time" placeholder="..." @update:time="time = $event" />
+		<div class="col-xl-3 my-xl-0 my-3 px-0">
+			<TimeInput class="px-xl-2" :time="time" placeholder="..." @update:time="time = $event" />
 		</div>
-		<div class="col-2 px-0">
-			<Input
-				:text="room"
-				placeholder="sala"
-				type="input"
-				:isDark="isDark"
-				:alignText="true"
-				@update:text="room = $event"
-			/>
+		<div class="col-xl-2 px-0">
+			<Input :text="room" placeholder="sala" type="input" :isDark="isDark" @update:text="room = $event" />
 		</div>
 	</div>
 
@@ -77,7 +70,7 @@ const createMeeting = async () => {
 		/>
 	</div>
 
-	<div class="col-12 d-flex align-items-end flex-column px-0">
+	<div class="col-12 d-flex align-items-lg-end align-items-center flex-column px-0">
 		<div class="col-12 my-3 d-flex justify-content-end px-0">
 			<div
 				class="d-flex justify-content-center align-items-center flex-column"

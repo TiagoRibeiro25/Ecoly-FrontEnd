@@ -51,9 +51,9 @@ onBeforeMount(async () => {
 	<div v-else class="mt-3 mx-auto" style="max-width: 1400px">
 		<DetailImages :images="activity.images" />
 
-		<div class="mt-4 px-3">
-			<header class="d-flex flex-row">
-				<div class="col-9">
+		<div class="mt-4 px-md-3">
+			<header class="d-flex flex-md-row flex-column">
+				<div class="col-md-9">
 					<h1 class="activity-title" :class="isDark ? 'activity-title-dark' : 'activity-title-light'">
 						{{ activity.title }}
 					</h1>
@@ -66,7 +66,7 @@ onBeforeMount(async () => {
 						</span>
 					</div>
 				</div>
-				<div class="col-3 d-flex flex-column px-0">
+				<div class="col-md-3 d-flex flex-md-column mt-md-0 mt-3 px-0">
 					<ComplexityInput
 						class="d-flex justify-content-end"
 						:complexity="activity.complexity"
@@ -74,10 +74,13 @@ onBeforeMount(async () => {
 						:disabled="true"
 					/>
 
-					<span class="text-right px-3 created-by" :class="isDark ? 'created-by-dark' : 'created-by-light'">
+					<span
+						class="text-right px-1 pt-1 created-by d-md-block d-flex align-items-center"
+						:class="isDark ? 'created-by-dark' : 'created-by-light'"
+					>
 						Criado por:
 						<router-link
-							class="header-info header-link text-muted"
+							class="header-info header-link text-muted pl-md-0 pl-1"
 							:class="isDark ? 'header-link-dark' : 'header-link-light'"
 							:to="{ name: 'Profile', params: { id: activity.creator.id } }"
 						>
@@ -85,6 +88,7 @@ onBeforeMount(async () => {
 						</router-link>
 					</span>
 
+					<!-- move this div to the end -->
 					<div v-if="canUserEdit" class="d-flex justify-content-end flex-row px-2">
 						<b-button
 							size="sm"
@@ -118,8 +122,8 @@ onBeforeMount(async () => {
 					</div>
 				</div>
 			</header>
-			<main class="d-flex flex-row" style="overflow: hidden">
-				<div class="col-lg-4 col-6 left-content px-0 pt-5">
+			<main class="d-flex flex-lg-row flex-column" style="overflow: hidden">
+				<div class="col-lg-4 col-12 left-content px-0 pt-5">
 					<ActivityDetailContent side="left" />
 					<ActivityDetailContent side="left" title="Diagnóstico" :content="activity.diagnostic" />
 					<ActivityDetailContent side="left" />
@@ -133,10 +137,10 @@ onBeforeMount(async () => {
 					/>
 					<ActivityDetailContent side="left" />
 				</div>
-				<div class="col-lg-4 col-0 plant">
+				<div class="col-lg-4 col-0 d-lg-block d-none plant">
 					<img class="img-fluid plant-img h-100 w-100" v-lazy="{ src: Plant }" alt="planta" />
 				</div>
-				<div class="col-lg-4 col-6 right-content px-0 pt-5">
+				<div class="col-lg-4 col-12 right-content px-0 pt-lg-5 mb-md-0 pb-md-0 mb-5 pb-5">
 					<ActivityDetailContent side="right" title="Objetivos" :content="activity.objective" />
 					<ActivityDetailContent side="right" />
 					<ActivityDetailContent side="right" title="Metas" :content="activity.meta" />

@@ -36,7 +36,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-	<footer class="px-3 d-flex flex-column align-items-center">
+	<footer class="px-3 d-flex flex-column align-items-center mb-md-0 pb-md-0 mb-5 pb-4">
 		<h2 class="new-title text-center pt-5 pb-3" :class="isDark ? 'new-title-dark' : 'new-title-light'">
 			{{ isUserSubscribed ? "Já estás inscrito na newsletter" : "Subscreve-te à newsletter" }}
 		</h2>

@@ -99,11 +99,17 @@ watchEffect(async () => {
 		<Header title="ATIVIDADES" />
 	</div>
 	<div class="col-12 mb-4">
-		<div class="activities-container px-5 mx-auto d-flex flex-row">
-			<div v-if="isUserVerified" class="col-6 px-0 d-flex align-items-end">
+		<div class="activities-container px-md-5 d-sm-flex">
+			<div
+				v-if="isUserVerified"
+				class="col-sm-6 col-12 px-0 d-flex align-items-end justify-content-sm-start justify-content-center pt-sm-0 pt-3"
+			>
 				<ChangeViewButton text="Adicionar atividade" to="ActivityCreate" iconImg="../assets/icons/add.svg" />
 			</div>
-			<div class="d-flex justify-content-end px-0" :class="isUserVerified ? 'col-6' : 'col-12'">
+			<div
+				class="d-flex justify-content-sm-end justify-content-center px-0 col-12"
+				:class="isUserVerified ? 'col-sm-6' : ''"
+			>
 				<b-form-select
 					class="mt-3 school-select"
 					:class="isDark ? 'school-dark-mode' : 'school-light-mode'"
@@ -116,8 +122,8 @@ watchEffect(async () => {
 	<div class="col-12 mt-5"></div>
 
 	<!-- Activities -->
-	<div class="col-12">
-		<div class="activities-container px-5 mx-auto">
+	<div class="col-12 pb-4">
+		<div class="activities-container px-md-5 mx-auto pb-md-0 pb-5">
 			<div
 				v-if="fetching || activities.length === 0"
 				class="d-flex flex-column align-items-center justify-content-center"

@@ -28,79 +28,77 @@ const subscribe = async () => {
 </script>
 
 <template>
-	<footer class="footer pt-5 pb-5">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 left-content">
-					<img
-						src="@/assets/logo/logo_exp.webp"
-						alt="Ecoly"
-						width="380"
-						class="img-fluid mb-2"
-						style="width: 170px"
+	<footer class="footer pt-5 pb-5 px-5">
+		<div class="row pb-5">
+			<div class="col-lg-4 left-content">
+				<img
+					src="@/assets/logo/logo_exp.webp"
+					alt="Ecoly"
+					width="380"
+					class="img-fluid mb-2"
+					style="width: 170px"
+				/>
+				<h4 class="slogan mb-3 text-left">PLANTA O TEU FUTURO</h4>
+				<router-link :to="{ name: 'News' }" class="route-link text-left"> notícias </router-link>
+				<router-link :to="{ name: 'Activities' }" class="route-link text-left"> atividades </router-link>
+				<h4 class="sub-title mt-4">SUBSCREVER À NEWSLETTER</h4>
+				<form class="input-group mb-3" @submit.prevent="subscribe">
+					<input
+						type="email"
+						class="form-control"
+						placeholder="Email"
+						aria-label="Email"
+						aria-describedby="button-addon2"
+						v-model="newsLetterEmail"
+						required
 					/>
-					<h4 class="slogan mb-3 text-left">PLANTA O TEU FUTURO</h4>
-					<router-link :to="{ name: 'News' }" class="route-link text-left"> notícias </router-link>
-					<router-link :to="{ name: 'Activities' }" class="route-link text-left"> atividades </router-link>
-					<h4 class="sub-title mt-4">SUBSCREVER À NEWSLETTER</h4>
-					<form class="input-group mb-3" @submit.prevent="subscribe">
-						<input
-							type="email"
-							class="form-control"
-							placeholder="Email"
-							aria-label="Email"
-							aria-describedby="button-addon2"
-							v-model="newsLetterEmail"
-							required
-						/>
-						<button
-							class="btn btn-outline-secondary"
-							:class="{
-								'btn-msg-success': btnMessage === 'Sucesso',
-								'btn-msg-danger': btnMessage === 'Erro',
-								'btn-msg-warning': btnMessage === 'Email inválido',
-							}"
-							type="submit"
-							id="button-addon2"
-						>
-							{{ btnMessage }}
-						</button>
-					</form>
-					<span class="cr-name"> &copy; 2022 Ecoly </span>
+					<button
+						class="btn btn-outline-secondary"
+						:class="{
+							'btn-msg-success': btnMessage === 'Sucesso',
+							'btn-msg-danger': btnMessage === 'Erro',
+							'btn-msg-warning': btnMessage === 'Email inválido',
+						}"
+						type="submit"
+						id="button-addon2"
+					>
+						{{ btnMessage }}
+					</button>
+				</form>
+				<span class="cr-name"> &copy; 2022 Ecoly </span>
+			</div>
+			<div class="col-lg-4 my-lg-0 my-5 pl-lg-5">
+				<div class="social-media text-left mb-4">
+					<img src="@/assets/icons/instagram.svg" alt="instagram" />
+					<img class="px-3" src="@/assets/icons/facebook.svg" alt="facebook" />
+					<img src="@/assets/icons/twitter.svg" alt="twitter" />
 				</div>
-				<div class="col-sm-4 mid-content">
-					<div class="social-media text-left mb-4">
-						<img src="@/assets/icons/instagram.svg" alt="instagram" />
-						<img class="px-3" src="@/assets/icons/facebook.svg" alt="facebook" />
-						<img src="@/assets/icons/twitter.svg" alt="twitter" />
-					</div>
 
-					<router-link :to="{ name: 'Activities' }" class="route-link text-left">
-						plano de atividades
-					</router-link>
-					<router-link v-if="isUserLoggedIn" :to="{ name: 'Manage' }" class="route-link text-left">
-						gestão do conselho
-					</router-link>
-					<router-link v-if="!isUserLoggedIn" :to="{ name: 'Authenticate' }" class="route-link text-left">
-						criar conta
-					</router-link>
-				</div>
-				<div class="col-sm-4 right-content">
-					<h5 class="text-left">ENTRE EM CONTACTO</h5>
-					<span class="mb-5 text-left">ECOLY@eco-escolas.com</span>
+				<router-link :to="{ name: 'Activities' }" class="route-link text-left">
+					plano de atividades
+				</router-link>
+				<router-link v-if="isUserLoggedIn" :to="{ name: 'Manage' }" class="route-link text-left">
+					gestão do conselho
+				</router-link>
+				<router-link v-if="!isUserLoggedIn" :to="{ name: 'Authenticate' }" class="route-link text-left">
+					criar conta
+				</router-link>
+			</div>
+			<div class="col-lg-4 right-content">
+				<h5 class="text-left">ENTRE EM CONTACTO</h5>
+				<span class="mb-5 text-left">ECOLY@eco-escolas.com</span>
 
-					<h5 class="text-left">PARA MAIS INFORMAÇÕES</h5>
-					<span class="text-left">fee.portugal@abae.pt</span>
-					<span class="mb-5 text-left">abae@abae.pt</span>
+				<h5 class="text-left">PARA MAIS INFORMAÇÕES</h5>
+				<span class="text-left">fee.portugal@abae.pt</span>
+				<span class="mb-5 text-left">abae@abae.pt</span>
 
-					<h5 class="text-left">SOBRE NÓS</h5>
-					<span class="text-left" style="line-height: 1.8">
-						ECOLY tem como objetivo reunir pessoas interessadas em tornar o planeta um espaço verde de forma a
-						sustentar o ecossistema que nos rodeia. Para o efeito, é disponibilizado ferramentas para os
-						membros do conselho poderem gerir o conselho Eco-escolas e á criação de atividades para o plano de
-						ação e poderá ter interação com outros utilizadores.
-					</span>
-				</div>
+				<h5 class="text-left">SOBRE NÓS</h5>
+				<span class="text-left" style="line-height: 1.8">
+					ECOLY tem como objetivo reunir pessoas interessadas em tornar o planeta um espaço verde de forma a
+					sustentar o ecossistema que nos rodeia. Para o efeito, é disponibilizado ferramentas para os membros
+					do conselho poderem gerir o conselho Eco-escolas e á criação de atividades para o plano de ação e
+					poderá ter interação com outros utilizadores.
+				</span>
 			</div>
 		</div>
 	</footer>
@@ -122,7 +120,7 @@ $footer-selected-color: #3fc380;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 50%;
-	height: 700px;
+	min-height: 700px;
 }
 
 .slogan {
@@ -216,14 +214,6 @@ $footer-selected-color: #3fc380;
 	font-family: "Panton", sans-serif;
 	font-weight: 400;
 	margin-left: 10px;
-}
-
-.mid-content {
-	padding-left: 120px;
-}
-
-.right-content {
-	padding-left: 120px;
 }
 
 .right-content span {

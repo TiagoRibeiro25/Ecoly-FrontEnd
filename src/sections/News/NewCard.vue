@@ -40,7 +40,7 @@ onMounted(() => {
 			<div class="row">
 				<div
 					class="title-container text-lg-left text-center"
-					:class="props.isUserAdmin ? 'col-10' : 'col-12'"
+					:class="props.isUserAdmin ? 'col-sm-10 col-9' : 'col-12'"
 				>
 					<h2>
 						<router-link
@@ -52,10 +52,10 @@ onMounted(() => {
 						</router-link>
 					</h2>
 				</div>
-				<div v-if="props.isUserAdmin" class="col-2 text-center pt-2">
+				<div v-if="props.isUserAdmin" class="col-sm-2 col-3 text-center pt-2">
 					<b-button
 						size="sm"
-						class="rounded-circle bg-transparent border-0"
+						class="rounded-circle bg-transparent border-0 mt-sm-0 mt-2"
 						@click="() => emit('delete', props.id)"
 					>
 						<img

@@ -40,17 +40,51 @@ const validateForm = () => {
 	if (
 		!activity.value.title ||
 		activity.value.title.trim().length < 10 ||
-		activity.value.title.trim().length > 100
+		activity.value.title.trim().length > 80
 	)
 		return false;
-	if (!activity.value.diagnostic || activity.value.diagnostic.trim().length < 15 || activity.value.diagnostic.trim().length > 300) return false;
-	if (!activity.value.objective || activity.value.objective.trim().length < 15 || activity.value.objective.trim().length > 300) return false;
-	if (!activity.value.participants || activity.value.participants.trim().length < 15 || activity.value.participants.trim().length > 300) return false;
-	if (!activity.value.metas || activity.value.metas.trim().length < 15 || activity.value.metas.trim().length > 300) return false;
-	if (!activity.value.resources || activity.value.resources.trim().length < 15 || activity.value.resources.trim().length > 300) return false;
-	if (!activity.value.evaluationIndicators || activity.value.evaluationIndicators.trim().length < 15 || activity.value.evaluationIndicators.trim().length > 300)
+	if (
+		!activity.value.diagnostic ||
+		activity.value.diagnostic.trim().length < 15 ||
+		activity.value.diagnostic.trim().length > 300
+	)
 		return false;
-	if (!activity.value.evaluationMethod || activity.value.evaluationMethod.trim().length < 15 || activity.value.evaluationMethod.trim().length > 300) return false;
+	if (
+		!activity.value.objective ||
+		activity.value.objective.trim().length < 15 ||
+		activity.value.objective.trim().length > 300
+	)
+		return false;
+	if (
+		!activity.value.participants ||
+		activity.value.participants.trim().length < 15 ||
+		activity.value.participants.trim().length > 300
+	)
+		return false;
+	if (
+		!activity.value.metas ||
+		activity.value.metas.trim().length < 15 ||
+		activity.value.metas.trim().length > 300
+	)
+		return false;
+	if (
+		!activity.value.resources ||
+		activity.value.resources.trim().length < 15 ||
+		activity.value.resources.trim().length > 300
+	)
+		return false;
+	if (
+		!activity.value.evaluationIndicators ||
+		activity.value.evaluationIndicators.trim().length < 15 ||
+		activity.value.evaluationIndicators.trim().length > 300
+	)
+		return false;
+	if (
+		!activity.value.evaluationMethod ||
+		activity.value.evaluationMethod.trim().length < 15 ||
+		activity.value.evaluationMethod.trim().length > 300
+	)
+		return false;
 	if (!activity.value.complexity || activity.value.complexity < 1 || activity.value.complexity > 5)
 		return false;
 	if (activity.value.initialDate > activity.value.finalDate) return false;
@@ -140,7 +174,7 @@ onBeforeMount(async () => {
 	</div>
 
 	<div class="col-12 mb-4">
-		<div class="mx-auto px-5" style="max-width: 1403px">
+		<div class="mx-auto px-md-5" style="max-width: 1403px">
 			<div class="col-12 pt-3">
 				<AddImages :images="activity.imgs" />
 			</div>

@@ -6,7 +6,7 @@ const isDark = useDark();
 </script>
 
 <template>
-	<header class="mt-4 mb-4 px-5 mx-auto" :class="{ 'text-light': isDark, 'text-dark': !isDark }">
+	<header class="mt-4 mb-4 px-md-5 mx-auto" :class="{ 'text-light': isDark, 'text-dark': !isDark }">
 		<h1 class="title text-left mt-3">{{ props.title }}</h1>
 		<div class="border border-2 mt-3" :class="{ 'border-light': isDark, 'border-dark': !isDark }"></div>
 	</header>

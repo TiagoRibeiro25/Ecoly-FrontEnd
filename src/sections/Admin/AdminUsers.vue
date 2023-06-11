@@ -79,8 +79,8 @@ watchEffect(async () => {
 	</div>
 	<div v-else>
 		<!-- filter Users -->
-		<header class="col-12 px-0 mt-3 d-flex flex-row">
-			<div class="col-4 px-1">
+		<header class="col-12 px-0 mt-3 d-flex flex-sm-row flex-column">
+			<div class="col-sm-4 px-sm-1 px-0">
 				<Input
 					:text="filterName"
 					placeholder="Filtrar por nome"
@@ -89,7 +89,7 @@ watchEffect(async () => {
 					@update:text="filterName = $event"
 				/>
 			</div>
-			<div class="col-4 px-1">
+			<div class="col-sm-4 px-sm-1 px-0 my-sm-0 my-3">
 				<Input
 					:text="filterEmail"
 					placeholder="Filtrar por email"
@@ -99,7 +99,7 @@ watchEffect(async () => {
 				/>
 			</div>
 			<!-- filter by role -->
-			<div class="col-4 px-1 d-flex justify-content-end align-items-center">
+			<div class="col-sm-4 px-sm-1 px-0 d-flex justify-content-end align-items-center">
 				<b-dropdown :text="filterRole" :variant="isDark ? 'dark' : 'light'" class="ml-2">
 					<b-dropdown-item v-for="role in roles" :key="role.id" @click="filterRole = role.title">
 						{{ role.title }}
@@ -110,19 +110,31 @@ watchEffect(async () => {
 		<main>
 			<div class="col-12 px-0 mt-3">
 				<table
-					class="table table-hover table-striped table-responsive-sm"
+					class="table table-hover table-striped"
 					:class="isDark ? 'table-dark-theme' : 'table-light-theme'"
 				>
-					<caption class="text-center">
+					<caption class="text-center mt-2">
 						Lista atualizada em
 						{{
 							new Date().toLocaleString("pt-PT")
 						}}
 					</caption>
 					<thead>
-						<tr class="text-center align-middle" style="font-size: 1.45rem">
-							<th scope="col" :class="isDark ? 'table-dark-theme' : 'table-light-theme'">Nome</th>
-							<th scope="col" :class="isDark ? 'table-dark-theme' : 'table-light-theme'">Email</th>
+						<tr class="text-center align-middle">
+							<th
+								scope="col"
+								class="d-lg-table-cell d-sm-none d-table-cell"
+								:class="isDark ? 'table-dark-theme' : 'table-light-theme'"
+							>
+								Nome
+							</th>
+							<th
+								scope="col"
+								class="d-sm-table-cell d-none"
+								:class="isDark ? 'table-dark-theme' : 'table-light-theme'"
+							>
+								Email
+							</th>
 							<th scope="col" :class="isDark ? 'table-dark-theme' : 'table-light-theme'">Cargo</th>
 						</tr>
 					</thead>
@@ -133,10 +145,16 @@ watchEffect(async () => {
 							:id="user.id"
 							:class="isDark ? 'table-dark-theme' : 'table-light-theme'"
 						>
-							<td class="text-center align-middle" :class="isDark ? 'table-dark-theme' : 'table-light-theme'">
+							<td
+								class="text-center d-lg-table-cell d-sm-none d-table-cell"
+								:class="isDark ? 'table-dark-theme' : 'table-light-theme'"
+							>
 								{{ user.name }}
 							</td>
-							<td class="text-center align-middle" :class="isDark ? 'table-dark-theme' : 'table-light-theme'">
+							<td
+								class="text-center align-middle d-sm-table-cell d-none"
+								:class="isDark ? 'table-dark-theme' : 'table-light-theme'"
+							>
 								{{ user.email }}
 							</td>
 							<td class="text-center align-middle" :class="isDark ? 'table-dark-theme' : 'table-light-theme'">
@@ -170,7 +188,7 @@ $septenary-color: #e2e1e1;
 .error-title {
 	font-family: "Panton", sans-serif;
 	font-weight: 600;
-	font-size: 1.8rem;
+	font-size: 1.5rem;
 	color: $primary-color;
 
 	&-dark {
@@ -185,6 +203,12 @@ $septenary-color: #e2e1e1;
 .table {
 	cursor: default;
 	animation: showFromBottom 0.5s ease-in-out;
+
+	& th {
+		font-family: "Panton", sans-serif;
+		font-weight: 700;
+		font-size: 1.2rem;
+	}
 
 	&-dark-theme {
 		background-color: $primary-color;
@@ -219,7 +243,7 @@ $septenary-color: #e2e1e1;
 tr {
 	font-family: "Panton", sans-serif;
 	font-weight: 700;
-	font-size: 1.25rem;
+	font-size: 1.15rem;
 }
 
 .select-user-role-input {
@@ -228,7 +252,7 @@ tr {
 	border: 2px solid transparent;
 	font-family: "Panton", sans-serif;
 	font-weight: 700;
-	font-size: 1.25rem;
+	font-size: 1.15rem;
 	padding: 0 10px;
 	cursor: pointer;
 	transition: all 0.3s ease-in-out;
@@ -259,7 +283,6 @@ tr {
 }
 
 caption {
-	color: $primary-color;
 	font-family: "Panton", sans-serif;
 	font-weight: 700;
 	font-size: 17px;

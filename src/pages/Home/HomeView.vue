@@ -47,8 +47,8 @@ const fetchRandomQuote = async () => {
 	fetchingQuote.value = false;
 };
 
-onBeforeMount(() => {
-	Promise.all([fetchNews(), fetchActivities(), fetchRandomQuote()]);
+onBeforeMount(async () => {
+	await Promise.all([fetchNews(), fetchActivities(), fetchRandomQuote()]);
 });
 </script>
 
@@ -60,7 +60,7 @@ onBeforeMount(() => {
 		<Header title="DESTAQUES" />
 	</div>
 	<div class="col-12 my-4">
-		<div class="mx-auto px-5" style="max-width: 1405px">
+		<div class="mx-auto px-md-5" style="max-width: 1405px">
 			<div class="col-12 px-0 mt-5">
 				<RecentNews :news="recentNews" :fetching="fetchingNews" />
 			</div>

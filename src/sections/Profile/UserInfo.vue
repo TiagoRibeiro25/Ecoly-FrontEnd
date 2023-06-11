@@ -1,6 +1,7 @@
 <script setup>
-import { useDark } from "@vueuse/core";
 import EditProfileModal from "../../components/Modals/EditProfileModal.vue";
+import { useDark } from "@vueuse/core";
+import { useUsersStore } from "../../stores/users";
 
 const isDark = useDark();
 const props = defineProps({
@@ -9,11 +10,16 @@ const props = defineProps({
 });
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const signOut = () => {
+	const usersStore = useUsersStore();
+	usersStore.signOut();
+};
 </script>
 
 <template>
 	<div
-		class="top-info row mx-auto py-lg-0 py-sm-3 py-5 shadow"
+		class="top-info row mx-auto py-lg-0 py-sm-3 py-3 shadow"
 		:class="isDark ? 'top-info-dark' : 'top-info-light'"
 	>
 		<!-- Profile Picture -->
@@ -73,7 +79,7 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 				/>
 			</div>
 			<!-- Edit Profile Button -->
-			<div v-if="props.user.isLoggedUser" class="mt-3">
+			<div v-if="props.user.isLoggedUser" class="mt-3 d-flex flex-column">
 				<b-button
 					class="edit-profile-btn px-2"
 					:class="isDark ? 'edit-profile-btn-dark' : 'edit-profile-btn-light'"
@@ -81,6 +87,14 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 					@click="$bvModal.show('edit-profile-modal')"
 				>
 					Editar Perfil
+				</b-button>
+				<b-button
+					class="edit-profile-btn px-2 mt-3 d-md-none d-block"
+					:class="isDark ? 'edit-profile-btn-dark' : 'edit-profile-btn-light'"
+					size="sm"
+					@click="signOut"
+				>
+					Sign Out
 				</b-button>
 			</div>
 		</div>

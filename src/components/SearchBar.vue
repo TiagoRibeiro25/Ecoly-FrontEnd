@@ -125,7 +125,7 @@ watchEffect(async () => {
 						{{ item.title }}
 					</router-link>
 				</div>
-				<div class="col-3">
+				<div class="col-3 d-flex justify-content-end align-items-center">
 					<span class="result-text" :class="isDark ? 'result-text-dark' : 'result-text-light'">
 						{{ item.type }}
 					</span>
@@ -143,8 +143,8 @@ $quaternary-color: #e4f0e8;
 $quinary-color: #18516f;
 
 .searchbar {
-	width: 50%;
-	max-width: 1310px;
+	width: 85%;
+	max-width: 700px;
 	z-index: 1001;
 }
 
@@ -277,7 +277,18 @@ $quinary-color: #18516f;
 	}
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 768px) {
+	.searchbar {
+		width: 100%;
+	}
+
+	.search-results {
+		margin-left: 0;
+		padding-top: 150px;
+	}
+}
+
+@media (max-width: 495px) {
 	.search-icon {
 		display: none;
 	}

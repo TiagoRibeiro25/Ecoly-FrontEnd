@@ -5,7 +5,7 @@ const emits = defineEmits(["update:complexity"]);
 const props = defineProps({
 	complexity: { type: Number, required: true },
 	isDark: { type: Boolean, required: false, default: false },
-	disabled: { type: Boolean, required: false, default: false }
+	disabled: { type: Boolean, required: false, default: false },
 });
 
 const complexity = ref(props.complexity);
@@ -13,12 +13,15 @@ const complexity = ref(props.complexity);
 watch(complexity, () => {
 	emits("update:complexity", complexity.value);
 });
-
 </script>
 
 <template>
 	<div>
-		<b v-if="!disabled" class="mr-1 info-label" :class="props.isDark ? 'info-dark-theme' : 'info-light-theme'">
+		<b
+			v-if="!disabled"
+			class="mr-1 info-label"
+			:class="props.isDark ? 'info-dark-theme' : 'info-light-theme'"
+		>
 			Complexidade
 		</b>
 		<b-form-rating

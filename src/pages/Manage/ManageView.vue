@@ -47,7 +47,7 @@ onBeforeMount(async () => {
 			<Header title="GESTÃO" />
 		</div>
 		<div class="col-12 mb-4">
-			<div class="mx-auto px-5" style="max-width: 1403px">
+			<div class="mx-auto px-md-5" style="max-width: 1403px">
 				<!-- Fast Actions -->
 				<FastActions :isUserAdmin="isUserAdmin" />
 
@@ -92,7 +92,7 @@ onBeforeMount(async () => {
 						title="Relatório de Atividades"
 						description="clique numa atividade para visualizar o seu relatório"
 					/>
-					<div class="col-12 my-4 px-0">
+					<div class="col-12 my-4 px-0 pb-5">
 						<ActivitiesReport />
 					</div>
 				</div>

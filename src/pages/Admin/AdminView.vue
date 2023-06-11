@@ -35,8 +35,8 @@ onBeforeMount(async () => {
 		<div class="col-12 mt-5">
 			<Header title="ÁREA DE ADMINISTRADOR" />
 		</div>
-		<div class="col-12 mb-4">
-			<div class="mx-auto px-5" style="max-width: 1403px">
+		<div class="col-12 mb-5 pb-md-0 pb-5">
+			<div class="mx-auto px-md-5" style="max-width: 1403px">
 				<div class="col-12 mt-5 px-0 d-flex flex-wrap">
 					<button
 						class="btn tab pr-4 pl-0"

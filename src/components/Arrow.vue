@@ -13,7 +13,7 @@ function handleClick() {
 }
 </script>
 <template>
-	<div v-if="options.direction === 'right'" @click="handleClick" class="mr-3">
+	<div v-if="options.direction === 'right'" @click="handleClick" class="mr-3 d-flex justify-content-end">
 		<img v-if="!isDark" src="@/assets/icons/rightLightThemeArrow.svg" alt="Seta para a direita" />
 		<img v-else src="@/assets/icons/rightDarkThemeArrow.svg" alt="Seta para a direita" />
 	</div>
@@ -36,6 +36,16 @@ div {
 	&[disabled] {
 		opacity: 0.5;
 		cursor: default;
+	}
+}
+
+@media (max-width: 768px) {
+	div {
+		scale: 0.8;
+
+		&:hover {
+			scale: 0.9;
+		}
 	}
 }
 </style>

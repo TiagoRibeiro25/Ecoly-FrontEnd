@@ -16,6 +16,11 @@ const router = useRouter();
 
 watch(useRoute(), (newRoute) => {
 	route.value = newRoute.name;
+
+	if (route.value === "Authenticate") {
+		profilePicture.value = "../../../../../../assets/icons/profile.svg";
+		isUserLogged.value = false;
+	}
 });
 
 const showText = ref(false);
@@ -70,22 +75,26 @@ onBeforeMount(async () => {
 		if (response.success) {
 			profilePicture.value = response.data.photo;
 			userLogged.value = response.data;
-		} else signOut();
+		} else {
+			await signOut();
+		}
 	}
 });
 </script>
 
 <template>
+	<!-- Desktop Navigation -->
 	<nav
-		class="sidebar d-flex flex-column justify-content-between shadow-lg"
+		class="sidebar-desktop d-md-flex d-none flex-column justify-content-between shadow-lg"
 		:class="{
 			expanded: isExpanded,
 			reduced: !isExpanded,
 			openAnimation: openAnimation,
 			closeAnimation: closeAnimation,
-			'sidebar-dark': isDark,
-			'sidebar-light': !isDark,
+			'sidebar-desktop-dark': isDark,
+			'sidebar-desktop-light': !isDark,
 		}"
+		aria-label="Desktop Navigation"
 		@mouseover="open"
 		@mouseleave="close"
 	>
@@ -281,6 +290,114 @@ onBeforeMount(async () => {
 			<button v-if="showText && isUserLogged" class="sign-out-btn" @click="signOut">Sign Out</button>
 		</div>
 	</nav>
+
+	<!-- Mobile Navigation -->
+	<nav
+		class="sidebar-mobile d-md-none shadow-lg pt-3 pb-2 d-flex justify-content-center align-items-center"
+		:class="isDark ? 'sidebar-mobile-dark' : 'sidebar-mobile-light'"
+		aria-label="Mobile Navigation"
+	>
+		<router-link :to="{ name: 'Home' }">
+			<img :src="isDark ? logo : logo_dark" alt="Home" width="35" height="45" class="route-icon" />
+		</router-link>
+		<div :class="isDark ? 'nav-links-dark' : 'nav-links-light'">
+			<router-link :to="{ name: 'News' }">
+				<img
+					src="../assets/icons/news.svg"
+					alt="News"
+					width="45"
+					height="45"
+					class="route-icon"
+					:class="{
+						'selected-icon': route === 'News',
+						'selected-icon-dark': route === 'News' && isDark,
+						'selected-icon-light': route === 'News' && !isDark,
+					}"
+				/>
+			</router-link>
+			<router-link :to="{ name: 'Activities' }">
+				<img
+					src="../assets/icons/activities.svg"
+					alt="Activities"
+					width="45"
+					height="45"
+					class="route-icon"
+					:class="{
+						'selected-icon': route === 'Activities',
+						'selected-icon-dark': route === 'Activities' && isDark,
+						'selected-icon-light': route === 'Activities' && !isDark,
+					}"
+				/>
+			</router-link>
+			<router-link :to="{ name: 'Manage' }">
+				<img
+					src="../assets/icons/manage.svg"
+					alt="Manage"
+					width="45"
+					height="45"
+					class="route-icon"
+					:class="{
+						'selected-icon': route === 'Manage',
+						'selected-icon-dark': route === 'Manage' && isDark,
+						'selected-icon-light': route === 'Manage' && !isDark,
+					}"
+				/>
+			</router-link>
+		</div>
+		<div class="d-flex flex-row-reverse align-items-center">
+			<router-link
+				:to="{ name: isUserLogged ? 'Profile' : 'Authenticate', params: { id: isUserLogged ? 'me' : '' } }"
+				class="pb-2"
+			>
+				<img
+					v-if="isUserLogged"
+					v-lazy="{ src: profilePicture }"
+					alt="Perfil"
+					width="45"
+					height="45"
+					class="route-icon"
+					:class="{ 'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged }"
+				/>
+				<img
+					v-else
+					src="../assets/icons/profile.svg"
+					alt="Perfil"
+					width="45"
+					height="45"
+					class="route-icon"
+					:class="{
+						'mt-2': showText,
+						'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged,
+						'selected-icon-dark': (route === 'Profile' || route === 'Authenticate') && isDark,
+						'selected-icon-light': (route === 'Profile' || route === 'Authenticate') && !isDark,
+						'authenticate-light-icon': !isDark,
+					}"
+				/>
+			</router-link>
+			<span
+				class="ml-3 toggle-theme"
+				:class="isDark ? 'toggle-theme-dark' : 'toggle-theme-light'"
+				@click="() => toggleDark()"
+			>
+				<img
+					v-if="isDark"
+					src="../assets/icons/dark.svg"
+					alt="Tema"
+					width="45"
+					height="45"
+					class="route-icon"
+				/>
+				<img
+					v-if="!isDark"
+					src="../assets/icons/light.svg"
+					alt="Tema"
+					width="45"
+					height="45"
+					class="route-icon"
+				/>
+			</span>
+		</div>
+	</nav>
 </template>
 
 <style lang="scss" scoped>
@@ -290,7 +407,7 @@ $tertiary-color: #3fc380;
 $quaternary-color: #18516f;
 $quinary-color: #aedcc0;
 
-.sidebar {
+.sidebar-desktop {
 	height: 100vh;
 	height: 100dvh;
 	position: fixed;
@@ -326,6 +443,24 @@ $quinary-color: #aedcc0;
 		display: block;
 		padding: 16px;
 		transition: 0.3s;
+	}
+}
+
+.sidebar-mobile {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px;
+	box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+	z-index: 1005;
+
+	&-dark {
+		background-color: $primary-color;
+	}
+
+	&-light {
+		background-color: $secondary-color;
 	}
 }
 

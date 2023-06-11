@@ -187,12 +187,14 @@ $septenary-color: #e2e1e1;
 		color: $primary-color;
 	}
 }
+.schools {
+	max-height: 565px;
+}
 
 .schools,
 .add-school {
 	border-radius: 15px;
 	overflow-y: auto;
-	max-height: 565px;
 
 	&-light {
 		border: 2px solid $primary-color;
@@ -325,6 +327,12 @@ $septenary-color: #e2e1e1;
 		&::-moz-scrollbar-thumb:hover {
 			background: $tertiary-color;
 		}
+	}
+}
+
+@media (max-width: 992px) {
+	.schools {
+		max-height: 400px;
 	}
 }
 </style>

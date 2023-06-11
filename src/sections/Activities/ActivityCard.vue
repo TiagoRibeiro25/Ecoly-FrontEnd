@@ -78,9 +78,12 @@ onMounted(() => {
 					></p>
 				</div>
 			</div>
-			<div class="row" style="height: 200px">
-				<div class="col-6 d-flex align-items-end">
-					<div class="activity-dates" :class="isDark ? 'activity-dates-dark' : 'activity-dates-light'">
+			<div class="row" style="height: 400px">
+				<div class="col-sm-6 d-flex align-items-end justify-content-sm-start justify-content-center">
+					<div
+						class="activity-dates mb-sm-0 mb-3"
+						:class="isDark ? 'activity-dates-dark' : 'activity-dates-light'"
+					>
 						<div>
 							Data de início: <span class="text-muted">{{ initialDate }}</span>
 						</div>
@@ -89,7 +92,9 @@ onMounted(() => {
 						</div>
 					</div>
 				</div>
-				<div class="col-6 d-flex justify-content-end align-items-end flex-column pr-5">
+				<div
+					class="col-sm-6 d-flex justify-content-end align-items-sm-end align-items-center flex-column pr-5"
+				>
 					<div :class="canUserEdit ? '' : 'mb-2'">
 						<span class="theme px-3 py-1">
 							{{ theme }}
@@ -237,6 +242,20 @@ $quinary-color: #18516f;
 	}
 	100% {
 		transform: translateX(0);
+	}
+}
+
+@media (max-width: 576px) {
+	.activity-card {
+		height: 400px;
+	}
+
+	.title-container {
+		height: 100px;
+	}
+
+	.activity-description {
+		height: 100px;
 	}
 }
 </style>

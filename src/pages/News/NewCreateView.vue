@@ -70,8 +70,8 @@ onBeforeMount(async () => {
 			<Header title="ADICIONAR NOTÍCIA" />
 		</div>
 
-		<div class="col-12 mb-4">
-			<div class="mx-auto px-5" style="max-width: 1403px">
+		<div class="col-12 mb-5 pb-md-0 pb-5">
+			<div class="mx-auto px-md-5" style="max-width: 1403px">
 				<div class="col-12 pt-3">
 					<AddImages :images="images" />
 				</div>

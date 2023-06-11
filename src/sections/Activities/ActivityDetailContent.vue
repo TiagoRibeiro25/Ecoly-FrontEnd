@@ -13,11 +13,11 @@ const props = defineProps({
 <template>
 	<div
 		v-if="props.title && props.content"
-		class="content-container custom-scroll-bar mx-0"
+		class="content-container custom-scroll-bar mx-0 pb-lg-0 pb-4"
 		:class="{
 			'text-right': props.side === 'left',
 			'text-left': props.side === 'right',
-			'pt-4': props.pad,
+			'pt-lg-4': props.pad,
 			'custom-scroll-bar-dark': isDark,
 			'custom-scroll-bar-light': !isDark,
 		}"
@@ -25,7 +25,7 @@ const props = defineProps({
 		<h2 class="title" :class="isDark ? 'title-dark-theme' : 'title-light-theme'">
 			{{ props.title }}
 		</h2>
-		<p class="content" :class="isDark ? 'content-dark-theme' : 'content-light-theme'">
+		<p class="content px-lg-0 px-3" :class="isDark ? 'content-dark-theme' : 'content-light-theme'">
 			{{ props.content }}
 		</p>
 	</div>
@@ -40,7 +40,6 @@ $fourth-color: #3fc380;
 $fifth-color: #18516f;
 
 .content-container {
-	height: 150px;
 	overflow-y: auto;
 }
 
@@ -119,6 +118,18 @@ $fifth-color: #18516f;
 		&::-moz-scrollbar-thumb:hover {
 			background: $fifth-color;
 		}
+	}
+}
+
+@media (min-width: 992px) {
+	.content-container {
+		height: 150px;
+	}
+}
+
+@media (max-width: 991px) {
+	.content-container {
+		text-align: center !important;
 	}
 }
 </style>

@@ -79,7 +79,7 @@ watchEffect(async () => {
 		</span>
 	</div>
 	<div
-		class="col-12 meetings custom-scroll-bar shadow p-3 pt-4"
+		class="col-12 meetings custom-scroll-bar shadow px-md-3 pt-md-4 pt-3 px-0"
 		:class="isDark ? 'meetings-dark custom-scroll-bar-dark' : 'meetings-light custom-scroll-bar-light'"
 	>
 		<div

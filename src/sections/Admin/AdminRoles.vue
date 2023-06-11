@@ -191,11 +191,14 @@ $septenary-color: #e2e1e1;
 	}
 }
 
+.roles {
+	max-height: 565px;
+}
+
 .roles,
 .add-role {
 	border-radius: 15px;
 	overflow-y: auto;
-	max-height: 565px;
 
 	&-light {
 		border: 2px solid $primary-color;
@@ -328,6 +331,12 @@ $septenary-color: #e2e1e1;
 		&::-moz-scrollbar-thumb:hover {
 			background: $tertiary-color;
 		}
+	}
+}
+
+@media (max-width: 992px) {
+	.roles {
+		max-height: 400px;
 	}
 }
 </style>

@@ -7,7 +7,7 @@ const isDark = useDark();
 
 <template>
 	<div class="FAQ-section pt-4" :class="{ 'FAQ-bg-light': !isDark, 'FAQ-bg-dark': isDark }">
-		<div class="faq my-5">
+		<div class="faq my-5 mx-auto px-3">
 			<h2 class="title text-center" :class="{ 'title-text-light': !isDark, 'title-text-dark': isDark }">
 				PERGUNTAS FREQUENTES
 			</h2>
@@ -46,7 +46,6 @@ $quaternary-color: #e4f0e8;
 	min-height: 550px;
 
 	& .faq {
-		width: 65%;
 		max-width: 905px;
 		margin: 0 auto;
 		min-height: 200px;
@@ -55,7 +54,6 @@ $quaternary-color: #e4f0e8;
 
 .FAQ-bg-light {
 	background-image: url("@/assets/images/illustrationFAQ.webp");
-	background-color: $quaternary-color;
 }
 
 .FAQ-bg-dark {

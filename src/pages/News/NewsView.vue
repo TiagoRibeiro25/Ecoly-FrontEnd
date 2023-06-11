@@ -55,12 +55,12 @@ watchEffect(async () => {
 		<Header title="NOTÍCIAS" />
 	</div>
 	<div v-if="isUserAdmin" class="col-12 mb-4">
-		<div class="news-container mx-auto px-5">
+		<div class="news-container mx-auto px-md-5 d-md-block d-flex justify-content-center">
 			<ChangeViewButton text="Adicionar notícia" to="NewCreate" iconImg="../assets/icons/add.svg" />
 		</div>
 	</div>
 	<div class="col-12" :class="isUserAdmin ? 'mt-0' : 'mt-5'">
-		<div class="news-container mx-auto px-5">
+		<div class="news-container mx-auto px-md-5">
 			<div
 				v-if="fetching || news.length === 0"
 				class="d-flex justify-content-center align-items-center"

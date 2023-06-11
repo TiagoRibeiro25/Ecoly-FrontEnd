@@ -11,7 +11,7 @@ const props = defineProps({
 
 <template>
 	<div
-		class="activities mx-auto d-flex flex-row justify-content-center align-items-center"
+		class="activities mx-auto d-flex flex-lg-row flex-column justify-content-center align-items-center"
 		:class="{ 'background-dark': isDark, 'background-light': !isDark }"
 	>
 		<div v-if="props.activities.length === 0" class="mx-4">
@@ -28,30 +28,30 @@ const props = defineProps({
 			</div>
 		</div>
 
-		<div v-else class="mx-4" v-for="activity in props.activities" :key="activity.id">
+		<div v-else class="mx-lg-4 my-lg-0 my-4 w-100" v-for="activity in props.activities" :key="activity.id">
 			<div class="activity-card shadow" :class="{ 'dark-bg': isDark, 'light-bg': !isDark }">
 				<header>
 					<img
-						class="img-fluid header-img"
+						class="img-fluid header-img d-lg-block d-none"
 						loading="lazy"
 						v-lazy="{ src: activity.images }"
 						alt="Atividade Recente"
 						:style="{ 'border-radius': '20px 20px 0 0' }"
 					/>
 				</header>
-				<main class="px-3 mt-2">
+				<main class="px-3 mt-2 d-flex flex-column">
 					<div class="title-theme">
-						<h5>{{ formatText(activity.title, 30) }}</h5>
+						<h5>{{ formatText(activity.title, 50) }}</h5>
 						<span>{{ activity.theme }}</span>
 					</div>
-					<div class="dates d-flex align-items-center justify-content-center flex-column">
+					<div class="dates d-none d-lg-flex align-items-center justify-content-center flex-column">
 						<h6>Calendarização</h6>
 						<div class="text-center">
 							<span class="d-block">{{ activity.initial_date }}</span>
 							<span class="d-block">{{ activity.final_date }}</span>
 						</div>
 					</div>
-					<div class="text-center mt-1">
+					<div class="text-center mt-1 d-lg-block d-flex justify-content-end">
 						<router-link
 							class="see-more-btn py-1 px-3"
 							:to="{ name: 'ActivityDetail', params: { id: activity.id } }"
@@ -73,12 +73,11 @@ $fourth-color: #18516f;
 $fifth-color: #aedcc0;
 
 .activities {
+	min-height: 500px;
+	max-width: 900px;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
-	background-size: 100% 100%;
-	min-height: 500px;
-	max-width: 900px;
 }
 
 .background-light {
@@ -150,7 +149,6 @@ $fifth-color: #aedcc0;
 }
 
 .dark-bg {
-	// background-color: $primary-color;
 	background-color: rgba(52, 62, 61, 0.8);
 	color: $secondary-color;
 	transition: background-color 0.3s ease-in-out;
@@ -188,7 +186,6 @@ $fifth-color: #aedcc0;
 }
 
 .light-bg {
-	// background-color: $secondary-color;
 	background-color: rgba(228, 240, 232, 0.8);
 	color: $primary-color;
 	transition: background-color 0.3s ease-in-out;
@@ -245,5 +242,21 @@ $fifth-color: #aedcc0;
 .error-container-light {
 	background-color: $secondary-color;
 	color: $primary-color;
+}
+
+@media (max-width: 992px) {
+	.activities {
+		background-size: cover;
+	}
+
+	.activity-card {
+		height: 100px;
+		width: 100%;
+	}
+
+	.title-theme {
+		height: 50px;
+		padding-top: 10px;
+	}
 }
 </style>

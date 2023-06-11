@@ -23,7 +23,7 @@ const removeImage = (index) => props.images.splice(index, 1);
 </script>
 
 <template>
-	<div class="col-12 d-flex justify-content-center align-items-center px-0">
+	<div class="images col-12 d-flex flex-wrap justify-content-center align-items-center px-0">
 		<img
 			v-for="(image, index) in images"
 			:key="index"
@@ -48,10 +48,16 @@ $primary-color: #343e3d;
 $secondary-color: #ffffff;
 $tertiary-color-color: #18516f;
 
+.images {
+	overflow-x: auto;
+	white-space: nowrap;
+	max-width: 100%;
+}
+
 .add-new-img {
 	width: 220px;
 	height: 150px;
-	transform: scale (1);
+	transform: scale(1);
 	transition: transform 0.3s ease-in-out;
 
 	&:hover {

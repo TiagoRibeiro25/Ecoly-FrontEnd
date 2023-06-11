@@ -50,7 +50,7 @@ onBeforeMount(async () => {
 	<div v-else class="mt-3 mx-auto" style="max-width: 1400px">
 		<DetailImages :images="newItem.images" />
 
-		<div class="mt-4 px-3">
+		<div class="mt-4 px-md-3">
 			<header class="d-flex flex-row">
 				<div class="col-9">
 					<h1 class="new-title" :class="isDark ? 'new-title-dark' : 'new-title-light'">

@@ -61,7 +61,7 @@ watchEffect(async () => {
 				{{ errorMsg }}
 			</span>
 		</div>
-		<div v-else class="col-12 px-0 d-flex flex-xl-row flex-column">
+		<div v-else class="col-12 px-0 d-flex flex-xl-row flex-column pb-md-0 pb-5">
 			<div class="col-xl-6 pl-0 pr-xl-3 px-0">
 				<div class="mb-xl-0 mb-5" style="max-height: 600px; overflow-y: auto; overflow-x: hidden">
 					<div v-for="activity in activities" :key="activity.id">

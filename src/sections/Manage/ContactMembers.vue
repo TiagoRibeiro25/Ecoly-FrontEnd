@@ -164,6 +164,7 @@ $quinary-color: #3fc380;
 	border: 2px solid $quinary-color;
 	border-radius: 0.6rem;
 	width: auto;
+	max-width: 100%;
 }
 
 .destination-dark-mode {
@@ -235,6 +236,12 @@ $quinary-color: #3fc380;
 
 	&-light {
 		color: $primary-color;
+	}
+}
+
+@media (max-width: 992px) {
+	.destination-select {
+		width: 100%;
 	}
 }
 </style>

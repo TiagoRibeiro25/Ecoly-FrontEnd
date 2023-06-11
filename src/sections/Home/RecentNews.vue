@@ -16,7 +16,7 @@ const slide = ref(0);
 <template>
 	<div class="news-card shadow" :class="{ 'recent-new-bg-light': !isDark, 'recent-new-bg-dark': isDark }">
 		<div v-if="props.news.length > 0" class="row">
-			<div class="col-1">
+			<div class="col-lg-1 col-2">
 				<Arrow
 					:options="{ direction: 'left', isDisabled: slide === 0 }"
 					@click="slide--"
@@ -24,12 +24,12 @@ const slide = ref(0);
 				/>
 			</div>
 			<!-- Image -->
-			<div class="col-4 img-container d-none d-lg-block">
+			<div class="col-lg-4 col-0 img-container d-none d-lg-block">
 				<img v-lazy="{ src: props.news[slide].image }" alt="Imagem da Notícia em Destaque" />
 			</div>
 			<!-- Content -->
-			<div class="col-10 col-lg-6">
-				<div class="row-3" style="height: 64px">
+			<div class="col-8 col-lg-6">
+				<div class="row-3">
 					<h2
 						class="mt-5 new-title"
 						:class="{ 'recent-new-text-light': !isDark, 'recent-new-title-dark': isDark }"
@@ -76,7 +76,7 @@ const slide = ref(0);
 					</div>
 				</div>
 			</div>
-			<div class="col-1">
+			<div class="col-lg-1 col-2">
 				<Arrow
 					:options="{ direction: 'right', isDisabled: slide === props.news.length - 1 }"
 					@click="slide++"
@@ -114,7 +114,8 @@ $fifth-color: #aedcc0;
 
 .news-card {
 	background-color: $secondary-color;
-	width: 900px;
+	max-width: 900px;
+	width: 100%;
 	height: 350px;
 	margin: 0 auto;
 	border-radius: 25px;
@@ -135,12 +136,16 @@ $fifth-color: #aedcc0;
 	font-size: 23px;
 	font-weight: 700;
 	text-align: left;
+	max-height: 55px;
+	overflow: hidden;
 }
 
 .new-text {
 	font-family: "Panton", sans-serif;
 	font-size: 16px;
 	font-weight: 400;
+	max-height: 120px;
+	overflow: hidden;
 }
 
 .recent-new-date {
@@ -199,18 +204,6 @@ $fifth-color: #aedcc0;
 		background-color: $fourth-color;
 		color: $tertiary-color;
 		text-decoration: none;
-	}
-}
-
-@media (max-width: 1090px) {
-	.news-card {
-		width: 800px;
-	}
-}
-
-@media (max-width: 950px) {
-	.news-card {
-		width: 100%;
 	}
 }
 </style>

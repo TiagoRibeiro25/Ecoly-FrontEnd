@@ -31,7 +31,7 @@ watchEffect(() => {
 	<header>
 		<SideBar />
 	</header>
-	<main style="margin-left: 80px">
+	<main>
 		<div v-if="isLoading" class="loading-bar"></div>
 		<RouterView />
 	</main>
@@ -57,6 +57,12 @@ $primary-color: #3fc380;
 	}
 	100% {
 		width: 100%;
+	}
+}
+
+@media (min-width: 768px) {
+	main {
+		margin-left: 80px;
 	}
 }
 </style>

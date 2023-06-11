@@ -298,7 +298,7 @@ onBeforeMount(async () => {
 		aria-label="Mobile Navigation"
 	>
 		<router-link :to="{ name: 'Home' }">
-			<img :src="isDark ? logo : logo_dark" alt="Home" width="25" height="35" class="route-icon" />
+			<img :src="isDark ? logo : logo_dark" alt="Home" width="25" height="35" class="route-icon mx-2" />
 		</router-link>
 		<div :class="isDark ? 'nav-links-dark' : 'nav-links-light'">
 			<router-link :to="{ name: 'News' }">
@@ -307,7 +307,7 @@ onBeforeMount(async () => {
 					alt="News"
 					width="35"
 					height="35"
-					class="route-icon"
+					class="route-icon mx-2"
 					:class="{
 						'selected-icon': route === 'News',
 						'selected-icon-dark': route === 'News' && isDark,
@@ -321,7 +321,7 @@ onBeforeMount(async () => {
 					alt="Activities"
 					width="35"
 					height="35"
-					class="route-icon"
+					class="route-icon mx-2"
 					:class="{
 						'selected-icon': route === 'Activities',
 						'selected-icon-dark': route === 'Activities' && isDark,
@@ -335,7 +335,7 @@ onBeforeMount(async () => {
 					alt="Manage"
 					width="35"
 					height="35"
-					class="route-icon"
+					class="route-icon mx-2"
 					:class="{
 						'selected-icon': route === 'Manage',
 						'selected-icon-dark': route === 'Manage' && isDark,
@@ -355,7 +355,7 @@ onBeforeMount(async () => {
 					alt="Perfil"
 					width="35"
 					height="35"
-					class="route-icon"
+					class="route-icon mx-2"
 					:class="{ 'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged }"
 				/>
 				<img
@@ -364,7 +364,7 @@ onBeforeMount(async () => {
 					alt="Perfil"
 					width="35"
 					height="35"
-					class="route-icon"
+					class="route-icon mx-2"
 					:class="{
 						'mt-2': showText,
 						'selected-icon': (route === 'Profile' || route === 'Authenticate') && !isUserLogged,
@@ -375,7 +375,7 @@ onBeforeMount(async () => {
 				/>
 			</router-link>
 			<span
-				class="ml-3 toggle-theme"
+				class="toggle-theme"
 				:class="isDark ? 'toggle-theme-dark' : 'toggle-theme-light'"
 				@click="() => toggleDark()"
 			>
@@ -385,7 +385,7 @@ onBeforeMount(async () => {
 					alt="Tema"
 					width="35"
 					height="35"
-					class="route-icon"
+					class="route-icon mx-2"
 				/>
 				<img
 					v-if="!isDark"
@@ -393,7 +393,7 @@ onBeforeMount(async () => {
 					alt="Tema"
 					width="35"
 					height="35"
-					class="route-icon"
+					class="route-icon mx-2"
 				/>
 			</span>
 		</div>

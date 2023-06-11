@@ -16,6 +16,7 @@ const router = useRouter();
 
 watch(useRoute(), (newRoute) => {
 	route.value = newRoute.name;
+	console.log(isUserLogged.value);
 });
 
 const showText = ref(false);
@@ -25,6 +26,7 @@ const isExpanded = ref(false);
 
 const isUserLogged = ref(userStore.isUserLoggedIn);
 const profilePicture = ref("../../../../../../assets/icons/profile.svg");
+const userLogged = ref(null);
 
 function open() {
 	if (isExpanded.value) return;
@@ -66,8 +68,10 @@ async function signOut() {
 onBeforeMount(async () => {
 	if (isUserLogged.value) {
 		const response = await userStore.getLoggedInUser();
-		if (response.success) profilePicture.value = response.data.photo;
-		else signOut();
+		if (response.success) {
+			profilePicture.value = response.data.photo;
+			userLogged.value = response.data;
+		} else signOut();
 	}
 });
 </script>
@@ -157,31 +161,6 @@ onBeforeMount(async () => {
 					Atividades
 				</span>
 			</router-link>
-			<router-link :to="{ name: 'Dashboard' }"
-				><img
-					src="../assets/icons/dashboard.svg"
-					alt="Dashboard"
-					width="50"
-					height="50"
-					class="route-icon"
-					:class="{
-						'selected-icon': route === 'Dashboard',
-						'selected-icon-dark': route === 'Dashboard' && isDark,
-						'selected-icon-light': route === 'Dashboard' && !isDark,
-					}"
-				/>
-				<span
-					v-if="showText"
-					class="route-text"
-					:class="{
-						'selected-link': route === 'Dashboard',
-						'selected-link-dark': route === 'Dashboard' && isDark,
-						'selected-link-light': route === 'Dashboard' && !isDark,
-					}"
-				>
-					Dashboard
-				</span>
-			</router-link>
 			<router-link :to="{ name: 'Manage' }"
 				><img
 					src="../assets/icons/manage.svg"
@@ -205,6 +184,31 @@ onBeforeMount(async () => {
 					}"
 				>
 					Gestão
+				</span>
+			</router-link>
+			<router-link v-if="isUserLogged && userLogged?.role === 'admin'" :to="{ name: 'Admin' }"
+				><img
+					src="../assets/icons/admin.svg"
+					alt="Admin"
+					width="50"
+					height="50"
+					class="route-icon"
+					:class="{
+						'selected-icon': route === 'Admin',
+						'selected-icon-dark': route === 'Admin' && isDark,
+						'selected-icon-light': route === 'Admin' && !isDark,
+					}"
+				/>
+				<span
+					v-if="showText"
+					class="route-text"
+					:class="{
+						'selected-link': route === 'Admin',
+						'selected-link-dark': route === 'Admin' && isDark,
+						'selected-link-light': route === 'Admin' && !isDark,
+					}"
+				>
+					Admin
 				</span>
 			</router-link>
 		</div>

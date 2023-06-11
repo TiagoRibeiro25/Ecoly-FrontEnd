@@ -22,6 +22,10 @@ const router = createRouter({
 			path: "/:pathMatch(.*)*",
 			name: "NotFound",
 			component: () => import("../pages/NotFoundView.vue"),
+			beforeEnter: (to, from, next) => {
+				if (from.name === "Authenticate") next({ name: "Authenticate" });
+				else next();
+			},
 		},
 		{
 			path: "/news",

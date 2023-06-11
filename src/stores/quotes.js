@@ -16,7 +16,7 @@ export const useQuotesStore = defineStore("quotes", () => {
 			quote.value = response.data;
 			return response.data;
 		} catch (err) {
-			console.log("There was an error fetching the quote. Using default quote instead.\n Error: ", err);
+			console.log("There was an error fetching the quote. Using default quote instead.");
 			return {
 				author: "Yan Arthus Bertrand",
 				content:

@@ -78,7 +78,7 @@ onBeforeMount(async () => {
 						class="text-right px-1 pt-1 created-by d-md-block d-flex align-items-center"
 						:class="isDark ? 'created-by-dark' : 'created-by-light'"
 					>
-						Criado por:
+						<span class="d-sm-inline-block d-none"> Criado por: </span>
 						<router-link
 							class="header-info header-link text-muted pl-md-0 pl-1"
 							:class="isDark ? 'header-link-dark' : 'header-link-light'"

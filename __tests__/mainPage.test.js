@@ -11,7 +11,7 @@ module.exports = async (url) => {
         await driver.get(url);
 
         const carousselArrowRight = await driver.wait(
-            until.elementLocated(By.css('img[src="/assets/rightLightThemeArrow-64b52ca0.svg"]')),
+            until.elementLocated(By.css('img[src="/assets/rightDarkThemeArrow-a5c883fc.svg"]')),
             5000
         );
     
@@ -21,14 +21,14 @@ module.exports = async (url) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
     
         const carousselArrowLeft = await driver.wait(
-            until.elementLocated(By.css('img[src="/assets/leftLightThemeArrow-5899c1be.svg"]')),
+            until.elementLocated(By.css('img[src="/assets/leftDarkThemeArrow-7becc0d9.svg"]')),
             5000
         );
     
         await carousselArrowLeft.click();
 
         const lightMode = await driver.wait(
-            until.elementLocated(By.css('img[src="/assets/light-7ada35aa.svg"]')),
+            until.elementLocated(By.css('img[src="/assets/dark-a1c90c7a.svg"]')),
             5000
         )
 
@@ -37,7 +37,7 @@ module.exports = async (url) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const darkMode = await driver.wait(
-            until.elementLocated(By.css('img[src="/assets/dark-a1c90c7a.svg"]')),
+            until.elementLocated(By.css('img[src="/assets/light-7ada35aa.svg"]')),
             5000
         )
 
@@ -46,7 +46,7 @@ module.exports = async (url) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         
         const article = await driver.wait(
-            until.elementLocated(By.className("see-details-btn py-2 px-3 recent-new-btn-light")),
+            until.elementLocated(By.className("see-details-btn py-2 px-3 recent-new-btn-dark")),
             5000
           );
       
@@ -55,7 +55,7 @@ module.exports = async (url) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const home = await driver.wait(
-            until.elementLocated(By.css('img[src="/assets/logo_dark-772ab600.webp"]')),
+            until.elementLocated(By.css('img[src="/assets/logo-0133b710.webp"]')),
             5000
         )
         
@@ -75,7 +75,7 @@ module.exports = async (url) => {
           
           // Locate the "home" element again
             const home2 = await driver.wait(
-                until.elementLocated(By.css('img[src="/assets/logo_exp_dark-f7aabb07.webp"]')),
+                until.elementLocated(By.css('img[src="/assets/logo_exp-9d75d77e.webp"]')),
                 5000
             );
   
@@ -109,7 +109,7 @@ module.exports = async (url) => {
             await new Promise((resolve) => setTimeout(resolve, 2000));
               
             const home3 = await driver.wait(
-                until.elementLocated(By.css('img[src="/assets/logo_exp_dark-f7aabb07.webp"]')),
+                until.elementLocated(By.css('img[src="/assets/logo_exp-9d75d77e.webp"]')),
                 5000
             );
   
@@ -128,7 +128,7 @@ module.exports = async (url) => {
             await new Promise((resolve) => setTimeout(resolve, 2000));
               
             const home4 = await driver.wait(
-                until.elementLocated(By.css('img[src="/assets/logo_exp_dark-f7aabb07.webp"]')),
+                until.elementLocated(By.css('img[src="/assets/logo_exp-9d75d77e.webp"]')),
                 5000
             );
   

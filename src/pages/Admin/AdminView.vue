@@ -50,6 +50,7 @@ onBeforeMount(async () => {
 						Utilizadores
 					</button>
 					<button
+						id="cargos"
 						class="btn tab pr-4 pl-0"
 						:class="{
 							'tab-selected': selectedTab === 'roles',

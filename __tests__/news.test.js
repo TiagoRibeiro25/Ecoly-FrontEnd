@@ -31,7 +31,7 @@ module.exports = async (url) =>{
   
   
           const home = await driver.wait(
-              until.elementLocated(By.css('img[src="/assets/logo_dark-772ab600.webp"]')),
+              until.elementLocated(By.css('img[src="/assets/logo-0133b710.webp"]')),
               5000
           )
           
@@ -45,7 +45,7 @@ module.exports = async (url) =>{
           }
   
           const home2 = await driver.wait(
-              until.elementLocated(By.css('img[src="/assets/logo_dark-772ab600.webp"]')),
+              until.elementLocated(By.css('img[src="/assets/logo-0133b710.webp"]')),
               5000
           );
     
@@ -62,7 +62,7 @@ module.exports = async (url) =>{
           await driver.sleep(1000);
   
           const removeBtn = await driver.wait(
-            until.elementLocated(By.css('img[data-v-00a57e29][src="../assets/icons/remove-light.svg"]')),
+            until.elementLocated(By.css('img[data-v-60397ec7][src="../assets/icons/remove-dark.svg"]')),
               5000
           )
   
@@ -84,7 +84,7 @@ module.exports = async (url) =>{
           
   
           const newTitle = await driver.wait(
-            until.elementLocated(By.className('form-control light-theme-input')),
+            until.elementLocated(By.className('form-control dark-theme-input')),
               5000
           )
   
@@ -92,7 +92,7 @@ module.exports = async (url) =>{
   
   
           const newBody = await driver.wait(
-            until.elementLocated(By.className('form-control custom-scroll-bar light-theme-input custom-scroll-bar-light')),
+            until.elementLocated(By.className('form-control custom-scroll-bar dark-theme-input custom-scroll-bar-dark')),
               5000
           )
   
@@ -107,7 +107,7 @@ module.exports = async (url) =>{
           await driver.executeScript('arguments[0].click()', newsIcon3);
   
           const searchBar = await driver.wait(
-            until.elementLocated(By.className('form-control searchbar-input bg-light')),
+            until.elementLocated(By.className('form-control searchbar-input bg-dark')),
               5000
           )
   

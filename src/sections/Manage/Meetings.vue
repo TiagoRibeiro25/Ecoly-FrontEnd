@@ -15,6 +15,12 @@ const seeDescriptionModal = ref(false);
 const seeAtaModal = ref(false);
 const seeAddAtaModal = ref(false);
 
+/** @param {"past" | "future"} newOption */
+const updateOption = (newOption) => {
+	if (fetching.value) return;
+	option.value = newOption;
+};
+
 const showDescriptionModal = (meeting) => {
 	meetingSelected.value = meeting;
 	seeDescriptionModal.value = true;
@@ -38,6 +44,7 @@ watchEffect(async () => {
 
 	meetings.value = [];
 	fetching.value = true;
+	errorMsg.value = "";
 
 	const response = await meetingsStore.getMeetings(option.value);
 
@@ -66,14 +73,14 @@ watchEffect(async () => {
 		<span
 			class="option mx-3"
 			:class="{ 'option-selected': option === 'past', 'option-dark': isDark, 'option-light': !isDark }"
-			@click="option = 'past'"
+			@click="updateOption('past')"
 		>
 			Realizadas
 		</span>
 		<span
 			class="option mx-2"
 			:class="{ 'option-selected': option === 'future', 'option-dark': isDark, 'option-light': !isDark }"
-			@click="option = 'future'"
+			@click="updateOption('future')"
 		>
 			Futuras
 		</span>

@@ -5,6 +5,7 @@ import { useUsersStore } from "../../stores/users";
 import { useNewsStore } from "../../stores/news";
 import { useActivitiesStore } from "../../stores/activities";
 import { useRouter } from "vue-router";
+import { useMeetingsStore } from "../../stores/meetings";
 
 const isDark = useDark();
 const props = defineProps({
@@ -19,9 +20,12 @@ const signOut = async () => {
 	const usersStore = useUsersStore();
 	const newsStore = useNewsStore();
 	const activitiesStore = useActivitiesStore();
+	const meetingsStore = useMeetingsStore();
+
 	usersStore.signOut();
 	newsStore.resetData();
 	activitiesStore.resetData();
+	meetingsStore.resetData();
 	await router.push({ name: "Authenticate" });
 };
 </script>

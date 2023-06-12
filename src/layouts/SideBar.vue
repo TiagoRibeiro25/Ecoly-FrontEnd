@@ -9,6 +9,7 @@ import logo_exp_dark from "../assets/logo/logo_exp_dark.webp";
 import logo_dark from "../assets/logo/logo_dark.webp";
 import { useNewsStore } from "../stores/news";
 import { useActivitiesStore } from "../stores/activities";
+import { useMeetingsStore } from "../stores/meetings";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -67,12 +68,14 @@ function close() {
 async function signOut() {
 	const newsStore = useNewsStore();
 	const activitiesStore = useActivitiesStore();
+	const meetingsStore = useMeetingsStore();
 
 	userStore.signOut();
 	isUserLogged.value = false;
 	profilePicture.value = "../../../../../../assets/icons/profile.svg";
 	newsStore.resetData();
 	activitiesStore.resetData();
+	meetingsStore.resetData();
 	await router.push({ name: "Authenticate" });
 }
 

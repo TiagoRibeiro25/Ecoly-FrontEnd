@@ -10,6 +10,8 @@ module.exports = async (url) => {
 
         await driver.get(url);
 
+        driver.sleep(1000)
+
         const carousselArrowRight = await driver.wait(
             until.elementLocated(By.css('img[src="/assets/rightDarkThemeArrow-a5c883fc.svg"]')),
             5000

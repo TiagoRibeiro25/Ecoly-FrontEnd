@@ -48,6 +48,22 @@ module.exports = async (url) =>{
         )
         
         await cargoCreate.sendKeys("Cargo teste");
+        
+        await driver.sleep(1000)
+
+        const escolasButton = await driver.wait(
+            until.elementLocated(By.id('escolas')), 5000
+        )
+
+        await escolasButton.click();
+        
+        const escolasCreate = await driver.wait(
+            until.elementLocated(By.className("form-control dark-theme-input"))
+        )
+        
+        await escolasCreate.sendKeys("Escola teste");
+
+        
 
           console.log(colors.green("Admin page test passed!"));
     } catch (error) {

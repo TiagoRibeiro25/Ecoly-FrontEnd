@@ -233,7 +233,7 @@ onBeforeMount(async () => {
 			<!-- Register Form -->
 			<b-form
 				v-else
-				class="form p-sm-4"
+				class="form p-sm-4 pb-5 mb-5"
 				:class="{ 'quit-register': RegisterQuitRegister }"
 				@submit.prevent="register"
 			>

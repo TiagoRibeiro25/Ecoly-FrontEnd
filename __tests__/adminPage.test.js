@@ -38,7 +38,7 @@ module.exports = async (url) =>{
         await driver.sleep(1000)
 
         const cargosButton = await driver.wait(
-            until.elementLocated(By.id('cargos'))
+            until.elementLocated(By.id('cargos')), 5000
         )
 
         await cargosButton.click();  

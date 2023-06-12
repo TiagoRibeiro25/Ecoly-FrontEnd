@@ -99,7 +99,7 @@ watchEffect(async () => {
 		<Header title="ATIVIDADES" />
 	</div>
 	<div class="col-12 mb-4">
-		<div class="activities-container px-md-5 d-sm-flex">
+		<div class="activities-container px-md-5 d-sm-flex mx-auto">
 			<div
 				v-if="isUserVerified"
 				class="col-sm-6 col-12 px-0 d-flex align-items-end justify-content-sm-start justify-content-center pt-sm-0 pt-3"

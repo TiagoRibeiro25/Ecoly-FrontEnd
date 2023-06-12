@@ -43,8 +43,11 @@ module.exports = async (url) =>{
 
         await cargosButton.click();  
 
-
+        const cargoCreate = await driver.wait(
+            until.elementLocated(By.className("form-control dark-theme-input"))
+        )
         
+        await cargoCreate.sendKeys("Cargo teste");
 
           console.log(colors.green("Admin page test passed!"));
     } catch (error) {

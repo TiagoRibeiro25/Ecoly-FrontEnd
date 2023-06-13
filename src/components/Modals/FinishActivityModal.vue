@@ -75,7 +75,7 @@ const finishActivity = async () => {
 			<div class="col-12 mt-3 text-center">
 				<b-button
 					class="btn finish-btn px-5"
-					:disabled="finishing || report.trim() === '' || imgs.length === 0"
+					:disabled="finishing || report.trim().length < 100 || imgs.length === 0"
 					@click="finishActivity"
 				>
 					Finalizar

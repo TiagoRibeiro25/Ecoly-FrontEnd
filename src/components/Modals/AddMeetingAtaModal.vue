@@ -2,6 +2,7 @@
 import { useMeetingsStore } from "../../stores/meetings";
 import AddImages from "../AddImages.vue";
 import { ref } from "vue";
+import Input from "../Input.vue";
 
 const emits = defineEmits(["close"]);
 const props = defineProps({
@@ -14,7 +15,11 @@ const text = ref("");
 const adding = ref(false);
 const errorMsg = ref("");
 
-const verifyText = () => !RegExp(/[a-z]/i).exec(text.value);
+const verifyForm = () => {
+	if (images.length === 0) return true;
+	if (text.value.length < 100) return true;
+	return !RegExp(/[a-z]/i).exec(text.value);
+};
 
 const addAta = async () => {
 	adding.value = true;
@@ -52,12 +57,13 @@ const addAta = async () => {
 
 			<div class="mt-5">
 				<!-- Max rows -->
-				<b-form-textarea
-					class="ata-textarea mb-4"
-					v-model="text"
-					placeholder="Insira a ata da reunião..."
-					rows="8"
-				></b-form-textarea>
+				<Input
+					class="mb-5"
+					:text="text"
+					placeholder="Insira a ata da reunião (mínimo 100 caracteres)"
+					type="textarea"
+					@update:text="($event) => (text = $event)"
+				/>
 			</div>
 
 			<div v-if="adding || errorMsg !== ''" class="w-100 text-center mb-4">
@@ -71,7 +77,7 @@ const addAta = async () => {
 				<button
 					type="button"
 					class="btn add-ata-btn text-center px-5"
-					:disabled="verifyText() || images.length === 0"
+					:disabled="verifyForm()"
 					@click="addAta"
 				>
 					Adicionar Ata
@@ -100,25 +106,6 @@ $fourth-color: #aedcc0;
 	font-size: 1.1rem;
 	font-weight: 500;
 	color: $primary-color;
-}
-
-.ata-textarea {
-	font-family: "Panton", sans-serif;
-	font-size: 1.2rem;
-	font-weight: 400;
-	text-align: justify;
-	color: $primary-color;
-	background-color: transparent;
-	border: 2px solid $fourth-color;
-	border-radius: 0.6rem;
-	max-height: 25rem;
-	min-height: 6rem;
-
-	&:focus {
-		border-color: $tertiary-color;
-		box-shadow: none;
-		outline: transparent;
-	}
 }
 
 .add-ata-btn {

@@ -143,7 +143,7 @@ onBeforeMount(async () => {
 	const themesResponse = await activitiesStore.getActiveThemes();
 
 	if (!themesResponse.success) {
-		msg.value = "Occoreu um erro ao carregar temas";
+		msg.value = "Ocorreu um erro ao carregar temas";
 		return;
 	}
 
@@ -173,7 +173,7 @@ onBeforeMount(async () => {
 		<Header title="Adicionar Atividade" />
 	</div>
 
-	<div class="col-12 mb-4">
+	<div class="col-12 mb-4 pb-md-0 pb-5">
 		<div class="mx-auto px-md-5" style="max-width: 1403px">
 			<div class="col-12 pt-3">
 				<AddImages :images="activity.imgs" />

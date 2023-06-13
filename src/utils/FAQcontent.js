@@ -18,7 +18,7 @@ export default [
 	},
 	{
 		answer:
-			"Sim, a plataforma Ecoly permite que os usuários vejam as estatísticas de atividades de outras escolas do país e comparem-nas com a da sua escola.",
+			"Sim, a plataforma Ecoly permite que os utilizadores vejam as estatísticas de atividades de outras escolas do país e comparem-nas com a da sua escola.",
 		id: "4",
 		question: "Existe alguma maneira de acompanhar as estatísticas de outras escolas no Ecoly?",
 	},

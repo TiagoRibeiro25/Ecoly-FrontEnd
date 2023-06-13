@@ -61,7 +61,7 @@ watchEffect(async () => {
 								class="percentage-info"
 								:class="isDark ? 'percentage-info-dark' : 'percentage-info-light'"
 							>
-								% de usuários com a medalha
+								% de utilizadores com a medalha
 							</span>
 						</div>
 					</div>
@@ -106,7 +106,7 @@ watchEffect(async () => {
 								class="percentage-info"
 								:class="isDark ? 'percentage-info-dark' : 'percentage-info-light'"
 							>
-								% de usuários com a medalha
+								% de utilizadores com a medalha
 							</span>
 						</div>
 					</div>

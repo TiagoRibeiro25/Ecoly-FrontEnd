@@ -3,6 +3,8 @@ import { ref, watchEffect } from "vue";
 import { RouterView, useRouter } from "vue-router";
 import { useDark } from "@vueuse/core";
 import SideBar from "./layouts/SideBar.vue";
+import { useUsersStore } from "./stores/users";
+import { setLocalStorage } from "./utils/localStorage";
 
 const isDark = useDark();
 const router = useRouter();
@@ -24,6 +26,12 @@ watchEffect(() => {
 	// Toggle theme
 	document.body.classList.toggle("body-dark-theme", isDark.value);
 	document.body.classList.toggle("body-light-theme", !isDark.value);
+});
+
+// when the user closes the browser add a flag to localStorage
+window.addEventListener("beforeunload", () => {
+	const usersStore = useUsersStore();
+	setLocalStorage("auth_key", usersStore.token);
 });
 </script>
 

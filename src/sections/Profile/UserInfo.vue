@@ -1,11 +1,11 @@
 <script setup>
-import EditProfileModal from "../../components/Modals/EditProfileModal.vue";
 import { useDark } from "@vueuse/core";
-import { useUsersStore } from "../../stores/users";
-import { useNewsStore } from "../../stores/news";
-import { useActivitiesStore } from "../../stores/activities";
 import { useRouter } from "vue-router";
+import EditProfileModal from "../../components/Modals/EditProfileModal.vue";
+import { useActivitiesStore } from "../../stores/activities";
 import { useMeetingsStore } from "../../stores/meetings";
+import { useNewsStore } from "../../stores/news";
+import { useUsersStore } from "../../stores/users";
 
 const isDark = useDark();
 const props = defineProps({
@@ -86,6 +86,8 @@ const signOut = async () => {
 			<div v-else class="d-flex justify-content-center align-items-center flex-column">
 				<img
 					class="empty-badge"
+					width="65"
+					height="90"
 					src="@/assets/logo/logo.webp"
 					alt="Nenhuma medalha em destaque"
 					:class="{ 'mb-3': !props.user.isLoggedUser }"
@@ -190,7 +192,6 @@ $quaternary-color: #e4f0e8;
 .empty-badge {
 	width: 65px;
 	height: 90px;
-	background-image: url("@/assets/logo/logo_dark.webp");
 }
 
 .edit-profile-btn {

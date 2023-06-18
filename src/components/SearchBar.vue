@@ -63,7 +63,7 @@ watchEffect(async () => {
 
 		searching.value = false;
 		if (data.value.length === 0) showModal.value = false;
-	}, 1500);
+	}, 1000);
 });
 </script>
 
@@ -73,14 +73,19 @@ watchEffect(async () => {
 			<template #prepend>
 				<b-input-group-text
 					class="searchbar-input search-icon"
-					:class="{ 'bg-light': !isDark, 'bg-dark': isDark }"
+					:class="isDark ? 'searchbar-input-dark' : 'searchbar-input-light'"
 				>
-					<img v-lazy="{ src: '../assets/icons/search.svg' }" alt="search" width="20" />
+					<img
+						v-lazy="{ src: isDark ? '../assets/icons/search-dark.svg' : '../assets/icons/search-light.svg' }"
+						alt="search"
+						width="20"
+						height="20"
+					/>
 				</b-input-group-text>
 			</template>
 			<b-form-input
 				class="searchbar-input"
-				:class="{ 'bg-light': !isDark, 'bg-dark': isDark }"
+				:class="isDark ? 'searchbar-input-dark' : 'searchbar-input-light'"
 				:placeholder="props.placeholder || 'Pesquisar'"
 				type="search"
 				v-model="search"
@@ -155,16 +160,16 @@ $quinary-color: #18516f;
 	&:focus {
 		box-shadow: none;
 	}
-}
 
-.bg-light {
-	background-color: $primary-color !important;
-	color: $secondary-color !important;
-}
+	&-dark {
+		background-color: $primary-color !important;
+		color: $secondary-color !important;
+	}
 
-.bg-dark {
-	background-color: $tertiary-color !important;
-	color: $primary-color !important;
+	&-light {
+		background-color: $quaternary-color !important;
+		color: $primary-color !important;
+	}
 }
 
 .search-results {

@@ -8,23 +8,29 @@ const isDark = useDark();
 <template>
 	<div class="FAQ-section pt-4" :class="{ 'FAQ-bg-light': !isDark, 'FAQ-bg-dark': isDark }">
 		<div class="faq my-5 mx-auto px-3">
-			<h2 class="title text-center" :class="{ 'title-text-light': !isDark, 'title-text-dark': isDark }">
+			<h2 class="title text-center" :class="{ 'title-light': !isDark, 'title-dark': isDark }">
 				PERGUNTAS FREQUENTES
 			</h2>
-			<div class="accordion" role="tablist">
+			<div class="accordion" role="tablist" :class="isDark ? 'accordion-dark' : 'accordion-light'">
 				<b-card v-for="question in FAQcontent" :key="question.id" no-body class="mb-1 card">
-					<b-card-header header-tag="header" class="p-1" role="tab">
+					<b-card-header
+						header-tag="header"
+						class="p-1 border-0"
+						:class="isDark ? 'card-header-dark' : 'card-header-light'"
+						role="tab"
+					>
 						<b-button
 							block
 							v-b-toggle="'collapse-' + question.id"
 							variant="info"
-							class="text-left question"
+							class="text-left question border-0"
+							:class="isDark ? 'question-dark' : 'question-light'"
 							>{{ question.question }}</b-button
 						>
 					</b-card-header>
 					<b-collapse :id="'collapse-' + question.id" accordion="my-accordion" role="tabpanel">
-						<b-card-body>
-							<b-card-text class="text-left answer"> {{ question.answer }}</b-card-text>
+						<b-card-body class="border-0" :class="isDark ? 'card-body-dark' : 'card-body-light'">
+							<b-card-text class="answer"> {{ question.answer }}</b-card-text>
 						</b-card-body>
 					</b-collapse>
 				</b-card>
@@ -38,6 +44,7 @@ $primary-color: #f8f9fa;
 $secondary-color: #343e3d;
 $tertiary-color: #aedcc0;
 $quaternary-color: #e4f0e8;
+$quinary-color: #2a3231;
 
 .FAQ-section {
 	background-repeat: no-repeat;
@@ -66,22 +73,28 @@ $quaternary-color: #e4f0e8;
 	font-size: 35px;
 	margin-top: -20px;
 	margin-bottom: 80px;
-}
 
-.title-text-light {
-	color: $secondary-color;
-}
+	&-dark {
+		color: $tertiary-color;
+	}
 
-.title-text-dark {
-	color: $tertiary-color;
+	&-light {
+		color: $secondary-color;
+	}
 }
 
 .accordion {
-	background-color: $secondary-color;
-	color: $tertiary-color;
 	border-radius: 5px;
 	padding: 10px;
 	border: none;
+
+	&-dark {
+		background-color: $secondary-color;
+	}
+
+	&-light {
+		background-color: $quaternary-color;
+	}
 }
 
 .card {
@@ -89,53 +102,73 @@ $quaternary-color: #e4f0e8;
 }
 
 .card-header {
-	background-color: $secondary-color;
-	color: $primary-color;
-	border: none;
-}
+	&-dark {
+		background-color: $secondary-color;
+	}
 
-button {
-	background-color: $secondary-color;
-	color: $primary-color;
-	border: none;
-}
-
-button:focus,
-button:active,
-button:hover {
-	outline: none;
-	box-shadow: none;
-	background-color: $secondary-color;
-}
-
-.card-body {
-	background-color: $secondary-color;
-	color: $primary-color;
-	border: none;
-}
-
-.card-text {
-	color: $primary-color;
-	font-size: 15px;
+	&-light {
+		background-color: $quaternary-color;
+	}
 }
 
 .question {
 	font-family: "Panton", sans-serif;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 19px;
+
+	&-dark {
+		background-color: $secondary-color;
+		color: $primary-color;
+
+		&:focus,
+		&:active,
+		&:hover {
+			outline: none;
+			box-shadow: none;
+			background-color: $quinary-color;
+		}
+
+		&:focus,
+		&:active {
+			background-color: $secondary-color;
+		}
+	}
+
+	&-light {
+		background-color: $quaternary-color;
+		color: $secondary-color;
+
+		&:focus,
+		&:active,
+		&:hover {
+			outline: none;
+			box-shadow: none;
+			background-color: $tertiary-color;
+			color: $secondary-color;
+		}
+
+		&:focus,
+		&:active {
+			background-color: $quaternary-color;
+		}
+	}
+}
+
+.card-body {
+	&-dark {
+		background-color: $secondary-color;
+		color: $primary-color;
+	}
+
+	&-light {
+		background-color: $quaternary-color;
+		color: $secondary-color;
+	}
 }
 
 .answer {
 	font-family: "Panton", sans-serif;
 	font-weight: normal;
-	font-size: 18px;
-}
-
-.light-text {
-	color: $secondary-color;
-}
-
-.dark-text {
-	color: $primary-color;
+	font-size: 17px;
 }
 </style>

@@ -1,7 +1,7 @@
 export default [
 	{
 		answer:
-			" A plataforma Ecoly tem como principais funções: gerir membros do conselho de cada escola, organizar atividades, organizar reuniões entre os membros do conselho e ver as estatísticas de atividades da escola.",
+			"A plataforma Ecoly tem como principais funções: gerir membros do conselho de cada escola, organizar atividades, organizar reuniões entre os membros do conselho e ver as estatísticas de atividades da escola.",
 		id: "1",
 		question: "Quais são as principais funções da plataforma Ecoly?",
 	},
@@ -12,7 +12,7 @@ export default [
 		question: "Como posso me inscrever na plataforma Ecoly?",
 	},
 	{
-		answer: " A plataforma Ecoly é totalmente gratuita.",
+		answer: "A plataforma Ecoly é totalmente gratuita.",
 		id: "3",
 		question: "Qual é o custo para usar a plataforma Ecoly?",
 	},

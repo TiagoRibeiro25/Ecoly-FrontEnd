@@ -1,9 +1,11 @@
 <script setup>
-import { ref } from "vue";
 import { useNewsStore } from "@/stores/news";
-import { validateEmail } from "@/utils/validators";
 import { useUsersStore } from "@/stores/users";
+import { validateEmail } from "@/utils/validators";
+import { useDark } from "@vueuse/core";
+import { ref } from "vue";
 
+const isDark = useDark();
 const usersStore = useUsersStore();
 const isUserLoggedIn = usersStore.isUserLoggedIn;
 const newsLetterEmail = ref("");
@@ -28,24 +30,41 @@ const subscribe = async () => {
 </script>
 
 <template>
-	<footer class="footer pt-5 pb-5 px-5">
+	<footer class="footer pt-5 pb-5 px-5" :class="isDark ? 'footer-dark' : 'footer-light'">
 		<div class="row pb-5">
 			<div class="col-lg-4 left-content">
 				<img
-					src="@/assets/logo/logo_exp.webp"
+					v-lazy="{ src: isDark ? '../assets/logo/logo_exp.webp' : '../assets/logo/logo_exp_dark.webp' }"
 					alt="Ecoly"
-					width="380"
+					width="170"
+					height="170"
 					class="img-fluid mb-2"
-					style="width: 170px"
 				/>
-				<h4 class="slogan mb-3 text-left">PLANTA O TEU FUTURO</h4>
-				<router-link :to="{ name: 'News' }" class="route-link text-left"> notícias </router-link>
-				<router-link :to="{ name: 'Activities' }" class="route-link text-left"> atividades </router-link>
-				<h4 class="sub-title mt-4">SUBSCREVER À NEWSLETTER</h4>
+				<h4 class="slogan mb-3 text-uppercase" :class="isDark ? 'slogan-dark' : 'slogan-light'">
+					PLANTA O TEU FUTURO
+				</h4>
+				<router-link
+					:to="{ name: 'News' }"
+					class="route-link"
+					:class="isDark ? 'route-link-dark' : 'route-link-light'"
+				>
+					notícias
+				</router-link>
+				<router-link
+					:to="{ name: 'Activities' }"
+					class="route-link"
+					:class="isDark ? 'route-link-dark' : 'route-link-light'"
+				>
+					atividades
+				</router-link>
+				<h4 class="sub-title mt-4" :class="isDark ? 'sub-title-dark' : 'sub-title-light'">
+					SUBSCREVER À NEWSLETTER
+				</h4>
 				<form class="input-group mb-3" @submit.prevent="subscribe">
 					<input
 						type="email"
 						class="form-control"
+						:class="isDark ? 'form-control-dark' : 'form-control-light'"
 						placeholder="Email"
 						aria-label="Email"
 						aria-describedby="button-addon2"
@@ -65,35 +84,77 @@ const subscribe = async () => {
 						{{ btnMessage }}
 					</button>
 				</form>
-				<span class="cr-name"> &copy; 2022 Ecoly </span>
+				<span class="cr-name" :class="isDark ? 'cr-name-dark' : 'cr-name-light'"> &copy; 2022 Ecoly </span>
 			</div>
 			<div class="col-lg-4 my-lg-0 my-5 pl-lg-5">
-				<div class="social-media text-left mb-4">
-					<img src="@/assets/icons/instagram.svg" alt="instagram" />
-					<img class="px-3" src="@/assets/icons/facebook.svg" alt="facebook" />
-					<img src="@/assets/icons/twitter.svg" alt="twitter" />
+				<div class="mb-2">
+					<img
+						v-lazy="{
+							src: isDark
+								? '../assets/icons/socials/instagram_dark.svg'
+								: '../assets/icons/socials/instagram_light.svg',
+						}"
+						alt="instagram"
+						width="20"
+						height="20"
+					/>
+					<img
+						class="px-3"
+						v-lazy="{
+							src: isDark
+								? '../assets/icons/socials/facebook_dark.svg'
+								: '../assets/icons/socials/facebook_light.svg',
+						}"
+						alt="facebook"
+						width="51"
+						height="51"
+					/>
+					<img
+						v-lazy="{
+							src: isDark
+								? '../assets/icons/socials/twitter_dark.svg'
+								: '../assets/icons/socials/twitter_light.svg',
+						}"
+						alt="twitter"
+						width="20"
+						height="20"
+					/>
 				</div>
 
-				<router-link :to="{ name: 'Activities' }" class="route-link text-left">
+				<router-link
+					:to="{ name: 'Activities' }"
+					class="route-link"
+					:class="isDark ? 'route-link-dark' : 'route-link-light'"
+				>
 					plano de atividades
 				</router-link>
-				<router-link v-if="isUserLoggedIn" :to="{ name: 'Manage' }" class="route-link text-left">
+				<router-link
+					v-if="isUserLoggedIn"
+					:to="{ name: 'Manage' }"
+					class="route-link"
+					:class="isDark ? 'route-link-dark' : 'route-link-light'"
+				>
 					gestão do conselho
 				</router-link>
-				<router-link v-if="!isUserLoggedIn" :to="{ name: 'Authenticate' }" class="route-link text-left">
+				<router-link
+					v-if="!isUserLoggedIn"
+					:to="{ name: 'Authenticate' }"
+					class="route-link"
+					:class="isDark ? 'route-link-dark' : 'route-link-light'"
+				>
 					criar conta
 				</router-link>
 			</div>
-			<div class="col-lg-4 right-content">
-				<h5 class="text-left">ENTRE EM CONTACTO</h5>
-				<span class="mb-5 text-left">ECOLY@eco-escolas.com</span>
+			<div class="col-lg-4 right-content" :class="isDark ? 'right-content-dark' : 'right-content-light'">
+				<h5>ENTRE EM CONTACTO</h5>
+				<span class="mb-5">ECOLY@eco-escolas.com</span>
 
-				<h5 class="text-left">PARA MAIS INFORMAÇÕES</h5>
-				<span class="text-left">fee.portugal@abae.pt</span>
-				<span class="mb-5 text-left">abae@abae.pt</span>
+				<h5>PARA MAIS INFORMAÇÕES</h5>
+				<span class="mb-1">fee.portugal@abae.pt</span>
+				<span class="mb-5">abae@abae.pt</span>
 
-				<h5 class="text-left">SOBRE NÓS</h5>
-				<span class="text-left" style="line-height: 1.8">
+				<h5>SOBRE NÓS</h5>
+				<span style="line-height: 1.8">
 					ECOLY tem como objetivo reunir pessoas interessadas em tornar o planeta um espaço verde de forma a
 					sustentar o ecossistema que nos rodeia. Para o efeito, é disponibilizado ferramentas para os membros
 					do conselho poderem gerir o conselho Eco-escolas e á criação de atividades para o plano de ação e
@@ -105,63 +166,110 @@ const subscribe = async () => {
 </template>
 
 <style lang="scss" scoped>
-$footer-bg: #343e3d;
-$footer-text: #aedcc0;
-$footer-selected-color: #3fc380;
+$primary-color: #343e3d;
+$secondary-color: #aedcc0;
+$tertiary-color: #3fc380;
+$quaternary-color: #f8f9fa;
+$quinary-color: #e4f0e8;
+$sixth-color: #18516f;
 
 .footer {
-	background-color: $footer-bg;
-	color: $footer-text;
 	font-size: 14px;
 	font-family: "Panton", sans-serif;
 	font-weight: 400;
 
-	background-image: url("@/assets/images/FooterIllustration.webp");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 50%;
 	min-height: 700px;
+
+	&-dark {
+		background-image: url("@/assets/images/footer-illustration-dark.webp");
+		background-color: $primary-color;
+		color: $secondary-color;
+	}
+
+	&-light {
+		background-image: url("@/assets/images/footer-illustration-light.webp");
+		background-color: $quinary-color;
+		color: $primary-color;
+	}
 }
 
 .slogan {
-	color: $footer-text;
 	font-size: 25px;
 	font-family: "Panton", sans-serif;
 	font-weight: 400;
+
+	&-dark {
+		color: $secondary-color;
+	}
+
+	&-light {
+		color: $primary-color;
+	}
 }
 
 .route-link {
 	display: block;
-	color: #ffffff;
 	font-size: 15px;
 	font-family: "Panton", sans-serif;
 	font-weight: 400;
 	margin-bottom: 10px;
-	&:hover {
-		color: $footer-selected-color;
-		text-decoration: none;
+
+	&-dark {
+		color: $secondary-color;
+
+		&:hover {
+			color: $tertiary-color;
+			text-decoration: none;
+		}
+	}
+
+	&-light {
+		color: $primary-color;
+
+		&:hover {
+			color: $sixth-color;
+			text-decoration: none;
+		}
 	}
 }
 
 .sub-title {
-	color: $footer-text;
 	font-size: 20px;
 	font-family: "Panton", sans-serif;
 	font-weight: 400;
 	margin-bottom: 10px;
 	text-align: left;
+
+	&-dark {
+		color: $secondary-color;
+	}
+
+	&-light {
+		color: $primary-color;
+	}
 }
 
 .form-control {
 	border: none;
 	border-radius: 15px;
-	background-color: $footer-text;
-	color: $footer-bg;
+	color: $primary-color;
 	font-size: 14px;
 	font-family: "Panton", sans-serif;
 	font-weight: 400;
+
 	&:focus {
 		box-shadow: none;
+	}
+
+	&-dark {
+		background-color: $secondary-color;
+	}
+
+	&-light {
+		background-color: $quaternary-color;
 	}
 }
 
@@ -172,7 +280,7 @@ $footer-selected-color: #3fc380;
 	border-bottom-right-radius: 15px;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
-	background-color: $footer-selected-color;
+	background-color: $tertiary-color;
 	color: #ffffff;
 	font-size: 14px;
 	font-family: "Panton", sans-serif;
@@ -209,19 +317,38 @@ $footer-selected-color: #3fc380;
 }
 
 .cr-name {
-	color: #ffffff;
 	font-size: 14px;
 	font-family: "Panton", sans-serif;
 	font-weight: 400;
 	margin-left: 10px;
+
+	&-dark {
+		color: $secondary-color;
+	}
+
+	&-light {
+		color: $primary-color;
+	}
 }
 
-.right-content span {
-	display: block;
-	color: #ffffff;
-	font-size: 14px;
-	font-family: "Panton", sans-serif;
-	font-weight: 400;
-	margin-bottom: 10px;
+.right-content {
+	& span {
+		display: block;
+		font-size: 14px;
+		font-family: "Panton", sans-serif;
+		font-weight: 400;
+	}
+
+	&-dark {
+		& span {
+			color: $quinary-color;
+		}
+	}
+
+	&-light {
+		& span {
+			color: $primary-color;
+		}
+	}
 }
 </style>

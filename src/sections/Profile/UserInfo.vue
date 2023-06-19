@@ -41,6 +41,8 @@ const signOut = async () => {
 				class="img-fluid profile-pic rounded-circle"
 				:class="isDark ? 'profile-pic-dark' : 'profile-pic-light'"
 				alt="Imagem de Perfil"
+				width="150"
+				height="150"
 				v-lazy="{ src: props.user.photo }"
 			/>
 		</div>
@@ -75,6 +77,8 @@ const signOut = async () => {
 				<img
 					class="img-fluid badge-icon mb-2"
 					v-lazy="{ src: highLightedBadge.img }"
+					width="60"
+					height="70"
 					alt="Medalha em Destaque"
 				/>
 				<span
@@ -86,11 +90,11 @@ const signOut = async () => {
 			<div v-else class="d-flex justify-content-center align-items-center flex-column">
 				<img
 					class="empty-badge"
+					:class="{ 'mb-3': !props.user.isLoggedUser, 'ml-3': !isDark, 'ml-2': isDark }"
+					v-lazy="{ src: isDark ? '../assets/logo/logo.webp' : '../assets/logo/logo_dark.webp' }"
+					alt="Nenhuma medalha em destaque"
 					width="65"
 					height="90"
-					src="@/assets/logo/logo.webp"
-					alt="Nenhuma medalha em destaque"
-					:class="{ 'mb-3': !props.user.isLoggedUser }"
 				/>
 			</div>
 			<!-- Edit Profile Button -->

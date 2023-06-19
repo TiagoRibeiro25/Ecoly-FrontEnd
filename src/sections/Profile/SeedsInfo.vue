@@ -23,7 +23,14 @@ const props = defineProps({
 					Mensal: {{ formatNumber(user.seeds.month) }}
 				</h2>
 				<div class="ml-2" style="margin-bottom: 11px">
-					<img class="img-fluid" v-lazy="{ src: '../assets/icons/seed.svg' }" alt="Semente" loading="lazy" />
+					<img
+						class="img-fluid mt-2"
+						v-lazy="{ src: isDark ? '../assets/icons/seed.svg' : '../assets/logo/logo_dark.webp' }"
+						alt="Semente"
+						loading="lazy"
+						width="14"
+						height="14"
+					/>
 				</div>
 			</div>
 		</div>
@@ -33,7 +40,14 @@ const props = defineProps({
 					Total: {{ formatNumber(user.seeds.total) }}
 				</h2>
 				<div class="ml-2" style="margin-bottom: 11px">
-					<img class="img-fluid" v-lazy="{ src: '../assets/icons/seed.svg' }" alt="Semente" loading="lazy" />
+					<img
+						class="img-fluid mt-2"
+						v-lazy="{ src: isDark ? '../assets/icons/seed.svg' : '../assets/logo/logo_dark.webp' }"
+						alt="Semente"
+						loading="lazy"
+						width="14"
+						height="14"
+					/>
 				</div>
 			</div>
 		</div>

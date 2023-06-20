@@ -2,14 +2,14 @@
 import { useDark, useToggle } from "@vueuse/core";
 import { onBeforeMount, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useUsersStore } from "../stores/users";
-import logo_exp from "../assets/logo/logo_exp.webp";
 import logo from "../assets/logo/logo.webp";
-import logo_exp_dark from "../assets/logo/logo_exp_dark.webp";
 import logo_dark from "../assets/logo/logo_dark.webp";
-import { useNewsStore } from "../stores/news";
+import logo_exp from "../assets/logo/logo_exp.webp";
+import logo_exp_dark from "../assets/logo/logo_exp_dark.webp";
 import { useActivitiesStore } from "../stores/activities";
 import { useMeetingsStore } from "../stores/meetings";
+import { useNewsStore } from "../stores/news";
+import { useUsersStore } from "../stores/users";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -125,6 +125,7 @@ onBeforeMount(async () => {
 					width="50"
 					height="80"
 					class="mr-3"
+					:class="isDark ? 'ml-0' : 'ml-1'"
 				/>
 			</router-link>
 		</div>

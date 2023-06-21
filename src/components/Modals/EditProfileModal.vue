@@ -1,7 +1,7 @@
 <script setup>
-import { validateEmail } from "../../utils/validators";
-import { useUsersStore } from "../../stores/users";
 import { ref } from "vue";
+import { useUsersStore } from "../../stores/users";
+import { validateEmail } from "../../utils/validators";
 
 const props = defineProps({
 	user: { type: Object, required: true },
@@ -72,7 +72,8 @@ const updateUser = async () => {
 	if (course.value.trim() !== props.user.course && course.value.trim() !== "") {
 		newData.course = course.value;
 	}
-	if (year.value.toString().trim() !== props.user.year.toString() && year.value.toString().trim() !== "") {
+
+	if (year.value.toString().trim() !== props.user.year?.toString() && year.value.toString().trim() !== "") {
 		newData.year = +year.value;
 	}
 

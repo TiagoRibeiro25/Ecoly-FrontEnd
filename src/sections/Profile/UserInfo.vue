@@ -32,11 +32,11 @@ const signOut = async () => {
 
 <template>
 	<div
-		class="top-info row mx-auto py-lg-0 py-sm-3 py-3 shadow"
+		class="top-info row mx-auto py-xl-0 py-sm-3 py-3 shadow"
 		:class="isDark ? 'top-info-dark' : 'top-info-light'"
 	>
 		<!-- Profile Picture -->
-		<div class="col-lg-2 d-flex justify-content-center align-items-center flex-column">
+		<div class="col-xl-2 d-flex justify-content-center align-items-center flex-column">
 			<img
 				class="img-fluid profile-pic rounded-circle"
 				:class="isDark ? 'profile-pic-dark' : 'profile-pic-light'"
@@ -47,7 +47,7 @@ const signOut = async () => {
 			/>
 		</div>
 		<!-- Profile Info -->
-		<div class="col-lg-8 pl-lg-0 pb-lg-0 pb-3 text-lg-left text-center">
+		<div class="col-xl-8 pl-xl-0 pb-xl-0 pb-3 text-xl-left text-center">
 			<div>
 				<h3 class="user-name mb-2 mt-4" :class="isDark ? 'user-name-dark' : 'user-name-light'">
 					{{ props.user.name }}
@@ -71,7 +71,7 @@ const signOut = async () => {
 			</div>
 		</div>
 		<!-- Profile HighLight Badge + Edit Profile Button -->
-		<div class="col-lg-2 d-flex justify-content-center align-items-center flex-column">
+		<div class="col-xl-2 d-flex justify-content-center align-items-center flex-column">
 			<!-- HighLight Badge -->
 			<div v-if="highLightedBadge" class="d-flex justify-content-center align-items-center flex-column">
 				<img

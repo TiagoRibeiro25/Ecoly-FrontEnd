@@ -1,10 +1,10 @@
 <script setup>
 import { useDark } from "@vueuse/core";
-import { useUsersStore } from "../../stores/users";
-import { useSchoolsStore } from "../../stores/schools";
-import { validateEmail } from "../../utils/validators";
-import { useRouter } from "vue-router";
 import { onBeforeMount, ref } from "vue";
+import { useRouter } from "vue-router";
+import { useSchoolsStore } from "../../stores/schools";
+import { useUsersStore } from "../../stores/users";
+import { validateEmail } from "../../utils/validators";
 
 const isDark = useDark();
 const router = useRouter();
@@ -175,7 +175,10 @@ onBeforeMount(async () => {
 			<img v-if="!isDark" src="@/assets/images/auth_illustration-light-theme.webp" alt="Autenticação" />
 			<img v-else src="@/assets/images/auth_illustration-dark-theme.webp" alt="Autenticação" />
 		</div>
-		<div class="column col-xl-6 col-12 d-flex flex-column justify-content-center align-items-center">
+		<div
+			class="column col-xl-6 col-12 d-flex flex-column justify-content-center align-items-center"
+			style="overflow-y: auto; height: 100vh"
+		>
 			<!-- Log In Form -->
 			<b-form
 				v-if="showLogIn"

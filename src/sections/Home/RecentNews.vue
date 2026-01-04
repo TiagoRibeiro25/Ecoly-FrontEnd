@@ -1,8 +1,8 @@
 <script setup>
-import Arrow from "../../components/Arrow.vue";
 import { useDark } from "@vueuse/core";
-import { formatDate, formatText } from "../../utils/formatData";
 import { ref } from "vue";
+import Arrow from "../../components/Arrow.vue";
+import { formatDate, formatText } from "../../utils/formatData";
 
 const isDark = useDark();
 const props = defineProps({
@@ -91,7 +91,7 @@ const slide = ref(0);
 				</div>
 				<h2
 					v-else
-					class="mt-5 new-title text-center pt-5"
+					class="mt-5 new-title text-center p-5"
 					style="font-size: 30px; font-weight: 400"
 					:class="{
 						'recent-new-text-light': !isDark,
